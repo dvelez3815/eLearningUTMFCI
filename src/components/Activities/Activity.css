@@ -1,0 +1,33 @@
+.circle {
+    display: inline-block;
+    width: 15vh;
+    height: 15vh;
+    border-radius: 50%;
+    border: 10px solid white;
+    text-align: center;
+    line-height: 250px;
+    overflow: hidden;
+    padding: 3px;
+    position: relative;
+    box-sizing: border-box;
+    box-shadow: 0 0 0 10px gray;
+    /* margin: 50px */
+    margin: 8px;
+  }
+  .circle:hover{
+    border: 10px solid rgb(197, 255, 178);
+  }
+
+
+  .fill {
+    background-color: teal;
+    height: 50%;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+
+  .activity-img{
+    position: relative; 
+}

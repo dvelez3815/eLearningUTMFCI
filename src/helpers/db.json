@@ -1,0 +1,62 @@
+{
+    "libros":[
+      {
+        "ingles":{
+          "libro":[
+            {  
+              "modulos":[
+                {
+                  "lecciones":[
+                    { 
+                      "grammar":[
+                        {
+                          "title": "COMPLETE DE SENTENCE",
+                          "respuesta": "I like to dance",
+                          "palabras":["I","like","to","dance"],
+                          "contexto": "We use \"to\" to make reference to something xdxokno"
+                        },
+                        {
+                          "title": "COMPLETE DE SENTENCE",
+                          "respuesta": "I like to sing",
+                          "palabras":["I","like","to","dance"],
+                          "contexto": "We use \"to\" to make reference to something xdxokno"
+                        }
+                      ]
+                    },
+                    {
+                      "writting":[
+                        {
+                          "title": "COMPLETE DE SENTENCE",
+                          "respuesta": "I like to dance",
+                          "palabras":["I","like","to","dance"],
+                          "contexto": "We use \"to\" to make reference to something xdxokno"
+                        },
+                        {
+                          "title": "COMPLETE DE SENTENCE",
+                          "respuesta": "I like to sing",
+                          "palabras":["I","like","to","dance"],
+                          "contexto": "We use \"to\" to make reference to something xdxokno"
+                        }
+                      ]                  
+                    }    
+                  ]
+                },
+                {
+
+                }
+              ]
+            },
+            {
+
+            }
+          ]
+        }
+      },
+      {
+        "frances":{
+
+        }
+      }
+    ]
+
+  }
