@@ -14,14 +14,14 @@ export default function Activity(props){
         console.log("hola desde el useEfect");
         circlePercent.current.style.height = `${props.percent}%`;        
     },[props.percent])
+
     return(
-        <div className="Container py-2">
+        <div className={props.colspan}>
         <div className="circle" ref={activity} onClick={handlerActivity}> 
         <div className="fill" ref={circlePercent}></div>
         <img src={props.img} alt="ActivityName" className="activity-img"></img>
-        
         </div>
-        <p>{props.name}</p>
+        <p className="circle-text">{props.name}</p>
         </div>
     );
 }
