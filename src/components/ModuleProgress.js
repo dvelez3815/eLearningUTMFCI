@@ -28,7 +28,7 @@ export function ModuleProgress(props) {
       ?<div style={{width: `${props.percent}%`}} className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-yellow-400"></div>
       :props.percent<70
       ?<div style={{width: `${props.percent}%`}} className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-yellow-600"></div>
-      :props.percent<71
+      :props.percent<85
       ?
       <div style={{width: `${props.percent}%`}} className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-400"></div>
       :<div style={{width: `${props.percent}%`}} className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-600"></div>

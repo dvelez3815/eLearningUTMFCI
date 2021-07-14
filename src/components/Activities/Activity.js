@@ -2,6 +2,7 @@ import "./Activity.css"
 
 import { useEffect, useRef } from "react";
 import i_writting from '../../assets/icons/teacher.png'
+import { getProgressColor } from "../../helpers/indexFuntions";
 
 
 export default function Activity(props){
@@ -12,7 +13,9 @@ export default function Activity(props){
     }
     useEffect((e)=>{
         console.log("hola desde el useEfect");
-        circlePercent.current.style.height = `${props.percent}%`;        
+        circlePercent.current.style.height = `${props.percent}%`;
+        circlePercent.current.style.backgroundColor = getProgressColor(props.percent);
+        console.log(getProgressColor(5));
     },[props.percent])
 
     return(
