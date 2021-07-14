@@ -29,7 +29,7 @@ export default function Activity(props){
     },[props.percent])
 
     return(
-        <div className={props.colspan}>
+        <div className={props.colspan+' py-2'}>
         <div className="circle" ref={activity} onClick={handlerActivity}> 
         <div className="fill" ref={circlePercent}></div>
         <img src={props.img} alt="ActivityName" className="activity-img"></img>
