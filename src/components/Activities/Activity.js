@@ -1,21 +1,31 @@
 import "./Activity.css"
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState} from "react";
 import i_writting from '../../assets/icons/teacher.png'
 import { getProgressColor } from "../../helpers/indexFuntions";
 
 
+
 export default function Activity(props){
+    const [modal, setModal] = useState(false)
+
     let activity = useRef(),
-     circlePercent = useRef();
+     circlePercent = useRef(),
+     modalCard = useRef();
+
     const handlerActivity = ()=>{
-        console.log("Me has dado click");
+
+        if(modal){
+
+            setModal(!modal)
+        }else{
+            setModal(!modal)
+        }   
     }
+
     useEffect((e)=>{
-        console.log("hola desde el useEfect");
         circlePercent.current.style.height = `${props.percent}%`;
         circlePercent.current.style.backgroundColor = getProgressColor(props.percent);
-        console.log(getProgressColor(5));
     },[props.percent])
 
     return(
@@ -25,6 +35,14 @@ export default function Activity(props){
         <img src={props.img} alt="ActivityName" className="activity-img"></img>
         </div>
         <p className="circle-text">{props.name}</p>
+        {modal && <div className="modalCard" ref={modalCard}>
+            <p>Lección 1/5</p>
+            <nav>
+                <button>APUNTES</button>
+                <button>EMPEZAR</button>
+            </nav>
+        </div>
+}
         </div>
     );
 }
