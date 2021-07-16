@@ -5,6 +5,8 @@ import {
   Route
 } from "react-router-dom";
 
+
+
 /* Pages */
 import ActivitiesPage from './pages/ActivitiesPage/ActivitiesPage'
 import HomePage from './pages/HomePage/HomePage';
