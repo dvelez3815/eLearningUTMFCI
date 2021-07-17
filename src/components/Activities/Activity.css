@@ -53,7 +53,7 @@
   align-items: center;
   justify-content: center
 }
-.modalCard button{
+.modalCard button{  
   width: 20vh;
   border-radius: 7%;
   display:block;

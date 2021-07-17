@@ -35,7 +35,8 @@ export default function Activity(props){
         <img src={props.img} alt="ActivityName" className="activity-img"></img>
         </div>
         <p className="circle-text">{props.name}</p>
-        {modal && <div className="modalCard" ref={modalCard}>
+        {modal && 
+        <div className="modalCard" ref={modalCard}>
             <p>Lección 1/5</p>
             <nav>
                 <button>APUNTES</button>
