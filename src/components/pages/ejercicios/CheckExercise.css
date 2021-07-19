@@ -1,0 +1,35 @@
+.cardCheck {
+    
+    --border-color: #e5e5e5;
+    border-radius: 12px;
+    border-width: 2px 2px 4px;
+    cursor: pointer;
+    display: inline-flex;
+    outline: 0;
+    position: relative;
+    touch-action: manipulation;
+    transform: translateZ(0);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+.btn-exercise{
+    min-width: 150px;
+    width: 100%;
+    border-radius: 16px 12px;
+    border-width: 1px;
+    cursor: pointer;
+    font-weight: 700;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    line-height: inherit;
+    color: inherit;
+}
+
+.cardCheck:active:not(.hfPEz) {
+    --border-color: #84d8ff;
+    color: green;
+}
