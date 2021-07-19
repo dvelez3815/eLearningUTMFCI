@@ -32,35 +32,35 @@ const Grammar = (props) => {
         </div>
       </div>
       <div className="flex flex-wrap items-center justify-center	gap-2 mb-4" aria-label="choice" role="radiogroup">
-        <div className="flex flex-col w-32 flex-wrap md:w-1/5 lg:w-1/4 cardCheck" aria-checked="false" role="radio" tabIndex="-1" data-test="challenge-choice-card">
+        <div className="flex flex-col w-1/4 flex-wrap cardCheck" aria-checked="false" role="radio" tabIndex="-1" data-test="challenge-choice-card">
           <img
             src="https://d2pur3iezf4d1j.cloudfront.net/images/18a521f1507cb86689faa5b2e8277703"
             alt=""
           />
           <p className="text-sm font-medium	">Tea</p>
         </div>
-        <div className="flex flex-col w-32 flex-wrap md:w-1/5 lg:w-1/4 cardCheck" aria-checked="false" role="radio" tabIndex="-1" data-test="challenge-choice-card">
+        <div className="flex flex-col w-1/4 flex-wrap cardCheck" aria-checked="false" role="radio" tabIndex="-1" data-test="challenge-choice-card">
           <img
             src="https://d2pur3iezf4d1j.cloudfront.net/images/18a521f1507cb86689faa5b2e8277703"
             alt=""
           />
           <p className="text-sm font-medium	">Tea</p>
         </div>
-        <div className="flex flex-col w-32 flex-wrap md:w-1/5 lg:w-1/4 cardCheck" aria-checked="false" role="radio" tabIndex="-1" data-test="challenge-choice-card">
+        <div className="flex flex-col w-1/4 flex-wrap cardCheck" aria-checked="false" role="radio" tabIndex="-1" data-test="challenge-choice-card">
           <img
             src="https://d2pur3iezf4d1j.cloudfront.net/images/18a521f1507cb86689faa5b2e8277703"
             alt=""
           />
           <p className="text-sm font-medium	">Tea</p>
         </div>
-        <div className="flex flex-col w-32 flex-wrap md:w-1/5 lg:w-1/4 cardCheck" aria-checked="false" role="radio" tabIndex="-1" data-test="challenge-choice-card">
+        <div className="flex flex-col w-1/4 flex-wrap cardCheck" aria-checked="false" role="radio" tabIndex="-1" data-test="challenge-choice-card">
           <img
             src="https://d2pur3iezf4d1j.cloudfront.net/images/18a521f1507cb86689faa5b2e8277703"
             alt=""
           />
           <p className="text-sm font-medium	">Tea</p>
         </div>
-        <div className="flex flex-col w-32 flex-wrap md:w-1/5 lg:w-1/4 cardCheck" aria-checked="true" role="radio" tabIndex="-1" data-test="challenge-choice-card">
+        <div className="flex flex-col w-1/4 flex-wrap cardCheck activado" aria-checked="true" role="radio" tabIndex="-1" data-test="challenge-choice-card">
           <img
             src="https://d2pur3iezf4d1j.cloudfront.net/images/18a521f1507cb86689faa5b2e8277703"
             alt=""
@@ -71,14 +71,14 @@ const Grammar = (props) => {
 
       <div className="flex justify-between flex-col sm:flex-row">
         <div className="mb-4">
-          <button className="btn-exercise">
+          <button className="btn-exercise" disabled={false} onClick={()=>console.log("hola")}>
             <span>
               <p>saltar</p>
             </span>
           </button>
         </div>
         <div className="mb-4">
-        <button className="bg-green-500 hover:bg-green-700 btn-exercise" disabled={"True"}>
+        <button className="bg-green-500 hover:bg-green-700 btn-exercise">
           <span>
             <p>comprobar</p>
           </span>

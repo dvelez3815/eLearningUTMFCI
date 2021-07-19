@@ -29,7 +29,8 @@
     color: inherit;
 }
 
-.cardCheck:active:not(.hfPEz) {
+.activado{
     --border-color: #84d8ff;
-    color: green;
+    color: #1899d6;
+    background-color: #ddf4ff;
 }
