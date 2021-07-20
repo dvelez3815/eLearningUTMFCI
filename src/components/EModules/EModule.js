@@ -7,7 +7,7 @@ export default function EModule(props){
     
     return(
         <>
-        <div className="container  w-6/12">
+        <div className="container">
         <ModuleProgress moduleName="Modulo 1" percent={props.percent}></ModuleProgress>
         <div className="grid grid-cols-6">
         <Activity img={i_writting} percent={props.percent} name={"Gramática"} colspan={'col-span-6 md:col-span-2'}/>
