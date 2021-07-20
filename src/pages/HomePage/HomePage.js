@@ -8,7 +8,7 @@ const HomePage = () => (
     <div class="h-1/5">
       <NavBar></NavBar>
     </div>
-    <div className="container h-4/5">
+    <div className="container  h-4/5">
       <div class="flex h-full w-screen items-end">
         <div class=" ">
           <img src={circulos} alt="circulos" width="700"></img>
@@ -36,6 +36,7 @@ const HomePage = () => (
         </div>
       </div>
     </div>
+   
   </section>
 );
 

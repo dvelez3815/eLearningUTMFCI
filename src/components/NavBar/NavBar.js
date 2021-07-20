@@ -8,9 +8,17 @@ class NavBar extends React.Component {
         <nav class="shadow-sm flex items-center justify-between flex-wrap bg-gray-50 p-6">
         <div class="flex items-center flex-shrink-0 text-white mr-6">
             <img src={logo} class="block h-8 w-auto" alt="LogoUtm"></img>
-          {/* <svg class="fill-current h-8 w-8 mr-2" width="54" height="54" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z"/></svg>
-           <span class="font-semibold text-xl tracking-tight">Tailwind CSS</span>*/}
         </div>
+        {/* prueba */}
+        <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+        <button class="h-8 px-5 text-gray-400 transition-colors duration-150 border border-gray-300  rounded-lg focus:shadow-outline hover:bg-gray-300 hover:text-white font-bold">Registrate</button>
+
+        <div class="ml-3 relative">
+          <div>
+          <button class="h-8 px-5 text-white font-bold transition-colors duration-150 bg-yellow-400 rounded-lg focus:shadow-outline hover:bg-yellow-500">Inicia sesión</button>
+          </div>
+        </div>
+      </div>
       </nav>
     );
   }
