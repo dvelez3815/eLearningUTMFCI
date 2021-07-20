@@ -4,7 +4,7 @@ import medalla from "../assets/icons/medalla.svg";
 export function ModuleProgress(props) {
   return (
 <div className="relative pt-1 max-w-7xl mx-auto px-8">
-  <div className="flex mb-2 items-center justify-between">
+  <div className="flex flex-col sm:flex-row mb-7 items-center justify-between">
     <div>
       <span className="text-xs font-semibold inline-block py-5 px-2 uppercase rounded-full text-amber-600 bg-amber-200">
         {props.moduleName}
@@ -13,7 +13,7 @@ export function ModuleProgress(props) {
     <figure>
         <img src={medalla} alt="medalla" className="absolute bottom-0 left-9" width="45px"/>
       </figure>  
-    <div className="text-right">
+    <div className="">
       <span className="text-xs font-semibold inline-block text-amber-600">
         {props.percent}% COMPLETADO
       </span> 

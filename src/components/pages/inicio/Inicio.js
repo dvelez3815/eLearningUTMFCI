@@ -10,7 +10,6 @@ export const Inicio = () => {
       <div className="grid grid-cols-6">
         <div className="col-span-4">
           <EModule percent={100} />
-          <EModule percent={50} />
         </div>
         <ProgresoCurso />
       </div>
@@ -22,7 +21,7 @@ export const Inicio = () => {
 const ProgresoCurso = () => {
     return(
         <div className="col-span-2 py-5 px-2">
-          <div className="h-1/4 border rounded-2xl flex flex-col justify-center items-center">
+          <div className="border rounded-2xl flex flex-col justify-center items-center">
             <div className="mb-4">
               <h2>Progreso total del curso</h2>
             </div>
