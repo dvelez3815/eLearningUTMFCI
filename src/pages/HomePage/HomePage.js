@@ -9,11 +9,11 @@ const HomePage = () => (
       <NavBar></NavBar>
     </div>
     <div className="container h-4/5">
-      <div class="grid  grid-rows-1 h-full grid-flow-col gap-4">
-        <div class="row-start-2  ">
-          <img src={circulos} alt="circulos" width="400"></img>
+      <div class="flex h-full w-screen items-end">
+        <div class=" ">
+          <img src={circulos} alt="circulos" width="700"></img>
         </div>
-        <div class="row-end-2 pt-5 ">
+        <div class="py-52">
           <h3 class="text-4xl font-sans font-bold text-green-500">
             Aprende Inglés con los contenidos más relevantes
           </h3>
@@ -31,8 +31,8 @@ const HomePage = () => (
             </button>
           </div>
         </div>
-        <div class="row-start-1 ">
-          <img src={chica} alt="circulos" width="1000"></img>
+        <div class=" chica ">
+          <img src={chica} alt="circulos" width="890"></img>
         </div>
       </div>
     </div>
