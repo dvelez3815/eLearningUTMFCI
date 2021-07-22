@@ -10,11 +10,13 @@ import {
 /* Pages */
 import ActivitiesPage from './pages/ActivitiesPage/ActivitiesPage'
 import HomePage from './pages/HomePage/HomePage';
+import AutenticationFormPage from './pages/AutenticationFormPage/AutenticationFormPage'
 function App() {
   return (
     <Router>
       <div className="App">
           <Route exact path="/activities" component={ActivitiesPage}></Route>
+          <Route exact path="/Autentation" component={AutenticationFormPage}></Route>
           <Route exact path="/" component={HomePage}></Route>
 
       </div>
