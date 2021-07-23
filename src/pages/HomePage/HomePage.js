@@ -13,7 +13,7 @@ const HomePage = () => (
         <div class=" ">
           <img src={circulos} alt="circulos" width="700"></img>
         </div>
-        <div class="py-52">
+        <div class="py-52 text-center">
           <h3 class="text-4xl font-sans font-bold text-green-500">
             Aprende Inglés con los contenidos más relevantes
           </h3>

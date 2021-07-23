@@ -1,4 +1,4 @@
-import "./Activity.css"
+//import "./Activity.css"
 
 import { useEffect, useRef } from "react";
 import i_writting from '../../assets/icons/teacher.png'
