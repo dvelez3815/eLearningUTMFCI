@@ -14,7 +14,7 @@ import AutenticationFormPage from './pages/AutenticationFormPage/AutenticationFo
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div className="App ">
           <Route exact path="/activities" component={ActivitiesPage}></Route>
           <Route exact path="/Autentication" component={AutenticationFormPage}></Route>
           <Route exact path="/" component={HomePage}></Route>

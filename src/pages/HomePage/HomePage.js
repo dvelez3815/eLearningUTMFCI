@@ -7,6 +7,17 @@ const HomePage = () => (
   <section className="Home h-screen">
     <div class="h-1/5">
       <NavBar></NavBar>
+         {/* <div>
+              <h3 className=" font-sans text-3xl subpixel-antialiased font-bold tracking-wider text-center">
+                Bienvenido
+              </h3>
+              <h3 className=" font-sans text-xl text-center text-gray-400">Inicia sesión para empezar</h3>
+              <form>
+
+              </form> 
+
+            </div>*/}
+            
     </div>
     <div className="container  h-4/5">
       <div class="flex h-full w-screen items-end">

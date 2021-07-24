@@ -1,52 +1,125 @@
 import React from "react";
-
-import './AutenticationFormPage.css'
+import logo from "../../assets/resource/Logo_Provicional.png";
+import "./AutenticationFormPage.css";
+import img1 from "../../assets/resource/sign.svg";
 class AutenticationFormPage extends React.Component {
-  
   render() {
     return (
-        <div class="container" id="container">
-        <div class="form-container sign-up-container">
-          <form action="/#">
-            <h1>Create Account</h1>
-            <div class="social-container">
-              <a href="/#" class="social"><i class="fab fa-facebook-f"></i></a>
-              <a href="/#" class="social"><i class="fab fa-google-plus-g"></i></a>
-              <a href="/#" class="social"><i class="fab fa-linkedin-in"></i></a>
+      <div className="container">
+        <div className="grid grid-cols-3 w-screen gap-4">
+          <div>
+            <div className="min-h-screen flex items-center justify-center  py-12 px-4 sm:px-6 lg:px-8">
+              <div className="max-w-md w-full space-y-8">
+                <div>
+                  <img
+                    className="mx-auto h-12 w-auto"
+                    src={logo}
+                    alt="Workflow"
+                  />
+                  <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                    Inicia sesión en tu cuenta
+                  </h2>
+                  <p className="mt-2 text-center text-sm text-gray-600">
+                    O
+                    <a
+                      href="#"
+                      className="font-medium text-indigo-600 hover:text-indigo-500"
+                    >
+                      Registrate
+                    </a>
+                  </p>
+                </div>
+                <form className="mt-8 space-y-6" action="#" method="POST">
+                  <input type="hidden" name="remember" value="true" />
+                  <div className="rounded-md shadow-sm -space-y-px">
+                    <div>
+                      <label for="email-address" className="sr-only">
+                        Email address
+                      </label>
+                      <input
+                        id="email-address"
+                        name="email"
+                        type="email"
+                        autocomplete="email"
+                        required
+                        className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                        placeholder="Correo electrónico"
+                      />
+                    </div>
+                    <div>
+                      <label for="password" className="sr-only">
+                        Password
+                      </label>
+                      <input
+                        id="password"
+                        name="password"
+                        type="password"
+                        autocomplete="current-password"
+                        required
+                        className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                        placeholder="Contraseña"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <input
+                        id="remember-me"
+                        name="remember-me"
+                        type="checkbox"
+                        className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                      />
+                      <label
+                        for="remember-me"
+                        className="ml-2 block text-sm text-gray-900"
+                      >
+                        Recuerdame
+                      </label>
+                    </div>
+
+                    <div className="text-sm">
+                      <a
+                        href="#"
+                        className="font-medium text-indigo-600 hover:text-indigo-500"
+                      >
+                        Olvidaste tu contraseña?
+                      </a>
+                    </div>
+                  </div>
+
+                  <div>
+                    <button
+                      type="submit"
+                      className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    >
+                      <span className="absolute left-0 inset-y-0 flex items-center pl-3">
+                        <svg
+                          className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                            clip-rule="evenodd"
+                          />
+                        </svg>
+                      </span>
+                      Iniciar sesión
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
-            <span>or use your email for registration</span>
-            <input type="text" placeholder="Name" />
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <button>Sign Up</button>
-          </form>
-        </div>
-        <div class="form-container sign-in-container">
-          <form action="/#">
-            <h1>Sign in</h1>
-            <div class="social-container">
-              <a href="/#" class="social"><i class="fab fa-facebook-f"></i></a>
-              <a href="/#" class="social"><i class="fab fa-google-plus-g"></i></a>
-              <a href="/#" class="social"><i class="fab fa-linkedin-in"></i></a>
-            </div>
-            <span>or use your account</span>
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <a href="/#">Forgot your password?</a>
-            <button>Sign In</button>
-          </form>
-        </div>
-        <div class="overlay-container">
-          <div class="overlay">
-            <div class="overlay-panel overlay-left">
-              <h1>Welcome Back!</h1>
-              <p>To keep connected with us please login with your personal info</p>
-              <button class="ghost" id="signIn">Sign In</button>
-            </div>
-            <div class="overlay-panel overlay-right">
-              <h1>Hello, Friend!</h1>
-              <p>Enter your personal details and start journey with us</p>
-              <button class="ghost" id="signUp">Sign Up</button>
+          </div>
+          <div>
+            <div className="col-span-2 ">
+              <div className="min-h-screen min-w-full w-full flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+                <img src={img1} width="400"></img>
+              </div>
             </div>
           </div>
         </div>
