@@ -37,7 +37,7 @@
 }
 
 .modalCard{
-  width: 80%;
+  width: 23%;
   display: flex;
   background-color: teal;
   flex-direction: column;
@@ -51,7 +51,8 @@
   z-index: 999;
   font-size: 1.4vh;
   align-items: center;
-  justify-content: center
+  justify-content: center;
+  position: absolute;
 }
 .modalCard button{  
   width: 20vh;

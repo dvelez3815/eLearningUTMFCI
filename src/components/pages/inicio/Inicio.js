@@ -8,19 +8,22 @@ export const Inicio = () => {
     <div>
       <NavComponent logo={logo} />
       <div className="grid grid-cols-6">
-        <div className="col-span-4">
+        <div className="col-span-6 md:col-span-4">
           <EModule percent={100} />
         </div>
-        <ProgresoCurso />
+        <div className="md:col-span-2">
+          <ProgresoLibros />
+          <ProgresoModulos />
+        </div>
       </div>
     </div>
   );
 };
 
 
-const ProgresoCurso = () => {
+const ProgresoLibros = () => {
     return(
-        <div className="col-span-2 py-5 px-2">
+        <div className="py-5 px-2 hidden md:block">
           <div className="border rounded-2xl flex flex-col justify-center items-center">
             <div className="mb-4">
               <h2>Progreso total del curso</h2>
@@ -32,7 +35,7 @@ const ProgresoCurso = () => {
                     </svg>
                 </div>
                 <div className="flex flex-col" id="info">
-                    <div><h2>Modulos completados</h2></div>
+                    <div><h2>Libros completados</h2></div>
                     <div className="overflow-hidden text-xs flex rounded bg-amber-200 h-4 border">
                         <div style={{width: `80%`}} className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-400"></div>
                     </div>
@@ -42,4 +45,27 @@ const ProgresoCurso = () => {
           </div>
         </div>
     )
+}
+
+const ProgresoModulos = () => {
+  return(
+    <div className="py-5 px-2 hidden md:block">
+      <div className="border rounded-2xl flex flex-col justify-center items-center">
+        <div className="mb-4">
+          <h2>Progreso por módulos</h2>
+        </div>
+        <div className="flex justify-center gap-4">
+            <div className="flex flex-col" id="info">
+                <div><h2>Libros completados</h2></div>
+                <div className="overflow-hidden text-xs flex rounded bg-amber-200 h-4 border">
+                    <div style={{width: `80%`}} className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-400"></div>
+                </div>
+            </div>
+           <div className="flex flex-col-reverse">
+             <p className="text-xs sm:text-sm">45%</p>
+           </div>
+        </div>
+      </div>
+    </div>
+)  
 }

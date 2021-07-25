@@ -1,9 +1,36 @@
 import "./CheckExercise.css";
+import { useState, useRef } from "react";
+
+const GrammarImage = (props)=>{
+  return(
+    <div className="flex flex-col w-1/4 flex-wrap cardCheck" aria-checked="false" role="radio" tabIndex="-1" data-test="challenge-choice-card" ref={props.myref}>
+      <button>
+      <img 
+      src={props.src}
+      alt={props.alt}
+      onClick={()=>{props.marcar(props.myref)}}
+    />
+    <p className="text-sm font-medium	">{props.nombre}</p>
+      </button>
+  </div>    
+  )
+}
+
+
 
 const Grammar = (props) => {
+  const imagen1 = useRef();
   let datos = {
     total_completado: 80,
   };
+  const [marcado, setMarcado] = useState(false);
+  const marcar = (imagenRef)=>{
+    console.log(imagenRef);
+    //borrar todas las otras referencias
+    
+    imagenRef.current.classList.add("activado");
+  }
+
   return (
     <div className="container m-auto p-auto w-10/12">
       <div className="flex justify-between py-5">
@@ -32,20 +59,7 @@ const Grammar = (props) => {
         </div>
       </div>
       <div className="flex flex-wrap items-center justify-center	gap-2 mb-4" aria-label="choice" role="radiogroup">
-        <div className="flex flex-col w-1/4 flex-wrap cardCheck" aria-checked="false" role="radio" tabIndex="-1" data-test="challenge-choice-card">
-          <img
-            src="https://d2pur3iezf4d1j.cloudfront.net/images/18a521f1507cb86689faa5b2e8277703"
-            alt=""
-          />
-          <p className="text-sm font-medium	">Tea</p>
-        </div>
-        <div className="flex flex-col w-1/4 flex-wrap cardCheck" aria-checked="false" role="radio" tabIndex="-1" data-test="challenge-choice-card">
-          <img
-            src="https://d2pur3iezf4d1j.cloudfront.net/images/18a521f1507cb86689faa5b2e8277703"
-            alt=""
-          />
-          <p className="text-sm font-medium	">Tea</p>
-        </div>
+        <GrammarImage src={'https://d2pur3iezf4d1j.cloudfront.net/images/18a521f1507cb86689faa5b2e8277703'} alt={"agua"} nombre={"agua"} marcar={marcar} myref={imagen1}/>
         <div className="flex flex-col w-1/4 flex-wrap cardCheck" aria-checked="false" role="radio" tabIndex="-1" data-test="challenge-choice-card">
           <img
             src="https://d2pur3iezf4d1j.cloudfront.net/images/18a521f1507cb86689faa5b2e8277703"
