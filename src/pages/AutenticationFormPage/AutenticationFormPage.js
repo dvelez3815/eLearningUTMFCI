@@ -23,7 +23,7 @@ class AutenticationFormPage extends React.Component {
                     O
                     <a
                       href="#"
-                      className="font-medium text-indigo-600 hover:text-indigo-500"
+                      className="font-medium text-green-600 hover:text-green-500"
                     >
                       Registrate
                     </a>
@@ -42,7 +42,7 @@ class AutenticationFormPage extends React.Component {
                         type="email"
                         autocomplete="email"
                         required
-                        className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                        className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
                         placeholder="Correo electrónico"
                       />
                     </div>
@@ -56,7 +56,7 @@ class AutenticationFormPage extends React.Component {
                         type="password"
                         autocomplete="current-password"
                         required
-                        className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                        className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
                         placeholder="Contraseña"
                       />
                     </div>
@@ -68,7 +68,7 @@ class AutenticationFormPage extends React.Component {
                         id="remember-me"
                         name="remember-me"
                         type="checkbox"
-                        className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                        className="h-4 w-4 text-yellow-600 focus:ring-yellow-500 border-gray-300 rounded"
                       />
                       <label
                         for="remember-me"
@@ -81,7 +81,7 @@ class AutenticationFormPage extends React.Component {
                     <div className="text-sm">
                       <a
                         href="#"
-                        className="font-medium text-indigo-600 hover:text-indigo-500"
+                        className="font-medium text-green-600 hover:text-green-500"
                       >
                         Olvidaste tu contraseña?
                       </a>
@@ -91,11 +91,12 @@ class AutenticationFormPage extends React.Component {
                   <div>
                     <button
                       type="submit"
-                      className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-offset-2 
+                      focus:ring-yellow-400"
                     >
                       <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                         <svg
-                          className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
+                          className="h-5 w-5 text-yellow-600 group-hover:text-yellow-500"
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 20 20"
                           fill="currentColor"
@@ -116,8 +117,16 @@ class AutenticationFormPage extends React.Component {
             </div>
           </div>
           <div className="w-2/3 ">
-            <div className="min-h-screen  flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-              <img src={img1} width="400"></img>
+            <div className="min-h-screen flex-col flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+              <div>
+                <img src={img1} width="400"></img>
+              </div>
+              <div>
+                <h3 className="text-lg p-2 font-semibold italic">
+                  Aprender otro idioma es como convertirse en otra persona, <br/>
+                  <span className="text-gray-500 font-normal italic"> Haruki Murakami</span>
+                </h3> 
+              </div>
             </div>
           </div>
         </div>

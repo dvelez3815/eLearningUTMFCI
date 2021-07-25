@@ -3,6 +3,9 @@ import React from "react";
 import logo from '../../assets/resource/Logo_Provicional.png';
 
 class NavBar extends React.Component {
+  constructor(props){
+    super(props)
+  }
   render() {
     return (
         <nav className="shadow-sm flex items-center justify-between flex-wrap bg-gray-50 p-6">
