@@ -5,9 +5,9 @@ import img1 from "../../assets/resource/sign.svg";
 class AutenticationFormPage extends React.Component {
   render() {
     return (
-      <div className="container">
-        <div className="grid grid-cols-3 w-screen gap-4">
-          <div>
+      <div className=" ">
+        <div className="flex h-screen ">
+          <div className=" w-1/3 ">
             <div className="min-h-screen flex items-center justify-center  py-12 px-4 sm:px-6 lg:px-8">
               <div className="max-w-md w-full space-y-8">
                 <div>
@@ -115,11 +115,9 @@ class AutenticationFormPage extends React.Component {
               </div>
             </div>
           </div>
-          <div>
-            <div className="col-span-2 ">
-              <div className="min-h-screen min-w-full w-full flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-                <img src={img1} width="400"></img>
-              </div>
+          <div className="w-2/3 ">
+            <div className="min-h-screen  flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+              <img src={img1} width="400"></img>
             </div>
           </div>
         </div>
