@@ -1,34 +1,33 @@
 import "./CheckExercise.css";
-import { useState, useRef } from "react";
-
-const GrammarImage = (props)=>{
-  return(
-    <div className="flex flex-col w-1/4 flex-wrap cardCheck" aria-checked="false" role="radio" tabIndex="-1" data-test="challenge-choice-card" ref={props.myref}>
-      <button>
-      <img 
-      src={props.src}
-      alt={props.alt}
-      onClick={()=>{props.marcar(props.myref)}}
-    />
-    <p className="text-sm font-medium	">{props.nombre}</p>
-      </button>
-  </div>    
-  )
-}
-
+import { useState, useRef,createRef } from "react";
 
 
 const Grammar = (props) => {
   const imagen1 = useRef();
   let datos = {
-    total_completado: 80,
+    total_completado:80,
+    ejercicios:[
+      {},{},{},{},{}
+    ],
   };
+  const imagesRef = useRef([...Array(datos.ejercicios.length)].map(() => createRef()));
+
   const [marcado, setMarcado] = useState(false);
   const marcar = (imagenRef)=>{
-    console.log(imagenRef);
-    //borrar todas las otras referencias
-    
-    imagenRef.current.classList.add("activado");
+    try {
+      
+      console.log(imagenRef);
+      //borrar todas las otras referencias
+      (imagesRef.current.forEach(ref => {
+        (ref.current.classList.contains("activado"))&&ref.current.classList.remove("activado");
+        (imagenRef.current.setAttribute("aria-checked", "false"));
+      }))
+
+      imagenRef.current.classList.toggle("activado");
+      (imagenRef.current.setAttribute("aria-checked", "true"));
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -59,28 +58,10 @@ const Grammar = (props) => {
         </div>
       </div>
       <div className="flex flex-wrap items-center justify-center	gap-2 mb-4" aria-label="choice" role="radiogroup">
-        <GrammarImage src={'https://d2pur3iezf4d1j.cloudfront.net/images/18a521f1507cb86689faa5b2e8277703'} alt={"agua"} nombre={"agua"} marcar={marcar} myref={imagen1}/>
-        <div className="flex flex-col w-1/4 flex-wrap cardCheck" aria-checked="false" role="radio" tabIndex="-1" data-test="challenge-choice-card">
-          <img
-            src="https://d2pur3iezf4d1j.cloudfront.net/images/18a521f1507cb86689faa5b2e8277703"
-            alt=""
-          />
-          <p className="text-sm font-medium	">Tea</p>
-        </div>
-        <div className="flex flex-col w-1/4 flex-wrap cardCheck" aria-checked="false" role="radio" tabIndex="-1" data-test="challenge-choice-card">
-          <img
-            src="https://d2pur3iezf4d1j.cloudfront.net/images/18a521f1507cb86689faa5b2e8277703"
-            alt=""
-          />
-          <p className="text-sm font-medium	">Tea</p>
-        </div>
-        <div className="flex flex-col w-1/4 flex-wrap cardCheck activado" aria-checked="true" role="radio" tabIndex="-1" data-test="challenge-choice-card">
-          <img
-            src="https://d2pur3iezf4d1j.cloudfront.net/images/18a521f1507cb86689faa5b2e8277703"
-            alt=""
-          />
-          <p className="text-sm font-medium	">Tea</p>
-        </div>
+        {datos.ejercicios.map((ejercicio, index)=>{
+          return(<GrammarImage key={index} src={'https://d2pur3iezf4d1j.cloudfront.net/images/18a521f1507cb86689faa5b2e8277703'} alt={"agua"} nombre={"agua"} marcar={marcar} myref={imagesRef.current[index]}/>)
+        }
+        )}
       </div>
 
       <div className="flex justify-between flex-col sm:flex-row">
@@ -116,5 +97,24 @@ const Grammar = (props) => {
     </div>
   );
 };
+
+
+const GrammarImage = (props)=>{
+  return(
+    <div className="flex flex-col w-1/4 flex-wrap cardCheck" aria-checked="false" role="radio" tabIndex="-1" ref={props.myref}>
+      <button>
+      <img 
+      src={props.src}
+      alt={props.alt}
+      onClick={()=>{
+        props.marcar(props.myref);
+
+      }}
+    />
+    <p className="text-sm font-medium	">{props.nombre}</p>
+      </button>
+  </div>    
+  )
+}
 
 export default Grammar;
