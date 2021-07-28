@@ -1,30 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
-import {
-  BrowserRouter as Router,
-  Route
-} from "react-router-dom";
-
-
+import logo from "./logo.svg";
+import "./App.css";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 /* Pages */
-import ActivitiesPage from './pages/ActivitiesPage/ActivitiesPage'
-import HomePage from './pages/HomePage/HomePage';
-import AutenticationFormPage from './pages/AutenticationFormPage/AutenticationFormPage'
+import ActivitiesPage from "./pages/ActivitiesPage/ActivitiesPage";
+import HomePage from "./pages/HomePage/HomePage";
+import SigInPage from "./pages/SigInPage/SigInPage";
+import SignUpPage from "./pages/SignUpPage/SignUpPage";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
+
 function App() {
   return (
     <Router>
       <div className="App">
-          <Route exact path="/activities" component={ActivitiesPage}></Route>
-          <Route exact path="/signin" component={AutenticationFormPage}></Route>
-          <Route exact path="/" component={HomePage}></Route>
-
+        <Switch>
+          <Route exact path="/activities" component={ActivitiesPage} />
+          <Route exact path="/signin" component={SigInPage} />
+          <Route exact path="/signup" component={SignUpPage} />
+          <Route exact path="/" component={HomePage} />
+          <Route component={NotFoundPage} />
+        </Switch>
       </div>
     </Router>
-    
   );
 }
 
 export default App;
-
-

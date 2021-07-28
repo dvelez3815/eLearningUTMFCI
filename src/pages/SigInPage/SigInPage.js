@@ -1,8 +1,8 @@
 import React from "react";
 import logo from "../../assets/resource/Logo_Provicional.png";
-import "./AutenticationFormPage.css";
 import img1 from "../../assets/resource/sign.svg";
-class AutenticationFormPage extends React.Component {
+import "./SigInPage.css";
+class SigInPage extends React.Component {
   render() {
     return (
       <div className=" ">
@@ -22,7 +22,7 @@ class AutenticationFormPage extends React.Component {
                   <p className="mt-2 text-center text-sm text-gray-600">
                     O
                     <a
-                      href="#"
+                      href="/signup"
                       className="font-medium text-green-600 hover:text-green-500"
                     >
                       Registrate
@@ -123,9 +123,12 @@ class AutenticationFormPage extends React.Component {
               </div>
               <div>
                 <h3 className="text-lg p-2 font-semibold italic">
-                  Aprender otro idioma es como convertirse en otra persona, <br/>
-                  <span className="text-gray-500 font-normal italic"> Haruki Murakami</span>
-                </h3> 
+                  Aprender otro idioma es como convertirse en otra persona,
+                  <br />
+                  <span className="text-gray-500 font-normal italic">
+                    Haruki Murakami
+                  </span>
+                </h3>
               </div>
             </div>
           </div>
@@ -134,4 +137,4 @@ class AutenticationFormPage extends React.Component {
     );
   }
 }
-export default AutenticationFormPage;
+export default SigInPage;

@@ -2,7 +2,7 @@ import React from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import circulos from "../../assets/resource/Semi_Circulo.png";
 import chica from "../../assets/resource/CHICA.png";
-
+import {Link} from  "react-router-dom"
 class HomePage extends React.Component {
   render() {
     return (
@@ -24,12 +24,12 @@ class HomePage extends React.Component {
               </h3>
               <div class="pt-4">
                 <button class=" w-1/2 bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded-full">
-                  Empieza
+                  <Link to="/signup">Empieza</Link>
                 </button>
               </div>
               <div class="pt-4">
                 <button class=" w-1/2 bg-gray-400 hover:bg-gray-300 text-white font-bold py-2 px-4 rounded-full">
-                  Ya tengo una cuenta
+                <Link to="/signin">Ya tengo una cuenta</Link>
                 </button>
               </div>
             </div>
