@@ -1,9 +1,60 @@
 import React from 'react'
 import logo from "../../../assets/resource/Logo_Provicional.png";
 import img1 from "../../../assets/resource/sign.svg";
-
+import axios from 'axios';
 class SignUpPage extends React.Component{
 
+  
+  constructor(props){
+    super(props);
+    this.state = {
+      submitForm: false, 
+      username: '',
+      lastname: '', 
+      mail: '', 
+      pass: '' 
+      
+    };
+  
+    this.UpdatePass1 = this.UpdatePass1.bind(this);
+    this.UpdatePass2 = this.UpdatePass2.bind(this);
+    this.UpdateUser = this.UpdateUser.bind(this);
+    this.UpdateMail = this.UpdateMail.bind(this);
+    this.ButtonSubmit = this.ButtonSubmit.bind(this);
+    this.UpdateLastname = this.UpdateLastname.bind(this);
+  }
+  UpdateUser(event){
+    this.setState({username: event.target.value})
+  }
+  UpdateLastname(event){
+    this.setState({lastname: event.target.value})
+
+  }
+  UpdateMail(event){
+    this.setState({mail: event.target.value})
+  }
+  UpdatePass1(event){
+    this.setState({pass: event.target.value})
+  }
+  UpdatePass2(event){
+    if(this.state.pass == event.target.value) this.setState({submitForm: true})
+    else
+    this.setState({submitForm: false})
+  }
+  ButtonSubmit(event){
+    event.preventDefault();
+    console.log(this.state)
+    axios.post('http://localhost:5000/users', {name: this.state.username, lastname: this.state.lastname, mail: this.state.mail, password: this.state.pass}).
+    then(
+      response =>{
+        console.log(response)
+    }).catch(
+      error =>{
+        console.log(error)
+      }
+    )
+  }
+  
     render(){
         return(
             <div className=" ">
@@ -34,57 +85,81 @@ class SignUpPage extends React.Component{
                       <input type="hidden" name="remember" value="true" />
                       <div className="rounded-md shadow-sm -space-y-px">
                         <div>
-                          <label for="email-address" className="sr-only">
+                          <label htmlFor="email-address" className="sr-only">
                             Name
                           </label>
                           <input
                             id="name"
                             name="name"
                             type="text"
-                            autocomplete="name"
+                            autoComplete="name"
                             required
+                            value={this.state.username}
+                            onChange={this.UpdateUser}
                             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
-                            placeholder="Nombre de usuario"
+                            placeholder="Nombres"
                           />
                         </div>
                         <div>
-                          <label for="email-address" className="sr-only">
+                          <label htmlFor="email-address" className="sr-only">
+                            Lastname
+                          </label>
+                          <input
+                            id="lastname"
+                            name="lastname"
+                            type="text"
+                            autoComplete="lastname"
+                            required
+                            value={this.state.lastname}
+                            onChange={this.UpdateLastname}
+                            className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
+                            placeholder="Apellidos"
+                          />
+                        </div>
+                        <div>
+                          <label htmlFor="email-address" className="sr-only">
                             Email address
                           </label>
                           <input
                             id="email-address"
-                            name="email"
+                            name="mail"
                             type="email"
-                            autocomplete="email"
+                            autoComplete="email"
                             required
+                            onChange={this.UpdateMail}
+                            value = {this.state.mail}
                             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
                             placeholder="Correo electrónico"
                           />
                         </div>
                         <div>
-                          <label for="password" className="sr-only">
+                          <label htmlFor="password" className="sr-only">
                             Password
                           </label>
                           <input
                             id="password"
                             name="password"
                             type="password"
-                            autocomplete="current-password"
+                            autoComplete="current-password"
+                            onChange={this.UpdatePass1}
+                            value={this.state.pass}
                             required
                             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
                             placeholder="Contraseña"
                           />
                         </div>
                         <div>
-                          <label for="password" className="sr-only">
+                          <label htmlFor="password" className="sr-only">
                             Password
                           </label>
                           <input
                             id="password2"
                             name="password2"
                             type="password"
-                            autocomplete="current-password"
+                            autoComplete="current-password"
                             required
+                            onChange={this.UpdatePass2}
+                            
                             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
                             placeholder="Repetir contraseña"
                           />
@@ -100,7 +175,7 @@ class SignUpPage extends React.Component{
                             className="h-4 w-4 text-yellow-600 focus:ring-yellow-500 border-gray-300 rounded"
                           />
                           <label
-                            for="remember-me"
+                            htmlFor="remember-me"
                             className="ml-2 block text-sm text-gray-900"
                           >
                             Recuerdame
@@ -119,7 +194,7 @@ class SignUpPage extends React.Component{
     
                       <div>
                         <button
-                          type="submit"
+                          type="submit" disabled={!this.state.submitForm} onClick={this.ButtonSubmit}
                           className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-offset-2 
                           focus:ring-yellow-400"
                         >
@@ -132,9 +207,9 @@ class SignUpPage extends React.Component{
                               aria-hidden="true"
                             >
                               <path
-                                fill-rule="evenodd"
+                                fillRule="evenodd"
                                 d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                                clip-rule="evenodd"
+                                clipRule="evenodd"
                               />
                             </svg>
                           </span>
