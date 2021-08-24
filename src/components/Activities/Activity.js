@@ -3,6 +3,13 @@ import "./Activity.css";
 import { useEffect, useRef, useState } from "react";
 import i_writting from "../../assets/icons/teacher.png";
 import { getProgressColor } from "../../helpers/indexFuntions";
+import { Fragment } from 'react'
+import { Menu, Transition } from '@headlessui/react'
+import { ChevronDownIcon } from '@heroicons/react/solid'
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
 
 export default function Activity(props) {
   const [modal, setModal] = useState(false);
@@ -21,9 +28,71 @@ export default function Activity(props) {
   );
 
   return (
-    
-    <div className={props.colspan + " p-2 relative inline-block text-left"} ref={props.myref}>
-      <button type="button" class="inline-flex justify-center w-full rounded-md  shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 " id="menu-button-actividad" aria-expanded="true" aria-haspopup="true">
+
+<Menu as="div" className={ props.colspan +" relative inline-block "}  ref={props.myref}>
+      <div>
+        <Menu.Button className="inline-flex justify-center w-full  px-4 py-2 bg-white text-sm font-medium text-gray-700 ">
+        <div className="circle" onClick={()=>props.handlerActivity(props.myref)}>
+        <div className="fill" ref={circlePercent}></div>
+        <img src={props.img} alt="ActivityName" className="activity-img"></img>
+      </div>
+         
+        </Menu.Button>
+      </div>
+      <div className="circle-text">
+      <h2 className="text-base font-bold">{props.name}</h2>
+    </div>
+
+      <Transition
+        as={Fragment}
+        enter="transition ease-out duration-100"
+        enterFrom="transform opacity-0 scale-95"
+        enterTo="transform opacity-100 scale-100"
+        leave="transition ease-in duration-75"
+        leaveFrom="transform opacity-100 scale-100"
+        leaveTo="transform opacity-0 scale-95"
+        >
+        <Menu.Items className="origin-center absolute  mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <div className="py-1">
+            <div className="p-2 text-left">
+              <h2 className="text-lg mx-2 font-bold text-gray-500">{props.name}</h2>
+
+            </div>
+            
+            <Menu.Item>
+              {({ active }) => (
+                <a
+                href="#"
+                  className={classNames(
+                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                    'block px-4 py-2 text-sm'
+                  )}
+                >
+                  Apuntes
+                </a>
+              )}
+            </Menu.Item>
+            <Menu.Item>
+              {({ active }) => (
+                <a
+                href="#"
+                  className={classNames(
+                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                    'block px-4 py-2 text-sm'
+                    )}
+                    >
+                  Empezar
+                </a>
+              )}
+            </Menu.Item>
+            
+            
+          </div>
+        </Menu.Items>
+      </Transition>
+    </Menu>    
+  /*   <div className={props.colspan + " p-2 relative inline-block text-left"} ref={props.myref}>
+    <button type="button" class="inline-flex justify-center w-full rounded-md  shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 " id="menu-button-actividad" aria-expanded="true" aria-haspopup="true">
       <div className="circle" onClick={()=>props.handlerActivity(props.myref)}>
         <div className="fill" ref={circlePercent}></div>
         <img src={props.img} alt="ActivityName" className="activity-img"></img>
@@ -43,8 +112,8 @@ export default function Activity(props) {
   </div>
     <div className="circle-text ">
       <h2 className="text-base font-bold">{props.name}</h2>
-    </div>
+    </div> 
     
-    </div>
+    </div>*/
   );
 }
