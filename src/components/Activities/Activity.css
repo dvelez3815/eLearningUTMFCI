@@ -1,7 +1,7 @@
 .circle {
     display: inline-block;
-    width: 9vh;
-    height: 9vh;
+    width: 16vh;
+    height: 16vh;
     border-radius: 50%;
     border: 10px solid white;
     text-align: center;
@@ -10,7 +10,7 @@
     padding: 3px;
     position: relative;
     box-sizing: border-box;
-    box-shadow: 0 0 0 10px gray;
+    box-shadow: 0 0 0 10px rgba(229, 231, 235, 1);;
     /* margin: 50px */
     margin: 8px;
   }

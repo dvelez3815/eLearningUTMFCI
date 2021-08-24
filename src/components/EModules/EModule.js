@@ -33,7 +33,7 @@ export default function EModule(props){
         <>
         <div>
         <ModuleProgress moduleName="Modulo 1" percent={props.percent}></ModuleProgress>
-        <div className="grid grid-cols-6">
+        <div className="flex flex-row">
         {data.actividades.map((actividad, index) => {
             if(index===0)
                 return(<Activity img={i_writting} percent={props.percent} name={"Gramática"} colspan={'col-span-1 col-start-2 sm:col-start-1 xsm:col-span-2'} handlerActivity={handlerActivity} myref ={activityRef.current[index]}/>)

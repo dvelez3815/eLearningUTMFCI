@@ -49,7 +49,9 @@ export function NavComponent(props){
                     EVALUACIÓN
                 </a>
             </div>
+            
         </div>
+        
     </nav>
 </div>
 

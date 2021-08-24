@@ -37,9 +37,12 @@ class SignUpPage extends React.Component{
     this.setState({pass: event.target.value})
   }
   UpdatePass2(event){
-    if(this.state.pass == event.target.value) this.setState({submitForm: true})
-    else
-    this.setState({submitForm: false})
+    if(this.state.pass === event.target.value){ 
+      this.setState({submitForm: true})
+    }
+    else{
+      this.setState({submitForm: false})
+    }
   }
   ButtonSubmit(event){
     event.preventDefault();
