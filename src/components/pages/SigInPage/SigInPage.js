@@ -2,7 +2,34 @@ import React from "react";
 import logo from "../../../assets/resource/Logo_Provicional.png";
 import img1 from "../../../assets/resource/sign.svg";
 import "./SigInPage.css";
+import axios from 'axios';
 class SigInPage extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      submitForm: false
+    }
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleButtonSubmit = this.handleButtonSubmit.bind(this);
+  }
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
+  handleButtonSubmit(event){
+    event.preventDefault();
+    axios.get('http:localhost:5000/users'+this.state.mail)
+
+  }
   render() {
     return (
       <div className=" ">
@@ -33,32 +60,34 @@ class SigInPage extends React.Component {
                   <input type="hidden" name="remember" value="true" />
                   <div className="rounded-md shadow-sm -space-y-px">
                     <div>
-                      <label for="email-address" className="sr-only">
+                      <label htmlFor="email-address" className="sr-only">
                         Email address
                       </label>
                       <input
                         id="email-address"
-                        name="email"
+                        name="mail"
                         type="email"
-                        autocomplete="email"
+                        autoComplete="email"
                         required
+                        onChange={this.handleInputChange}
                         className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
                         placeholder="Correo electrónico"
-                      />
+                        />
                     </div>
                     <div>
-                      <label for="password" className="sr-only">
+                      <label htmlFor="password" className="sr-only">
                         Password
                       </label>
                       <input
                         id="password"
                         name="password"
                         type="password"
-                        autocomplete="current-password"
+                        onChange={this.handleInputChange}
+                        autoComplete="current-password"
                         required
                         className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
                         placeholder="Contraseña"
-                      />
+                        />
                     </div>
                   </div>
 
@@ -68,10 +97,11 @@ class SigInPage extends React.Component {
                         id="remember-me"
                         name="remember-me"
                         type="checkbox"
+                        onChange={this.handleInputChange}
                         className="h-4 w-4 text-yellow-600 focus:ring-yellow-500 border-gray-300 rounded"
                       />
                       <label
-                        for="remember-me"
+                        htmlFor="remember-me"
                         className="ml-2 block text-sm text-gray-900"
                       >
                         Recuerdame
@@ -91,6 +121,7 @@ class SigInPage extends React.Component {
                   <div>
                     <button
                       type="submit"
+                      onClick={this.handleButtonSubmit}
                       className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-offset-2 
                       focus:ring-yellow-400"
                     >
@@ -103,9 +134,9 @@ class SigInPage extends React.Component {
                           aria-hidden="true"
                         >
                           <path
-                            fill-rule="evenodd"
+                            fillRule="evenodd"
                             d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                            clip-rule="evenodd"
+                            clipRule="evenodd"
                           />
                         </svg>
                       </span>

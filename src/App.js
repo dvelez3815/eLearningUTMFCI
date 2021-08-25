@@ -3,8 +3,8 @@ import {NavComponent} from './components/NavComponent';
 import EModule from './components/EModules/EModule';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom"
 import Grammar from './components/pages/ejercicios/Grammar';
-import { Inicio } from './components/pages/inicio/Inicio.js';
 /* PAGES */
+import  Inicio  from './components/pages/inicio/Inicio.js';
 import HomePage from './components/pages/HomePage/HomePage'
 import SignUpPage from './components/pages/SignUpPage/SignUpPage'
 import SigInPage from './components/pages/SigInPage/SigInPage'
