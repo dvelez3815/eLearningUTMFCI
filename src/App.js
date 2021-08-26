@@ -12,6 +12,7 @@ import NotFoundPage from './components/pages/NotFoundPage/NotFoundPage'
 import { Emparejar } from './components/pages/ejercicios/Emparejar';
 import { Drag } from './components/pages/ejercicios/Drag';
 function App() {
+  
   return (
     <div className="App">      
     {/* Rutas solo de pruebas para probar las vistas */}

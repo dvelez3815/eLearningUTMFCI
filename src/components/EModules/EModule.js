@@ -4,12 +4,10 @@ import i_writting from "../../assets/icons/teacher.png";
 import { useRef, createRef } from "react";
 
 export default function EModule(props) {
-  let data = {
-    actividades: [{}, {}, {}, {}, {}],
-  };
+  
 
   const activityRef = useRef(
-    [...Array(data.actividades.length)].map(() => createRef())
+    [...Array(props.actividades.length)].map(() => createRef())
   );
 
   const handlerActivity = (activity) => {
@@ -32,77 +30,21 @@ export default function EModule(props) {
     <>
       <div>
         <ModuleProgress
-          moduleName="Modulo 1"
+          moduleName={props.nombre}
           percent={props.percent}
         ></ModuleProgress>
         <div className="flex flex-wrap justify-center">
-          {data.actividades.map((actividad, index) => {
-            if (index === 0)
+          {props.actividades.map((actividad, index) => {
               return (
                 <Activity
                   img={i_writting}
                   moduleName="Modulo 1"
                   percent={props.percent}
-                  name={"Gramática"}
+                  name={props.actividades[index].nombre}
                   colspan={
                     "col-span-1 col-start-2 sm:col-start-1 xsm:col-span-2"
                   }
-                  handlerActivity={handlerActivity}
-                  myref={activityRef.current[index]}
-                />
-              );
-            if (index === 1)
-              return (
-                <Activity
-                  img={i_writting}
-                  moduleName="Modulo 1"
-                  percent={props.percent}
-                  name={"Vocabulario"}
-                  colspan={
-                    "col-span-1 col-start-4 sm:col-start-3 sm:col-span-2"
-                  }
-                  handlerActivity={handlerActivity}
-                  myref={activityRef.current[index]}
-                />
-              );
-            if (index === 2)
-              return (
-                <Activity
-                  img={i_writting}
-                  moduleName="Modulo 1"
-                  percent={props.percent}
-                  name={"Escritura"}
-                  colspan={
-                    "col-span-1 col-start-2 sm:col-start-5 sm:col-span-2"
-                  }
-                  handlerActivity={handlerActivity}
-                  myref={activityRef.current[index]}
-                />
-              );
-            if (index === 3)
-              return (
-                <Activity
-                  img={i_writting}
-                  moduleName="Modulo 1"
-                  percent={props.percent}
-                  name={"Escucha"}
-                  colspan={
-                    "col-span-1 col-start-4 sm:col-start-2 sm:col-span-2"
-                  }
-                  handlerActivity={handlerActivity}
-                  myref={activityRef.current[index]}
-                />
-              );
-            if (index === 4)
-              return (
-                <Activity
-                  img={i_writting}
-                  moduleName="Modulo 1"
-                  percent={props.percent}
-                  name={"Pronunciación"}
-                  colspan={
-                    "col-span-1 col-start-2 sm:col-start-4 sm:col-span-2"
-                  }
+                  ruta={props.actividades[index].ruta}
                   handlerActivity={handlerActivity}
                   myref={activityRef.current[index]}
                 />
