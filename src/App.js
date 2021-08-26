@@ -34,10 +34,10 @@ function App() {
       <Route exact path="/">
         <HomePage />
       </Route>
-      <Route exact path="/signup">
+      <Route exact path="/registro">
         <SignUpPage />
       </Route>
-      <Route exact path="/signin">
+      <Route exact path="/login">
         <SigInPage />
       </Route>
       <Route > <NotFoundPage/> </Route>
