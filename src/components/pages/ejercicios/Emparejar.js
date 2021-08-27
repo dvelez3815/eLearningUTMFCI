@@ -1,7 +1,9 @@
 import React, { createRef, useRef, useState } from 'react'
+import { useHistory } from 'react-router-dom';
 
 export const Emparejar = () => {
 
+  const history = useHistory();
 
     let datos = {
         total_completado:80,
@@ -34,8 +36,6 @@ export const Emparejar = () => {
   const [marcado, setMarcado] = useState(false);
   const marcar = (imagenRef)=>{
     try {
-      
-      console.log(imagenRef);
       //borrar todas las otras referencias
       (imagesRef.current.forEach(ref => {
         (ref.current.classList.contains("activado"))&&ref.current.classList.remove("activado");
@@ -50,7 +50,7 @@ export const Emparejar = () => {
   }
  
     return (
-        <div className="container m-auto p-auto w-10/12">
+        <div className="container m-auto p-auto w-10/12 flex flex-col h-screen justify-between ">
           <div className="flex justify-between py-5">
             <h2>
               <span>
@@ -58,7 +58,7 @@ export const Emparejar = () => {
               </span>
             </h2>
             <div>
-              <button>
+              <button onClick={()=>history.push('/inicio')}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6"
@@ -109,7 +109,7 @@ export const Emparejar = () => {
     
           <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-amber-200 h-4 border">
             <div
-              style={{ width: 100 }}
+              style={{ width: "100%" }}
               className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-400"
             ></div>
           </div>

@@ -7,10 +7,6 @@ const ErrorData = {
     type: "error",
     text: "Wrong answer!",
     confirmButtonText: "Ok",
-    showCancelButton: true,
-    cancelButtonText: "Try again",
-    closeOnConfirm: false,
-    closeOnCancel: true   
 };
   
 const SuccessData = {
@@ -27,7 +23,7 @@ export const mostrarAlertaError= ()=>{
     }).then((result) => {
         if (result.value) {
             console.log("You clicked the confirm button!");
-            window.location = "/";
+            window.location = "/modulo/1/grammar/2";
         } else {
             console.log("You clicked the cancel button!");
         }

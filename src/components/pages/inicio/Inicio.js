@@ -29,7 +29,7 @@ export const Inicio = () => {
               nombre: "Vocabulary",
               progreso: 2,
               total: 8,
-              ruta: "",
+              ruta: "http://localhost:3000/modulo/1/writting/1",
               imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
             },
             {

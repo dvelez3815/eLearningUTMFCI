@@ -11,6 +11,7 @@ import SigInPage from './components/pages/SigInPage/SigInPage'
 import NotFoundPage from './components/pages/NotFoundPage/NotFoundPage'
 import { Emparejar } from './components/pages/ejercicios/Emparejar';
 import { Drag } from './components/pages/ejercicios/Drag';
+
 function App() {
   
   return (
@@ -22,6 +23,9 @@ function App() {
       <Route exact path="/modulo/1/grammar/1">
         <Grammar />
       </Route>
+      <Route exact path="/modulo/1/grammar/2">
+        <Emparejar />
+      </Route>      
       <Route exact path="/modulo/1/vocabulary/1">
         <Emparejar />
       </Route>

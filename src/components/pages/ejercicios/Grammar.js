@@ -11,10 +11,26 @@ const Grammar = (props) => {
 
 
   const imagen1 = useRef();
+
   let datos = {
     total_completado:80,
     ejercicios:[
-      {},{},{},{},{}
+      {
+        nombre:"coffee",
+        imagen: "https://d2pur3iezf4d1j.cloudfront.net/images/6fd84b8a838c43c4a84b44b08b10177e",
+      },{
+        nombre:"te",
+        imagen: "https://d2pur3iezf4d1j.cloudfront.net/images/18a521f1507cb86689faa5b2e8277703",
+      },{
+        nombre:"milk",
+        imagen: "https://d2pur3iezf4d1j.cloudfront.net/images/645fa42dcea02c7e2970a1285e321562",
+      },{
+        nombre:"water",
+        imagen: "https://d2pur3iezf4d1j.cloudfront.net/images/7afea32bcf0e8c6f9d446ad4aad416be",
+      },{
+        nombre:"sugar",
+        imagen: "https://d2pur3iezf4d1j.cloudfront.net/images/72529140fa35af37c56e0a20f1fbe2a8",
+      }
     ],
   };
   const imagesRef = useRef([...Array(datos.ejercicios.length)].map(() => createRef()));
@@ -66,7 +82,7 @@ const Grammar = (props) => {
       </div>
       <div className="flex flex-wrap items-center justify-center	gap-2 mb-4" aria-label="choice" role="radiogroup">
         {datos.ejercicios.map((ejercicio, index)=>{
-          return(<GrammarImage key={index} src={'https://d2pur3iezf4d1j.cloudfront.net/images/18a521f1507cb86689faa5b2e8277703'} alt={"agua"} nombre={"agua"} marcar={marcar} myref={imagesRef.current[index]}/>)
+          return(<GrammarImage key={index} src={ejercicio.imagen} alt={"agua"} nombre={ejercicio.nombre} marcar={marcar} myref={imagesRef.current[index]}/>)
         }
         )}
       </div>
