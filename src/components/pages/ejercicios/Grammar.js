@@ -1,8 +1,15 @@
 import "./CheckExercise.css";
 import { useState, useRef,createRef } from "react";
+import AlertError, { mostrarError } from "../../Alert/Error";
+import AlertSuccess from "../../Alert/Exito";
+import { ErrorData } from "../../Alert/Mensajes";
+import { mostrarAlertaError,mostrarAlertaExito } from "../../Alert/Alerts";
+
 
 
 const Grammar = (props) => {
+
+
   const imagen1 = useRef();
   let datos = {
     total_completado:80,
@@ -73,7 +80,7 @@ const Grammar = (props) => {
           </button>
         </div>
         <div className="mb-4">
-        <button className="bg-green-500 hover:bg-green-700 btn-exercise">
+        <button className="bg-green-500 hover:bg-green-700 btn-exercise" onClick={()=>mostrarAlertaError()}>
           <span>
             <p>comprobar</p>
           </span>
@@ -108,7 +115,6 @@ const GrammarImage = (props)=>{
       alt={props.alt}
       onClick={()=>{
         props.marcar(props.myref);
-
       }}
     />
     <p className="text-sm font-medium	">{props.nombre}</p>
