@@ -19,7 +19,7 @@ function App() {
       <Route exact path="/modulo/1/grammar/1">
         <Grammar />
       </Route>
-      <Route exact path="/inicio">
+      <Route exact path="/dashboard">
         <Inicio />
       </Route>
       <Route exact path="/">
