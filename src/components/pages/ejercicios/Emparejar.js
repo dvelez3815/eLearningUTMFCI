@@ -58,7 +58,7 @@ export const Emparejar = () => {
               </span>
             </h2>
             <div>
-              <button onClick={()=>history.push('/inicio')}>
+              <button onClick={()=>history.push('/dashboard')}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6"
