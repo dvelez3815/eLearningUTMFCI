@@ -9,7 +9,10 @@ import HomePage from './components/pages/HomePage/HomePage'
 import SignUpPage from './components/pages/SignUpPage/SignUpPage'
 import SigInPage from './components/pages/SigInPage/SigInPage'
 import NotFoundPage from './components/pages/NotFoundPage/NotFoundPage'
+import { Emparejar } from './components/pages/ejercicios/Emparejar';
+import { Drag } from './components/pages/ejercicios/Drag';
 function App() {
+  
   return (
     <div className="App">      
     {/* Rutas solo de pruebas para probar las vistas */}
@@ -19,16 +22,23 @@ function App() {
       <Route exact path="/modulo/1/grammar/1">
         <Grammar />
       </Route>
-      <Route exact path="/dashboard">
+      <Route exact path="/modulo/1/vocabulary/1">
+        <Emparejar />
+      </Route>
+      <Route exact path="/modulo/1/writting/1">
+        <Drag />
+      </Route>      
+
+      <Route exact path="/inicio">
         <Inicio />
       </Route>
       <Route exact path="/">
         <HomePage />
       </Route>
-      <Route exact path="/signup">
+      <Route exact path="/registro">
         <SignUpPage />
       </Route>
-      <Route exact path="/signin">
+      <Route exact path="/login">
         <SigInPage />
       </Route>
       <Route > <NotFoundPage/> </Route>

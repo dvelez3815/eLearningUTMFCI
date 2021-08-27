@@ -33,7 +33,7 @@ export default function Activity(props) {
       ref={props.myref}
     >
       <div>
-        <Menu.Button className="inline-flex justify-center w-full  px-4 py-2 bg-white text-sm font-medium text-gray-700 ">
+        <Menu.Button className="inline-flex justify-center w-full  px-4 py-2 bg-white text-sm font-medium text-gray-700">
           <div
             className="circle"
             onClick={() => props.handlerActivity(props.myref)}
@@ -60,7 +60,7 @@ export default function Activity(props) {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="origin-center absolute  mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <Menu.Items className="origin-center absolute  mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
           <div className="py-1">
             <div className="p-2 text-left">
               <h2 className="text-lg mx-2 font-bold text-gray-900">
@@ -73,7 +73,7 @@ export default function Activity(props) {
 
             <Menu.Item>
               {({ active }) => (
-                <button class="bg-transparent w-3/4 my-2 text-yellow-500 font-semibold hover:text-yellow-400 py-2 px-4 border border-yellow-500 hover:border-yellow-500 rounded">
+                <button className="bg-transparent w-3/4 my-2 text-yellow-500 font-semibold hover:text-yellow-400 py-2 px-4 border border-yellow-500 hover:border-yellow-500 rounded">
                   <a
                     href="#"
                     /* className={classNames(
@@ -88,9 +88,9 @@ export default function Activity(props) {
             </Menu.Item>
             <Menu.Item>
               {({ active }) => (
-                <button class="bg-green-600 w-3/4 my-2 hover:bg-green-800 text-white font-bold py-2 px-4 rounded">
-                  <a
-                    href="#"
+                <button className="bg-green-600 w-3/4 my-2 hover:bg-green-800 text-white font-bold py-2 px-4 rounded">
+                  <a className="block"
+                    href={props.ruta}
                    /*  className={classNames(
                       active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                       "block px-4 py-2 text-sm"
@@ -106,19 +106,19 @@ export default function Activity(props) {
       </Transition>
     </Menu>
     /*   <div className={props.colspan + " p-2 relative inline-block text-left"} ref={props.myref}>
-    <button type="button" class="inline-flex justify-center w-full rounded-md  shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 " id="menu-button-actividad" aria-expanded="true" aria-haspopup="true">
+    <button type="button" className="inline-flex justify-center w-full rounded-md  shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 " id="menu-button-actividad" aria-expanded="true" aria-haspopup="true">
       <div className="circle" onClick={()=>props.handlerActivity(props.myref)}>
         <div className="fill" ref={circlePercent}></div>
         <img src={props.img} alt="ActivityName" className="activity-img"></img>
       </div>
     </button>
-    <div class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button-actividad" >
-    <div class="py-1" role="none">
-      <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">Account settings</a>
-      <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-1">Support</a>
-      <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-2">License</a>
+    <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button-actividad" >
+    <div className="py-1" role="none">
+      <a href="#" className="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">Account settings</a>
+      <a href="#" className="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-1">Support</a>
+      <a href="#" className="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-2">License</a>
       <form method="POST" action="#" role="none">
-        <button type="submit" class="text-gray-700 block w-full text-left px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-3">
+        <button type="submit" className="text-gray-700 block w-full text-left px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-3">
           Sign out
         </button>
       </form>
