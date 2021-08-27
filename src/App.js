@@ -33,16 +33,16 @@ function App() {
         <Drag />
       </Route>      
 
-      <Route exact path="/inicio">
+      <Route exact path="/dashboard">
         <Inicio />
       </Route>
       <Route exact path="/">
         <HomePage />
       </Route>
-      <Route exact path="/registro">
+      <Route exact path="/signup">
         <SignUpPage />
       </Route>
-      <Route exact path="/login">
+      <Route exact path="/signin">
         <SigInPage />
       </Route>
       <Route > <NotFoundPage/> </Route>
