@@ -16,7 +16,7 @@ export const Inicio = () => {
       modulo: [
         {
           nombre: "Module 1",
-          progreso: 60,
+          progreso: 10,
           actividades: [
             {
               nombre: "Grammar",

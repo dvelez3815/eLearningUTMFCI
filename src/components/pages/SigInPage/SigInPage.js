@@ -60,7 +60,7 @@ class SigInPage extends React.Component {
                   <p className="mt-2 text-center text-sm text-gray-600">
                     O
                     <a
-                      href="/signup"
+                      href="/registro"
                       className="font-medium text-green-600 hover:text-green-500"
                     >
                       Registrate
