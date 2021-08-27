@@ -71,7 +71,7 @@ class SignUpPage extends React.Component {
       password: this.state.pass,
     })
     .then((response) => {
-      if( response.data.res === "User Exist"){
+      if( response.data.res !== "User Not Exist"){
         this.setState({dato: 'El correo '});
         this.setState({isVisibleDato: ''});
         setInterval(()=>{

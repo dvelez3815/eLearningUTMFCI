@@ -2,14 +2,13 @@ import React from "react";
 import logo from "../../../assets/resource/Logo_Provicional.png";
 import img1 from "../../../assets/resource/sign.svg";
 import "./SigInPage.css";
-import axios from 'axios';
+import axios from "axios";
 class SigInPage extends React.Component {
-
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-      submitForm: false
-    }
+      submitForm: false,
+    };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleButtonSubmit = this.handleButtonSubmit.bind(this);
@@ -17,18 +16,30 @@ class SigInPage extends React.Component {
 
   handleInputChange(event) {
     const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
 
     this.setState({
-      [name]: value
+      [name]: value,
     });
   }
 
-  handleButtonSubmit(event){
+  handleButtonSubmit(event) {
     event.preventDefault();
-    axios.get('http:localhost:5000/users'+this.state.mail)
-
+    axios
+      .post("http://localhost:5000/signin", {
+        mail: this.state.mail,
+        password: this.state.password,
+      })
+      .then((res) => {
+        console.log(res.data)
+        if(res.data != null){
+          console.log('ha iniciado sesion')
+        }else{
+          console.log('no se puedo iniciar sesion ')
+        }
+      })
+      .catch((err) => {});
   }
   render() {
     return (
@@ -72,7 +83,7 @@ class SigInPage extends React.Component {
                         onChange={this.handleInputChange}
                         className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
                         placeholder="Correo electrónico"
-                        />
+                      />
                     </div>
                     <div>
                       <label htmlFor="password" className="sr-only">
@@ -87,7 +98,7 @@ class SigInPage extends React.Component {
                         required
                         className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
                         placeholder="Contraseña"
-                        />
+                      />
                     </div>
                   </div>
 
