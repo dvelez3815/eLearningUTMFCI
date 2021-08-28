@@ -72,13 +72,13 @@ const Grammar = (props) => {
         </div>
       </div>
 
-      <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-amber-200 h-4 border">
+      <div className="overflow-hidden h-2 mb-2 text-xs flex rounded bg-amber-200 h-4 border">
         <div
           style={{ width: `${datos.total_completado}%` }}
           className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-400"
         ></div>
       </div>
-      <div className="flex justify-between py-5">
+      <div className="flex justify-between py-2">
         <h2>
           <span>
             <p className="text-2xl font-bold	text-gray-700">
@@ -91,7 +91,7 @@ const Grammar = (props) => {
         </div>
       </div>
       <div
-        className="flex flex-wrap items-center justify-center	gap-2 mb-4"
+        className="flex flex-wrap items-center justify-center	gap-2 my-12"
         aria-label="choice"
         role="radiogroup"
       >
