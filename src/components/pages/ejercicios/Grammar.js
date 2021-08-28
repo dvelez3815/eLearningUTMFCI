@@ -4,7 +4,7 @@ import AlertError, { mostrarError } from "../../Alert/Error";
 import AlertSuccess from "../../Alert/Exito";
 import { ErrorData } from "../../Alert/Mensajes";
 import { mostrarAlertaError, mostrarAlertaExito } from "../../Alert/Alerts";
-import CancelIcon from '@material-ui/icons/Cancel';
+import CancelIcon from "@material-ui/icons/Cancel";
 
 const Grammar = (props) => {
   const imagen1 = useRef();
@@ -18,7 +18,7 @@ const Grammar = (props) => {
           "https://d2pur3iezf4d1j.cloudfront.net/images/6fd84b8a838c43c4a84b44b08b10177e",
       },
       {
-        nombre: "te",
+        nombre: "tea",
         imagen:
           "https://d2pur3iezf4d1j.cloudfront.net/images/18a521f1507cb86689faa5b2e8277703",
       },
@@ -62,30 +62,13 @@ const Grammar = (props) => {
   };
 
   return (
-    <div className="container m-auto p-auto w-10/12">
+    <div className="container m-auto p-auto  w-10/12">
       <div className="flex justify-between">
         <div></div>
         <div className="order-last my-3 ">
           <button className="bg-transparent tracking-wider  my-2 text-yellow-500 font-semibold hover:text-yellow-400 py-2 px-4 border border-yellow-500 hover:border-yellow-500 rounded">
-            <CancelIcon style={{  fontSize: 27 }} /> Salir
+            <CancelIcon style={{ fontSize: 27 }} /> Salir
           </button>
-          {/* <button>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-            cerrar
-          </button> */}
         </div>
       </div>
 
@@ -126,21 +109,22 @@ const Grammar = (props) => {
         })}
       </div>
 
+        <div className="shadow-md border border-gray-300 my-5 w-full">
+
+        </div>
       <div className="flex justify-between flex-col sm:flex-row">
         <div className="mb-4">
           <button
-            className="btn-exercise"
             disabled={false}
             onClick={() => console.log("hola")}
+            className="bg-transparent text-xl tracking-wider  my-2 text-gray-500 font-semibold hover:text-gray-400 py-2 px-4 border border-gray-500 hover:border-gray-500 rounded"
           >
-            <span>
-              <p>saltar</p>
-            </span>
+            Saltar
           </button>
         </div>
         <div className="mb-4">
           <button
-            className="bg-green-500 hover:bg-green-700 btn-exercise"
+            className=" text-xl tracking-wider  my-2 text-white bg-green-500 font-semibold  hover:bg-green-400 py-2 px-4 capitalize border border-green-500 hover:border-green-600 rounded "
             onClick={() => mostrarAlertaError()}
           >
             <span>
@@ -156,7 +140,7 @@ const Grammar = (props) => {
 const GrammarImage = (props) => {
   return (
     <div
-      className="flex flex-col w-1/4 flex-wrap cardCheck"
+      className=" w-1/6 my-5 flex-wrap cardCheck  flex-col flex items-center justify-center  py-2 px-2 sm:px-6 lg:px-8"
       aria-checked="false"
       role="radio"
       tabIndex="-1"
@@ -170,7 +154,7 @@ const GrammarImage = (props) => {
             props.marcar(props.myref);
           }}
         />
-        <p className="text-sm font-medium	">{props.nombre}</p>
+        <p className="text-sm font-medium	capitalize">{props.nombre}</p>
       </button>
     </div>
   );
