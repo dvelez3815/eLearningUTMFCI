@@ -3,11 +3,16 @@ import logo from "../../../assets/resource/Logo_Provicional.png";
 import img1 from "../../../assets/resource/sign.svg";
 import "./SigInPage.css";
 import axios from "axios";
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
 class SigInPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       submitForm: false,
+      isVisibleDato: "hidden",
+      dato: "",
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -23,6 +28,11 @@ class SigInPage extends React.Component {
       [name]: value,
     });
   }
+  componentDidMount() {
+    if (cookies.get("_id")) {
+      window.location.href = "./dashboard";
+    }
+  }
 
   handleButtonSubmit(event) {
     event.preventDefault();
@@ -32,11 +42,27 @@ class SigInPage extends React.Component {
         password: this.state.password,
       })
       .then((res) => {
-        console.log(res.data)
-        if(res.data != null){
-          console.log('ha iniciado sesion')
-        }else{
-          console.log('no se puedo iniciar sesion ')
+        console.log(res);
+        if (res.data.res === "USER NOT EXIST") {
+          this.setState({ dato: "Usuario no existe" });
+          this.setState({ isVisibleDato: "" });
+          setInterval(() => {
+            this.setState({ dato: "" });
+            this.setState({ isVisibleDato: "hidden" });
+          }, 4000);
+        } else if (res.data.res === "PASSWORD INCORRECT") {
+          this.setState({ dato: "Contraseña incorrecta" });
+          this.setState({ isVisibleDato: "" });
+          setInterval(() => {
+            this.setState({ dato: "" });
+            this.setState({ isVisibleDato: "hidden" });
+          }, 4000);
+        } else {
+          cookies.set("_id", res.data.res._id, { path: "/" });
+          cookies.set("name", res.data.res.name, { path: "/" });
+          cookies.set("lastname", res.data.res.lastname, { path: "/" });
+          cookies.set("mail", res.data.res.mail, { path: "/" });
+          window.location.href = "./dashboard"
         }
       })
       .catch((err) => {});
@@ -48,7 +74,7 @@ class SigInPage extends React.Component {
         <div className="flex h-screen ">
           <div className=" w-1/3 ">
             <div className="min-h-screen flex items-center justify-center  py-12 px-4 sm:px-6 lg:px-8">
-              <div className="max-w-md w-full space-y-8">
+              <div className="max-w-md w-full space-y-2">
                 <div>
                   <img
                     className="mx-auto h-12 w-auto"
@@ -68,7 +94,10 @@ class SigInPage extends React.Component {
                     </a>
                   </p>
                 </div>
-                <form className="mt-8 space-y-6" action="#" method="POST">
+                <div className={this.state.isVisibleDato}>
+                  <h2 className="text-md text-red-500">{this.state.dato}</h2>
+                </div>
+                <form className="mt-8 space-y-4" action="#" method="POST">
                   <input type="hidden" name="remember" value="true" />
                   <div className="rounded-md shadow-sm -space-y-px">
                     <div>
@@ -81,6 +110,7 @@ class SigInPage extends React.Component {
                         type="email"
                         autoComplete="email"
                         required
+                        pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
                         onChange={this.handleInputChange}
                         className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
                         placeholder="Correo electrónico"

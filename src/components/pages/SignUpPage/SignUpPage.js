@@ -2,7 +2,9 @@ import React from "react";
 import logo from "../../../assets/resource/Logo_Provicional.png";
 import img1 from "../../../assets/resource/sign.svg";
 import axios from "axios";
-import validator from "validator";
+import Cookies from "universal-cookie";
+
+const cookie = new Cookies();
 class SignUpPage extends React.Component {
   constructor(props) {
     super(props);
@@ -31,22 +33,6 @@ class SignUpPage extends React.Component {
   }
   UpdateMail(event) {
     this.setState({ mail: event.target.value });
-    /* if (validator.isEmail(event.target.value)) {
-      axios
-        .get("http://localhost:5000/user/" + event.target.value)
-        .then((response) => {
-          console.log(response)
-          if(response.data.res == 'User Exist'){
-            this.setState({classMail: 'border-red-500 text-red-500 focus:ring-red-500 focus:border-red-500'})
-          }else {
-            this.setState({classMail: 'border-gray-300 placeholder-gray-500 text-gray-900 focus:ring-yellow-500 focus:border-yellow-500'})
-
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } */
   }
   UpdatePass1(event) {
     this.setState({ pass: event.target.value });
@@ -54,31 +40,47 @@ class SignUpPage extends React.Component {
   UpdatePass2(event) {
     if (this.state.pass === event.target.value) {
       this.setState({ submitForm: true });
+      this.setState({ dato: "" });
+      this.setState({ isVisibleDato: "hidden" });
     } else {
       this.setState({ submitForm: false });
+      this.setState({ dato: "Las contraseñas no son iguales" });
+      this.setState({ isVisibleDato: "" });
+      
     }
   }
-  ButtonSubmit(event) {
+  componentDidMount() {
+    if (cookie.get("_id")) {
+      window.location.href = "./dashboard";
+    }
+  }
+  async ButtonSubmit(event) {
     event.preventDefault();
-    console.log(this.state);
-    this.setState({dato: ''});
-    this.setState({isVisibleDato: 'hidden'});
+    this.setState({ dato: "" });
+    this.setState({ isVisibleDato: "hidden" });
     axios
-    .post("http://localhost:5000/signup", {
-      name: this.state.username,
-      lastname: this.state.lastname,
-      mail: this.state.mail,
-      password: this.state.pass,
-    })
-    .then((response) => {
-      if( response.data.res !== "User Not Exist"){
-        this.setState({dato: 'El correo '});
-        this.setState({isVisibleDato: ''});
-        setInterval(()=>{
-          this.setState({dato: ''});
-          this.setState({isVisibleDato: 'hidden'});
-        }, 3000)
-        
+      .post("http://localhost:5000/signup", {
+        name: this.state.username,
+        lastname: this.state.lastname,
+        mail: this.state.mail,
+        password: this.state.pass,
+      })
+      .then((response) => {
+        if (response.data.res === "USER EXITS") {
+          this.setState({ dato: "El correo ya existe" });
+          this.setState({ isVisibleDato: "" });
+          setInterval(() => {
+            this.setState({ dato: "" });
+            this.setState({ isVisibleDato: "hidden" });
+          }, 3000);
+        } else {
+          var user = response.data.res;
+          cookie.set("_id", user._id, { path: "/" });
+          cookie.set("name", user.name, { path: "/" });
+          cookie.set("lastname", user.lastname, { path: "/" });
+          cookie.set("mail", user.mail, { path: "/" });
+          console.log("ha iniciado sesion");
+          window.location.href = "./dashboard";
         }
       })
       .catch((error) => {
@@ -112,10 +114,8 @@ class SignUpPage extends React.Component {
                     </a>
                   </p>
                 </div>
-                <div className = {this.state.isVisibleDato}>
-                  <h2 className="text-md text-red-500">
-                    {this.state.dato} ya existe
-                  </h2>
+                <div className={this.state.isVisibleDato}>
+                  <h2 className="text-md text-red-500">{this.state.dato}</h2>
                 </div>
                 <form className=" space-y-4" action="#" method="POST">
                   <input type="hidden" name="remember" value="true" />
@@ -160,6 +160,7 @@ class SignUpPage extends React.Component {
                         id="email-address"
                         name="mail"
                         type="email"
+                        pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
                         autoComplete="email"
                         required
                         onChange={this.UpdateMail}

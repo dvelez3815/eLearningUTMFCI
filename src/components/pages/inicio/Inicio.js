@@ -1,6 +1,6 @@
 import React from "react";
-import { NavComponent } from "../../NavComponent";
-import logo from "../../../assets/resource/Logo_Provicional.ico";
+import  NavComponent from "../../NavComponent";
+import logo from "../../../assets/resource/Logo_Provicional.png";
 import EModule from "../../EModules/EModule";
 import StarIcon from '@material-ui/icons/Star';
 import CollectionsBookmarkIcon from '@material-ui/icons/CollectionsBookmark';
