@@ -10,10 +10,9 @@ const ErrorData = {
 };
   
 const SuccessData = {
-    title: "Success",
+    title: "Great",
     type: "success",
-    text: "Your work has been saved.",
-    footer: ""
+    text: "Excelent!.",
   };
 
 
@@ -30,8 +29,17 @@ export const mostrarAlertaError= ()=>{
     });
 }
 
+
+
 export const mostrarAlertaExito= ()=>{
     Swal.fire({
         ...SuccessData
+    }).then((result) => {
+        if (result.value) {
+            console.log("You clicked the confirm button!");
+            window.location = "/modulo/1/grammar/3";
+        } else {
+            console.log("You clicked the cancel button!");
+        }
     });
 }

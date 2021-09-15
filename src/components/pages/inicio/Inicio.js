@@ -16,21 +16,21 @@ export const Inicio = () => {
       modulo: [
         {
           nombre: "Module 1",
-          progreso: 10,
+          progreso: 30,
           actividades: [
             {
               nombre: "Grammar",
               progreso: 2,
               total: 8,
               ruta: "http://localhost:3000/modulo/1/grammar/1",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
+              imagen: "https://image.flaticon.com/icons/png/512/3534/3534033.png",
             },
             {
               nombre: "Vocabulary",
               progreso: 2,
               total: 8,
               ruta: "http://localhost:3000/modulo/1/writting/1",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
+              imagen: "https://image.flaticon.com/icons/png/512/4214/4214146.png",
             },
             {
               nombre: "Writting",
@@ -51,7 +51,7 @@ export const Inicio = () => {
         },
 
         {
-          nombre: "Module 1",
+          nombre: "Module 2",
           progreso: 100,
           actividades: [
             {
@@ -59,7 +59,7 @@ export const Inicio = () => {
               progreso: 2,
               total: 8,
               ruta: "http://localhost:3000/modulo/1/grammar/1",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
+              imagen: "https://image.flaticon.com/icons/png/512/4214/4214146.png",
             },
             {
               nombre: "Vocabulary",
@@ -95,7 +95,7 @@ export const Inicio = () => {
               progreso: 2,
               total: 8,
               ruta: "http://localhost:3000/modulo/1/grammar/1",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
+              imagen: "https://image.flaticon.com/icons/png/512/1035/1035688.png",
             },
             {
               nombre: "Vocabulary",
@@ -123,15 +123,15 @@ export const Inicio = () => {
         },
 
         {
-          nombre: "Module 1",
-          progreso: 60,
+          nombre: "Module 3",
+          progreso: 5,
           actividades: [
             {
               nombre: "Grammar",
               progreso: 2,
               total: 8,
               ruta: "http://localhost:3000/modulo/1/grammar/1",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
+              imagen: "https://image.flaticon.com/icons/png/512/3048/3048406.png",
             },
             {
               nombre: "Vocabulary",
@@ -159,15 +159,15 @@ export const Inicio = () => {
         },
 
         {
-          nombre: "Module 1",
-          progreso: 60,
+          nombre: "Module 4",
+          progreso: 100,
           actividades: [
             {
               nombre: "Grammar",
               progreso: 2,
               total: 8,
               ruta: "http://localhost:3000/modulo/1/grammar/1",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
+              imagen: "https://image.flaticon.com/icons/png/512/3068/3068318.png",
             },
             {
               nombre: "Vocabulary",
@@ -195,7 +195,7 @@ export const Inicio = () => {
         },
 
         {
-          nombre: "Module 1",
+          nombre: "Module 5",
           progreso: 60,
           actividades: [
             {
@@ -203,7 +203,7 @@ export const Inicio = () => {
               progreso: 2,
               total: 8,
               ruta: "http://localhost:3000/modulo/1/grammar/1",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
+              imagen: "https://image.flaticon.com/icons/png/512/2942/2942821.png",
             },
             {
               nombre: "Vocabulary",
@@ -231,15 +231,15 @@ export const Inicio = () => {
         },
 
         {
-          nombre: "Module 1",
-          progreso: 60,
+          nombre: "Module 5",
+          progreso: 70,
           actividades: [
             {
               nombre: "Grammar",
               progreso: 2,
               total: 8,
               ruta: "http://localhost:3000/modulo/1/grammar/1",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
+              imagen: "https://image.flaticon.com/icons/png/512/2942/2942488.png",
             },
             {
               nombre: "Vocabulary",
@@ -267,15 +267,15 @@ export const Inicio = () => {
         },
 
         {
-          nombre: "Module 1",
-          progreso: 60,
+          nombre: "Module 6",
+          progreso: 20,
           actividades: [
             {
               nombre: "Grammar",
               progreso: 2,
               total: 8,
               ruta: "http://localhost:3000/modulo/1/grammar/1",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
+              imagen: "https://image.flaticon.com/icons/png/512/5493/5493372.png",
             },
             {
               nombre: "Vocabulary",
@@ -303,15 +303,15 @@ export const Inicio = () => {
         },
 
         {
-          nombre: "Module 1",
-          progreso: 60,
+          nombre: "Module 7",
+          progreso: 40,
           actividades: [
             {
               nombre: "Grammar",
               progreso: 2,
               total: 8,
               ruta: "http://localhost:3000/modulo/1/grammar/1",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
+              imagen: "https://image.flaticon.com/icons/png/512/5491/5491695.png",
             },
             {
               nombre: "Vocabulary",
@@ -339,7 +339,7 @@ export const Inicio = () => {
         },
 
         {
-          nombre: "Module 1",
+          nombre: "Module 8",
           progreso: 60,
           actividades: [
             {
@@ -347,7 +347,7 @@ export const Inicio = () => {
               progreso: 2,
               total: 8,
               ruta: "http://localhost:3000/modulo/1/grammar/1",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
+              imagen: "https://image.flaticon.com/icons/png/512/1436/1436690.png",
             },
             {
               nombre: "Vocabulary",
@@ -358,7 +358,7 @@ export const Inicio = () => {
             },
             {
               nombre: "Writting",
-              progreso: 2,
+              progreso: 80,
               total: 8,
               ruta: "",
               imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
@@ -374,15 +374,15 @@ export const Inicio = () => {
           ]
         },
         {
-          nombre: "Module 1",
-          progreso: 60,
+          nombre: "Module ",
+          progreso: 40,
           actividades: [
             {
               nombre: "Grammar",
               progreso: 2,
               total: 8,
               ruta: "http://localhost:3000/modulo/1/grammar/1",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
+              imagen: "https://image.flaticon.com/icons/png/512/5493/5493549.png",
             },
             {
               nombre: "Vocabulary",
@@ -422,6 +422,8 @@ export const Inicio = () => {
       <div className="grid grid-cols-6">
         <div className="col-span-6 md:col-span-4">
           {data.Unidad.modulo.map((modulo, index) => (
+            <div>
+
             <EModule
               key={index}
               nombre={modulo.nombre}
@@ -432,7 +434,10 @@ export const Inicio = () => {
               setProgesoModulo={setProgesoModulo}
               setprogresoTotal={setprogresoTotal}
               actividades={modulo.actividades}
+              imagen={modulo.actividades[0].imagen}
             />
+          </div>
+          
           ))}
         </div>
         <div className="md:col-span-2">

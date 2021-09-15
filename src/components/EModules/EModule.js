@@ -37,7 +37,7 @@ export default function EModule(props) {
           {props.actividades.map((actividad, index) => {
               return (
                 <Activity
-                  img={i_writting}
+                  img={props.imagen}
                   moduleName="Modulo 1"
                   percent={props.percent}
                   name={props.actividades[index].nombre}

@@ -1,5 +1,6 @@
 import React, { createRef, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom';
+import { mostrarAlertaError, mostrarAlertaExito } from '../../Alert/Alerts';
 
 export const Emparejar = () => {
 
@@ -93,7 +94,7 @@ export const Emparejar = () => {
             </div>
             
             <div className="mb-4">
-            <button className="bg-green-500 hover:bg-green-700 btn-exercise">
+            <button className="bg-green-500 hover:bg-green-700 btn-exercise" onClick={()=>mostrarAlertaExito()}>
               <span>
                 <p>comprobar</p>
               </span>
