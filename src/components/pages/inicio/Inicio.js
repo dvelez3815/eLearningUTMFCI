@@ -10,6 +10,11 @@ import Cookies from "universal-cookie";
 import { ModuleProgress } from "../../ModuleProgress";
 import Activity from "../../Activities/Activity";
 
+import grammarimg from "../../../assets/icons/Grammar.png";
+import readingimg from "../../../assets/icons/Reading.png";
+import vocabularyimg from "../../../assets/icons/Vocabulary.png";
+import writingimg from "../../../assets/icons/Writing.png";
+
 const cookies = new Cookies();
 
 
@@ -52,409 +57,7 @@ export const Inicio = () => {
   
 }, []);
 
-  let data = {
-    Unidad: {
-      modulo: [
-        {
-          nombre: "Module 1",
-          progreso: 30,
-          actividades: [
-            {
-              nombre: "Grammar",
-              progreso: 2,
-              total: 8,
-              ruta: "http://localhost:3000/modulo/1/grammar/1",
-              imagen: "https://image.flaticon.com/icons/png/512/3534/3534033.png",
-            },
-            {
-              nombre: "Vocabulary",
-              progreso: 2,
-              total: 8,
-              ruta: "http://localhost:3000/modulo/1/writting/1",
-              imagen: "https://image.flaticon.com/icons/png/512/4214/4214146.png",
-            },
-            {
-              nombre: "Writting",
-              progreso: 2,
-              total: 8,
-              ruta: "",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
-            },            
-            {
-              nombre: "Reading",
-              progreso: 2,
-              total: 8,
-              ruta: "",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
-            },            
 
-          ]
-        },
-
-        {
-          nombre: "Module 2",
-          progreso: 100,
-          actividades: [
-            {
-              nombre: "Grammar",
-              progreso: 2,
-              total: 8,
-              ruta: "http://localhost:3000/modulo/1/grammar/1",
-              imagen: "https://image.flaticon.com/icons/png/512/4214/4214146.png",
-            },
-            {
-              nombre: "Vocabulary",
-              progreso: 2,
-              total: 8,
-              ruta: "",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
-            },
-            {
-              nombre: "Writting",
-              progreso: 2,
-              total: 8,
-              ruta: "",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
-            },            
-            {
-              nombre: "Reading",
-              progreso: 2,
-              total: 8,
-              ruta: "",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
-            },            
-
-          ]
-        },
-
-        {
-          nombre: "Module 1",
-          progreso: 60,
-          actividades: [
-            {
-              nombre: "Grammar",
-              progreso: 2,
-              total: 8,
-              ruta: "http://localhost:3000/modulo/1/grammar/1",
-              imagen: "https://image.flaticon.com/icons/png/512/1035/1035688.png",
-            },
-            {
-              nombre: "Vocabulary",
-              progreso: 2,
-              total: 8,
-              ruta: "",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
-            },
-            {
-              nombre: "Writting",
-              progreso: 2,
-              total: 8,
-              ruta: "",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
-            },            
-            {
-              nombre: "Reading",
-              progreso: 2,
-              total: 8,
-              ruta: "",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
-            },            
-
-          ]
-        },
-
-        {
-          nombre: "Module 3",
-          progreso: 5,
-          actividades: [
-            {
-              nombre: "Grammar",
-              progreso: 2,
-              total: 8,
-              ruta: "http://localhost:3000/modulo/1/grammar/1",
-              imagen: "https://image.flaticon.com/icons/png/512/3048/3048406.png",
-            },
-            {
-              nombre: "Vocabulary",
-              progreso: 2,
-              total: 8,
-              ruta: "",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
-            },
-            {
-              nombre: "Writting",
-              progreso: 2,
-              total: 8,
-              ruta: "",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
-            },            
-            {
-              nombre: "Reading",
-              progreso: 2,
-              total: 8,
-              ruta: "",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
-            },            
-
-          ]
-        },
-
-        {
-          nombre: "Module 4",
-          progreso: 100,
-          actividades: [
-            {
-              nombre: "Grammar",
-              progreso: 2,
-              total: 8,
-              ruta: "http://localhost:3000/modulo/1/grammar/1",
-              imagen: "https://image.flaticon.com/icons/png/512/3068/3068318.png",
-            },
-            {
-              nombre: "Vocabulary",
-              progreso: 2,
-              total: 8,
-              ruta: "",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
-            },
-            {
-              nombre: "Writting",
-              progreso: 2,
-              total: 8,
-              ruta: "",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
-            },            
-            {
-              nombre: "Reading",
-              progreso: 2,
-              total: 8,
-              ruta: "",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
-            },            
-
-          ]
-        },
-
-        {
-          nombre: "Module 5",
-          progreso: 60,
-          actividades: [
-            {
-              nombre: "Grammar",
-              progreso: 2,
-              total: 8,
-              ruta: "http://localhost:3000/modulo/1/grammar/1",
-              imagen: "https://image.flaticon.com/icons/png/512/2942/2942821.png",
-            },
-            {
-              nombre: "Vocabulary",
-              progreso: 2,
-              total: 8,
-              ruta: "",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
-            },
-            {
-              nombre: "Writting",
-              progreso: 2,
-              total: 8,
-              ruta: "",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
-            },            
-            {
-              nombre: "Reading",
-              progreso: 2,
-              total: 8,
-              ruta: "",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
-            },            
-
-          ]
-        },
-
-        {
-          nombre: "Module 5",
-          progreso: 70,
-          actividades: [
-            {
-              nombre: "Grammar",
-              progreso: 2,
-              total: 8,
-              ruta: "http://localhost:3000/modulo/1/grammar/1",
-              imagen: "https://image.flaticon.com/icons/png/512/2942/2942488.png",
-            },
-            {
-              nombre: "Vocabulary",
-              progreso: 2,
-              total: 8,
-              ruta: "",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
-            },
-            {
-              nombre: "Writting",
-              progreso: 2,
-              total: 8,
-              ruta: "",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
-            },            
-            {
-              nombre: "Reading",
-              progreso: 2,
-              total: 8,
-              ruta: "",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
-            },            
-
-          ]
-        },
-
-        {
-          nombre: "Module 6",
-          progreso: 20,
-          actividades: [
-            {
-              nombre: "Grammar",
-              progreso: 2,
-              total: 8,
-              ruta: "http://localhost:3000/modulo/1/grammar/1",
-              imagen: "https://image.flaticon.com/icons/png/512/5493/5493372.png",
-            },
-            {
-              nombre: "Vocabulary",
-              progreso: 2,
-              total: 8,
-              ruta: "",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
-            },
-            {
-              nombre: "Writting",
-              progreso: 2,
-              total: 8,
-              ruta: "",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
-            },            
-            {
-              nombre: "Reading",
-              progreso: 2,
-              total: 8,
-              ruta: "",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
-            },            
-
-          ]
-        },
-
-        {
-          nombre: "Module 7",
-          progreso: 40,
-          actividades: [
-            {
-              nombre: "Grammar",
-              progreso: 2,
-              total: 8,
-              ruta: "http://localhost:3000/modulo/1/grammar/1",
-              imagen: "https://image.flaticon.com/icons/png/512/5491/5491695.png",
-            },
-            {
-              nombre: "Vocabulary",
-              progreso: 2,
-              total: 8,
-              ruta: "",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
-            },
-            {
-              nombre: "Writting",
-              progreso: 2,
-              total: 8,
-              ruta: "",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
-            },            
-            {
-              nombre: "Reading",
-              progreso: 2,
-              total: 8,
-              ruta: "",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
-            },            
-
-          ]
-        },
-
-        {
-          nombre: "Module 8",
-          progreso: 60,
-          actividades: [
-            {
-              nombre: "Grammar",
-              progreso: 2,
-              total: 8,
-              ruta: "http://localhost:3000/modulo/1/grammar/1",
-              imagen: "https://image.flaticon.com/icons/png/512/1436/1436690.png",
-            },
-            {
-              nombre: "Vocabulary",
-              progreso: 2,
-              total: 8,
-              ruta: "",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
-            },
-            {
-              nombre: "Writting",
-              progreso: 80,
-              total: 8,
-              ruta: "",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
-            },            
-            {
-              nombre: "Reading",
-              progreso: 2,
-              total: 8,
-              ruta: "",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
-            },            
-
-          ]
-        },
-        {
-          nombre: "Module ",
-          progreso: 40,
-          actividades: [
-            {
-              nombre: "Grammar",
-              progreso: 2,
-              total: 8,
-              ruta: "http://localhost:3000/modulo/1/grammar/1",
-              imagen: "https://image.flaticon.com/icons/png/512/5493/5493549.png",
-            },
-            {
-              nombre: "Vocabulary",
-              progreso: 2,
-              total: 8,
-              ruta: "",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
-            },
-            {
-              nombre: "Writting",
-              progreso: 2,
-              total: 8,
-              ruta: "",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
-            },            
-            {
-              nombre: "Reading",
-              progreso: 2,
-              total: 8,
-              ruta: "",
-              imagen: "https://image.flaticon.com/icons/svg/1077/1077891.svg",
-            },            
-
-          ]
-        },
-
-
-      ]
-
-    }
-  }
   
 
   return (
@@ -463,41 +66,48 @@ export const Inicio = () => {
       <div className="grid grid-cols-6">
         <div className="col-span-6 md:col-span-4">
           {userProgress.map((modulo, index) =>{
-            let grammar = createRef()
             if ((index+1)%2 === 0) {
               return <div>
                 <ModuleProgress
                 moduleName={"Unidad: "+modulo.book_info.unit}
                 percent={parseInt(((modulo.writing.user_progress+modulo.reading.user_progress+modulo.grammar.user_progress+modulo.vocabulary.user_progress)/(modulo.writing.total_task+modulo.reading.total_task+modulo.grammar.total_task+modulo.vocabulary.total_task))*100)}
                 ></ModuleProgress>
+
                 <Activity 
                 moduleName={`Modulo: ${modulo.book_info.module}`}
-                ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}`}
-                myRef={grammar}
-                taskid={modulo.grammar.task_id}
-                percent={parseInt(((modulo.writing.user_progress+modulo.reading.user_progress+modulo.grammar.user_progress+modulo.vocabulary.user_progress)/(modulo.writing.total_task+modulo.reading.total_task+modulo.grammar.total_task+modulo.vocabulary.total_task))*100)}
+                ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}/${modulo.writing.task_id}`}
+                taskid={modulo.writing.task_id}
+                percent={parseInt(((modulo.writing.user_progress)/(modulo.writing.total_task))*100)}
+                name={"writing"}
+                img={writingimg}
                 />
+
                 <Activity 
                 moduleName={`Modulo: ${modulo.book_info.module}`}
-                ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}`}
-                myRef={grammar}
-                taskid={modulo.grammar.task_id}
-                percent={parseInt(((modulo.writing.user_progress+modulo.reading.user_progress+modulo.grammar.user_progress+modulo.vocabulary.user_progress)/(modulo.writing.total_task+modulo.reading.total_task+modulo.grammar.total_task+modulo.vocabulary.total_task))*100)}
+                ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/vocabulary/${modulo.book_info.unit}/${modulo.vocabulary.task_id}`}
+                taskid={modulo.vocabulary.task_id}
+                percent={parseInt(((modulo.reading.user_progress)/(modulo.reading.total_task))*100)}
+                name={"vocabulary"}
+                img={vocabularyimg}
                 />
+
                 <Activity 
                 moduleName={`Modulo: ${modulo.book_info.module}`}
-                ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}`}
-                myRef={grammar}
-                taskid={modulo.grammar.task_id}
-                percent={parseInt(((modulo.writing.user_progress+modulo.reading.user_progress+modulo.grammar.user_progress+modulo.vocabulary.user_progress)/(modulo.writing.total_task+modulo.reading.total_task+modulo.grammar.total_task+modulo.vocabulary.total_task))*100)}
+                ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/reading/${modulo.book_info.unit}/${modulo.reading.task_id}`}
+                taskid={modulo.reading.task_id}
+                percent={parseInt(((modulo.reading.user_progress)/(modulo.reading.total_task))*100)}
+                name={"reading"}
+                img={readingimg}
                 />
+
                 <Activity 
                 moduleName={`Modulo: ${modulo.book_info.module}`}
-                ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}`}
-                myRef={grammar}
+                ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}/${modulo.grammar.task_id}`}
                 taskid={modulo.grammar.task_id}
-                percent={parseInt(((modulo.writing.user_progress+modulo.reading.user_progress+modulo.grammar.user_progress+modulo.vocabulary.user_progress)/(modulo.writing.total_task+modulo.reading.total_task+modulo.grammar.total_task+modulo.vocabulary.total_task))*100)}
-                />                                                                
+                percent={parseInt(((modulo.reading.user_progress)/(modulo.reading.total_task))*100)}
+                name={"grammar"}
+                img={grammarimg}
+                />                          
               </div>
             }else{
               return <div>
@@ -506,34 +116,42 @@ export const Inicio = () => {
                 moduleName={"Unidad: "+modulo.book_info.unit}
                 percent={parseInt(((modulo.writing.user_progress+modulo.reading.user_progress+modulo.grammar.user_progress+modulo.vocabulary.user_progress)/(modulo.writing.total_task+modulo.reading.total_task+modulo.grammar.total_task+modulo.vocabulary.total_task))*100)}
                 ></ModuleProgress>
+
+                <Activity 
+                moduleName={`Modulo: ${modulo.book_info.module}`}
+                ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}/${modulo.writing.task_id}`}
+                taskid={modulo.writing.task_id}
+                percent={parseInt(((modulo.writing.user_progress)/(modulo.writing.total_task))*100)}
+                name={"writing"}
+                img={writingimg}
+                />
+
+                <Activity 
+                moduleName={`Modulo: ${modulo.book_info.module}`}
+                ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/vocabulary/${modulo.book_info.unit}/${modulo.vocabulary.task_id}`}
+                taskid={modulo.vocabulary.task_id}
+                percent={parseInt(((modulo.reading.user_progress)/(modulo.reading.total_task))*100)}
+                name={"vocabulary"}
+                img={vocabularyimg}
+                />
+
+                <Activity 
+                moduleName={`Modulo: ${modulo.book_info.module}`}
+                ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/reading/${modulo.book_info.unit}/${modulo.reading.task_id}`}
+                taskid={modulo.reading.task_id}
+                percent={parseInt(((modulo.reading.user_progress)/(modulo.reading.total_task))*100)}
+                name={"reading"}
+                img={readingimg}
+                />
+
                 <Activity 
                 moduleName={`Modulo: ${modulo.book_info.module}`}
                 ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}/${modulo.grammar.task_id}`}
-                myRef={grammar}
                 taskid={modulo.grammar.task_id}
                 percent={parseInt(((modulo.reading.user_progress)/(modulo.reading.total_task))*100)}
+                name={"grammar"}
+                img={grammarimg}
                 />
-                <Activity 
-                moduleName={`Modulo: ${modulo.book_info.module}`}
-                ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}`}
-                myRef={grammar}
-                taskid={modulo.grammar.task_id}
-                percent={parseInt(((modulo.writing.user_progress+modulo.reading.user_progress+modulo.grammar.user_progress+modulo.vocabulary.user_progress)/(modulo.writing.total_task+modulo.reading.total_task+modulo.grammar.total_task+modulo.vocabulary.total_task))*100)}
-                />
-                <Activity 
-                moduleName={`Modulo: ${modulo.book_info.module}`}
-                ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}`}
-                myRef={grammar}
-                taskid={modulo.grammar.task_id}
-                percent={parseInt(((modulo.writing.user_progress+modulo.reading.user_progress+modulo.grammar.user_progress+modulo.vocabulary.user_progress)/(modulo.writing.total_task+modulo.reading.total_task+modulo.grammar.total_task+modulo.vocabulary.total_task))*100)}
-                />
-                <Activity 
-                moduleName={`Modulo: ${modulo.book_info.module}`}
-                ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}`}
-                myRef={grammar}
-                taskid={modulo.grammar.task_id}
-                percent={parseInt(((modulo.writing.user_progress+modulo.reading.user_progress+modulo.grammar.user_progress+modulo.vocabulary.user_progress)/(modulo.writing.total_task+modulo.reading.total_task+modulo.grammar.total_task+modulo.vocabulary.total_task))*100)}
-                />                                                
 
               </div>
 
