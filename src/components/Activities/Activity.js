@@ -36,7 +36,6 @@ export default function Activity(props) {
         <Menu.Button className="inline-flex justify-center w-full  px-4 py-2 bg-white text-sm font-medium text-gray-700">
           <div
             className="circle"
-            onClick={() => props.handlerActivity(props.myref)}
           >
             <div className="fill" ref={circlePercent}></div>
             <img

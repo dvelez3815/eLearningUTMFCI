@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createRef, useEffect } from "react";
 import  NavComponent from "../../NavComponent";
 import logo from "../../../assets/resource/Logo_Provicional.png";
 import EModule from "../../EModules/EModule";
@@ -6,10 +6,51 @@ import StarIcon from '@material-ui/icons/Star';
 import CollectionsBookmarkIcon from '@material-ui/icons/CollectionsBookmark';
 import { useState } from "react";
 
+import Cookies from "universal-cookie";
+import { ModuleProgress } from "../../ModuleProgress";
+import Activity from "../../Activities/Activity";
+
+const cookies = new Cookies();
+
 
 export const Inicio = () => {
   const [progresoTotal, setprogresoTotal] = useState(0)
   const [progesoModulo, setProgesoModulo] = useState(0)
+  let userid = cookies.get("_id");    
+
+  const [userProgress, setuserProgress] = useState([])
+
+
+  //get user progress from api
+  const getData = async() => {
+    const response = await fetch(`https://utminglesapp.herokuapp.com/user_progress/${userid}`,{
+      method: 'POST',
+    });
+    const data = await response.json();
+
+    return data;
+  }
+
+  useEffect(() => {
+    let llenarInfo = async() => {
+    let userInfo = await getData();
+      for (let i = 0; i < userInfo.length-1; i++) {
+        for (let j = 0; j < userInfo.length-i-1; j++) {
+          if ((parseInt(""+userInfo[j].book_info.module+userInfo[j].book_info.unit) > parseInt(""+userInfo[j+1].book_info.module+userInfo[j+1].book_info.unit))) {
+            let aux = userInfo[j];
+            userInfo[j] = userInfo[j+1];
+            userInfo[j+1] = aux;
+          }
+        }
+      }
+
+       setuserProgress(await userInfo)
+       console.log(userInfo);
+  }
+
+  llenarInfo();
+  
+}, []);
 
   let data = {
     Unidad: {
@@ -421,13 +462,93 @@ export const Inicio = () => {
       <NavComponent logo={logo} />
       <div className="grid grid-cols-6">
         <div className="col-span-6 md:col-span-4">
-          {data.Unidad.modulo.map((modulo, index) => (
-            <div>
+          {userProgress.map((modulo, index) =>{
+            let grammar = createRef()
+            if ((index+1)%2 === 0) {
+              return <div>
+                <ModuleProgress
+                moduleName={"Unidad: "+modulo.book_info.unit}
+                percent={parseInt(((modulo.writing.user_progress+modulo.reading.user_progress+modulo.grammar.user_progress+modulo.vocabulary.user_progress)/(modulo.writing.total_task+modulo.reading.total_task+modulo.grammar.total_task+modulo.vocabulary.total_task))*100)}
+                ></ModuleProgress>
+                <Activity 
+                moduleName={`Modulo: ${modulo.book_info.module}`}
+                ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}`}
+                myRef={grammar}
+                taskid={modulo.grammar.task_id}
+                percent={parseInt(((modulo.writing.user_progress+modulo.reading.user_progress+modulo.grammar.user_progress+modulo.vocabulary.user_progress)/(modulo.writing.total_task+modulo.reading.total_task+modulo.grammar.total_task+modulo.vocabulary.total_task))*100)}
+                />
+                <Activity 
+                moduleName={`Modulo: ${modulo.book_info.module}`}
+                ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}`}
+                myRef={grammar}
+                taskid={modulo.grammar.task_id}
+                percent={parseInt(((modulo.writing.user_progress+modulo.reading.user_progress+modulo.grammar.user_progress+modulo.vocabulary.user_progress)/(modulo.writing.total_task+modulo.reading.total_task+modulo.grammar.total_task+modulo.vocabulary.total_task))*100)}
+                />
+                <Activity 
+                moduleName={`Modulo: ${modulo.book_info.module}`}
+                ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}`}
+                myRef={grammar}
+                taskid={modulo.grammar.task_id}
+                percent={parseInt(((modulo.writing.user_progress+modulo.reading.user_progress+modulo.grammar.user_progress+modulo.vocabulary.user_progress)/(modulo.writing.total_task+modulo.reading.total_task+modulo.grammar.total_task+modulo.vocabulary.total_task))*100)}
+                />
+                <Activity 
+                moduleName={`Modulo: ${modulo.book_info.module}`}
+                ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}`}
+                myRef={grammar}
+                taskid={modulo.grammar.task_id}
+                percent={parseInt(((modulo.writing.user_progress+modulo.reading.user_progress+modulo.grammar.user_progress+modulo.vocabulary.user_progress)/(modulo.writing.total_task+modulo.reading.total_task+modulo.grammar.total_task+modulo.vocabulary.total_task))*100)}
+                />                                                                
+              </div>
+            }else{
+              return <div>
+                <h2>{`Modulo ${modulo.book_info.module}`}</h2>
+                <ModuleProgress
+                moduleName={"Unidad: "+modulo.book_info.unit}
+                percent={parseInt(((modulo.writing.user_progress+modulo.reading.user_progress+modulo.grammar.user_progress+modulo.vocabulary.user_progress)/(modulo.writing.total_task+modulo.reading.total_task+modulo.grammar.total_task+modulo.vocabulary.total_task))*100)}
+                ></ModuleProgress>
+                <Activity 
+                moduleName={`Modulo: ${modulo.book_info.module}`}
+                ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}/${modulo.grammar.task_id}`}
+                myRef={grammar}
+                taskid={modulo.grammar.task_id}
+                percent={parseInt(((modulo.reading.user_progress)/(modulo.reading.total_task))*100)}
+                />
+                <Activity 
+                moduleName={`Modulo: ${modulo.book_info.module}`}
+                ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}`}
+                myRef={grammar}
+                taskid={modulo.grammar.task_id}
+                percent={parseInt(((modulo.writing.user_progress+modulo.reading.user_progress+modulo.grammar.user_progress+modulo.vocabulary.user_progress)/(modulo.writing.total_task+modulo.reading.total_task+modulo.grammar.total_task+modulo.vocabulary.total_task))*100)}
+                />
+                <Activity 
+                moduleName={`Modulo: ${modulo.book_info.module}`}
+                ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}`}
+                myRef={grammar}
+                taskid={modulo.grammar.task_id}
+                percent={parseInt(((modulo.writing.user_progress+modulo.reading.user_progress+modulo.grammar.user_progress+modulo.vocabulary.user_progress)/(modulo.writing.total_task+modulo.reading.total_task+modulo.grammar.total_task+modulo.vocabulary.total_task))*100)}
+                />
+                <Activity 
+                moduleName={`Modulo: ${modulo.book_info.module}`}
+                ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}`}
+                myRef={grammar}
+                taskid={modulo.grammar.task_id}
+                percent={parseInt(((modulo.writing.user_progress+modulo.reading.user_progress+modulo.grammar.user_progress+modulo.vocabulary.user_progress)/(modulo.writing.total_task+modulo.reading.total_task+modulo.grammar.total_task+modulo.vocabulary.total_task))*100)}
+                />                                                
 
+              </div>
+
+
+            }
+
+          })}
+      
+
+          {/* {data.Unidad.modulo.map((modulo, index) => (
+            <div>
             <EModule
               key={index}
               nombre={modulo.nombre}
-              percent={modulo.progreso}
+                percent={parseInt(((modulo.writing.user_progress+modulo.reading.user_progress+modulo.grammar.user_progress+modulo.vocabulary.user_progress)/(modulo.writing.total_task+modulo.reading.total_task+modulo.grammar.total_task+modulo.vocabulary.total_task))*100)}
               actividades={modulo.actividades}
               progresoModulo={progesoModulo}
               progresoTotal={progresoTotal}
@@ -438,10 +559,12 @@ export const Inicio = () => {
             />
           </div>
           
-          ))}
+          ))} */}
         </div>
-        <div className="md:col-span-2">
-          {/* progreso libros */}
+
+        {/* BARRA LATERAL */}
+        
+        {/* <div className="md:col-span-2">
           <div className="py-5  hidden md:block">
          <div className="border rounded-2xl flex flex-col w-4/6 text-left p-2">
            <div className="flex flex-col-2">
@@ -455,9 +578,6 @@ export const Inicio = () => {
            <div className="flex p-2 gap-4 flex-col md:flex-row">
                <div className="flex justify-center items-start rounded-2xl" id="estrella">
                  <StarIcon color="action" fontSize="large"/>
-                  {/*  <svg xmlns="http://www.w3.org/2000/svg" className="h-6" fill="white" viewBox="0 0 24 24" stroke="currentColor">
-                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-                   </svg> */}
                </div>
                <div className="flex flex-col " id="info">
                    <div><h2 className="text-gray-700 text-lg">Libros completados </h2></div>
@@ -469,7 +589,6 @@ export const Inicio = () => {
            </div>
          </div>
        </div>
-       {/* progreso modulo */}
        <div className="py-5  hidden md:block">
       <div className="border rounded-2xl flex flex-col w-4/6 text-left p-2">
       <div className="flex flex-col-2">
@@ -498,6 +617,8 @@ export const Inicio = () => {
       </div>
     </div>
         </div>
+       */}
+      
       </div>
     </div>
   );
@@ -514,7 +635,7 @@ export const Inicio = () => {
       <NavComponent logo={logo} />
       <div className="grid grid-cols-6">
         <div className="col-span-6 md:col-span-4">
-          <EModule percent={100} />
+                percent={parseInt(((modulo.writing.user_progress+modulo.reading.user_progress+modulo.grammar.user_progress+modulo.vocabulary.user_progress)/(modulo.writing.total_task+modulo.reading.total_task+modulo.grammar.total_task+modulo.vocabulary.total_task))*100)}
         </div>
         <div className="md:col-span-2">
           <ProgresoLibros />

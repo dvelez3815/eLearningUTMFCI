@@ -59,7 +59,7 @@ class SignUpPage extends React.Component {
     this.setState({ dato: "" });
     this.setState({ isVisibleDato: "hidden" });
     axios
-      .post("http://localhost:5000/signup", {
+      .post("https://utminglesapp.herokuapp.com/signup", {
         name: this.state.username,
         lastname: this.state.lastname,
         mail: this.state.mail,
@@ -251,7 +251,7 @@ class SignUpPage extends React.Component {
                           />
                         </svg>
                       </span>
-                      Iniciar sesión
+                      Registrar
                     </button>
                   </div>
                 </form>

@@ -21,7 +21,7 @@ function App() {
 
     <Router>
     <Switch>
-      <Route exact path="/modulo/1/grammar/1">
+      <Route path="/modulo/1/grammar/1/:id">
         <Grammar />
       </Route>
       <Route exact path="/modulo/1/grammar/2">
