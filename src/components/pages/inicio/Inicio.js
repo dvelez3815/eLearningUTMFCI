@@ -60,7 +60,6 @@ export const Inicio = () => {
   
 }, []);
 
-<<<<<<< HEAD
 useEffect(async () => {
   if (!(cookies.get("_id"))) {
     window.location.href = "./signin";
@@ -78,13 +77,6 @@ useEffect(async () => {
   }
 }, []);
   
-=======
-useEffect(() => {
-  if (!cookies.get("_id")) {
-    window.location.href = "./signin";
-  }
-}, []);
->>>>>>> 860f81eefd9da5f36b540ca51ea4eb5156e10fe6
   
 
   return (

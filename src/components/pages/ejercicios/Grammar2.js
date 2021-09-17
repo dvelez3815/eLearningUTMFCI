@@ -11,12 +11,7 @@ export const Grammar2 = () => {
     const getExercises = async() => {
 
         let taskid = window.location.href.split('/')[window.location.href.split('/').length - 1];
-<<<<<<< HEAD
         const url = `${api_url}/task/${taskid}`;
-=======
-        
-        const url = `https://utminglesapp.herokuapp.com/task/${taskid}`;
->>>>>>> 860f81eefd9da5f36b540ca51ea4eb5156e10fe6
         const response = await fetch(url,
             {
                 method: 'POST',
