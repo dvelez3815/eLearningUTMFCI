@@ -36,6 +36,8 @@ export const Inicio = () => {
     return data;
   }
 
+
+
   useEffect(() => {
     let llenarInfo = async() => {
     let userInfo = await getData();
@@ -53,11 +55,16 @@ export const Inicio = () => {
        console.log(userInfo);
   }
 
+
   llenarInfo();
   
 }, []);
 
-
+useEffect(() => {
+  if (!cookies.get("_id")) {
+    window.location.href = "./signin";
+  }
+}, []);
   
 
   return (
@@ -181,8 +188,8 @@ export const Inicio = () => {
         </div>
 
         {/* BARRA LATERAL */}
-        
-        {/* <div className="md:col-span-2">
+{/*         
+        <div className="md:col-span-2">
           <div className="py-5  hidden md:block">
          <div className="border rounded-2xl flex flex-col w-4/6 text-left p-2">
            <div className="flex flex-col-2">
@@ -235,8 +242,8 @@ export const Inicio = () => {
       </div>
     </div>
         </div>
-       */}
       
+       */}
       </div>
     </div>
   );

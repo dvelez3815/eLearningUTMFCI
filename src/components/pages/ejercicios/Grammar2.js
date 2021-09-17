@@ -8,7 +8,9 @@ export const Grammar2 = () => {
     const [progreso, setProgreso] = React.useState(0);
 
     const getExercises = async() => {
+
         let taskid = window.location.href.split('/')[window.location.href.split('/').length - 1];
+        
         const url = `https://utminglesapp.herokuapp.com/task/${taskid}`;
         const response = await fetch(url,
             {
