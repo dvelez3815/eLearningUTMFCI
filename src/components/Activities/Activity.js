@@ -47,7 +47,7 @@ export default function Activity(props) {
         </Menu.Button>
       </div>
       <div className="circle-text">
-        <h2 className="text-base font-bold">{props.name}</h2>
+        <h2 className="text-base font-bold capitalize">{props.name}</h2>
       </div>
 
       <Transition

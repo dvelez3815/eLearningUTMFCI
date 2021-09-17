@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { Ejercicio } from './Ejercicio'
 import ProgressBar from './ProgressBar'
+import {api_url} from '../../../api.config'
 
 export const Grammar2 = () => {
 
@@ -9,7 +10,7 @@ export const Grammar2 = () => {
 
     const getExercises = async() => {
         let taskid = window.location.href.split('/')[window.location.href.split('/').length - 1];
-        const url = `https://utminglesapp.herokuapp.com/task/${taskid}`;
+        const url = `${api_url}/task/${taskid}`;
         const response = await fetch(url,
             {
                 method: 'POST',

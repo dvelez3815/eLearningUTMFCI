@@ -14,7 +14,7 @@ import grammarimg from "../../../assets/icons/Grammar.png";
 import readingimg from "../../../assets/icons/Reading.png";
 import vocabularyimg from "../../../assets/icons/Vocabulary.png";
 import writingimg from "../../../assets/icons/Writing.png";
-
+import {api_url} from '../../../api.config'
 const cookies = new Cookies();
 
 
@@ -28,7 +28,7 @@ export const Inicio = () => {
 
   //get user progress from api
   const getData = async() => {
-    const response = await fetch(`https://utminglesapp.herokuapp.com/user_progress/${userid}`,{
+    const response = await fetch(`${api_url}/user_progress/${userid}`,{
       method: 'POST',
     });
     const data = await response.json();
@@ -57,7 +57,23 @@ export const Inicio = () => {
   
 }, []);
 
-
+useEffect(async () => {
+  if (!(cookies.get("_id"))) {
+    window.location.href = "./signin";
+  }
+  if (cookies.get('status') !== 'Active'){
+    const user_response = await fetch(`${api_url}/user/${userid}`, {method: 'GET'});
+    const user_json = await user_response.json();
+    console.log(user_json)
+    if(user_json.status == 'Active'){
+      cookies.set("status", user_json.status, { path: "/" });
+    }else{
+      window.location.href = "./PendingAccount";
+    }
+  
+  }
+}, []);
+  
   
 
   return (

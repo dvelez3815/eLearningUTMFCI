@@ -3,7 +3,7 @@ import logo from "../../../assets/resource/Logo_Provicional.png";
 import img1 from "../../../assets/resource/sign.svg";
 import axios from "axios";
 import Cookies from "universal-cookie";
-
+import {api_url} from '../../../api.config'
 const cookie = new Cookies();
 class SignUpPage extends React.Component {
   constructor(props) {
@@ -59,7 +59,7 @@ class SignUpPage extends React.Component {
     this.setState({ dato: "" });
     this.setState({ isVisibleDato: "hidden" });
     axios
-      .post("https://utminglesapp.herokuapp.com/signup", {
+      .post(api_url+"/signup", {
         name: this.state.username,
         lastname: this.state.lastname,
         mail: this.state.mail,
@@ -75,12 +75,19 @@ class SignUpPage extends React.Component {
           }, 3000);
         } else {
           var user = response.data.res;
+          console.log(user)
           cookie.set("_id", user._id, { path: "/" });
           cookie.set("name", user.name, { path: "/" });
           cookie.set("lastname", user.lastname, { path: "/" });
           cookie.set("mail", user.mail, { path: "/" });
+          cookie.set("status", user.status, { path: "/" });
           console.log("ha iniciado sesion");
-          window.location.href = "./dashboard";
+          if(user.status === 'Active'){
+            window.location.href = "./dashboard";
+          }else{
+            window.location.href = "./PendingAccount";
+
+          }
         }
       })
       .catch((error) => {

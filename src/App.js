@@ -13,7 +13,7 @@ import { Emparejar } from './components/pages/ejercicios/Emparejar';
 import { Drag } from './components/pages/ejercicios/Drag';
 import NuevaaG from './components/pages/ParaVideo/NuevaaG';
 import { Grammar2 } from './components/pages/ejercicios/Grammar2';
-
+import AccountPendingPage from './components/pages/AccountPendingPage/AccountPendingPage'
 function App() {
   
   return (
@@ -49,6 +49,9 @@ function App() {
       </Route>
       <Route exact path="/signin">
         <SigInPage />
+      </Route>
+      <Route exact path="/PendingAccount">
+        <AccountPendingPage />
       </Route>
       <Route > <NotFoundPage/> </Route>
       </Switch>

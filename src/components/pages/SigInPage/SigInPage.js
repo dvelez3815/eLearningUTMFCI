@@ -4,7 +4,7 @@ import img1 from "../../../assets/resource/sign.svg";
 import "./SigInPage.css";
 import axios from "axios";
 import Cookies from "universal-cookie";
-
+import {api_url} from '../../../api.config'
 const cookies = new Cookies();
 
 class SigInPage extends React.Component {
@@ -38,7 +38,7 @@ class SigInPage extends React.Component {
   handleButtonSubmit(event) {
     event.preventDefault();
     axios
-      .post("https://utminglesapp.herokuapp.com/signin", {
+      .post(api_url+"/signin", {
         mail: this.state.mail,
         password: this.state.password,
       })
@@ -58,11 +58,16 @@ class SigInPage extends React.Component {
             this.setState({ dato: "" });
             this.setState({ isVisibleDato: "hidden" });
           }, 4000);
-        } else {
+        } else if(res.data.res === "PENDING ACCOUNT"){
+          window.location.href = "./PendingAccount"
+
+        }
+        else {
           cookies.set("_id", res.data.res._id, { path: "/" });
           cookies.set("name", res.data.res.name, { path: "/" });
           cookies.set("lastname", res.data.res.lastname, { path: "/" });
           cookies.set("mail", res.data.res.mail, { path: "/" });
+          cookies.set("status", res.data.res.status, { path: "/" });
           window.location.href = "./dashboard"
         }
       })
