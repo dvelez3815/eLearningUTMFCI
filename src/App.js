@@ -12,6 +12,7 @@ import NotFoundPage from './components/pages/NotFoundPage/NotFoundPage'
 import { Emparejar } from './components/pages/ejercicios/Emparejar';
 import { Drag } from './components/pages/ejercicios/Drag';
 import NuevaaG from './components/pages/ParaVideo/NuevaaG';
+import { Grammar2 } from './components/pages/ejercicios/Grammar2';
 
 function App() {
   
@@ -22,7 +23,7 @@ function App() {
     <Router>
     <Switch>
       <Route path="/modulo/1/grammar/1/:id">
-        <Grammar />
+        <Grammar2 />
       </Route>
       <Route exact path="/modulo/1/grammar/2">
         <Emparejar />

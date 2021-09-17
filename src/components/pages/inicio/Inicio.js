@@ -72,7 +72,7 @@ export const Inicio = () => {
                 moduleName={"Unidad: "+modulo.book_info.unit}
                 percent={parseInt(((modulo.writing.user_progress+modulo.reading.user_progress+modulo.grammar.user_progress+modulo.vocabulary.user_progress)/(modulo.writing.total_task+modulo.reading.total_task+modulo.grammar.total_task+modulo.vocabulary.total_task))*100)}
                 ></ModuleProgress>
-
+                
                 <Activity 
                 moduleName={`Modulo: ${modulo.book_info.module}`}
                 ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}/${modulo.writing.task_id}`}
