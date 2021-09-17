@@ -6,7 +6,7 @@ export function ModuleProgress(props) {
 <div className="relative pt-1 max-w-7xl mx-auto px-8">
   <div className="flex flex-col sm:flex-row mb-7 items-center justify-between">
     <div>
-      <span className="text-xl font-bold inline-block py-5 px-2 uppercase rounded-full text-amber-600 bg-amber-200">
+      <span className="text-xl text-lowercase capitalize  font-bold inline-block py-5 px-2 uppercase rounded-full text-gray-800 bg-amber-200">
         {props.moduleName}
       </span>
     </div>
@@ -14,8 +14,8 @@ export function ModuleProgress(props) {
         <img src={medalla} alt="medalla" className="absolute bottom-0 left-9" width="45px"/>
       </figure>  
     <div className="">
-      <span className="text-xl font-bold inline-block text-amber-600">
-        {props.percent}% COMPLETADO
+      <span className="text-xl font-bold text-lowercase  inline-block text-gray-800">
+      {props.percent}% completado
       </span> 
         
     </div>

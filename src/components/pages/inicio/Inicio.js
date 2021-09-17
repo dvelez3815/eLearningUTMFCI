@@ -1,9 +1,9 @@
 import React, { createRef, useEffect } from "react";
-import  NavComponent from "../../NavComponent";
+import NavComponent from "../../NavComponent";
 import logo from "../../../assets/resource/Logo_Provicional.png";
 import EModule from "../../EModules/EModule";
-import StarIcon from '@material-ui/icons/Star';
-import CollectionsBookmarkIcon from '@material-ui/icons/CollectionsBookmark';
+import StarIcon from "@material-ui/icons/Star";
+import CollectionsBookmarkIcon from "@material-ui/icons/CollectionsBookmark";
 import { useState } from "react";
 
 import Cookies from "universal-cookie";
@@ -14,171 +14,225 @@ import grammarimg from "../../../assets/icons/Grammar.png";
 import readingimg from "../../../assets/icons/Reading.png";
 import vocabularyimg from "../../../assets/icons/Vocabulary.png";
 import writingimg from "../../../assets/icons/Writing.png";
-import {api_url} from '../../../api.config'
+import { api_url } from "../../../api.config";
 const cookies = new Cookies();
 
-
 export const Inicio = () => {
-  const [progresoTotal, setprogresoTotal] = useState(0)
-  const [progesoModulo, setProgesoModulo] = useState(0)
-  let userid = cookies.get("_id");    
+  const [progresoTotal, setprogresoTotal] = useState(0);
+  const [progesoModulo, setProgesoModulo] = useState(0);
+  let userid = cookies.get("_id");
 
-  const [userProgress, setuserProgress] = useState([])
-
+  const [userProgress, setuserProgress] = useState([]);
 
   //get user progress from api
-  const getData = async() => {
-    const response = await fetch(`${api_url}/user_progress/${userid}`,{
-      method: 'POST',
+  const getData = async () => {
+    const response = await fetch(`${api_url}/user_progress/${userid}`, {
+      method: "POST",
     });
     const data = await response.json();
 
     return data;
-  }
-
-
+  };
 
   useEffect(() => {
-    let llenarInfo = async() => {
-    let userInfo = await getData();
-      for (let i = 0; i < userInfo.length-1; i++) {
-        for (let j = 0; j < userInfo.length-i-1; j++) {
-          if ((parseInt(""+userInfo[j].book_info.module+userInfo[j].book_info.unit) > parseInt(""+userInfo[j+1].book_info.module+userInfo[j+1].book_info.unit))) {
+    let llenarInfo = async () => {
+      let userInfo = await getData();
+      for (let i = 0; i < userInfo.length - 1; i++) {
+        for (let j = 0; j < userInfo.length - i - 1; j++) {
+          if (
+            parseInt(
+              "" + userInfo[j].book_info.module + userInfo[j].book_info.unit
+            ) >
+            parseInt(
+              "" +
+                userInfo[j + 1].book_info.module +
+                userInfo[j + 1].book_info.unit
+            )
+          ) {
             let aux = userInfo[j];
-            userInfo[j] = userInfo[j+1];
-            userInfo[j+1] = aux;
+            userInfo[j] = userInfo[j + 1];
+            userInfo[j + 1] = aux;
           }
         }
       }
 
-       setuserProgress(await userInfo)
-       console.log(userInfo);
-  }
+      setuserProgress(await userInfo);
+      console.log(userInfo);
+    };
 
+    llenarInfo();
+  }, []);
 
-  llenarInfo();
-  
-}, []);
-
-useEffect(async () => {
-  if (!(cookies.get("_id"))) {
-    window.location.href = "./signin";
-  }
-  if (cookies.get('status') !== 'Active'){
-    const user_response = await fetch(`${api_url}/user/${userid}`, {method: 'GET'});
-    const user_json = await user_response.json();
-    console.log(user_json)
-    if(user_json.status == 'Active'){
-      cookies.set("status", user_json.status, { path: "/" });
-    }else{
-      window.location.href = "./PendingAccount";
+  useEffect(async () => {
+    if (!cookies.get("_id")) {
+      window.location.href = "./signin";
     }
-  
-  }
-}, []);
-  
-  
+    if (cookies.get("status") !== "Active") {
+      const user_response = await fetch(`${api_url}/user/${userid}`, {
+        method: "GET",
+      });
+      const user_json = await user_response.json();
+      console.log(user_json);
+      if (user_json.status == "Active") {
+        cookies.set("status", user_json.status, { path: "/" });
+      } else {
+        window.location.href = "./PendingAccount";
+      }
+    }
+  }, []);
 
   return (
     <div>
       <NavComponent logo={logo} />
       <div className="grid grid-cols-6">
         <div className="col-span-6 md:col-span-4">
-          {userProgress.map((modulo, index) =>{
-            if ((index+1)%2 === 0) {
-              return <div>
-                <ModuleProgress
-                moduleName={"Unidad: "+modulo.book_info.unit}
-                percent={parseInt(((modulo.writing.user_progress+modulo.reading.user_progress+modulo.grammar.user_progress+modulo.vocabulary.user_progress)/(modulo.writing.total_task+modulo.reading.total_task+modulo.grammar.total_task+modulo.vocabulary.total_task))*100)}
-                ></ModuleProgress>
+          {userProgress.map((modulo, index) => {
+            if ((index + 1) % 2 === 0) {
+              return (
+                <div>
+                  <ModuleProgress
+                    moduleName={"Unidad: " + modulo.book_info.unit}
+                    percent={parseInt(
+                      ((modulo.writing.user_progress +
+                        modulo.reading.user_progress +
+                        modulo.grammar.user_progress +
+                        modulo.vocabulary.user_progress) /
+                        (modulo.writing.total_task +
+                          modulo.reading.total_task +
+                          modulo.grammar.total_task +
+                          modulo.vocabulary.total_task)) *
+                        100
+                    )}
+                  ></ModuleProgress>
+
+                  <Activity
+                    moduleName={`Modulo: ${modulo.book_info.module}`}
+                    ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}/${modulo.writing.task_id}`}
+                    taskid={modulo.writing.task_id}
+                    percent={parseInt(
+                      (modulo.writing.user_progress /
+                        modulo.writing.total_task) *
+                        100
+                    )}
+                    name={"writing"}
+                    img={writingimg}
+                  />
+
+                  <Activity
+                    moduleName={`Modulo: ${modulo.book_info.module}`}
+                    ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/vocabulary/${modulo.book_info.unit}/${modulo.vocabulary.task_id}`}
+                    taskid={modulo.vocabulary.task_id}
+                    percent={parseInt(
+                      (modulo.reading.user_progress /
+                        modulo.reading.total_task) *
+                        100
+                    )}
+                    name={"vocabulary"}
+                    img={vocabularyimg}
+                  />
+
+                  <Activity
+                    moduleName={`Modulo: ${modulo.book_info.module}`}
+                    ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/reading/${modulo.book_info.unit}/${modulo.reading.task_id}`}
+                    taskid={modulo.reading.task_id}
+                    percent={parseInt(
+                      (modulo.reading.user_progress /
+                        modulo.reading.total_task) *
+                        100
+                    )}
+                    name={"reading"}
+                    img={readingimg}
+                  />
+
+                  <Activity
+                    moduleName={`Modulo: ${modulo.book_info.module}`}
+                    ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}/${modulo.grammar.task_id}`}
+                    taskid={modulo.grammar.task_id}
+                    percent={parseInt(
+                      (modulo.reading.user_progress /
+                        modulo.reading.total_task) *
+                        100
+                    )}
+                    name={"grammar"}
+                    img={grammarimg}
+                  />
+                </div>
+              );
+            } else {
+              return (
+                <div>
                 
-                <Activity 
-                moduleName={`Modulo: ${modulo.book_info.module}`}
-                ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}/${modulo.writing.task_id}`}
-                taskid={modulo.writing.task_id}
-                percent={parseInt(((modulo.writing.user_progress)/(modulo.writing.total_task))*100)}
-                name={"writing"}
-                img={writingimg}
-                />
+                  <h2 className="text-2xl text-left text-green-600 mt-5 mx-10 font-bold">{`Módulo ${modulo.book_info.module}`}</h2>
+                  <ModuleProgress
+                    moduleName={"Unidad: " + modulo.book_info.unit}
+                    percent={parseInt(
+                      ((modulo.writing.user_progress +
+                        modulo.reading.user_progress +
+                        modulo.grammar.user_progress +
+                        modulo.vocabulary.user_progress) /
+                        (modulo.writing.total_task +
+                          modulo.reading.total_task +
+                          modulo.grammar.total_task +
+                          modulo.vocabulary.total_task)) *
+                        100
+                    )}
+                  ></ModuleProgress>
 
-                <Activity 
-                moduleName={`Modulo: ${modulo.book_info.module}`}
-                ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/vocabulary/${modulo.book_info.unit}/${modulo.vocabulary.task_id}`}
-                taskid={modulo.vocabulary.task_id}
-                percent={parseInt(((modulo.reading.user_progress)/(modulo.reading.total_task))*100)}
-                name={"vocabulary"}
-                img={vocabularyimg}
-                />
+                  <Activity
+                    moduleName={`Modulo: ${modulo.book_info.module}`}
+                    ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}/${modulo.writing.task_id}`}
+                    taskid={modulo.writing.task_id}
+                    percent={parseInt(
+                      (modulo.writing.user_progress /
+                        modulo.writing.total_task) *
+                        100
+                    )}
+                    name={"writing"}
+                    img={writingimg}
+                  />
 
-                <Activity 
-                moduleName={`Modulo: ${modulo.book_info.module}`}
-                ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/reading/${modulo.book_info.unit}/${modulo.reading.task_id}`}
-                taskid={modulo.reading.task_id}
-                percent={parseInt(((modulo.reading.user_progress)/(modulo.reading.total_task))*100)}
-                name={"reading"}
-                img={readingimg}
-                />
+                  <Activity
+                    moduleName={`Modulo: ${modulo.book_info.module}`}
+                    ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/vocabulary/${modulo.book_info.unit}/${modulo.vocabulary.task_id}`}
+                    taskid={modulo.vocabulary.task_id}
+                    percent={parseInt(
+                      (modulo.reading.user_progress /
+                        modulo.reading.total_task) *
+                        100
+                    )}
+                    name={"vocabulary"}
+                    img={vocabularyimg}
+                  />
 
-                <Activity 
-                moduleName={`Modulo: ${modulo.book_info.module}`}
-                ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}/${modulo.grammar.task_id}`}
-                taskid={modulo.grammar.task_id}
-                percent={parseInt(((modulo.reading.user_progress)/(modulo.reading.total_task))*100)}
-                name={"grammar"}
-                img={grammarimg}
-                />                          
-              </div>
-            }else{
-              return <div>
-                <h2>{`Modulo ${modulo.book_info.module}`}</h2>
-                <ModuleProgress
-                moduleName={"Unidad: "+modulo.book_info.unit}
-                percent={parseInt(((modulo.writing.user_progress+modulo.reading.user_progress+modulo.grammar.user_progress+modulo.vocabulary.user_progress)/(modulo.writing.total_task+modulo.reading.total_task+modulo.grammar.total_task+modulo.vocabulary.total_task))*100)}
-                ></ModuleProgress>
+                  <Activity
+                    moduleName={`Modulo: ${modulo.book_info.module}`}
+                    ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/reading/${modulo.book_info.unit}/${modulo.reading.task_id}`}
+                    taskid={modulo.reading.task_id}
+                    percent={parseInt(
+                      (modulo.reading.user_progress /
+                        modulo.reading.total_task) *
+                        100
+                    )}
+                    name={"reading"}
+                    img={readingimg}
+                  />
 
-                <Activity 
-                moduleName={`Modulo: ${modulo.book_info.module}`}
-                ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}/${modulo.writing.task_id}`}
-                taskid={modulo.writing.task_id}
-                percent={parseInt(((modulo.writing.user_progress)/(modulo.writing.total_task))*100)}
-                name={"writing"}
-                img={writingimg}
-                />
-
-                <Activity 
-                moduleName={`Modulo: ${modulo.book_info.module}`}
-                ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/vocabulary/${modulo.book_info.unit}/${modulo.vocabulary.task_id}`}
-                taskid={modulo.vocabulary.task_id}
-                percent={parseInt(((modulo.reading.user_progress)/(modulo.reading.total_task))*100)}
-                name={"vocabulary"}
-                img={vocabularyimg}
-                />
-
-                <Activity 
-                moduleName={`Modulo: ${modulo.book_info.module}`}
-                ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/reading/${modulo.book_info.unit}/${modulo.reading.task_id}`}
-                taskid={modulo.reading.task_id}
-                percent={parseInt(((modulo.reading.user_progress)/(modulo.reading.total_task))*100)}
-                name={"reading"}
-                img={readingimg}
-                />
-
-                <Activity 
-                moduleName={`Modulo: ${modulo.book_info.module}`}
-                ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}/${modulo.grammar.task_id}`}
-                taskid={modulo.grammar.task_id}
-                percent={parseInt(((modulo.reading.user_progress)/(modulo.reading.total_task))*100)}
-                name={"grammar"}
-                img={grammarimg}
-                />
-
-              </div>
-
-
+                  <Activity
+                    moduleName={`Modulo: ${modulo.book_info.module}`}
+                    ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}/${modulo.grammar.task_id}`}
+                    taskid={modulo.grammar.task_id}
+                    percent={parseInt(
+                      (modulo.reading.user_progress /
+                        modulo.reading.total_task) *
+                        100
+                    )}
+                    name={"grammar"}
+                    img={grammarimg}
+                  />
+                </div>
+              );
             }
-
           })}
-      
 
           {/* {data.Unidad.modulo.map((modulo, index) => (
             <div>
@@ -200,7 +254,7 @@ useEffect(async () => {
         </div>
 
         {/* BARRA LATERAL */}
-{/*         
+        {/*         
         <div className="md:col-span-2">
           <div className="py-5  hidden md:block">
          <div className="border rounded-2xl flex flex-col w-4/6 text-left p-2">
@@ -260,9 +314,6 @@ useEffect(async () => {
     </div>
   );
 };
-
-
-
 
 export default Inicio;
 /* 
