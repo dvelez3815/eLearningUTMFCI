@@ -36,6 +36,8 @@ export const Inicio = () => {
     return data;
   }
 
+
+
   useEffect(() => {
     let llenarInfo = async() => {
     let userInfo = await getData();
@@ -53,10 +55,12 @@ export const Inicio = () => {
        console.log(userInfo);
   }
 
+
   llenarInfo();
   
 }, []);
 
+<<<<<<< HEAD
 useEffect(async () => {
   if (!(cookies.get("_id"))) {
     window.location.href = "./signin";
@@ -74,6 +78,13 @@ useEffect(async () => {
   }
 }, []);
   
+=======
+useEffect(() => {
+  if (!cookies.get("_id")) {
+    window.location.href = "./signin";
+  }
+}, []);
+>>>>>>> 860f81eefd9da5f36b540ca51ea4eb5156e10fe6
   
 
   return (
@@ -197,8 +208,8 @@ useEffect(async () => {
         </div>
 
         {/* BARRA LATERAL */}
-        
-        {/* <div className="md:col-span-2">
+{/*         
+        <div className="md:col-span-2">
           <div className="py-5  hidden md:block">
          <div className="border rounded-2xl flex flex-col w-4/6 text-left p-2">
            <div className="flex flex-col-2">
@@ -251,8 +262,8 @@ useEffect(async () => {
       </div>
     </div>
         </div>
-       */}
       
+       */}
       </div>
     </div>
   );

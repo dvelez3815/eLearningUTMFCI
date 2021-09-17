@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { mostrarAlertaError } from '../../Alert/Alerts'
 
-const EjercicioFooter = () => {
+const EjercicioFooter = (props) => {
+  useEffect(() => {
+
+  }, [props.juego])
+
     return (
         <div className="flex justify-between flex-col sm:flex-row container m-auto p-auto">
         <div className="mb-4">
@@ -16,7 +20,7 @@ const EjercicioFooter = () => {
         <div className="mb-4">
           <button
             className=" text-xl tracking-wider  my-2 text-white bg-green-500 font-semibold  hover:bg-green-400 py-2 px-4 capitalize border border-green-500 hover:border-green-600 rounded "
-            onClick={() => mostrarAlertaError()}
+            onClick={() => functionPruebas(props)}
           >
             <span>
               <p>comprobar</p>
@@ -25,6 +29,13 @@ const EjercicioFooter = () => {
         </div>
       </div>
     )
+}
+
+const functionPruebas = (props)=> {
+
+    console.log(props.juego.pop());
+    props.setCargado(false);
+  
 }
 
 export default EjercicioFooter
