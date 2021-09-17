@@ -1,7 +1,7 @@
 import React from 'react'
 import CancelIcon from "@material-ui/icons/Cancel";
 
-const ProgressBar = () => {
+const ProgressBar = (props) => {
     return (
         <div className="container m-auto p-auto">
         <div className="flex justify-between">
@@ -14,7 +14,7 @@ const ProgressBar = () => {
         </div>
         <div className="overflow-hidden mb-2 text-xs flex rounded bg-amber-200 h-4 border">
         <div
-          style={{ width: `100%` }}
+          style={{ width: `${(props.resueltos/props.totalEjercicios)*100}%` }}
           className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-400"
         ></div>
       </div>

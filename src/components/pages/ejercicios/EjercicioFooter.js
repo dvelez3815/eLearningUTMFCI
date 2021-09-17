@@ -32,8 +32,21 @@ const EjercicioFooter = (props) => {
 }
 
 const functionPruebas = (props)=> {
-
+  let actual = props.contadorRespondidas;
     console.log(props.juego.pop());
+    if(props.juego.length === 0){
+      props.setFinJuego(true)
+      console.log(props.miref.current);
+      console.log("hola",props.contadorRespondidas);
+      console.log("1");
+      props.setContadorRespondidas(actual + 1);
+    }else{
+      console.log(props.miref.current);
+
+      console.log("hola",props.contadorRespondidas);
+      console.log("2");
+      props.setContadorRespondidas(actual + 1);
+    }
     props.setCargado(false);
   
 }

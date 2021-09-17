@@ -6,8 +6,8 @@ import CancelIcon from "@material-ui/icons/Cancel";
 
 export const Emparejar = (props) => {
   const history = useHistory();
+  const opciones = useRef(null);
 
-  
 
   let datos = {
     total_completado: 80,
@@ -57,12 +57,13 @@ export const Emparejar = (props) => {
   };
 
   return (
-    <div className="container m-auto p-auto   w-10/12">
+    <div className="container m-auto p-auto   w-10/12" ref={props.miref}>
 
       <div
         className="flex flex-wrap items-center justify-center  	gap-2 my-20"
         aria-label="choice"
         role="radiogroup"
+        ref={opciones}
       >
         {props.ejercicio.options.map((ejercicio, index) => {
           return (
