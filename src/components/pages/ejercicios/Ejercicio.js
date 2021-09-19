@@ -11,49 +11,37 @@ import { Emparejar } from './Emparejar'
 export const Ejercicio = (props) => {
     let ejercicios = props.ejercicios;
     const [juego, setJuego] = React.useState([]);
-    const [cargado, setCargado] = React.useState(false);
+    const [cargado, setCargado] = React.useState(true);
     const [finJuego, setFinJuego] = React.useState(false);
+    const [cambioPregunta, setCambioPregunta] = React.useState(false);
     const [contadorRespondidas, setContadorRespondidas] = React.useState(0);
 
     const panelJuego = useRef(null);
     
-    const opcionesRef = useRef(
-        [...Array(ejercicios.length)].map(() => createRef())
-      );
-    
 
     React.useEffect(() => {
-        if(juego.length !== 0){
-            juego.map((ejercicio, index) => {
-                if(juego.type === "opcion_correcta"){  
-                    setJuego(juego => [...juego, <Emparejar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
-                }           
-            })
-            setCargado(true)
+        // const cargarVista = async() => {
+        //     await cargarEjercicios(juego, setJuego, panelJuego, setCargado, finJuego, ejercicios);
+        // }
+        cargarEjercicios2(props.ejercicios, setJuego, panelJuego,setCargado);
+        
 
-        }else{
-            if(finJuego){
-                setJuego([<h2 ref={panelJuego} className="container m-auto p-auto w-6/12">Fin</h2>])
-            }else{
-                ejercicios.map((ejercicio, index) => {
-                    if(ejercicio.type === "opcion_correcta"){  
-                        setJuego(juego => [...juego, <Emparejar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
-                    }else{
-                        console.log(ejercicio);
-                    }
-                })
-                setCargado(true)
-            }
+        
 
-        }
-    }, [cargado])
+    }, []) //cuando haya un cambio de pregunta se actualiza el estado del componente.
 
 
     return (
         <div className={"ejercicio"}>
             <ProgressBar totalEjercicios = {juego.length} resueltos ={contadorRespondidas} />
-            {juego && juego[juego.length-1]}
-            <EjercicioFooter ejercicio={juego[juego.length-1]} juego={juego} cargado={cargado} setCargado={setCargado} setFinJuego={setFinJuego} miref={panelJuego} contadorRespondidas={contadorRespondidas} setContadorRespondidas={setContadorRespondidas}/>
+            {cargado &&  <h2 className="container m-auto p-auto w-6/12">Cargando...</h2> }
+            {/* {juego.length === 0 ? <h2 className="container m-auto p-auto w-6/12">Cargando...</h2> :juego[juego.length-1]} */}
+            {finJuego? <h2 className="container m-auto p-auto w-6/12">Fin del juego...</h2>:juego[juego.length-1]}
+            {/* Eejercicio footer se encarga de verificar mediante el botoòn de comprobar la respuesta correcta.
+            Para esto es necesario enviar el juego actual es decir juego[juego.length-1]	y el panel del juego actual, es decir lo que està en el medio de la pantalla, que es el juego actual.
+            Tambièn se debe de enviar el contador para ir incrementando el estado de respondidas. */}
+
+            {finJuego || <EjercicioFooter ejercicio={juego[juego.length-1]} juego={juego} setJuego = {setJuego} cargado={cargado} setCargado={setCargado} setFinJuego={setFinJuego} miref={panelJuego} contadorRespondidas={contadorRespondidas} setContadorRespondidas={setContadorRespondidas}/>}
         </div>
     )
 }
@@ -73,3 +61,54 @@ const generarEjercicios = (ejercicios, setJuego) => {
     setJuego(juego)
     
 }
+
+const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado)=>{
+
+    //los ejercicios ya están cargando desde la vista anterior, solo se necesita una estructura que almacene los ejercicios de forma con componente
+    // para esto se iterra atravez de ejercicios y en una variable llamada Juego se guardan los ejercicios en forma de componentes
+
+    //finalmente iteramos los ejercicios, preguntamos el tipo, cargamos la variable juego con el tipo de juego correspondiente y una vez se cargan todos los juegos
+    //se actualiza el estado de cargando.
+
+    //De esta manera la renderización del mensaje con estado cargando se va a mostrar hasta que se carguen todos los ejercicios.
+
+    ejercicios.map((ejercicio, index) => {
+        if(ejercicio.type === "opcion_correcta_1"){  
+            setJuego(juego => [...juego, <Emparejar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
+        }
+    }
+    )
+    setCargado(false);
+
+}
+
+
+
+// const cargarEjercicios = (juego, setJuego, panelJuego, setCargado, finJuego, ejercicios)=>{
+
+//     if(juego.length !== 0){
+//         console.log("entra");
+//         juego.map((ejercicio, index) => {
+//             if(juego.type === "opcion_correc"){  
+//                 console.log("no entra");
+//                 setJuego(juego => [...juego, <Emparejar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
+//             }           
+//         })
+//         setCargado(true)
+
+//     }else{
+//         if(finJuego){
+//             setJuego([<h2 ref={panelJuego} className="container m-auto p-auto w-6/12">Fin</h2>])
+//         }else{
+//             ejercicios.map((ejercicio, index) => {
+//                 if(ejercicio.type === "opcion_correcta_1"){  
+//                     setJuego(juego => [...juego, <Emparejar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
+//                 }else{
+//                     console.log(ejercicio);
+//                 }
+//             })
+//             setCargado(true)
+//         }
+
+//     }    
+// }

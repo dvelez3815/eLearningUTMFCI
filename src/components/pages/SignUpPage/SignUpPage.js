@@ -72,7 +72,7 @@ class SignUpPage extends React.Component {
           setInterval(() => {
             this.setState({ dato: "" });
             this.setState({ isVisibleDato: "hidden" });
-          }, 3000);
+          }, 10000);
         } else {
           var user = response.data.res;
           console.log(user)

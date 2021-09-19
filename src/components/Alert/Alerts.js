@@ -22,7 +22,7 @@ export const mostrarAlertaError= ()=>{
     }).then((result) => {
         if (result.value) {
             console.log("You clicked the confirm button!");
-            window.location = "/modulo/1/grammar/2";
+            // window.location = "/modulo/1/grammar/2";
         } else {
             console.log("You clicked the cancel button!");
         }
