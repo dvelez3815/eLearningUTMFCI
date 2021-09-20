@@ -222,8 +222,8 @@ export const Inicio = () => {
                     ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}/${modulo.grammar.task_id}`}
                     taskid={modulo.grammar.task_id}
                     percent={parseInt(
-                      (modulo.reading.user_progress /
-                        modulo.reading.total_task) *
+                      (modulo.grammar.user_progress /
+                        modulo.grammar.total_task) *
                         100
                     )}
                     name={"grammar"}

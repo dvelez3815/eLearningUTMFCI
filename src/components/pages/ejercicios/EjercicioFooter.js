@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react'
-import { mostrarAlertaError } from '../../Alert/Alerts'
+import Cookies from 'universal-cookie';
+import { mostrarAlertaError, mostrarAlertaExito, mostrarAlertaExitoFin } from '../../Alert/Alerts'
+
+const cookies = new Cookies();
 
 const EjercicioFooter = (props) => {
   useEffect(() => {
@@ -31,19 +34,19 @@ const EjercicioFooter = (props) => {
     )
 }
 
-const validarRespuesta = (props)=>{
+const validarRespuesta = async(props)=>{
   let tipo_ejercicio = props.ejercicio.props.ejercicio.type;
   let contadorRespuestas = props.contadorRespondidas;
 
   if(tipo_ejercicio === "opcion_correcta_1"){
     let hijos = props.miref.current.children;
-    verificarOpcion_Correcta_1(props,hijos,contadorRespuestas);
+    await verificarOpcion_Correcta_1(props,hijos,contadorRespuestas);
   }
   
 
 }
 
-const verificarOpcion_Correcta_1 = (props,hijos,contadorRespondidas)=>{
+const verificarOpcion_Correcta_1 = async (props,hijos,contadorRespondidas)=>{
   let esCorrecta = false;
   let userSelection;
   let hasSelected = false;    
@@ -67,11 +70,35 @@ const verificarOpcion_Correcta_1 = (props,hijos,contadorRespondidas)=>{
       //Se es corecta se necesita saber si se ha llegado al final de la lista de ejercicios, de ser así, se debe de terminar el juego y guardar el progreso,
       //caso contrario se debe de pasar al siguiente ejercicio
       if(props.juego.length-1 === 0){
-        alert("Juego terminado")
+        let tasks_id = window.location.href.split('/')[window.location.href.split('/').length - 1];
+        let id = cookies.get('_id');
+
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+          "user_id": {
+            "id": `${id}`,
+            "mail": `${cookies.get('mail')}`
+          },
+          "tasks_id": `${tasks_id}`
+        });       
+        
+        var requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: raw,
+        };
+
+        await fetch("https://utminglesapp.herokuapp.com/progress/update", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+        mostrarAlertaExitoFin(`Fin del juego`);
         props.setFinJuego(true)
 
-        
       }else{
+        mostrarAlertaExito(`Respuesta correcta`);
         props.juego.pop();
         props.setContadorRespondidas(contadorRespondidas+1)
         console.log("b",contadorRespondidas);

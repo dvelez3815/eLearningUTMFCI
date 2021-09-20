@@ -37,7 +37,21 @@ export const mostrarAlertaExito= ()=>{
     }).then((result) => {
         if (result.value) {
             console.log("You clicked the confirm button!");
-            window.location = "/modulo/1/grammar/3";
+            // window.location = "/modulo/1/grammar/3";
+        } else {
+            console.log("You clicked the cancel button!");
+        }
+    });
+}
+
+
+export const mostrarAlertaExitoFin= ()=>{
+    Swal.fire({
+        ...SuccessData
+    }).then((result) => {
+        if (result.value) {
+            console.log("You clicked the confirm button!");
+            window.location = "/dashboard";
         } else {
             console.log("You clicked the cancel button!");
         }
