@@ -107,8 +107,10 @@ const verificarOpcion_Correcta_1 = async (props,hijos,contadorRespondidas)=>{
     }else{
       //Se crea otro stack para guardar las respuestas pendiente, se elimina el ejercicio actual se trabaja con la stack creada y se randomiza la stack
       //Se muestra una alerta de que la respuesta es incorrecta
+      let aux = randomizarArray([...props.juego]);
       mostrarAlertaError("Respuesta incorrecta");
-
+      props.juego.pop();
+      props.setJuego(aux);
     }
 
   }else{
@@ -166,4 +168,18 @@ const verificarOpcionCorrecta1 = (props)=>{
   }
 }
 
+
+function randomizarArray(array) {
+  for (var i = array.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+  }
+  return array;
+}
+
+
 export default EjercicioFooter
+
+
