@@ -77,11 +77,8 @@ const verificarOpcion_Correcta_1 = async (props,hijos,contadorRespondidas)=>{
         myHeaders.append("Content-Type", "application/json");
 
         var raw = JSON.stringify({
-          "user_id": {
-            "id": `${id}`,
-            "mail": `${cookies.get('mail')}`
-          },
-          "tasks_id": `${tasks_id}`
+          "user_id": `${id}`,
+          "task_id": `${tasks_id}`
         });       
         
         var requestOptions = {
