@@ -107,7 +107,7 @@ export const Inicio = () => {
 
                   <Activity
                     moduleName={`Modulo: ${modulo.book_info.module}`}
-                    ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}/${modulo.writing.task_id}`}
+                    ruta={`/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}/${modulo.writing.task_id}`}
                     taskid={modulo.writing.task_id}
                     percent={parseInt(
                       (modulo.writing.user_progress /
@@ -120,7 +120,7 @@ export const Inicio = () => {
 
                   <Activity
                     moduleName={`Modulo: ${modulo.book_info.module}`}
-                    ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/vocabulary/${modulo.book_info.unit}/${modulo.vocabulary.task_id}`}
+                    ruta={`/modulo/${modulo.book_info.module}/vocabulary/${modulo.book_info.unit}/${modulo.vocabulary.task_id}`}
                     taskid={modulo.vocabulary.task_id}
                     percent={parseInt(
                       (modulo.reading.user_progress /
@@ -133,7 +133,7 @@ export const Inicio = () => {
 
                   <Activity
                     moduleName={`Modulo: ${modulo.book_info.module}`}
-                    ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/reading/${modulo.book_info.unit}/${modulo.reading.task_id}`}
+                    ruta={`/modulo/${modulo.book_info.module}/reading/${modulo.book_info.unit}/${modulo.reading.task_id}`}
                     taskid={modulo.reading.task_id}
                     percent={parseInt(
                       (modulo.reading.user_progress /
@@ -146,7 +146,7 @@ export const Inicio = () => {
 
                   <Activity
                     moduleName={`Modulo: ${modulo.book_info.module}`}
-                    ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}/${modulo.grammar.task_id}`}
+                    ruta={`/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}/${modulo.grammar.task_id}`}
                     taskid={modulo.grammar.task_id}
                     percent={parseInt(
                       (modulo.reading.user_progress /
@@ -180,7 +180,7 @@ export const Inicio = () => {
 
                   <Activity
                     moduleName={`Modulo: ${modulo.book_info.module}`}
-                    ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}/${modulo.writing.task_id}`}
+                    ruta={`/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}/${modulo.writing.task_id}`}
                     taskid={modulo.writing.task_id}
                     percent={parseInt(
                       (modulo.writing.user_progress /
@@ -193,7 +193,7 @@ export const Inicio = () => {
 
                   <Activity
                     moduleName={`Modulo: ${modulo.book_info.module}`}
-                    ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/vocabulary/${modulo.book_info.unit}/${modulo.vocabulary.task_id}`}
+                    ruta={`/modulo/${modulo.book_info.module}/vocabulary/${modulo.book_info.unit}/${modulo.vocabulary.task_id}`}
                     taskid={modulo.vocabulary.task_id}
                     percent={parseInt(
                       (modulo.reading.user_progress /
@@ -206,7 +206,7 @@ export const Inicio = () => {
 
                   <Activity
                     moduleName={`Modulo: ${modulo.book_info.module}`}
-                    ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/reading/${modulo.book_info.unit}/${modulo.reading.task_id}`}
+                    ruta={`/modulo/${modulo.book_info.module}/reading/${modulo.book_info.unit}/${modulo.reading.task_id}`}
                     taskid={modulo.reading.task_id}
                     percent={parseInt(
                       (modulo.reading.user_progress /
@@ -219,7 +219,7 @@ export const Inicio = () => {
 
                   <Activity
                     moduleName={`Modulo: ${modulo.book_info.module}`}
-                    ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}/${modulo.grammar.task_id}`}
+                    ruta={`/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}/${modulo.grammar.task_id}`}
                     taskid={modulo.grammar.task_id}
                     percent={parseInt(
                       (modulo.grammar.user_progress /

@@ -28,8 +28,16 @@ export const Emparejar = (props) => {
   };
 
   return (
-    <div className="grid grid-row-2">
-      <h2 className="m-auto p-auto">{(props.ejercicio.question)}</h2>
+    <div className="grid grid-row-3">
+      <h2 className="m-auto p-auto mt-8">{(props.ejercicio.question)}</h2>
+      <figure>
+        <img
+          src="https://drive.google.com/uc?export=view&id=1eZIjwIPz8ucnz_D8ILEt3ktrOQZEA0sB" 
+          alt="imagen"
+          className="m-auto p-auto"
+          width="20%"
+        />
+      </figure>
     <div className="container m-auto p-auto   w-10/12">
       <div
         className="flex flex-wrap items-center justify-center  	gap-2 my-20"

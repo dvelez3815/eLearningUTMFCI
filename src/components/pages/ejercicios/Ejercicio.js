@@ -59,6 +59,7 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado)=>{
     ejercicios.map((ejercicio, index) => {
         if(ejercicio.type === "opcion_correcta_1"){  
             setJuego(juego => [...juego, <Emparejar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
+            console.log(ejercicio);
         }
     }
     )
