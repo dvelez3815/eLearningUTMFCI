@@ -2,7 +2,7 @@
 import React, { createRef, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 
-export const Emparejar = (props) => {
+export const OpcionCorrecta_1 = (props) => {
   const history = useHistory();
   const opciones = useRef(null);
 

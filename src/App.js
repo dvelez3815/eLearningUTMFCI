@@ -9,7 +9,7 @@ import HomePage from './components/pages/HomePage/HomePage'
 import SignUpPage from './components/pages/SignUpPage/SignUpPage'
 import SigInPage from './components/pages/SigInPage/SigInPage'
 import NotFoundPage from './components/pages/NotFoundPage/NotFoundPage'
-import { Emparejar } from './components/pages/ejercicios/Emparejar';
+import { OpcionCorrecta_1 } from './components/pages/ejercicios/OpcionCorrecta_1';
 import { Drag } from './components/pages/ejercicios/Drag';
 import NuevaaG from './components/pages/ParaVideo/NuevaaG';
 import { Grammar2 } from './components/pages/ejercicios/Grammar2';

@@ -5,7 +5,8 @@ import ProgressBar from './ProgressBar'
 //load ejercicio.css
 import './Ejercicio.css'
 import EjercicioFooter from './EjercicioFooter'
-import { Emparejar } from './Emparejar'
+import { OpcionCorrecta_1 } from './OpcionCorrecta_1'
+import { OpcionCorrecta_n } from './OpcionCorrecta_n'
 
 
 export const Ejercicio = (props) => {
@@ -57,9 +58,11 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado)=>{
     //De esta manera la renderización del mensaje con estado cargando se va a mostrar hasta que se carguen todos los ejercicios.
 
     ejercicios.map((ejercicio, index) => {
+        console.log(ejercicio.type);
         if(ejercicio.type === "opcion_correcta_1"){  
-            setJuego(juego => [...juego, <Emparejar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
-            console.log(ejercicio);
+            setJuego(juego => [...juego, <OpcionCorrecta_1 key={index} ejercicio={ejercicio} miref={panelJuego}/>])
+        }else if(ejercicio.type === "opcion_correcta_n"){
+            setJuego(juego => [...juego, <OpcionCorrecta_n key={index} ejercicio={ejercicio} miref={panelJuego}/>])
         }
     }
     )
