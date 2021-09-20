@@ -22,18 +22,21 @@ function App() {
 
     <Router>
     <Switch>
-      <Route path="/modulo/1/grammar/1/:id">
+      <Route path="/modulo/:pmodulo/grammar/:punidad/:id">
         <Grammar2 />
       </Route>
-      <Route exact path="/modulo/1/grammar/2">
-        <Emparejar />
-      </Route>      
-      <Route exact path="/modulo/1/grammar/3">
-        <NuevaaG />
-      </Route>            
-      <Route exact path="/modulo/1/vocabulary/1">
-        <Emparejar />
+      <Route path="/modulo/:pmodulo/reading/:punidad/:id">
+        <Grammar2 />
       </Route>
+      <Route path="/modulo/:pmodulo/vocabulary/:punidad/:id">
+        <Grammar2 />
+      </Route>
+      <Route path="/modulo/:pmodulo/writing/:punidad/:id">
+        <Grammar2 />
+      </Route>
+
+
+
       <Route exact path="/modulo/1/writting/1">
         <Drag />
       </Route>      

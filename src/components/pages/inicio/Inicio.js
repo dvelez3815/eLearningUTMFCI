@@ -218,7 +218,7 @@ export const Inicio = () => {
                   />
 
                   <Activity
-                    moduleName={`Modulo: ${modulo.book_info.module}`}
+                    moduleName={`Modulo: ${modulo.book_info.module} Unidad: ${modulo.book_info.unit}`}
                     ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}/${modulo.grammar.task_id}`}
                     taskid={modulo.grammar.task_id}
                     percent={parseInt(
@@ -233,24 +233,6 @@ export const Inicio = () => {
               );
             }
           })}
-
-          {/* {data.Unidad.modulo.map((modulo, index) => (
-            <div>
-            <EModule
-              key={index}
-              nombre={modulo.nombre}
-                percent={parseInt(((modulo.writing.user_progress+modulo.reading.user_progress+modulo.grammar.user_progress+modulo.vocabulary.user_progress)/(modulo.writing.total_task+modulo.reading.total_task+modulo.grammar.total_task+modulo.vocabulary.total_task))*100)}
-              actividades={modulo.actividades}
-              progresoModulo={progesoModulo}
-              progresoTotal={progresoTotal}
-              setProgesoModulo={setProgesoModulo}
-              setprogresoTotal={setprogresoTotal}
-              actividades={modulo.actividades}
-              imagen={modulo.actividades[0].imagen}
-            />
-          </div>
-          
-          ))} */}
         </div>
 
         {/* BARRA LATERAL */}
