@@ -30,7 +30,7 @@ export const Emparejar = (props) => {
   return (
     <div className="grid grid-row-2">
       <h2 className="m-auto p-auto mt-8">{(props.ejercicio.question)}</h2>
-    <div className="container m-auto p-auto   w-10/12">
+    <div className="container m-auto p-auto w-auto">
       <div
         className="flex flex-wrap items-center justify-center  	gap-2 my-20"
         aria-label="choice"
