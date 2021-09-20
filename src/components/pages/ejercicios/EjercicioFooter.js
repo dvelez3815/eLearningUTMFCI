@@ -120,54 +120,6 @@ const verificarOpcion_Correcta_1 = async (props,hijos,contadorRespondidas)=>{
 
 }
 
-const functionPruebas = (props)=> {
-  let actual = props.contadorRespondidas;
-    console.log(props.juego.pop());
-    if(props.juego.length === 0){
-      props.setFinJuego(true)
-      // console.log(props.miref.current);
-      // console.log("hola",props.contadorRespondidas);
-      // console.log("1");
-
-      props.setContadorRespondidas(actual + 1);
-    }else{
-      // console.log(props.miref.current);
-
-      // console.log("hola",props.contadorRespondidas);
-      // console.log("2");
-      props.setContadorRespondidas(actual + 1);
-      console.log("a",props.juego[0].props.ejercicio.type);
-    }
-    props.setCargado(false);
-  
-}
-const verificarRespuesta = (props)=>{
-  let tipo_ejercicio = props.juego[0].props.ejercicio.type;
-
-  if(props.miref.current.classList.contains("activado")){
-    if(tipo_ejercicio === "opcion_correcta"){
-  
-    }else if(tipo_ejercicio === "ordenar"){
-  
-    }
-
-  }else{
-
-  }
-
-
-}
-const verificarOpcionCorrecta1 = (props)=>{
-  let esCorrecta = false;
-  let userSelection = props.miref.current.classList.contains("activado");
-  if(props.miref.current.classList.contains("activado")){
-
-  }else{
-    //alerta que diga que no selecciono nada
-    alert("No seleccionaste nada")
-  }
-}
-
 
 function randomizarArray(array) {
   for (var i = array.length - 1; i > 0; i--) {
