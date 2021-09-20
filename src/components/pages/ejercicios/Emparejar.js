@@ -1,45 +1,16 @@
 
 import React, { createRef, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { mostrarAlertaError, mostrarAlertaExito } from "../../Alert/Alerts";
-import CancelIcon from "@material-ui/icons/Cancel";
 
 export const Emparejar = (props) => {
   const history = useHistory();
   const opciones = useRef(null);
 
-
-  let datos = {
-    total_completado: 80,
-    ejercicios: [
-      {
-        id: 1,
-        item: ["Please hold the line", "____________"],
-        respuesta: "library",
-      },
-      {
-        id: 2,
-        item: ["Please you hold the line", "____________"],
-        respuesta: "pizza",
-      },
-      {
-        id: 3,
-        item: ["Please to hold the line", "____________"],
-        respuesta: "bank",
-      },
-      {
-        id: 4,
-        item: ["Please hold your the line", "____________"],
-        respuesta: "library",
-      },
-    ],
-  };
-
   const imagesRef = useRef(
     [...Array(props.ejercicio.options.length)].map(() => createRef())
   );
 
-  const [marcado, setMarcado] = useState(false);
+
   const marcar = (imagenRef) => {
     try {
       //borrar todas las otras referencias
@@ -57,8 +28,9 @@ export const Emparejar = (props) => {
   };
 
   return (
+    <div className="grid grid-row-2">
+      <h2 className="m-auto p-auto">{(props.ejercicio.question)}</h2>
     <div className="container m-auto p-auto   w-10/12">
-
       <div
         className="flex flex-wrap items-center justify-center  	gap-2 my-20"
         aria-label="choice"
@@ -82,6 +54,7 @@ export const Emparejar = (props) => {
           );
         })}
       </div>
+    </div>
     </div>
   );
 };

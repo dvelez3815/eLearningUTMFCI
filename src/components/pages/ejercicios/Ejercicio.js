@@ -46,22 +46,6 @@ export const Ejercicio = (props) => {
     )
 }
 
-
-const generarEjercicios = (ejercicios, setJuego) => {
-    let juego = []
-    
-    ejercicios.map((ejercicio, index) => {
-        if(ejercicio.type === "opcion_correcta"){  
-            juego.push(<Emparejar key={index} ejercicio={ejercicio}/>)
-            console.log(ejercicio);
-        }else{
-            console.log(ejercicio);
-        }     
-    })
-    setJuego(juego)
-    
-}
-
 const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado)=>{
 
     //los ejercicios ya están cargando desde la vista anterior, solo se necesita una estructura que almacene los ejercicios de forma con componente
@@ -81,34 +65,3 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado)=>{
     setCargado(false);
 
 }
-
-
-
-// const cargarEjercicios = (juego, setJuego, panelJuego, setCargado, finJuego, ejercicios)=>{
-
-//     if(juego.length !== 0){
-//         console.log("entra");
-//         juego.map((ejercicio, index) => {
-//             if(juego.type === "opcion_correc"){  
-//                 console.log("no entra");
-//                 setJuego(juego => [...juego, <Emparejar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
-//             }           
-//         })
-//         setCargado(true)
-
-//     }else{
-//         if(finJuego){
-//             setJuego([<h2 ref={panelJuego} className="container m-auto p-auto w-6/12">Fin</h2>])
-//         }else{
-//             ejercicios.map((ejercicio, index) => {
-//                 if(ejercicio.type === "opcion_correcta_1"){  
-//                     setJuego(juego => [...juego, <Emparejar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
-//                 }else{
-//                     console.log(ejercicio);
-//                 }
-//             })
-//             setCargado(true)
-//         }
-
-//     }    
-// }
