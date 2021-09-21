@@ -63,7 +63,7 @@ const Texto = (props) => {
   return (
     <div
       style={{ height: "70px" }}
-      className="flex flex-col w-2/5 center-items justify-center flex-wrap cardCheck"
+      className="flex flex-col w-2/5 sm:w-60 center-items justify-center flex-wrap cardCheck"
       aria-checked="false"
       role="radio"
       tabIndex="-1"

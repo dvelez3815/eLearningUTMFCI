@@ -101,8 +101,15 @@ const verificarOpcion_Correcta_1 = async (props,hijos,contadorRespondidas)=>{
         .then(response => response.text())
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
+
+        props.setContadorRespondidas(contadorRespondidas+1)
+        props.juego.pop();
+        setInterval(() => {
+          
+        }, 4000);
         mostrarAlertaExitoFin(`Fin del juego`);
         props.setFinJuego(true)
+        
 
       }else{
         mostrarAlertaExito(`Respuesta correcta`);
@@ -115,6 +122,9 @@ const verificarOpcion_Correcta_1 = async (props,hijos,contadorRespondidas)=>{
       //Se muestra una alerta de que la respuesta es incorrecta
       let aux = [...props.juego];
       let actual = props.juego.pop();
+      
+      //Ahora lo que se hace es randomizar el array para que la siguiente pregunta sea random y para que la siguiente no sea la misma a la ctual
+      
       aux = randomizarArray(aux);
       
       aux = aux.filter(e => e !== actual);
