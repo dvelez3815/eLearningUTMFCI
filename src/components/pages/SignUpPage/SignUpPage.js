@@ -72,16 +72,15 @@ class SignUpPage extends React.Component {
           setInterval(() => {
             this.setState({ dato: "" });
             this.setState({ isVisibleDato: "hidden" });
-          }, 3000);
+          }, 10000);
         } else {
           var user = response.data.res;
-          console.log(user)
           cookie.set("_id", user._id, { path: "/" });
           cookie.set("name", user.name, { path: "/" });
           cookie.set("lastname", user.lastname, { path: "/" });
           cookie.set("mail", user.mail, { path: "/" });
           cookie.set("status", user.status, { path: "/" });
-          console.log("ha iniciado sesion");
+          
           if(user.status === 'Active'){
             window.location.href = "./dashboard";
           }else{

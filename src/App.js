@@ -9,7 +9,7 @@ import HomePage from './components/pages/HomePage/HomePage'
 import SignUpPage from './components/pages/SignUpPage/SignUpPage'
 import SigInPage from './components/pages/SigInPage/SigInPage'
 import NotFoundPage from './components/pages/NotFoundPage/NotFoundPage'
-import { Emparejar } from './components/pages/ejercicios/Emparejar';
+import { OpcionCorrecta_1 } from './components/pages/ejercicios/OpcionCorrecta_1';
 import { Drag } from './components/pages/ejercicios/Drag';
 import NuevaaG from './components/pages/ParaVideo/NuevaaG';
 import { Grammar2 } from './components/pages/ejercicios/Grammar2';
@@ -23,18 +23,21 @@ function App() {
 
     <Router>
     <Switch>
-      <Route path="/modulo/1/grammar/1/:id">
+      <Route path="/modulo/:pmodulo/grammar/:punidad/:id">
         <Grammar2 />
       </Route>
-      <Route exact path="/modulo/1/grammar/2">
-        <Emparejar />
-      </Route>      
-      <Route exact path="/modulo/1/grammar/3">
-        <NuevaaG />
-      </Route>            
-      <Route exact path="/modulo/1/vocabulary/1">
-        <Emparejar />
+      <Route path="/modulo/:pmodulo/reading/:punidad/:id">
+        <Grammar2 />
       </Route>
+      <Route path="/modulo/:pmodulo/vocabulary/:punidad/:id">
+        <Grammar2 />
+      </Route>
+      <Route path="/modulo/:pmodulo/writing/:punidad/:id">
+        <Grammar2 />
+      </Route>
+
+
+
       <Route exact path="/modulo/1/writting/1">
         <Drag />
       </Route>      

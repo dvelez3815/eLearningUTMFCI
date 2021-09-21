@@ -46,7 +46,7 @@ const Grammar = (props) => {
   const [marcado, setMarcado] = useState(false);
   const marcar = (imagenRef) => {
     try {
-      console.log(imagenRef);
+      
       //borrar todas las otras referencias
       imagesRef.current.forEach((ref) => {
         ref.current.classList.contains("activado") &&

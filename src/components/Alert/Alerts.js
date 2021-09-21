@@ -21,10 +21,10 @@ export const mostrarAlertaError= ()=>{
         ...ErrorData
     }).then((result) => {
         if (result.value) {
-            console.log("You clicked the confirm button!");
-            window.location = "/modulo/1/grammar/2";
+            
+            // window.location = "/modulo/1/grammar/2";
         } else {
-            console.log("You clicked the cancel button!");
+            
         }
     });
 }
@@ -36,10 +36,24 @@ export const mostrarAlertaExito= ()=>{
         ...SuccessData
     }).then((result) => {
         if (result.value) {
-            console.log("You clicked the confirm button!");
-            window.location = "/modulo/1/grammar/3";
+            
+            // window.location = "/modulo/1/grammar/3";
         } else {
-            console.log("You clicked the cancel button!");
+            
+        }
+    });
+}
+
+
+export const mostrarAlertaExitoFin= ()=>{
+    Swal.fire({
+        ...SuccessData
+    }).then((result) => {
+        if (result.value) {
+            
+            window.location = "/dashboard";
+        } else {
+            
         }
     });
 }

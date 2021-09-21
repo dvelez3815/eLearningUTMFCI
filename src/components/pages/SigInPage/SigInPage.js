@@ -43,21 +43,21 @@ class SigInPage extends React.Component {
         password: this.state.password,
       })
       .then((res) => {
-        console.log(res);
+        
         if (res.data.res === "USER NOT EXIST") {
           this.setState({ dato: "Usuario no existe" });
           this.setState({ isVisibleDato: "" });
           setInterval(() => {
             this.setState({ dato: "" });
             this.setState({ isVisibleDato: "hidden" });
-          }, 4000);
+          }, 10000);
         } else if (res.data.res === "PASSWORD INCORRECT") {
           this.setState({ dato: "Contraseña incorrecta" });
           this.setState({ isVisibleDato: "" });
           setInterval(() => {
             this.setState({ dato: "" });
             this.setState({ isVisibleDato: "hidden" });
-          }, 4000);
+          }, 10000);
         } else if(res.data.res === "PENDING ACCOUNT"){
           window.location.href = "./PendingAccount"
 

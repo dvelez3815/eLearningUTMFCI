@@ -57,7 +57,7 @@ export const Inicio = () => {
       }
 
       setuserProgress(await userInfo);
-      console.log(userInfo);
+      
     };
 
     llenarInfo();
@@ -72,7 +72,7 @@ export const Inicio = () => {
         method: "GET",
       });
       const user_json = await user_response.json();
-      console.log(user_json);
+      
       if (user_json.status == "Active") {
         cookies.set("status", user_json.status, { path: "/" });
       } else {
@@ -107,7 +107,7 @@ export const Inicio = () => {
 
                   <Activity
                     moduleName={`Modulo: ${modulo.book_info.module}`}
-                    ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}/${modulo.writing.task_id}`}
+                    ruta={`/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}/${modulo.writing.task_id}`}
                     taskid={modulo.writing.task_id}
                     percent={parseInt(
                       (modulo.writing.user_progress /
@@ -120,7 +120,7 @@ export const Inicio = () => {
 
                   <Activity
                     moduleName={`Modulo: ${modulo.book_info.module}`}
-                    ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/vocabulary/${modulo.book_info.unit}/${modulo.vocabulary.task_id}`}
+                    ruta={`/modulo/${modulo.book_info.module}/vocabulary/${modulo.book_info.unit}/${modulo.vocabulary.task_id}`}
                     taskid={modulo.vocabulary.task_id}
                     percent={parseInt(
                       (modulo.reading.user_progress /
@@ -133,7 +133,7 @@ export const Inicio = () => {
 
                   <Activity
                     moduleName={`Modulo: ${modulo.book_info.module}`}
-                    ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/reading/${modulo.book_info.unit}/${modulo.reading.task_id}`}
+                    ruta={`/modulo/${modulo.book_info.module}/reading/${modulo.book_info.unit}/${modulo.reading.task_id}`}
                     taskid={modulo.reading.task_id}
                     percent={parseInt(
                       (modulo.reading.user_progress /
@@ -146,16 +146,17 @@ export const Inicio = () => {
 
                   <Activity
                     moduleName={`Modulo: ${modulo.book_info.module}`}
-                    ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}/${modulo.grammar.task_id}`}
+                    ruta={`/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}/${modulo.grammar.task_id}`}
                     taskid={modulo.grammar.task_id}
                     percent={parseInt(
-                      (modulo.reading.user_progress /
-                        modulo.reading.total_task) *
+                      (modulo.grammar.user_progress /
+                        modulo.grammar.total_task) *
                         100
                     )}
                     name={"grammar"}
                     img={grammarimg}
                   />
+
                 </div>
               );
             } else {
@@ -180,7 +181,7 @@ export const Inicio = () => {
 
                   <Activity
                     moduleName={`Modulo: ${modulo.book_info.module}`}
-                    ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}/${modulo.writing.task_id}`}
+                    ruta={`/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}/${modulo.writing.task_id}`}
                     taskid={modulo.writing.task_id}
                     percent={parseInt(
                       (modulo.writing.user_progress /
@@ -193,7 +194,7 @@ export const Inicio = () => {
 
                   <Activity
                     moduleName={`Modulo: ${modulo.book_info.module}`}
-                    ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/vocabulary/${modulo.book_info.unit}/${modulo.vocabulary.task_id}`}
+                    ruta={`/modulo/${modulo.book_info.module}/vocabulary/${modulo.book_info.unit}/${modulo.vocabulary.task_id}`}
                     taskid={modulo.vocabulary.task_id}
                     percent={parseInt(
                       (modulo.reading.user_progress /
@@ -206,7 +207,7 @@ export const Inicio = () => {
 
                   <Activity
                     moduleName={`Modulo: ${modulo.book_info.module}`}
-                    ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/reading/${modulo.book_info.unit}/${modulo.reading.task_id}`}
+                    ruta={`/modulo/${modulo.book_info.module}/reading/${modulo.book_info.unit}/${modulo.reading.task_id}`}
                     taskid={modulo.reading.task_id}
                     percent={parseInt(
                       (modulo.reading.user_progress /
@@ -219,11 +220,11 @@ export const Inicio = () => {
 
                   <Activity
                     moduleName={`Modulo: ${modulo.book_info.module}`}
-                    ruta={`http://localhost:3000/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}/${modulo.grammar.task_id}`}
+                    ruta={`/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}/${modulo.grammar.task_id}`}
                     taskid={modulo.grammar.task_id}
                     percent={parseInt(
-                      (modulo.reading.user_progress /
-                        modulo.reading.total_task) *
+                      (modulo.grammar.user_progress /
+                        modulo.grammar.total_task) *
                         100
                     )}
                     name={"grammar"}
@@ -233,24 +234,6 @@ export const Inicio = () => {
               );
             }
           })}
-
-          {/* {data.Unidad.modulo.map((modulo, index) => (
-            <div>
-            <EModule
-              key={index}
-              nombre={modulo.nombre}
-                percent={parseInt(((modulo.writing.user_progress+modulo.reading.user_progress+modulo.grammar.user_progress+modulo.vocabulary.user_progress)/(modulo.writing.total_task+modulo.reading.total_task+modulo.grammar.total_task+modulo.vocabulary.total_task))*100)}
-              actividades={modulo.actividades}
-              progresoModulo={progesoModulo}
-              progresoTotal={progresoTotal}
-              setProgesoModulo={setProgesoModulo}
-              setprogresoTotal={setprogresoTotal}
-              actividades={modulo.actividades}
-              imagen={modulo.actividades[0].imagen}
-            />
-          </div>
-          
-          ))} */}
         </div>
 
         {/* BARRA LATERAL */}
