@@ -75,13 +75,13 @@ class SignUpPage extends React.Component {
           }, 10000);
         } else {
           var user = response.data.res;
-          console.log(user)
+          (user)
           cookie.set("_id", user._id, { path: "/" });
           cookie.set("name", user.name, { path: "/" });
           cookie.set("lastname", user.lastname, { path: "/" });
           cookie.set("mail", user.mail, { path: "/" });
           cookie.set("status", user.status, { path: "/" });
-          console.log("ha iniciado sesion");
+          ("ha iniciado sesion");
           if(user.status === 'Active'){
             window.location.href = "./dashboard";
           }else{
@@ -91,7 +91,7 @@ class SignUpPage extends React.Component {
         }
       })
       .catch((error) => {
-        console.log(error);
+        (error);
       });
   }
 

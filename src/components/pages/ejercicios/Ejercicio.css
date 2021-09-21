@@ -4,7 +4,6 @@
     grid-template-columns: 100%;
     grid-template-rows: -webkit-min-content 1fr -webkit-min-content;
     grid-template-rows: min-content 1fr min-content;
-    height: 100%;
     left: 0;
     min-height: 460px;
     overflow: hidden;

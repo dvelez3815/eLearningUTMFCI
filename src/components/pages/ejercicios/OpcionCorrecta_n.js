@@ -17,13 +17,13 @@ export const OpcionCorrecta_n = (props) => {
       imagenRef.current.classList.toggle("activado");
       imagenRef.current.setAttribute("aria-checked", "true");
     } catch (error) {
-      console.log(error);
+      (error);
     }
   };
 
   return (
-    <div className="grid grid-row-2">
-      <h2 className="m-auto p-auto mt-8">{(props.ejercicio.question)}</h2>
+    <div className="flex flex-col flex-wrap mt-8">
+      <h2 className="m-auto p-auto">{(props.ejercicio.question)}</h2>
     <div className="container m-auto p-auto w-auto">
       <div
         className="flex flex-wrap items-center justify-center  	gap-2 my-20"
@@ -57,7 +57,7 @@ const Texto = (props) => {
   return (
     <div
       style={{ height: "70px" }}
-      className="flex flex-col w-1/4 center-items justify-center flex-wrap cardCheck"
+      className="flex flex-col w-24 sm:w-1/4 center-items justify-center flex-wrap cardCheck"
       aria-checked="false"
       role="radio"
       tabIndex="-1"
@@ -68,7 +68,7 @@ const Texto = (props) => {
           props.marcar(props.myref);
         }}
       >
-        <p className="text-lg	 font-medium	">{props.data.item}</p>
+        <p className="text-xs sm:text-base	 font-medium	">{props.data.item}</p>
       </button>
     </div>
   );
