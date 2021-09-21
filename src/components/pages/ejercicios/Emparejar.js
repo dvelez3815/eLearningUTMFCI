@@ -99,7 +99,7 @@ const Texto = (props) => {
           props.marcar(props.myref);
         }}
       >
-        <p className="text-lg	 font-medium	">{props.data.item}</p>
+        <p className="text-lg	font-medium	">{props.data.item}</p>
       </button>
     </div>
   );

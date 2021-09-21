@@ -14,6 +14,7 @@ import { Drag } from './components/pages/ejercicios/Drag';
 import NuevaaG from './components/pages/ParaVideo/NuevaaG';
 import { Grammar2 } from './components/pages/ejercicios/Grammar2';
 import AccountPendingPage from './components/pages/AccountPendingPage/AccountPendingPage'
+import RestartPasswordPage from './components/pages/RestartPassword/RestartPasswordPage'
 function App() {
   
   return (
@@ -52,6 +53,9 @@ function App() {
       </Route>
       <Route exact path="/PendingAccount">
         <AccountPendingPage />
+      </Route>
+      <Route exact path="/restartPassword">
+        <RestartPasswordPage />
       </Route>
       <Route > <NotFoundPage/> </Route>
       </Switch>

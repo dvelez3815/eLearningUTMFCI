@@ -3,8 +3,8 @@ import logo from "../../../assets/resource/Logo_Provicional.png";
 import img1 from "../../../assets/resource/sign.svg";
 import "./SigInPage.css";
 import axios from "axios";
-import Cookies from "universal-cookie";
 import {api_url} from '../../../api.config'
+import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
 class SigInPage extends React.Component {
