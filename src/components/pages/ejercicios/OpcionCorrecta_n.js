@@ -68,7 +68,7 @@ const Texto = (props) => {
           props.marcar(props.myref);
         }}
       >
-        <p className="text-xs sm:text-base font-medium	">{props.data.item}</p>
+        <h2 className="text-xl sm:text-base font-medium	">{props.data.item}</h2>
       </button>
     </div>
   );
