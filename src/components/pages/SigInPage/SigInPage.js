@@ -43,7 +43,7 @@ class SigInPage extends React.Component {
         password: this.state.password,
       })
       .then((res) => {
-        (res);
+        
         if (res.data.res === "USER NOT EXIST") {
           this.setState({ dato: "Usuario no existe" });
           this.setState({ isVisibleDato: "" });

@@ -17,7 +17,7 @@ export const OpcionCorrecta_n = (props) => {
       imagenRef.current.classList.toggle("activado");
       imagenRef.current.setAttribute("aria-checked", "true");
     } catch (error) {
-      (error);
+      console.log(error);
     }
   };
 
@@ -57,7 +57,7 @@ const Texto = (props) => {
   return (
     <div
       style={{ height: "70px" }}
-      className="flex flex-col w-24 sm:w-1/4 center-items justify-center flex-wrap cardCheck"
+      className="flex flex-col w-2/5 center-items justify-center flex-wrap cardCheck"
       aria-checked="false"
       role="radio"
       tabIndex="-1"

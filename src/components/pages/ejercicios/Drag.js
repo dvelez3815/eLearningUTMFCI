@@ -94,7 +94,7 @@ export const Drag = () => {
       imagenRef.current.classList.toggle("activado");
       imagenRef.current.setAttribute("aria-checked", "true");
     } catch (error) {
-      (error);
+      
     }
   };
 

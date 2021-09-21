@@ -57,7 +57,7 @@ export const Inicio = () => {
       }
 
       setuserProgress(await userInfo);
-      (userInfo);
+      
     };
 
     llenarInfo();
@@ -72,7 +72,7 @@ export const Inicio = () => {
         method: "GET",
       });
       const user_json = await user_response.json();
-      (user_json);
+      
       if (user_json.status == "Active") {
         cookies.set("status", user_json.status, { path: "/" });
       } else {

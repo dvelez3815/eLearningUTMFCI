@@ -46,7 +46,7 @@ const Grammar = (props) => {
   const [marcado, setMarcado] = useState(false);
   const marcar = (imagenRef) => {
     try {
-      (imagenRef);
+      
       //borrar todas las otras referencias
       imagesRef.current.forEach((ref) => {
         ref.current.classList.contains("activado") &&
@@ -57,7 +57,7 @@ const Grammar = (props) => {
       imagenRef.current.classList.toggle("activado");
       imagenRef.current.setAttribute("aria-checked", "true");
     } catch (error) {
-      (error);
+      console.log(error);
     }
   };
 
@@ -116,7 +116,7 @@ const Grammar = (props) => {
         <div className="mb-4">
           <button
             disabled={false}
-            onClick={() => ("hola")}
+            onClick={() => console.log("hola")}
             className="bg-transparent text-xl tracking-wider  my-2 text-gray-500 font-semibold hover:text-gray-400 py-2 px-4 border border-gray-500 hover:border-gray-500 rounded"
           >
             Saltar

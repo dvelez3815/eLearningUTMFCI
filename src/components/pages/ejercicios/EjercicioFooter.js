@@ -15,7 +15,7 @@ const EjercicioFooter = (props) => {
         <div className="mb-4">
           <button
             disabled={false}
-            onClick={() => ("hola")}
+            
             className="bg-transparent text-xs sm:text-xl tracking-wider  my-2 text-gray-500 font-semibold hover:text-gray-400 py-2 px-4 border border-gray-500 hover:border-gray-500 rounded"
             >
             Saltar
@@ -58,27 +58,24 @@ const verificarOpcion_Correcta_1 = async (props,hijos,contadorRespondidas)=>{
   let esCorrecta = false;
   let userSelection;
   let hasSelected = false;    
-  (contadorRespondidas);
+  
 
   for(let i = 0; i < hijos.length; i++){
     if(hijos[i].classList.contains("activado")){
       hasSelected = true;
-      userSelection = hijos[i].innerText;
+      userSelection = hijos[i].innerText.toString().trim();
       break;
     }
   }
   if(hasSelected){
-    (props.ejercicio.props.ejercicio.options)
+    
     //Se obtiene la respuesta correcta para esto utilizo la funcion filter, itero las opciones de los ejercicios y para cada opcion si la respuesta es correcta se guarda en un arreglo
-    let correctAnswer = props.ejercicio.props.ejercicio.options.filter(option => option.answer === true)[0].item;
+    let correctAnswer = props.ejercicio.props.ejercicio.options.filter(option => option.answer === true)[0].item.toString().trim();
     if(correctAnswer === userSelection){
       esCorrecta = true;
-      ("hola???");
+      
     }
-    ("AQUI");
-    (correctAnswer);
-    (userSelection);
-    (correctAnswer === userSelection);
+
     if(esCorrecta){
       //Se es corecta se necesita saber si se ha llegado al final de la lista de ejercicios, de ser así, se debe de terminar el juego y guardar el progreso,
       //caso contrario se debe de pasar al siguiente ejercicio
@@ -102,8 +99,8 @@ const verificarOpcion_Correcta_1 = async (props,hijos,contadorRespondidas)=>{
 
         await fetch("https://utminglesapp.herokuapp.com/progress/update", requestOptions)
         .then(response => response.text())
-        .then(result => (result))
-        .catch(error => ('error', error));
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
         mostrarAlertaExitoFin(`Fin del juego`);
         props.setFinJuego(true)
 
@@ -111,15 +108,19 @@ const verificarOpcion_Correcta_1 = async (props,hijos,contadorRespondidas)=>{
         mostrarAlertaExito(`Respuesta correcta`);
         props.juego.pop();
         props.setContadorRespondidas(contadorRespondidas+1)
-        ("b",contadorRespondidas);
       }
       //Se guarda el progreso del usuario y se muestra una alerta de que la respuesta es correcta
     }else{
       //Se crea otro stack para guardar las respuestas pendiente, se elimina el ejercicio actual se trabaja con la stack creada y se randomiza la stack
       //Se muestra una alerta de que la respuesta es incorrecta
-      let aux = randomizarArray([...props.juego]);
+      let aux = [...props.juego];
+      let actual = props.juego.pop();
+      aux = randomizarArray(aux);
+      
+      aux = aux.filter(e => e !== actual);
+
+      aux.unshift(actual);
       mostrarAlertaError("Respuesta incorrecta");
-      props.juego.pop();
       props.setJuego(aux);
     }
 
@@ -144,7 +145,7 @@ const verificarOpcion_Correcta_n = async (props,hijos,contadorRespondidas)=>{
   }
 
   if(hasSelected){
-    (props.ejercicio.props.ejercicio.options)
+    
     //Se obtiene la respuesta correcta para esto utilizo la funcion filter, itero las opciones de los ejercicios y para cada opcion si la respuesta es correcta se guarda en un arreglo
     let correctAnswer = [];
     props.ejercicio.props.ejercicio.options.forEach(option => {
@@ -153,19 +154,19 @@ const verificarOpcion_Correcta_n = async (props,hijos,contadorRespondidas)=>{
       }
     });
 
-    (userSelection);
+    
     if(userSelection.length>correctAnswer.length || userSelection.length<correctAnswer.length){
       esCorrecta = false;
     }else if(userSelection.length === correctAnswer.length){
       //order array
       userSelection.sort();
       correctAnswer.sort();
-      ("hola",userSelection,correctAnswer,"adios");
+      
       if(userSelection.toString().trim() === correctAnswer.toString().trim()){
         esCorrecta = true;
       }
     }
-    ("correctas",correctAnswer.toString().trim());
+    
     if(esCorrecta){
       //Se es corecta se necesita saber si se ha llegado al final de la lista de ejercicios, de ser así, se debe de terminar el juego y guardar el progreso,
       //caso contrario se debe de pasar al siguiente ejercicio
@@ -189,8 +190,8 @@ const verificarOpcion_Correcta_n = async (props,hijos,contadorRespondidas)=>{
 
         await fetch("https://utminglesapp.herokuapp.com/progress/update", requestOptions)
         .then(response => response.text())
-        .then(result => (result))
-        .catch(error => ('error', error));
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
         props.setContadorRespondidas(contadorRespondidas+1)
         props.juego.pop();
         setInterval(() => {
@@ -213,10 +214,10 @@ const verificarOpcion_Correcta_n = async (props,hijos,contadorRespondidas)=>{
       //se guarda el ejercicio para no mostrarlo en la siguiente iteracion
       let actual = props.juego.pop();
       //se randomiza todo al arreglo de props.juego
-      ("no random",aux);
+
       aux = randomizarArray(aux);
       //se elimina el ejercicio actual
-      ("random",aux);
+      
       
       mostrarAlertaError("Respuesta incorrecta");
       props.juego.pop();

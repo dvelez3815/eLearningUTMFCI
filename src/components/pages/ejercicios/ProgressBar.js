@@ -5,10 +5,7 @@ import { useHistory } from 'react-router';
 
 const ProgressBar = (props) => {
   const history = useHistory();
-  useEffect(() => {
-    ("hola",props.totalEjercicios);
-
-  }, [])
+  
 
     return (
       <div className="mr-8 ml-8">
