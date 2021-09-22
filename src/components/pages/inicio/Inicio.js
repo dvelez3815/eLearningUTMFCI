@@ -69,6 +69,7 @@ export const Inicio = () => {
     if (!cookies.get("_id")) {
       window.location.href = "./signin";
     }
+<<<<<<< HEAD
     if (cookies.get("status") !== "Active") {
       const user_response = await fetch(`${api_url}/user/${userid}`, {
         method: "GET",
@@ -81,6 +82,20 @@ export const Inicio = () => {
         window.location.href = "./PendingAccount";
       }
     }
+=======
+    // if (cookies.get("status") !== "Active") {
+    //   const user_response = await fetch(`${api_url}/user/${userid}`, {
+    //     method: "GET",
+    //   });
+    //   const user_json = await user_response.json();
+      
+    //   if (user_json.status == "Active") {
+    //     cookies.set("status", user_json.status, { path: "/" });
+    //   } else {
+    //     window.location.href = "./PendingAccount";
+    //   }
+    // }
+>>>>>>> 66708e124d292bfd2d62da70bc2530b73f3e7563
   }, []);
 
   return (

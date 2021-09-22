@@ -14,7 +14,12 @@ import { Drag } from './components/pages/ejercicios/Drag';
 import NuevaaG from './components/pages/ParaVideo/NuevaaG';
 import { Grammar2 } from './components/pages/ejercicios/Grammar2';
 import AccountPendingPage from './components/pages/AccountPendingPage/AccountPendingPage'
+<<<<<<< HEAD
 import RestartPasswordPage from './components/pages/RestartPassword/RestartPasswordPage'
+=======
+import Arrastrar from './components/pages/ejercicios/Arrastrar';
+import Arrastrar2 from './components/pages/ejercicios/Arrastrar2';
+>>>>>>> 66708e124d292bfd2d62da70bc2530b73f3e7563
 function App() {
   
   return (
@@ -34,6 +39,9 @@ function App() {
       </Route>
       <Route path="/modulo/:pmodulo/writing/:punidad/:id">
         <Grammar2 />
+      </Route>
+      <Route path="/a">
+        <Arrastrar/>
       </Route>
 
 
