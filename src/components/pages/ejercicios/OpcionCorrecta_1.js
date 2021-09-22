@@ -10,7 +10,6 @@ export const OpcionCorrecta_1 = (props) => {
     [...Array(props.ejercicio.options.length)].map(() => createRef())
   );
 
-
   const marcar = (imagenRef) => {
     try {
       //borrar todas las otras referencias
@@ -74,7 +73,7 @@ const Texto = (props) => {
           props.marcar(props.myref);
         }}
       >
-        <h2 className="text-xl sm:text-base font-medium	">{props.data.item}</h2>
+        <h2 className="text-xs sm:text-base font-medium	">{props.data.item}</h2>
       </button>
     </div>
   );
