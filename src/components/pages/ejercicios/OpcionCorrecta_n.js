@@ -23,7 +23,7 @@ export const OpcionCorrecta_n = (props) => {
 
   return (
     <div className="flex flex-col flex-wrap mt-8">
-      <h2 className="m-auto p-auto">{(props.ejercicio.question)}</h2>
+      <h2 className="m-auto p-auto text-2xl">{(props.ejercicio.question)}</h2>
     <div className="container m-auto p-auto w-auto">
       <div
         className="flex flex-wrap items-center justify-center  	gap-2 my-20"
@@ -68,7 +68,7 @@ const Texto = (props) => {
           props.marcar(props.myref);
         }}
       >
-        <p className="text-xs sm:text-base	 font-medium	">{props.data.item}</p>
+        <h2 className="text-xl sm:text-base font-medium	">{props.data.item}</h2>
       </button>
     </div>
   );
