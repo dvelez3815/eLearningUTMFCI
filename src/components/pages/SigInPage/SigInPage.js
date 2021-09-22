@@ -58,9 +58,13 @@ class SigInPage extends React.Component {
             this.setState({ dato: "" });
             this.setState({ isVisibleDato: "hidden" });
           }, 10000);
-        } else if(res.data.res === "PENDING ACCOUNT"){
-          window.location.href = "./PendingAccount"
-
+        } else if(res.data.res === "ERROR"){
+          this.setState({ dato: "Hubo un problema al conectar con el servidor" });
+          this.setState({ isVisibleDato: "" });
+          setInterval(() => {
+            this.setState({ dato: "" });
+            this.setState({ isVisibleDato: "hidden" });
+          }, 10000);
         }
         else {
           cookies.set("_id", res.data.res._id, { path: "/" });

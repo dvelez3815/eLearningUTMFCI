@@ -73,6 +73,14 @@ class SignUpPage extends React.Component {
             this.setState({ dato: "" });
             this.setState({ isVisibleDato: "hidden" });
           }, 10000);
+        } else if(response.data.res === "ERROR"){
+          this.setState({ dato: "Hubo un error al conectar con el servidor" });
+          this.setState({ isVisibleDato: "" });
+          setInterval(() => {
+            this.setState({ dato: "" });
+            this.setState({ isVisibleDato: "hidden" });
+          }, 10000);
+
         } else {
           var user = response.data.res;
           cookie.set("_id", user._id, { path: "/" });
