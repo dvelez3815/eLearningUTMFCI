@@ -124,8 +124,8 @@ export const Inicio = () => {
                     ruta={`/modulo/${modulo.book_info.module}/vocabulary/${modulo.book_info.unit}/${modulo.vocabulary.task_id}`}
                     taskid={modulo.vocabulary.task_id}
                     percent={parseInt(
-                      (modulo.reading.user_progress /
-                        modulo.reading.total_task) *
+                      (modulo.vocabulary.user_progress /
+                        modulo.vocabulary.total_task) *
                         100
                     )}
                     name={"vocabulary"}
@@ -196,8 +196,8 @@ export const Inicio = () => {
                     ruta={`/modulo/${modulo.book_info.module}/vocabulary/${modulo.book_info.unit}/${modulo.vocabulary.task_id}`}
                     taskid={modulo.vocabulary.task_id}
                     percent={parseInt(
-                      (modulo.reading.user_progress /
-                        modulo.reading.total_task) *
+                      (modulo.vocabulary.user_progress /
+                        modulo.vocabulary.total_task) *
                         100
                     )}
                     name={"vocabulary"}
