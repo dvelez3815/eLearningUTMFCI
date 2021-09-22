@@ -3,54 +3,9 @@ import { useState, useRef, createRef } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import shortid from "shortid";
 
-const Arrastrar = () => {
+const Arrastrar = (props) => {
 
-  let data = {
-    "options": [
-        [
-            {
-                "item": "Peter: My name is Peter.",
-                "answer": 2
-            },
-            {
-                "item": "Peter : I’m a Doctor Nice to meet you, too.",
-                "answer": 4
-            },
-            {
-                "item": "Mary:  What´s your name?",
-                "answer": 1
-            },
-            {
-                "item": "Mary: Nice to meet you. What´s your job?",
-                "answer": 3
-            }
-        ],
-        [
-            {
-                "item": "b.",
-                "answer": 8
-            },
-            {
-                "item": "c",
-                "answer": 9
-            },
-            {
-                "item": "d",
-                "answer": 10
-            },
-            {
-                "item": "a",
-                "answer": 11
-            }            
-        ]
-    ],
-    "body": [],
-    "_id": "6133aa1062a77824887c0f77",
-    "task_id": "6133a93562a77824887c0f6b",
-    "type": "ordenar",
-    "question": "Order the next dialogue",
-    "__v": 0
-}
+    let data = props.ejercicio.options;
 
 
 
@@ -88,18 +43,19 @@ const Arrastrar = () => {
     width: "auto",
   });
 
-  const [items, setItems] = useState(data.options);
+  const [items, setItems] = useState(data);
 
  
   
 
 
   return (
-      <div>
-
+    <div className="flex flex-col flex-wrap">
+        <h2 className="m-auto p-auto text-2xl font-bold ">{(props.ejercicio.question)}</h2>
     {items.map((preguntas, index) => (
 
-        <div style={{ width: "100%" }} className="p-4" key={shortid.generate()}>
+        <div className="container m-auto p-auto w-auto w-full" key={shortid.generate()}>
+            <div className="flex"><h2>ejercicio: {index+1}</h2></div>
             <DragDropContext
                 onDragEnd={(result) => {
                     if (!result.destination) {
