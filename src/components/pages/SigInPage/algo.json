@@ -1,115 +1,28 @@
-[
-    {
-        "book_info": {
-            "_id": "612db38ce2d9f111a6413db7",
-            "unit": 1,
-            "module": 1,
-            "book": 1
-        },
-        
-        "writing": {
-            "total_task:": 3,
-            "user_progress": 2,
-            "task_id": "612ef0904ed1a5407853d237"
-        },
-        "vocabulary": {
-            "total_task:": 4,
-            "user_progress": 0,
-            "task_id": "613134f204857602b8b44daa"
-        },
-        "reading": {
-            "total_task:": 2,
-            "user_progress": 0,
-            "task_id": "613283c1f3fe0e32c4508d05"
-        },
-        "grammar": {
-            "total_task:": 4,
-            "user_progress": 0,
-            "task_id": "6133a93562a77824887c0f6b"
-        }
-    },
-    {
-        "book_info": {
-            "_id": "612db38ce2d9f111a6413dba",
-            "unit": 2,
-            "module": 2,
-            "book": 1
-        },
-        "writing": {
-            "total_task:": 3,
-            "user_progress": 0,
-            "task_id": "6140053e0f57f126382c1895"
-        },
-        "vocabulary": {
-            "total_task:": 4,
-            "user_progress": 0,
-            "task_id": "614000140f57f126382c1781"
-        },
-        "reading": {
-            "total_task:": 2,
-            "user_progress": 0,
-            "task_id": "613fcd4a30e723162ca28d32"
-        },
-        "grammar": {
-            "total_task:": 4,
-            "user_progress": 0,
-            "task_id": "613fc96f30e723162ca28c56"
-        }
-    },
-    {
-        "book_info": {
-            "_id": "612db38ce2d9f111a6413db8",
-            "unit": 2,
-            "module": 1,
-            "book": 1
-        },
-        "writing": {
-            "total_task:": 2,
-            "user_progress": 0,
-            "task_id": "61351af8c5a8e7126893bd2d"
-        },
-        "vocabulary": {
-            "total_task:": 4,
-            "user_progress": 0,
-            "task_id": "61354244c5a8e7126893bdfc"
-        },
-        "reading": {
-            "total_task:": 3,
-            "user_progress": 0,
-            "task_id": "61352ce3c5a8e7126893bd7f"
-        },
-        "grammar": {
-            "total_task:": 4,
-            "user_progress": 0,
-            "task_id": "61354a6dc5a8e7126893bec8"
-        }
-    },
-    {
-        "book_info": {
-            "_id": "612db38ce2d9f111a6413db9",
-            "unit": 1,
-            "module": 2,
-            "book": 1
-        },
-        "writing": {
-            "total_task:": 2,
-            "user_progress": 0,
-            "task_id": "613fa5c85260b32a4c2d98d1"
-        },
-        "vocabulary": {
-            "total_task:": 4,
-            "user_progress": 0,
-            "task_id": "613fabb15260b32a4c2d9923"
-        },
-        "reading": {
-            "total_task:": 3,
-            "user_progress": 0,
-            "task_id": "613fb54030e723162ca28aee"
-        },
-        "grammar": {
-            "total_task:": 4,
-            "user_progress": 0,
-            "task_id": "613fb82b30e723162ca28b73"
-        }
-    }
-]
+{
+    "options": [
+        [
+            {
+                "item": "Peter: My name is Peter.",
+                "answer": 2
+            },
+            {
+                "item": "Peter : I’m a Doctor Nice to meet you, too.",
+                "answer": 4
+            },
+            {
+                "item": "Mary:  What´s your name?",
+                "answer": 1
+            },
+            {
+                "item": "Mary: Nice to meet you. What´s your job?",
+                "answer": 3
+            }
+        ]
+    ],
+    "body": [],
+    "_id": "6133aa1062a77824887c0f77",
+    "task_id": "6133a93562a77824887c0f6b",
+    "type": "ordenar",
+    "question": "Order the next dialogue",
+    "__v": 0
+}
