@@ -8,7 +8,7 @@ class NavBar extends React.Component {
   }
   render() {
     return (
-      <nav className="shadow-sm flex items-center justify-between flex-wrap bg-gray-50 p-4">
+      <nav className="shadow-sm flex items-center justify-between flex-wrap bg-gray-50 p-4 h-1/5" >
         <div className="flex items-center flex-shrink-0 text-white mr-6">
           <img src={logo} className="block h-8 w-auto" alt="LogoUtm"></img>
         </div>

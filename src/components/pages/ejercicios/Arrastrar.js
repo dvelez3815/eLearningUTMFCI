@@ -52,9 +52,7 @@ const Arrastrar = (props) => {
 
   return (
     <div className="flex flex-col flex-wrap">
-      <h2 className="m-auto p-auto text-2xl font-bold" style={(esArrastrarN())}>
-        {props.ejercicio.question}
-      </h2>
+      <h2 className="mt-10 text-2xl font-bold ">{(props.ejercicio.question)}</h2>
       {items.map((preguntas, index) => (
         <div
           className="container m-auto p-auto w-auto w-full"
@@ -92,6 +90,7 @@ const Arrastrar = (props) => {
                   )}
                   {...provided.droppableProps}
                 >
+                    
                   {preguntas.map((ordenar, index) => (
                     <Draggable
                       key={ordenar.answer}
