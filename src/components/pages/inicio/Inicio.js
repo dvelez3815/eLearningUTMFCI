@@ -6,7 +6,6 @@ import StarIcon from "@material-ui/icons/Star";
 import CollectionsBookmarkIcon from "@material-ui/icons/CollectionsBookmark";
 import { useState } from "react";
 
-
 import "./inicio.css";
 
 import Cookies from "universal-cookie";
@@ -74,7 +73,7 @@ export const Inicio = () => {
     //     method: "GET",
     //   });
     //   const user_json = await user_response.json();
-      
+
     //   if (user_json.status == "Active") {
     //     cookies.set("status", user_json.status, { path: "/" });
     //   } else {
@@ -86,8 +85,8 @@ export const Inicio = () => {
   return (
     <div>
       <NavComponent logo={logo} />
-      <div className="grid grid-cols-12 ">
-        <div className="col-span-9 ">
+      <div className="grid grid-cols-12">
+        <div className="sm:col-span-9 col-span-12">
           {userProgress.map((modulo, index) => {
             if ((index + 1) % 2 === 0) {
               return (
@@ -239,41 +238,159 @@ export const Inicio = () => {
         {/* BARRA LATERAL */}
 
         <div className="col-span-3  ml-7 ">
-          <div className="py-5  hidden md:block">
-            <div className="border shadow rounded-2xl flex flex-col w-4/6 text-left p-2">
-              <div className="flex flex-col-2">
-                <div className="text-left">
-                  <h2 className="font-semibold text-xl m-2">Libros</h2>
-                </div>
-                {/* <div className="text-right">
+          <div className="flex flex-wrap flex-col">
+            <div className="py-5  hidden md:block">
+              <div className="border shadow rounded-2xl flex flex-col w-4/6 text-left p-2">
+                <div className="flex flex-col-2">
+                  <div className="text-left">
+                    <h2 className="font-semibold text-xl m-2">Libros</h2>
+                  </div>
+                  {/* <div className="text-right">
                   <h2 className=" font-semibold text-xl m-2 text-yellow-300 ">
                     {progresoTotal}%{" "}
                   </h2>
                 </div> */}
-              </div>
-              <div className="flex p-2 gap-4 flex-col md:flex-row">
-                <div
-                  className="flex justify-center items-start rounded-2xl"
-                  id="estrella"
-                >
-                  <CollectionsBookmarkIcon color="action" fontSize="large" />
                 </div>
-                <div className="flex flex-col " id="info">
-                  <div>
-                    <h2 className="text-gray-700 text-lg">
-                      <ol>
-                        <li className="hover:text-green-500"> <a target="_blank" href="https://drive.google.com/file/d/1pwa9ffmEMoHOJBa98KDNpONhp92DtoL6/view?usp=sharing">Libro 1</a> </li>
-                        <li className="hover:text-green-500"> <a target="_blank" href="https://drive.google.com/file/d/1zSL78FugkafrXulTG9Wb3CcHwouNr62y/view?usp=sharing">Libro 2</a> </li>
-                        <li className="hover:text-green-500"> <a target="_blank" href="https://drive.google.com/file/d/1kVydGHFB5M59yMLyAQVM6w0YnN-uf4zJ/view?usp=sharing">Libro 3</a> </li>
-                        <li className="hover:text-green-500"> <a target="_blank" href="https://drive.google.com/file/d/1Q8COVdO2dGtjDt6mrdb4I1HuqB3w_yxb/view?usp=sharing">Libro 4</a> </li>
-                        <li className="hover:text-green-500"> <a target="_blank" href="https://drive.google.com/file/d/158WHHjUUYaFvTJaxBK5-SbDS-Fxz1BAy/view?usp=sharing">Libro 5</a> </li>
-                      </ol>
-                    </h2>
+                <div className="flex p-2 gap-4 flex-col md:flex-row">
+                  <div
+                    className="flex justify-center items-start rounded-2xl"
+                    id="estrella"
+                  >
+                    <CollectionsBookmarkIcon color="action" fontSize="large" />
                   </div>
-                  
+                  <div className="flex flex-col " id="info">
+                    <div>
+                      <h2 className="text-gray-700 text-lg">
+                        <ol>
+                          <li className="hover:text-green-500">
+                            {" "}
+                            <a
+                              target="_blank"
+                              href="https://drive.google.com/file/d/1pwa9ffmEMoHOJBa98KDNpONhp92DtoL6/view?usp=sharing"
+                            >
+                              Libro 1
+                            </a>{" "}
+                          </li>
+                          <li className="hover:text-green-500">
+                            {" "}
+                            <a
+                              target="_blank"
+                              href="https://drive.google.com/file/d/1zSL78FugkafrXulTG9Wb3CcHwouNr62y/view?usp=sharing"
+                            >
+                              Libro 2
+                            </a>{" "}
+                          </li>
+                          <li className="hover:text-green-500">
+                            {" "}
+                            <a
+                              target="_blank"
+                              href="https://drive.google.com/file/d/1kVydGHFB5M59yMLyAQVM6w0YnN-uf4zJ/view?usp=sharing"
+                            >
+                              Libro 3
+                            </a>{" "}
+                          </li>
+                          <li className="hover:text-green-500">
+                            {" "}
+                            <a
+                              target="_blank"
+                              href="https://drive.google.com/file/d/1Q8COVdO2dGtjDt6mrdb4I1HuqB3w_yxb/view?usp=sharing"
+                            >
+                              Libro 4
+                            </a>{" "}
+                          </li>
+                          <li className="hover:text-green-500">
+                            {" "}
+                            <a
+                              target="_blank"
+                              href="https://drive.google.com/file/d/158WHHjUUYaFvTJaxBK5-SbDS-Fxz1BAy/view?usp=sharing"
+                            >
+                              Libro 5
+                            </a>{" "}
+                          </li>
+                        </ol>
+                      </h2>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
+            <div className="py-5  hidden md:block">
+              <div className="border shadow rounded-2xl flex flex-col w-4/6 text-left p-2">
+                <div className="flex flex-col-2">
+                  <div className="text-left">
+                    <h2 className="font-semibold text-xl m-2">Recursos audiovisuales</h2>
+                  </div>
+                  {/* <div className="text-right">
+                  <h2 className=" font-semibold text-xl m-2 text-yellow-300 ">
+                    {progresoTotal}%{" "}
+                  </h2>
+                </div> */}
+                </div>
+                <div className="flex p-2 gap-4 flex-col md:flex-row">
+                  <div
+                    className="flex justify-center items-start rounded-2xl"
+                    id="estrella"
+                  >
+                    <CollectionsBookmarkIcon color="action" fontSize="large" />
+                  </div>
+                  <div className="flex flex-col " id="info">
+                    <div>
+                      <h2 className="text-gray-700 text-lg">
+                        <ol>
+                          <li className="hover:text-green-500">
+                            {" "}
+                            <a
+                              target="_blank"
+                              href="https://drive.google.com/file/d/1pwa9ffmEMoHOJBa98KDNpONhp92DtoL6/view?usp=sharing"
+                            >
+                              Libro 1
+                            </a>{" "}
+                          </li>
+                          <li className="hover:text-green-500">
+                            {" "}
+                            <a
+                              target="_blank"
+                              href="https://drive.google.com/file/d/1zSL78FugkafrXulTG9Wb3CcHwouNr62y/view?usp=sharing"
+                            >
+                              Libro 2
+                            </a>{" "}
+                          </li>
+                          <li className="hover:text-green-500">
+                            {" "}
+                            <a
+                              target="_blank"
+                              href="https://drive.google.com/file/d/1kVydGHFB5M59yMLyAQVM6w0YnN-uf4zJ/view?usp=sharing"
+                            >
+                              Libro 3
+                            </a>{" "}
+                          </li>
+                          <li className="hover:text-green-500">
+                            {" "}
+                            <a
+                              target="_blank"
+                              href="https://drive.google.com/file/d/1Q8COVdO2dGtjDt6mrdb4I1HuqB3w_yxb/view?usp=sharing"
+                            >
+                              Libro 4
+                            </a>{" "}
+                          </li>
+                          <li className="hover:text-green-500">
+                            {" "}
+                            <a
+                              target="_blank"
+                              href="https://drive.google.com/file/d/158WHHjUUYaFvTJaxBK5-SbDS-Fxz1BAy/view?usp=sharing"
+                            >
+                              Libro 5
+                            </a>{" "}
+                          </li>
+                        </ol>
+                      </h2>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+                                    
           </div>
         </div>
       </div>
