@@ -163,20 +163,16 @@ const verificarOpcion_Correcta_n = async (props,hijos,contadorRespondidas)=>{
         correctAnswer.push(option.item);
       }
     });
-
-    
     if(userSelection.length>correctAnswer.length || userSelection.length<correctAnswer.length){
       esCorrecta = false;
     }else if(userSelection.length === correctAnswer.length){
       //order array
       userSelection.sort();
-      correctAnswer.sort();
-      
+      correctAnswer.sort();      
       if(userSelection.toString().trim() === correctAnswer.toString().trim()){
         esCorrecta = true;
       }
     }
-    
     if(esCorrecta){
       //Se es corecta se necesita saber si se ha llegado al final de la lista de ejercicios, de ser así, se debe de terminar el juego y guardar el progreso,
       //caso contrario se debe de pasar al siguiente ejercicio

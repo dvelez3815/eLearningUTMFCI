@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState, useRef, createRef } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import shortid from "shortid";
 
 const Arrastrar = () => {
+
   let data = {
     "options": [
         [
@@ -22,6 +24,24 @@ const Arrastrar = () => {
                 "item": "Mary: Nice to meet you. What´s your job?",
                 "answer": 3
             }
+        ],
+        [
+            {
+                "item": "b.",
+                "answer": 8
+            },
+            {
+                "item": "c",
+                "answer": 9
+            },
+            {
+                "item": "d",
+                "answer": 10
+            },
+            {
+                "item": "a",
+                "answer": 11
+            }            
         ]
     ],
     "body": [],
@@ -36,14 +56,11 @@ const Arrastrar = () => {
 
   //Re ordena la lista en base al cambio realizado
 
-  const reorder = (list, startIndex, endIndex) => {
-    //se guarda la lista actual en una variable
-    const result = [...list];
-    //se guarda el item que se ha movido
-    const [removed] = result.splice(startIndex, 1);
-    //se inserta el item movido en la posicion donde se ha soltado
-    result.splice(endIndex, 0, removed);
-    return result;
+  const reorder = (list, startIndex, endIndex,index) => {
+      const result = [...list];
+      const [removed] = result[index].splice(startIndex, 1);
+      result[index].splice(endIndex, 0, removed);
+      return result
   };
 
 
@@ -71,58 +88,70 @@ const Arrastrar = () => {
     width: "auto",
   });
 
-  const [items, setItems] = useState(data.options[0]);
+  const [items, setItems] = useState(data.options);
+
+ 
+  
+
 
   return (
-    <div style={{ width: "100%" }} className="p-4">
-      <DragDropContext
-        onDragEnd={(result) => {
-          if (!result.destination) {
-            return;
-          }
-          if (result.destination.index === result.source.index) {
-            return;
-          }
-          setItems(
-            reorder(items, result.source.index, result.destination.index)
-          );
-        }}
-      >
-        <Droppable droppableId="droppable" direction="horizontal">
-          {(provided, snapshot) => (
-            <div
-              ref={provided.innerRef}
-              style={getListStyle(snapshot.isDraggingOver, items.length)}
-              {...provided.droppableProps}
-            >
-              {items.map((item, index) => (
-                <Draggable
-                  key={item.answer}
-                  draggableId={item.answer.toString()}
-                  index={index}
-                >
-                  {(provided, snapshot) => (
-                    <div
-                    className="rounded h-10 justify-center flex items-center	"
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      style={getItemStyle(
-                        snapshot.isDragging,
-                        provided.draggableProps.style
-                      )}
-                    >
-                      <p className="text-xs">{item.item}</p>
-                    </div>
-                  )}
-                </Draggable>
-              ))}
+      <div>
 
-              {provided.placeholder}
+    {items.map((preguntas, index) => (
+
+        <div style={{ width: "100%" }} className="p-4" key={shortid.generate()}>
+            <DragDropContext
+                onDragEnd={(result) => {
+                    if (!result.destination) {
+                        return;
+                    }
+                    if (result.destination.index === result.source.index) {
+                        return;
+                    }
+                        setItems(reorder(items, result.source.index, result.destination.index,index))
+                }}
+                key={shortid.generate()}
+            >
+                <Droppable droppableId="droppable" direction="horizontal">
+                    {(provided, snapshot) => (
+                        <div
+                        ref={provided.innerRef}
+                        style={getListStyle(snapshot.isDraggingOver, preguntas.length)}
+                        {...provided.droppableProps}
+                        >
+                            {preguntas.map((ordenar, index) => (
+                                <Draggable
+                                key={ordenar.answer}
+                                draggableId={ordenar.answer.toString()}
+                                index={index}
+                                >
+                                {(provided, snapshot) => (
+                                    <div
+                                    className="rounded h-10 justify-center flex items-center	"
+                                    ref={provided.innerRef}
+                                    {...provided.draggableProps}
+                                    {...provided.dragHandleProps}
+                                    style={getItemStyle(
+                                        snapshot.isDragging,
+                                        provided.draggableProps.style
+                                    )}
+                                    >
+                                    <p className="text-xs">{ordenar.item}</p>
+                                    </div>
+                                )}
+                                </Draggable>
+                            ))}
+                            {provided.placeholder}
             </div>
-          )}
+                )}
         </Droppable>
-      </DragDropContext>
+                </DragDropContext>
+        </div>
+
+        
+    ))}
+        
+
     </div>
   );
 };
