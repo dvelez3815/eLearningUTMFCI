@@ -10,7 +10,6 @@ export const OpcionCorrecta_1 = (props) => {
     [...Array(props.ejercicio.options.length)].map(() => createRef())
   );
 
-
   const marcar = (imagenRef) => {
     try {
       //borrar todas las otras referencias
@@ -29,7 +28,7 @@ export const OpcionCorrecta_1 = (props) => {
 
   return (
     <div className="flex flex-col flex-wrap">
-      <h2 className="m-auto p-auto text-2xl font-bold ">{(props.ejercicio.question)}</h2>
+      <h2 className="mt-10 text-2xl font-bold ">{(props.ejercicio.question)}</h2>
     <div className="container m-auto p-auto w-auto">
       <div
         className="flex flex-wrap items-center justify-center gap-2"
@@ -74,7 +73,7 @@ const Texto = (props) => {
           props.marcar(props.myref);
         }}
       >
-        <h2 className="text-xl sm:text-base font-medium	">{props.data.item}</h2>
+        <h2 className="text-xs sm:text-base font-medium	">{props.data.item}</h2>
       </button>
     </div>
   );

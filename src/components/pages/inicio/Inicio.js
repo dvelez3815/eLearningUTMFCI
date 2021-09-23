@@ -6,7 +6,6 @@ import StarIcon from "@material-ui/icons/Star";
 import CollectionsBookmarkIcon from "@material-ui/icons/CollectionsBookmark";
 import { useState } from "react";
 
-
 import "./inicio.css";
 
 import Cookies from "universal-cookie";
@@ -17,7 +16,9 @@ import grammarimg from "../../../assets/icons/Grammar.png";
 import readingimg from "../../../assets/icons/Reading.png";
 import vocabularyimg from "../../../assets/icons/Vocabulary.png";
 import writingimg from "../../../assets/icons/Writing.png";
+import loading from "../../../assets/resource/loading.svg";
 import { api_url } from "../../../api.config";
+import shortid from "shortid";
 const cookies = new Cookies();
 
 export const Inicio = () => {
@@ -26,6 +27,7 @@ export const Inicio = () => {
   let userid = cookies.get("_id");
 
   const [userProgress, setuserProgress] = useState([]);
+  const [cargando, setcargando] = useState(true);
 
   //get user progress from api
   const getData = async () => {
@@ -60,6 +62,7 @@ export const Inicio = () => {
       }
 
       setuserProgress(await userInfo);
+      setcargando(false);
     };
 
     llenarInfo();
@@ -74,7 +77,7 @@ export const Inicio = () => {
     //     method: "GET",
     //   });
     //   const user_json = await user_response.json();
-      
+
     //   if (user_json.status == "Active") {
     //     cookies.set("status", user_json.status, { path: "/" });
     //   } else {
@@ -86,197 +89,330 @@ export const Inicio = () => {
   return (
     <div>
       <NavComponent logo={logo} />
-      <div className="grid grid-cols-12 ">
-        <div className="col-span-9 ">
-          {userProgress.map((modulo, index) => {
-            if ((index + 1) % 2 === 0) {
-              return (
-                <div>
-                  <ModuleProgress
-                    moduleName={"Unidad: " + modulo.book_info.unit}
-                    percent={parseInt(
-                      ((modulo.writing.user_progress +
-                        modulo.reading.user_progress +
-                        modulo.grammar.user_progress +
-                        modulo.vocabulary.user_progress) /
-                        (modulo.writing.total_task +
-                          modulo.reading.total_task +
-                          modulo.grammar.total_task +
-                          modulo.vocabulary.total_task)) *
-                        100
-                    )}
-                  ></ModuleProgress>
+      {cargando?<div className="cargando"><img src={loading}></img></div>:
+  <div className="grid grid-cols-12">
+  <div className="xl:col-span-9 col-span-12">
+    {userProgress.map((modulo, index) => {
+      if ((index + 1) % 2 === 0) {
+        return (
+          <div key={shortid.generate()}> 
+            <ModuleProgress
+            key={shortid.generate()}
+              moduleName={"Unidad: " + modulo.book_info.unit}
+              percent={parseInt(
+                ((modulo.writing.user_progress +
+                  modulo.reading.user_progress +
+                  modulo.grammar.user_progress +
+                  modulo.vocabulary.user_progress) /
+                  (modulo.writing.total_task +
+                    modulo.reading.total_task +
+                    modulo.grammar.total_task +
+                    modulo.vocabulary.total_task)) *
+                  100
+              )}
+            ></ModuleProgress>
 
-                  <Activity
-                    moduleName={`Modulo: ${modulo.book_info.module}`}
-                    ruta={`/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}/${modulo.writing.task_id}`}
-                    taskid={modulo.writing.task_id}
-                    percent={parseInt(
-                      (modulo.writing.user_progress /
-                        modulo.writing.total_task) *
-                        100
-                    )}
-                    name={"writing"}
-                    img={writingimg}
-                  />
+            <Activity
+              moduleName={`Modulo: ${modulo.book_info.module}`}
+              ruta={`/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}/${modulo.writing.task_id}`}
+              taskid={modulo.writing.task_id}
+              percent={parseInt(
+                (modulo.writing.user_progress /
+                  modulo.writing.total_task) *
+                  100
+              )}
+              key={shortid.generate()}
+              name={"writing"}
+              img={writingimg}
+            />
 
-                  <Activity
-                    moduleName={`Modulo: ${modulo.book_info.module}`}
-                    ruta={`/modulo/${modulo.book_info.module}/vocabulary/${modulo.book_info.unit}/${modulo.vocabulary.task_id}`}
-                    taskid={modulo.vocabulary.task_id}
-                    percent={parseInt(
-                      (modulo.reading.user_progress /
-                        modulo.reading.total_task) *
-                        100
-                    )}
-                    name={"vocabulary"}
-                    img={vocabularyimg}
-                  />
+            <Activity
+              moduleName={`Modulo: ${modulo.book_info.module}`}
+              ruta={`/modulo/${modulo.book_info.module}/vocabulary/${modulo.book_info.unit}/${modulo.vocabulary.task_id}`}
+              taskid={modulo.vocabulary.task_id}
+              percent={parseInt(
+                (modulo.vocabulary.user_progress /
+                  modulo.vocabulary.total_task) *
+                  100
+              )}
+              key={shortid.generate()}
+              name={"vocabulary"}
+              img={vocabularyimg}
+            />
 
-                  <Activity
-                    moduleName={`Modulo: ${modulo.book_info.module}`}
-                    ruta={`/modulo/${modulo.book_info.module}/reading/${modulo.book_info.unit}/${modulo.reading.task_id}`}
-                    taskid={modulo.reading.task_id}
-                    percent={parseInt(
-                      (modulo.reading.user_progress /
-                        modulo.reading.total_task) *
-                        100
-                    )}
-                    name={"reading"}
-                    img={readingimg}
-                  />
+            <Activity
+              moduleName={`Modulo: ${modulo.book_info.module}`}
+              ruta={`/modulo/${modulo.book_info.module}/reading/${modulo.book_info.unit}/${modulo.reading.task_id}`}
+              taskid={modulo.reading.task_id}
+              percent={parseInt(
+                (modulo.reading.user_progress /
+                  modulo.reading.total_task) *
+                  100
+              )}
+              key={shortid.generate()}
+              name={"reading"}
+              img={readingimg}
+            />
 
-                  <Activity
-                    moduleName={`Modulo: ${modulo.book_info.module}`}
-                    ruta={`/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}/${modulo.grammar.task_id}`}
-                    taskid={modulo.grammar.task_id}
-                    percent={parseInt(
-                      (modulo.grammar.user_progress /
-                        modulo.grammar.total_task) *
-                        100
-                    )}
-                    name={"grammar"}
-                    img={grammarimg}
-                  />
-                </div>
-              );
-            } else {
-              return (
-                <div>
-                  <h2 className="text-2xl text-left text-green-600 mt-5 mx-10 font-bold">{`Módulo ${modulo.book_info.module}`}</h2>
-                  <ModuleProgress
-                    moduleName={"Unidad: " + modulo.book_info.unit}
-                    percent={parseInt(
-                      ((modulo.writing.user_progress +
-                        modulo.reading.user_progress +
-                        modulo.grammar.user_progress +
-                        modulo.vocabulary.user_progress) /
-                        (modulo.writing.total_task +
-                          modulo.reading.total_task +
-                          modulo.grammar.total_task +
-                          modulo.vocabulary.total_task)) *
-                        100
-                    )}
-                  ></ModuleProgress>
+            <Activity
+              moduleName={`Modulo: ${modulo.book_info.module}`}
+              ruta={`/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}/${modulo.grammar.task_id}`}
+              taskid={modulo.grammar.task_id}
+              percent={parseInt(
+                (modulo.grammar.user_progress /
+                  modulo.grammar.total_task) *
+                  100
+              )}
+              key={shortid.generate()}
+              name={"grammar"}
+              img={grammarimg}
+            />
+          </div>
+        );
+      } else {
+        return (
+          <div key={shortid.generate()}>
+            <h2  key={shortid.generate()} className="text-2xl text-left text-green-600 mt-5 mx-10 font-bold">{`Módulo ${modulo.book_info.module}`}</h2>
+            <ModuleProgress
+            key={shortid.generate()}
+              moduleName={"Unidad: " + modulo.book_info.unit}
+              percent={parseInt(
+                ((modulo.writing.user_progress +
+                  modulo.reading.user_progress +
+                  modulo.grammar.user_progress +
+                  modulo.vocabulary.user_progress) /
+                  (modulo.writing.total_task +
+                    modulo.reading.total_task +
+                    modulo.grammar.total_task +
+                    modulo.vocabulary.total_task)) *
+                  100
+              )}
+            ></ModuleProgress>
 
-                  <Activity
-                    moduleName={`Modulo: ${modulo.book_info.module}`}
-                    ruta={`/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}/${modulo.writing.task_id}`}
-                    taskid={modulo.writing.task_id}
-                    percent={parseInt(
-                      (modulo.writing.user_progress /
-                        modulo.writing.total_task) *
-                        100
-                    )}
-                    name={"writing"}
-                    img={writingimg}
-                  />
+            <Activity
+              moduleName={`Modulo: ${modulo.book_info.module}`}
+              ruta={`/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}/${modulo.writing.task_id}`}
+              taskid={modulo.writing.task_id}
+              percent={parseInt(
+                (modulo.writing.user_progress /
+                  modulo.writing.total_task) *
+                  100
+              )}
+              key={shortid.generate()}
+              name={"writing"}
+              img={writingimg}
+            />
 
-                  <Activity
-                    moduleName={`Modulo: ${modulo.book_info.module}`}
-                    ruta={`/modulo/${modulo.book_info.module}/vocabulary/${modulo.book_info.unit}/${modulo.vocabulary.task_id}`}
-                    taskid={modulo.vocabulary.task_id}
-                    percent={parseInt(
-                      (modulo.reading.user_progress /
-                        modulo.reading.total_task) *
-                        100
-                    )}
-                    name={"vocabulary"}
-                    img={vocabularyimg}
-                  />
+            <Activity
+              moduleName={`Modulo: ${modulo.book_info.module}`}
+              ruta={`/modulo/${modulo.book_info.module}/vocabulary/${modulo.book_info.unit}/${modulo.vocabulary.task_id}`}
+              taskid={modulo.vocabulary.task_id}
+              percent={parseInt(
+                (modulo.vocabulary.user_progress /
+                  modulo.vocabulary.total_task) *
+                  100
+              )}
+              key={shortid.generate()}
+              name={"vocabulary"}
+              img={vocabularyimg}
+            />
 
-                  <Activity
-                    moduleName={`Modulo: ${modulo.book_info.module}`}
-                    ruta={`/modulo/${modulo.book_info.module}/reading/${modulo.book_info.unit}/${modulo.reading.task_id}`}
-                    taskid={modulo.reading.task_id}
-                    percent={parseInt(
-                      (modulo.reading.user_progress /
-                        modulo.reading.total_task) *
-                        100
-                    )}
-                    name={"reading"}
-                    img={readingimg}
-                  />
+            <Activity
+              moduleName={`Modulo: ${modulo.book_info.module}`}
+              ruta={`/modulo/${modulo.book_info.module}/reading/${modulo.book_info.unit}/${modulo.reading.task_id}`}
+              taskid={modulo.reading.task_id}
+              percent={parseInt(
+                (modulo.reading.user_progress /
+                  modulo.reading.total_task) *
+                  100
+              )}
+              key={shortid.generate()}
+              name={"reading"}
+              img={readingimg}
+            />
 
-                  <Activity
-                    moduleName={`Modulo: ${modulo.book_info.module}`}
-                    ruta={`/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}/${modulo.grammar.task_id}`}
-                    taskid={modulo.grammar.task_id}
-                    percent={parseInt(
-                      (modulo.grammar.user_progress /
-                        modulo.grammar.total_task) *
-                        100
-                    )}
-                    name={"grammar"}
-                    img={grammarimg}
-                  />
-                </div>
-              );
-            }
-          })}
-        </div>
+            <Activity
+              moduleName={`Modulo: ${modulo.book_info.module}`}
+              ruta={`/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}/${modulo.grammar.task_id}`}
+              taskid={modulo.grammar.task_id}
+              percent={parseInt(
+                (modulo.grammar.user_progress /
+                  modulo.grammar.total_task) *
+                  100
+              )}
+              key={shortid.generate()}
+              name={"grammar"}
+              img={grammarimg}
+            />
+          </div>
+        );
+      }
+    })}
+  </div>
 
-        {/* BARRA LATERAL */}
+  {/* BARRA LATERAL */}
 
-        <div className="col-span-3  ml-7 ">
-          <div className="py-5  hidden md:block">
-            <div className="border shadow rounded-2xl flex flex-col w-4/6 text-left p-2">
-              <div className="flex flex-col-2">
-                <div className="text-left">
-                  <h2 className="font-semibold text-xl m-2">Libros</h2>
-                </div>
-                {/* <div className="text-right">
-                  <h2 className=" font-semibold text-xl m-2 text-yellow-300 ">
-                    {progresoTotal}%{" "}
-                  </h2>
-                </div> */}
-              </div>
-              <div className="flex p-2 gap-4 flex-col md:flex-row">
-                <div
-                  className="flex justify-center items-start rounded-2xl"
-                  id="estrella"
-                >
-                  <CollectionsBookmarkIcon color="action" fontSize="large" />
-                </div>
-                <div className="flex flex-col " id="info">
-                  <div>
-                    <h2 className="text-gray-700 text-lg">
-                      <ol>
-                        <li className="hover:text-green-500"> <a target="_blank" href="https://drive.google.com/file/d/1pwa9ffmEMoHOJBa98KDNpONhp92DtoL6/view?usp=sharing">Libro 1</a> </li>
-                        <li className="hover:text-green-500"> <a target="_blank" href="https://drive.google.com/file/d/1zSL78FugkafrXulTG9Wb3CcHwouNr62y/view?usp=sharing">Libro 2</a> </li>
-                        <li className="hover:text-green-500"> <a target="_blank" href="https://drive.google.com/file/d/1kVydGHFB5M59yMLyAQVM6w0YnN-uf4zJ/view?usp=sharing">Libro 3</a> </li>
-                        <li className="hover:text-green-500"> <a target="_blank" href="https://drive.google.com/file/d/1Q8COVdO2dGtjDt6mrdb4I1HuqB3w_yxb/view?usp=sharing">Libro 4</a> </li>
-                        <li className="hover:text-green-500"> <a target="_blank" href="https://drive.google.com/file/d/158WHHjUUYaFvTJaxBK5-SbDS-Fxz1BAy/view?usp=sharing">Libro 5</a> </li>
-                      </ol>
-                    </h2>
-                  </div>
-                  
-                </div>
+  <div className="col-span-3  ml-7 ">
+    <div className="flex flex-wrap flex-col">
+      <div className="py-5  hidden md:block">
+        <div className="border shadow rounded-2xl flex flex-col w-4/6 text-left p-2">
+          <div className="flex flex-col-2">
+            <div className="text-left">
+              <h2 className="font-semibold text-xl m-2">Libros</h2>
+            </div>
+            {/* <div className="text-right">
+            <h2 className=" font-semibold text-xl m-2 text-yellow-300 ">
+              {progresoTotal}%{" "}
+            </h2>
+          </div> */}
+          </div>
+          <div className="flex p-2 gap-4 flex-col md:flex-row">
+            <div
+              className="flex justify-center items-start rounded-2xl"
+              id="estrella"
+            >
+              <CollectionsBookmarkIcon color="action" fontSize="large" />
+            </div>
+            <div className="flex flex-col " id="info">
+              <div>
+                <h2 className="text-gray-700 text-lg">
+                  <ol>
+                    <li className="hover:text-green-500">
+                      {" "}
+                      <a
+                        target="_blank"
+                        href="https://drive.google.com/file/d/1pwa9ffmEMoHOJBa98KDNpONhp92DtoL6/view?usp=sharing"
+                      >
+                        Libro 1
+                      </a>{" "}
+                    </li>
+                    <li className="hover:text-green-500">
+                      {" "}
+                      <a
+                        target="_blank"
+                        href="https://drive.google.com/file/d/1zSL78FugkafrXulTG9Wb3CcHwouNr62y/view?usp=sharing"
+                      >
+                        Libro 2
+                      </a>{" "}
+                    </li>
+                    <li className="hover:text-green-500">
+                      {" "}
+                      <a
+                        target="_blank"
+                        href="https://drive.google.com/file/d/1kVydGHFB5M59yMLyAQVM6w0YnN-uf4zJ/view?usp=sharing"
+                      >
+                        Libro 3
+                      </a>{" "}
+                    </li>
+                    <li className="hover:text-green-500">
+                      {" "}
+                      <a
+                        target="_blank"
+                        href="https://drive.google.com/file/d/1Q8COVdO2dGtjDt6mrdb4I1HuqB3w_yxb/view?usp=sharing"
+                      >
+                        Libro 4
+                      </a>{" "}
+                    </li>
+                    <li className="hover:text-green-500">
+                      {" "}
+                      <a
+                        target="_blank"
+                        href="https://drive.google.com/file/d/158WHHjUUYaFvTJaxBK5-SbDS-Fxz1BAy/view?usp=sharing"
+                      >
+                        Libro 5
+                      </a>{" "}
+                    </li>
+                  </ol>
+                </h2>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <div className="py-5  hidden md:block">
+        <div className="border shadow rounded-2xl flex flex-col w-4/6 text-left p-2">
+          <div className="flex flex-col-2">
+            <div className="text-left">
+              <h2 className="font-semibold text-xl m-2">Recursos audiovisuales</h2>
+            </div>
+            {/* <div className="text-right">
+            <h2 className=" font-semibold text-xl m-2 text-yellow-300 ">
+              {progresoTotal}%{" "}
+            </h2>
+          </div> */}
+          </div>
+          <div className="flex p-2 gap-4 flex-col md:flex-row">
+            <div
+              className="flex justify-center items-start rounded-2xl"
+              id="estrella"
+            >
+              <CollectionsBookmarkIcon color="action" fontSize="large" />
+            </div>
+            <div className="flex flex-col " id="info">
+              <div>
+                <h2 className="text-gray-700 text-lg">
+                  <ol>
+                    <li className="hover:text-green-500">
+                      {" "}
+                      <a
+                        target="_blank"
+                        href="https://drive.google.com/file/d/1pwa9ffmEMoHOJBa98KDNpONhp92DtoL6/view?usp=sharing"
+                      >
+                        Libro 1
+                      </a>{" "}
+                    </li>
+                    <li className="hover:text-green-500">
+                      {" "}
+                      <a
+                        target="_blank"
+                        href="https://drive.google.com/file/d/1zSL78FugkafrXulTG9Wb3CcHwouNr62y/view?usp=sharing"
+                      >
+                        Libro 2
+                      </a>{" "}
+                    </li>
+                    <li className="hover:text-green-500">
+                      {" "}
+                      <a
+                        target="_blank"
+                        href="https://drive.google.com/file/d/1kVydGHFB5M59yMLyAQVM6w0YnN-uf4zJ/view?usp=sharing"
+                      >
+                        Libro 3
+                      </a>{" "}
+                    </li>
+                    <li className="hover:text-green-500">
+                      {" "}
+                      <a
+                        target="_blank"
+                        href="https://drive.google.com/file/d/1Q8COVdO2dGtjDt6mrdb4I1HuqB3w_yxb/view?usp=sharing"
+                      >
+                        Libro 4
+                      </a>{" "}
+                    </li>
+                    <li className="hover:text-green-500">
+                      {" "}
+                      <a
+                        target="_blank"
+                        href="https://drive.google.com/file/d/158WHHjUUYaFvTJaxBK5-SbDS-Fxz1BAy/view?usp=sharing"
+                      >
+                        Libro 5
+                      </a>{" "}
+                    </li>
+                  </ol>
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+                              
+    </div>
+  </div>
+</div>
+
+    
+      
+      }
     </div>
   );
 };
@@ -299,8 +435,6 @@ export const Inicio = () => {
     </div>
   );
 };
-
-
 const ProgresoLibros = () => {
     return(
         <div className="py-5 px-2 hidden md:block">
@@ -324,7 +458,6 @@ const ProgresoLibros = () => {
         </div>
     )
 }
-
 const ProgresoModulos = () => {
   return(
     <div className="py-5 px-2 hidden md:block">

@@ -7,6 +7,7 @@ import './Ejercicio.css'
 import EjercicioFooter from './EjercicioFooter'
 import { OpcionCorrecta_1 } from './OpcionCorrecta_1'
 import { OpcionCorrecta_n } from './OpcionCorrecta_n'
+import Arrastrar from './Arrastrar'
 
 
 export const Ejercicio = (props) => {
@@ -69,7 +70,11 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado,preguntas
         }else if(ejercicio.type === "opcion_correcta_n"){
             setJuego(juego => [...juego, <OpcionCorrecta_n key={index} ejercicio={ejercicio} miref={panelJuego}/>])
             contador++;
-        }
+        }else if(ejercicio.type === "ordenar"){
+            console.log(ejercicio);
+            setJuego(juego => [...juego, <Arrastrar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
+            contador++;
+        }        
     }
     )
     setPreguntasValidas(contador);

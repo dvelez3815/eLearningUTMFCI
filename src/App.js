@@ -15,7 +15,10 @@ import NuevaaG from './components/pages/ParaVideo/NuevaaG';
 import { Grammar2 } from './components/pages/ejercicios/Grammar2';
 import AccountPendingPage from './components/pages/AccountPendingPage/AccountPendingPage'
 import Arrastrar from './components/pages/ejercicios/Arrastrar';
-//import Arrastrar2 from './components/pages/ejercicios/Arrastrar2';
+import Arrastrar2 from './components/pages/ejercicios/Arrastrar2';
+import Evaluacion from './components/pages/Evaluacion';
+
+
 function App() {
   
   return (
@@ -39,6 +42,9 @@ function App() {
       <Route path="/a">
         <Arrastrar/>
       </Route>
+      <Route path="/b">
+        <Evaluacion/>
+      </Route>
 
 
 
@@ -61,6 +67,9 @@ function App() {
       <Route exact path="/PendingAccount">
         <AccountPendingPage />
       </Route>
+      {/* <Route exact path="/restartPassword">
+        <RestarPaswor />
+      </Route> */}
       <Route > <NotFoundPage/> </Route>
       </Switch>
     </Router>
@@ -70,5 +79,3 @@ function App() {
 }
 
 export default App;
-
-
