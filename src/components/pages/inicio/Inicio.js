@@ -89,7 +89,7 @@ export const Inicio = () => {
   return (
     <div>
       <NavComponent logo={logo} />
-      JANDRY
+      JANDRY FRANCO
       {cargando?<div className="cargando"><img src={loading}></img></div>:
   <div className="grid grid-cols-12">
   <div className="xl:col-span-9 col-span-12">
