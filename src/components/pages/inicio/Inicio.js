@@ -18,6 +18,7 @@ import vocabularyimg from "../../../assets/icons/Vocabulary.png";
 import writingimg from "../../../assets/icons/Writing.png";
 import loading from "../../../assets/resource/loading.svg";
 import { api_url } from "../../../api.config";
+import shortid from "shortid";
 const cookies = new Cookies();
 
 export const Inicio = () => {
@@ -94,8 +95,9 @@ export const Inicio = () => {
     {userProgress.map((modulo, index) => {
       if ((index + 1) % 2 === 0) {
         return (
-          <div>
+          <div key={shortid.generate()}> 
             <ModuleProgress
+            key={shortid.generate()}
               moduleName={"Unidad: " + modulo.book_info.unit}
               percent={parseInt(
                 ((modulo.writing.user_progress +
@@ -119,6 +121,7 @@ export const Inicio = () => {
                   modulo.writing.total_task) *
                   100
               )}
+              key={shortid.generate()}
               name={"writing"}
               img={writingimg}
             />
@@ -132,6 +135,7 @@ export const Inicio = () => {
                   modulo.vocabulary.total_task) *
                   100
               )}
+              key={shortid.generate()}
               name={"vocabulary"}
               img={vocabularyimg}
             />
@@ -145,6 +149,7 @@ export const Inicio = () => {
                   modulo.reading.total_task) *
                   100
               )}
+              key={shortid.generate()}
               name={"reading"}
               img={readingimg}
             />
@@ -158,6 +163,7 @@ export const Inicio = () => {
                   modulo.grammar.total_task) *
                   100
               )}
+              key={shortid.generate()}
               name={"grammar"}
               img={grammarimg}
             />
@@ -165,9 +171,10 @@ export const Inicio = () => {
         );
       } else {
         return (
-          <div>
-            <h2 className="text-2xl text-left text-green-600 mt-5 mx-10 font-bold">{`Módulo ${modulo.book_info.module}`}</h2>
+          <div key={shortid.generate()}>
+            <h2  key={shortid.generate()} className="text-2xl text-left text-green-600 mt-5 mx-10 font-bold">{`Módulo ${modulo.book_info.module}`}</h2>
             <ModuleProgress
+            key={shortid.generate()}
               moduleName={"Unidad: " + modulo.book_info.unit}
               percent={parseInt(
                 ((modulo.writing.user_progress +
@@ -191,6 +198,7 @@ export const Inicio = () => {
                   modulo.writing.total_task) *
                   100
               )}
+              key={shortid.generate()}
               name={"writing"}
               img={writingimg}
             />
@@ -204,6 +212,7 @@ export const Inicio = () => {
                   modulo.vocabulary.total_task) *
                   100
               )}
+              key={shortid.generate()}
               name={"vocabulary"}
               img={vocabularyimg}
             />
@@ -217,6 +226,7 @@ export const Inicio = () => {
                   modulo.reading.total_task) *
                   100
               )}
+              key={shortid.generate()}
               name={"reading"}
               img={readingimg}
             />
@@ -230,6 +240,7 @@ export const Inicio = () => {
                   modulo.grammar.total_task) *
                   100
               )}
+              key={shortid.generate()}
               name={"grammar"}
               img={grammarimg}
             />
