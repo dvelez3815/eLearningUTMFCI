@@ -40,6 +40,7 @@ const Arrastrar = (props) => {
     display: "flex",
     padding: "2px",
     width: "auto",
+    border: "1px solid #e5e5e5",
   });
 
 
@@ -51,15 +52,17 @@ const Arrastrar = (props) => {
   const [items, setItems] = useState(data);
 
   return (
-    <div className="flex flex-col flex-wrap">
+    <div className="flex flex-col flex-wrap" ref={props.miref}>
       <h2 className="mt-10 text-2xl font-bold ">{(props.ejercicio.question)}</h2>
       {items.map((preguntas, index) => (
         <div
           className="container m-auto p-auto w-auto w-full"
           key={shortid.generate()}
+          id="arrastrar"
         >
           <div className="flex">
             {/* <h2>ejercicio: {index + 1}</h2> */}
+          
           </div>
           <DragDropContext
             onDragEnd={(result) => {

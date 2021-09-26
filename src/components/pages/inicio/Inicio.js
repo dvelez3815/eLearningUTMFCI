@@ -89,7 +89,6 @@ export const Inicio = () => {
   return (
     <div>
       <NavComponent logo={logo} />
-      JANDRY FRANCO
       {cargando?<div className="cargando"><img src={loading}></img></div>:
   <div className="grid grid-cols-12">
   <div className="xl:col-span-9 col-span-12">
@@ -282,6 +281,7 @@ export const Inicio = () => {
                       {" "}
                       <a
                         target="_blank"
+                        rel="noopener noreferrer"
                         href="https://drive.google.com/file/d/1pwa9ffmEMoHOJBa98KDNpONhp92DtoL6/view?usp=sharing"
                       >
                         Libro 1
@@ -291,6 +291,7 @@ export const Inicio = () => {
                       {" "}
                       <a
                         target="_blank"
+                        rel="noopener noreferrer"
                         href="https://drive.google.com/file/d/1zSL78FugkafrXulTG9Wb3CcHwouNr62y/view?usp=sharing"
                       >
                         Libro 2
@@ -300,6 +301,7 @@ export const Inicio = () => {
                       {" "}
                       <a
                         target="_blank"
+                        rel="noopener noreferrer"
                         href="https://drive.google.com/file/d/1kVydGHFB5M59yMLyAQVM6w0YnN-uf4zJ/view?usp=sharing"
                       >
                         Libro 3
@@ -309,6 +311,7 @@ export const Inicio = () => {
                       {" "}
                       <a
                         target="_blank"
+                        rel="noopener noreferrer"
                         href="https://drive.google.com/file/d/1Q8COVdO2dGtjDt6mrdb4I1HuqB3w_yxb/view?usp=sharing"
                       >
                         Libro 4
@@ -318,6 +321,7 @@ export const Inicio = () => {
                       {" "}
                       <a
                         target="_blank"
+                        rel="noopener noreferrer"
                         href="https://drive.google.com/file/d/158WHHjUUYaFvTJaxBK5-SbDS-Fxz1BAy/view?usp=sharing"
                       >
                         Libro 5
@@ -357,6 +361,7 @@ export const Inicio = () => {
                       {" "}
                       <a
                         target="_blank"
+                        rel="noopener noreferrer"
                         href="https://drive.google.com/file/d/1pwa9ffmEMoHOJBa98KDNpONhp92DtoL6/view?usp=sharing"
                       >
                         Libro 1
@@ -366,6 +371,7 @@ export const Inicio = () => {
                       {" "}
                       <a
                         target="_blank"
+                        rel="noopener noreferrer"
                         href="https://drive.google.com/file/d/1zSL78FugkafrXulTG9Wb3CcHwouNr62y/view?usp=sharing"
                       >
                         Libro 2
@@ -375,6 +381,7 @@ export const Inicio = () => {
                       {" "}
                       <a
                         target="_blank"
+                        rel="noopener noreferrer"
                         href="https://drive.google.com/file/d/1kVydGHFB5M59yMLyAQVM6w0YnN-uf4zJ/view?usp=sharing"
                       >
                         Libro 3
@@ -384,6 +391,7 @@ export const Inicio = () => {
                       {" "}
                       <a
                         target="_blank"
+                        rel="noopener noreferrer"
                         href="https://drive.google.com/file/d/1Q8COVdO2dGtjDt6mrdb4I1HuqB3w_yxb/view?usp=sharing"
                       >
                         Libro 4
@@ -393,6 +401,7 @@ export const Inicio = () => {
                       {" "}
                       <a
                         target="_blank"
+                        rel="noopener noreferrer"
                         href="https://drive.google.com/file/d/158WHHjUUYaFvTJaxBK5-SbDS-Fxz1BAy/view?usp=sharing"
                       >
                         Libro 5

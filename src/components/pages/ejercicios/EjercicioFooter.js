@@ -47,82 +47,49 @@ const validarRespuesta = async(props)=>{
     let hijos = props.miref.current.children;
     await verificarOpcion_Correcta_n(props,hijos,contadorRespuestas);
   }else if(tipo_ejercicio === "ordenar"){
-    let hijos = []
-    await verificarOrdenar(props,hijos,contadorRespuestas);
+    let hijos = [...props.miref.current.children]
+
+    //se quita la ref 
+    const respuestasBack = Array.from(props.ejercicio.props.ejercicio.options).map(item => ([...item]));
+    const respuestasBackEndOrdenadas = [...respuestasBack].map((item)=>{
+      if(item){
+        item  = [...item.sort((a, b) => a.answer > b.answer ? 1 : -1)];
+        let texto = "";
+        for (let i = 0; i < item.length; i++) {
+          const element = item[i];
+          texto += element.item;
+          
+        }
+        return texto;
+      }
+    })
+    await verificarOrdenar(props,hijos,contadorRespuestas,respuestasBackEndOrdenadas);
+    
   }
   
 
 }
 
-const verificarOrdenar = async (props,hijos,contadorRespondidas)=>{
-  let esCorrecta = true;
-  let hasSelected = true;
-
-  if(hasSelected){
-    
-    if(esCorrecta){
-      //Se es corecta se necesita saber si se ha llegado al final de la lista de ejercicios, de ser así, se debe de terminar el juego y guardar el progreso,
-      //caso contrario se debe de pasar al siguiente ejercicio
-      if(props.juego.length-1 === 0){
-        let tasks_id = window.location.href.split('/')[window.location.href.split('/').length - 1];
-        let id = cookies.get('_id');
-
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-
-        var raw = JSON.stringify({
-          "user_id": `${id}`,
-          "task_id": `${tasks_id}`
-        });       
-        
-        var requestOptions = {
-          method: 'POST',
-          headers: myHeaders,
-          body: raw,
-        };
-
-        await fetch("https://utminglesapp.herokuapp.com/progress/update", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
-
-        props.setContadorRespondidas(contadorRespondidas+1)
-        props.juego.pop();
-        setInterval(() => {
-          
-        }, 4000);
-        mostrarAlertaExitoFin(`Fin del juego`);
-        props.setFinJuego(true)
-        
-
-      }else{
-        mostrarAlertaExito(`Respuesta correcta`);
-        props.juego.pop();
-        props.setContadorRespondidas(contadorRespondidas+1)
-      }
-      //Se guarda el progreso del usuario y se muestra una alerta de que la respuesta es correcta
-    }else{
-      //Se crea otro stack para guardar las respuestas pendiente, se elimina el ejercicio actual se trabaja con la stack creada y se randomiza la stack
-      //Se muestra una alerta de que la respuesta es incorrecta
-      let aux = [...props.juego];
-      let actual = props.juego.pop();
-      
-      //Ahora lo que se hace es randomizar el array para que la siguiente pregunta sea random y para que la siguiente no sea la misma a la ctual
-      
-      aux = randomizarArray(aux);
-      
-      aux = aux.filter(e => e !== actual);
-
-      aux.unshift(actual);
-      mostrarAlertaError("Respuesta incorrecta");
-      props.setJuego(aux);
-    }
-
-  }else{
-    alert("No seleccionaste nada")
-
+const verificarOrdenar = async(props,hijos,contadorRespuestas,respuestasBackEndOrdenadas)=>{
+  let esCorrecta = false;
+  let respuestasUser = [];
+ //aca en este for se agarran los div que tengan id agarrar el texto y agregarlo a un array
+ for(let i = 0; i < hijos.length; i++){
+  if(hijos[i].id === 'arrastrar'){
+    respuestasUser.push(hijos[i].innerText.toString().replace(/\n/g, '').trim())
   }
-
+  } 
+  if(JSON.stringify(respuestasUser) === JSON.stringify(respuestasBackEndOrdenadas)){
+    esCorrecta = true;
+  }else{
+    esCorrecta = false;
+  }
+  console.log(respuestasBackEndOrdenadas);
+  if(esCorrecta){
+    enviarSiEsCorrecta(props,contadorRespuestas);
+  }else{
+    noEsCorrecta(props)
+  }
 }
 
 
@@ -149,61 +116,9 @@ const verificarOpcion_Correcta_1 = async (props,hijos,contadorRespondidas)=>{
     }
 
     if(esCorrecta){
-      //Se es corecta se necesita saber si se ha llegado al final de la lista de ejercicios, de ser así, se debe de terminar el juego y guardar el progreso,
-      //caso contrario se debe de pasar al siguiente ejercicio
-      if(props.juego.length-1 === 0){
-        let tasks_id = window.location.href.split('/')[window.location.href.split('/').length - 1];
-        let id = cookies.get('_id');
-
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-
-        var raw = JSON.stringify({
-          "user_id": `${id}`,
-          "task_id": `${tasks_id}`
-        });       
-        
-        var requestOptions = {
-          method: 'POST',
-          headers: myHeaders,
-          body: raw,
-        };
-
-        await fetch("https://utminglesapp.herokuapp.com/progress/update", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
-
-        props.setContadorRespondidas(contadorRespondidas+1)
-        props.juego.pop();
-        setInterval(() => {
-          
-        }, 4000);
-        mostrarAlertaExitoFin(`Fin del juego`);
-        props.setFinJuego(true)
-        
-
-      }else{
-        mostrarAlertaExito(`Respuesta correcta`);
-        props.juego.pop();
-        props.setContadorRespondidas(contadorRespondidas+1)
-      }
-      //Se guarda el progreso del usuario y se muestra una alerta de que la respuesta es correcta
+      enviarSiEsCorrecta(props,contadorRespondidas);
     }else{
-      //Se crea otro stack para guardar las respuestas pendiente, se elimina el ejercicio actual se trabaja con la stack creada y se randomiza la stack
-      //Se muestra una alerta de que la respuesta es incorrecta
-      let aux = [...props.juego];
-      let actual = props.juego.pop();
-      
-      //Ahora lo que se hace es randomizar el array para que la siguiente pregunta sea random y para que la siguiente no sea la misma a la ctual
-      
-      aux = randomizarArray(aux);
-      
-      aux = aux.filter(e => e !== actual);
-
-      aux.unshift(actual);
-      mostrarAlertaError("Respuesta incorrecta");
-      props.setJuego(aux);
+      noEsCorrecta(props)
     }
 
   }else{
@@ -246,60 +161,9 @@ const verificarOpcion_Correcta_n = async (props,hijos,contadorRespondidas)=>{
       }
     }
     if(esCorrecta){
-      //Se es corecta se necesita saber si se ha llegado al final de la lista de ejercicios, de ser así, se debe de terminar el juego y guardar el progreso,
-      //caso contrario se debe de pasar al siguiente ejercicio
-      if(props.juego.length-1 === 0){
-        let tasks_id = window.location.href.split('/')[window.location.href.split('/').length - 1];
-        let id = cookies.get('_id');
-
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-
-        var raw = JSON.stringify({
-          "user_id": `${id}`,
-          "task_id": `${tasks_id}`
-        });       
-        
-        var requestOptions = {
-          method: 'POST',
-          headers: myHeaders,
-          body: raw,
-        };
-
-        await fetch("https://utminglesapp.herokuapp.com/progress/update", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
-        props.setContadorRespondidas(contadorRespondidas+1)
-        props.juego.pop();
-        setInterval(() => {
-          
-        }, 4000);
-        mostrarAlertaExitoFin(`Fin del juego`);
-        props.setFinJuego(true)
-
-      }else{
-        mostrarAlertaExito(`Respuesta correcta`);
-        props.juego.pop();
-        props.setContadorRespondidas(contadorRespondidas+1)
-      }
-      //Se guarda el progreso del usuario y se muestra una alerta de que la respuesta es correcta
+      enviarSiEsCorrecta(props,contadorRespondidas);
     }else{
-      //Se crea otro stack para guardar las respuestas pendiente, se elimina el ejercicio actual se trabaja con la stack creada y se randomiza la stack
-      //Se muestra una alerta de que la respuesta es incorrecta
-    
-      let aux = [...props.juego];
-      //se guarda el ejercicio para no mostrarlo en la siguiente iteracion
-      let actual = props.juego.pop();
-      //se randomiza todo al arreglo de props.juego
-
-      aux = randomizarArray(aux);
-      //se elimina el ejercicio actual
-      
-      
-      mostrarAlertaError("Respuesta incorrecta");
-      props.juego.pop();
-      props.setJuego(aux);
+      noEsCorrecta(props)
     }
 
   }else{
@@ -318,6 +182,67 @@ function randomizarArray(array) {
       array[j] = temp;
   }
   return array;
+}
+
+
+async function noEsCorrecta(props){
+      //Se crea otro stack para guardar las respuestas pendiente, se elimina el ejercicio actual se trabaja con la stack creada y se randomiza la stack
+      //Se muestra una alerta de que la respuesta es incorrecta
+      let aux = [...props.juego];
+      let actual = props.juego.pop();
+      
+      //Ahora lo que se hace es randomizar el array para que la siguiente pregunta sea random y para que la siguiente no sea la misma a la ctual
+      
+      aux = randomizarArray(aux);
+      
+      aux = aux.filter(e => e !== actual);
+
+      aux.unshift(actual);
+      mostrarAlertaError("Respuesta incorrecta");
+      props.setJuego(aux);
+
+}
+
+async function enviarSiEsCorrecta (props,contadorRespondidas){
+
+  //Se es corecta se necesita saber si se ha llegado al final de la lista de ejercicios, de ser así, se debe de terminar el juego y guardar el progreso,
+//caso contrario se debe de pasar al siguiente ejercicio
+if(props.juego.length-1 === 0){
+  let tasks_id = window.location.href.split('/')[window.location.href.split('/').length - 1];
+  let id = cookies.get('_id');
+
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  var raw = JSON.stringify({
+    "user_id": `${id}`,
+    "task_id": `${tasks_id}`
+  });       
+  
+  var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+  };
+
+  await fetch("https://utminglesapp.herokuapp.com/progress/update", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+  props.setContadorRespondidas(contadorRespondidas+1)
+  props.juego.pop();
+  setInterval(() => {
+    
+  }, 4000);
+  mostrarAlertaExitoFin(`Fin del juego`);
+  props.setFinJuego(true)
+
+}else{
+  mostrarAlertaExito(`Respuesta correcta`);
+  props.juego.pop();
+  props.setContadorRespondidas(contadorRespondidas+1)
+}
+//Se guarda el progreso del usuario y se muestra una alerta de que la respuesta es correcta  
 }
 
 
