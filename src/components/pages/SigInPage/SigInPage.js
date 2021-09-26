@@ -1,69 +1,69 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../../assets/resource/Logo_Provicional.png";
 import img1 from "../../../assets/resource/sign.svg";
 import "./SigInPage.css";
 import axios from "axios";
 import {api_url} from '../../../api.config'
 import Cookies from "universal-cookie";
+import loading from "../../../assets/resource/loading.svg"
+
 const cookies = new Cookies();
 
-class SigInPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      submitForm: false,
-      isVisibleDato: "hidden",
-      dato: "",
-    };
 
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleButtonSubmit = this.handleButtonSubmit.bind(this);
-  }
 
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.type === "checkbox" ? target.checked : target.value;
-    const name = target.name;
+const SigInPage = () => {
 
-    this.setState({
-      [name]: value,
+  const [isVisibleDato, setIsVisibleDato] = useState("hidden");
+  const [dato, setDato] = useState("");
+  const [form, setForm] = useState({});
+  const [cargando, setCargando] = useState(false);
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
     });
   }
-  componentDidMount() {
-    if (cookies.get("_id")) {
-      window.location.href = "./dashboard";
-    }
+  
+  const handleChecked = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.checked,
+    });
   }
 
-  handleButtonSubmit(event) {
+  const handleButtonSubmit = (event) =>{
+    setCargando(true);
     event.preventDefault();
     axios
       .post(api_url+"/signin", {
-        mail: this.state.mail,
-        password: this.state.password,
+        mail: form.mail,
+        password: form.password,
       })
       .then((res) => {
-        
         if (res.data.res === "USER NOT EXIST") {
-          this.setState({ dato: "Usuario no existe" });
-          this.setState({ isVisibleDato: "" });
+          setDato("El usuario no existe");
+          setCargando(false);
+          setIsVisibleDato("");
           setInterval(() => {
-            this.setState({ dato: "" });
-            this.setState({ isVisibleDato: "hidden" });
+            setDato("");
+            setIsVisibleDato("hidden");
           }, 10000);
         } else if (res.data.res === "PASSWORD INCORRECT") {
-          this.setState({ dato: "Contraseña incorrecta" });
-          this.setState({ isVisibleDato: "" });
+          setDato("La contraseña es incorrecta");
+          setIsVisibleDato("");
+          setCargando(false);
           setInterval(() => {
-            this.setState({ dato: "" });
-            this.setState({ isVisibleDato: "hidden" });
+            setDato("");
+            setIsVisibleDato("hidden");
           }, 10000);
         } else if(res.data.res === "ERROR"){
-          this.setState({ dato: "Hubo un problema al conectar con el servidor" });
-          this.setState({ isVisibleDato: "" });
+          setDato("Hubo un problema al conectar con el servidor");
+          setIsVisibleDato("");
+          setCargando(false);
           setInterval(() => {
-            this.setState({ dato: "" });
-            this.setState({ isVisibleDato: "hidden" });
+            setDato("");
+            setIsVisibleDato("hidden");
           }, 10000);
         }
         else {
@@ -76,9 +76,17 @@ class SigInPage extends React.Component {
         }
       })
       .catch((err) => {});
+      
   }
   
-  render() {
+
+  useEffect(() => {
+    if (cookies.get("_id")) {
+      window.location.href = "./dashboard";
+    }
+  })
+
+
     return (
       <div className=" ">
         <div className="flex h-screen ">
@@ -104,8 +112,8 @@ class SigInPage extends React.Component {
                     </a>
                   </p>
                 </div>
-                <div className={this.state.isVisibleDato}>
-                  <h2 className="text-md text-red-500">{this.state.dato}</h2>
+                <div className={isVisibleDato}>
+                  <h2 className="text-md text-red-500">{dato}</h2>
                 </div>
                 <form className="mt-8 space-y-4" action="#" method="POST">
                   <input type="hidden" name="remember" value="true" />
@@ -121,7 +129,8 @@ class SigInPage extends React.Component {
                         autoComplete="email"
                         required
                         pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
-                        onChange={this.handleInputChange}
+                        onChange={handleChange}
+                        value={form.mail || ''}
                         className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
                         placeholder="Correo electrónico"
                       />
@@ -134,7 +143,8 @@ class SigInPage extends React.Component {
                         id="password"
                         name="password"
                         type="password"
-                        onChange={this.handleInputChange}
+                        onChange={handleChange}
+                        value={form.password || ''}
                         autoComplete="current-password"
                         required
                         className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
@@ -146,14 +156,15 @@ class SigInPage extends React.Component {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
                       <input
-                        id="remember-me"
-                        name="remember-me"
+                        id="remember"
+                        name="remember"
                         type="checkbox"
-                        onChange={this.handleInputChange}
+                        onChange={handleChecked}
+                        value={form.remember}
                         className="h-4 w-4 text-yellow-600 focus:ring-yellow-500 border-gray-300 rounded"
                       />
                       <label
-                        htmlFor="remember-me"
+                        htmlFor="remember"
                         className="ml-2 block text-sm text-gray-900"
                       >
                         Recuerdame
@@ -169,13 +180,13 @@ class SigInPage extends React.Component {
                       </a>
                     </div>
                   </div>
-
+                  {cargando && <div className="flex items-center justify-center"><img src={loading} width={50}></img></div>}
                   <div>
                     <button
                       type="submit"
-                      onClick={this.handleButtonSubmit}
+                      onClick={handleButtonSubmit}
                       className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-offset-2 
-                      focus:ring-yellow-400"
+                      focus:ring-yellow-400" 
                     >
                       <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                         <svg
@@ -218,6 +229,9 @@ class SigInPage extends React.Component {
         </div>
       </div>
     );
-  }
+
 }
-export default SigInPage;
+
+export default SigInPage
+
+

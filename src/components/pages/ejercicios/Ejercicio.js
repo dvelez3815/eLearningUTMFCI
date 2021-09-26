@@ -63,7 +63,7 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado,preguntas
     //De esta manera la renderización del mensaje con estado cargando se va a mostrar hasta que se carguen todos los ejercicios.
     let contador = 0;
     ejercicios.map((ejercicio, index) => {
-        console.log(ejercicio);
+        
         if(ejercicio.type === "opcion_correcta_1"){  
             setJuego(juego => [...juego, <OpcionCorrecta_1 key={index} ejercicio={ejercicio} miref={panelJuego}/>])
             contador++;
@@ -71,10 +71,11 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado,preguntas
             setJuego(juego => [...juego, <OpcionCorrecta_n key={index} ejercicio={ejercicio} miref={panelJuego}/>])
             contador++;
         }else if(ejercicio.type === "ordenar"){
-            console.log(ejercicio);
             setJuego(juego => [...juego, <Arrastrar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
             contador++;
-        }        
+        }else{
+            console.log(ejercicio);
+        } 
     }
     )
     setPreguntasValidas(contador);

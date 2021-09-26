@@ -1,108 +1,103 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../../assets/resource/Logo_Provicional.png";
 import img1 from "../../../assets/resource/sign.svg";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import {api_url} from '../../../api.config'
+import loading from "../../../assets/resource/loading.svg"
 const cookie = new Cookies();
-class SignUpPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      submitForm: false,
-      username: "",
-      lastname: "",
-      mail: "",
-      pass: "",
-      dato: "",
-      isVisibleDato: "hidden",
-    };
 
-    this.UpdatePass1 = this.UpdatePass1.bind(this);
-    this.UpdatePass2 = this.UpdatePass2.bind(this);
-    this.UpdateUser = this.UpdateUser.bind(this);
-    this.UpdateMail = this.UpdateMail.bind(this);
-    this.ButtonSubmit = this.ButtonSubmit.bind(this);
-    this.UpdateLastname = this.UpdateLastname.bind(this);
+
+
+const SignUpPage = () => {
+  
+  const [isVisibleDato, setIsVisibleDato] = useState("hidden");
+  const [dato, setDato] = useState("");
+  const [form, setForm] = useState({});
+  const [cargando, setCargando] = useState(false);
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
   }
-  UpdateUser(event) {
-    this.setState({ username: event.target.value });
-  }
-  UpdateLastname(event) {
-    this.setState({ lastname: event.target.value });
-  }
-  UpdateMail(event) {
-    this.setState({ mail: event.target.value });
-  }
-  UpdatePass1(event) {
-    this.setState({ pass: event.target.value });
-  }
-  UpdatePass2(event) {
-    if (this.state.pass === event.target.value) {
-      this.setState({ submitForm: true });
-      this.setState({ dato: "" });
-      this.setState({ isVisibleDato: "hidden" });
+  const handlePassWord2 = (e) => {
+    if (form.password === e.target.value) {
+      setDato("");
+      setIsVisibleDato("hidden");
     } else {
-      this.setState({ submitForm: false });
-      this.setState({ dato: "Las contraseñas no son iguales" });
-      this.setState({ isVisibleDato: "" });
-      
-    }
+      setDato("Las contraseñas no coinciden");
+      setIsVisibleDato("visible");
+    }    
+  }  
+  const handleChecked = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.checked,
+    });
   }
-  componentDidMount() {
+
+
+  const handleSubmit = (event) => {
+  setCargando(true);
+  event.preventDefault();
+  setCargando(true);
+  setDato("");
+  setIsVisibleDato("hidden");
+
+  axios
+    .post(api_url+"/signup", {
+      name: form.name,
+      lastname: form.lastname,
+      mail: form.mail,
+      password: form.password,
+    })
+    .then((response) => {
+      if (response.data.res === "USER EXITS") {
+        setDato("El usuario ya existe");
+        setIsVisibleDato("visible");
+        setCargando(false);
+        setInterval(() => {
+          setDato("");
+          setIsVisibleDato("hidden");
+        }, 10000);
+      } else if(response.data.res === "ERROR"){
+        setDato("Hubo un error al conectar con el servidor");
+        setIsVisibleDato("");
+        setCargando(false);
+        setInterval(() => {
+          setDato("");
+          setIsVisibleDato("hidden");
+        }, 10000);
+
+      } else {
+        var user = response.data.res;
+        cookie.set("_id", user._id, { path: "/" });
+        cookie.set("name", user.name, { path: "/" });
+        cookie.set("lastname", user.lastname, { path: "/" });
+        cookie.set("mail", user.mail, { path: "/" });
+        cookie.set("status", user.status, { path: "/" });
+        
+        if(user.status === 'Active'){
+          window.location.href = "./dashboard";
+        }else{
+          window.location.href = "./PendingAccount";
+
+        }
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+  
+  useEffect(() => {
     if (cookie.get("_id")) {
       window.location.href = "./dashboard";
     }
-  }
-  async ButtonSubmit(event) {
-    event.preventDefault();
-    this.setState({ dato: "" });
-    this.setState({ isVisibleDato: "hidden" });
-    axios
-      .post(api_url+"/signup", {
-        name: this.state.username,
-        lastname: this.state.lastname,
-        mail: this.state.mail,
-        password: this.state.pass,
-      })
-      .then((response) => {
-        if (response.data.res === "USER EXITS") {
-          this.setState({ dato: "El correo ya existe" });
-          this.setState({ isVisibleDato: "" });
-          setInterval(() => {
-            this.setState({ dato: "" });
-            this.setState({ isVisibleDato: "hidden" });
-          }, 10000);
-        } else if(response.data.res === "ERROR"){
-          this.setState({ dato: "Hubo un error al conectar con el servidor" });
-          this.setState({ isVisibleDato: "" });
-          setInterval(() => {
-            this.setState({ dato: "" });
-            this.setState({ isVisibleDato: "hidden" });
-          }, 10000);
+  })
 
-        } else {
-          var user = response.data.res;
-          cookie.set("_id", user._id, { path: "/" });
-          cookie.set("name", user.name, { path: "/" });
-          cookie.set("lastname", user.lastname, { path: "/" });
-          cookie.set("mail", user.mail, { path: "/" });
-          cookie.set("status", user.status, { path: "/" });
-          
-          if(user.status === 'Active'){
-            window.location.href = "./dashboard";
-          }else{
-            window.location.href = "./PendingAccount";
-
-          }
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
-  render() {
     return (
       <div className=" ">
         <div className="flex h-screen w-screen ">
@@ -128,8 +123,8 @@ class SignUpPage extends React.Component {
                     </a>
                   </p>
                 </div>
-                <div className={this.state.isVisibleDato}>
-                  <h2 className="text-md text-red-500">{this.state.dato}</h2>
+                <div className={isVisibleDato}>
+                  <h2 className="text-md text-red-500">{dato}</h2>
                 </div>
                 <form className=" space-y-4" action="#" method="POST">
                   <input type="hidden" name="remember" value="true" />
@@ -144,8 +139,8 @@ class SignUpPage extends React.Component {
                         type="text"
                         autoComplete="name"
                         required
-                        value={this.state.username}
-                        onChange={this.UpdateUser}
+                        value={form.username}
+                        onChange={handleChange}
                         className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
                         placeholder="Nombres"
                       />
@@ -160,8 +155,8 @@ class SignUpPage extends React.Component {
                         type="text"
                         autoComplete="lastname"
                         required
-                        value={this.state.lastname}
-                        onChange={this.UpdateLastname}
+                        value={form.lastname}
+                        onChange={handleChange}
                         className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
                         placeholder="Apellidos"
                       />
@@ -177,8 +172,8 @@ class SignUpPage extends React.Component {
                         pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
                         autoComplete="email"
                         required
-                        onChange={this.UpdateMail}
-                        value={this.state.mail}
+                        onChange={handleChange}
+                        value={form.mail}
                         className=" border-gray-300 placeholder-gray-500 text-gray-900 focus:ring-yellow-500 focus:border-yellow-500  focus:z-10 sm:text-sm appearance-none rounded-none relative block w-full px-3 py-2 border rounded-t-md focus:outline-none "
                         placeholder="Correo electrónico"
                       />
@@ -192,8 +187,8 @@ class SignUpPage extends React.Component {
                         name="password"
                         type="password"
                         autoComplete="current-password"
-                        onChange={this.UpdatePass1}
-                        value={this.state.pass}
+                        onChange={handleChange}
+                        value={form.pass}
                         required
                         className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
                         placeholder="Contraseña"
@@ -209,7 +204,8 @@ class SignUpPage extends React.Component {
                         type="password"
                         autoComplete="current-password"
                         required
-                        onChange={this.UpdatePass2}
+                        value={form.pass2}
+                        onChange={handlePassWord2}
                         className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
                         placeholder="Repetir contraseña"
                       />
@@ -219,13 +215,15 @@ class SignUpPage extends React.Component {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
                       <input
-                        id="remember-me"
-                        name="remember-me"
+                        id="remember"
+                        name="remember"
                         type="checkbox"
+                        onChange={handleChecked}
+                        value={form.remember}
                         className="h-4 w-4 text-yellow-600 focus:ring-yellow-500 border-gray-300 rounded"
                       />
                       <label
-                        htmlFor="remember-me"
+                        htmlFor="remember"
                         className="ml-2 block text-sm text-gray-900"
                       >
                         Recuerdame
@@ -241,12 +239,12 @@ class SignUpPage extends React.Component {
                       </a>
                     </div>
                   </div>
-
+                  {cargando && <div className="flex items-center justify-center"><img src={loading} width={50}></img></div>}
                   <div>
                     <button
                       type="submit"
-                      disabled={!this.state.submitForm}
-                      onClick={this.ButtonSubmit}
+                      disabled={cargando}
+                      onClick={handleSubmit}
                       className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-offset-2 
                           focus:ring-yellow-400"
                     >
@@ -291,7 +289,6 @@ class SignUpPage extends React.Component {
         </div>
       </div>
     );
-  }
 }
 
-export default SignUpPage;
+export default SignUpPage
