@@ -64,16 +64,19 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado,preguntas
     ejercicios.map((ejercicio, index) => {
         
         if(ejercicio.type === "opcion_correcta_1"){  
+            if(!ejercicio.img)
             setJuego(juego => [...juego, <OpcionCorrecta_1 key={index} ejercicio={ejercicio} miref={panelJuego}/>])
             contador++;
         }else if(ejercicio.type === "opcion_correcta_n"){
+            if(!ejercicio.img)
             setJuego(juego => [...juego, <OpcionCorrecta_n key={index} ejercicio={ejercicio} miref={panelJuego}/>])
             contador++;
         }else if(ejercicio.type === "ordenar"){
+            if(!ejercicio.img)
             setJuego(juego => [...juego, <Arrastrar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
             contador++;
         }else{
-            console.log(ejercicio);
+            
         } 
     }
     )
