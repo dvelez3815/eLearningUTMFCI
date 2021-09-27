@@ -1,6 +1,5 @@
 import Activity from "../Activities/Activity";
 import { ModuleProgress } from "../ModuleProgress";
-import i_writting from "../../assets/icons/teacher.png";
 import { useRef, createRef } from "react";
 
 export default function EModule(props) {

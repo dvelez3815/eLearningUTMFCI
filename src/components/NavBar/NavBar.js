@@ -3,9 +3,7 @@ import React from "react";
 import logo from "../../assets/resource/Logo_Provicional.png";
 import {Link} from 'react-router-dom';
 class NavBar extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+
   render() {
     return (
       <nav className="shadow-sm flex items-center justify-between flex-wrap bg-gray-50 p-4 h-1/5" >

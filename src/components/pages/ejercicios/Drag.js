@@ -80,7 +80,6 @@ export const Drag = () => {
     [...Array(datos.ejercicios.length)].map(() => createRef())
   );
 
-  const [marcado, setMarcado] = useState(false);
   const marcar = (imagenRef) => {
     try {
       

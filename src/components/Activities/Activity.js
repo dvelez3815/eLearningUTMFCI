@@ -1,18 +1,13 @@
 import "./Activity.css";
 
-import { useEffect, useRef, useState } from "react";
-import i_writting from "../../assets/icons/teacher.png";
+import { useEffect, useRef} from "react";
 import { getProgressColor } from "../../helpers/indexFuntions";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/solid";
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
 
 export default function Activity(props) {
-  const [modal, setModal] = useState(false);
+  
 
   let circlePercent = useRef();
 

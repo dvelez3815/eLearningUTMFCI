@@ -1,6 +1,6 @@
-import React, { useRef, createRef } from "react";
+import React, {createRef } from "react";
 import { Fragment } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
+import {Menu, Transition } from "@headlessui/react";
 import Cookie from "universal-cookie";
 
 import user from "../assets/resource/user.png";

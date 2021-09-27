@@ -1,8 +1,6 @@
 import React, { createRef, useEffect } from "react";
 import NavComponent from "../../NavComponent";
 import logo from "../../../assets/resource/Logo_Provicional.png";
-import EModule from "../../EModules/EModule";
-import StarIcon from "@material-ui/icons/Star";
 import CollectionsBookmarkIcon from "@material-ui/icons/CollectionsBookmark";
 import { useState } from "react";
 
@@ -22,8 +20,6 @@ import shortid from "shortid";
 const cookies = new Cookies();
 
 export const Inicio = () => {
-  const [progresoTotal, setprogresoTotal] = useState(0);
-  const [progesoModulo, setProgesoModulo] = useState(0);
   let userid = cookies.get("_id");
 
   const [userProgress, setuserProgress] = useState([]);
