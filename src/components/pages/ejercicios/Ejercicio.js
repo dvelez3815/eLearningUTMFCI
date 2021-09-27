@@ -1,5 +1,4 @@
-import React, { createRef, useRef } from 'react'
-import { Grammar2 } from './Grammar2'
+import React, {useRef } from 'react'
 import ProgressBar from './ProgressBar'
 
 //load ejercicio.css
