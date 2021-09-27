@@ -2,6 +2,9 @@
 import React, { createRef, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 
+
+import "../../pages/ejercicios/CheckExercise.css"
+
 export const OpcionCorrecta_1 = (props) => {
   const history = useHistory();
   const opciones = useRef(null);
