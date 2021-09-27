@@ -16,7 +16,7 @@ import { Grammar2 } from './components/pages/ejercicios/Grammar2';
 import AccountPendingPage from './components/pages/AccountPendingPage/AccountPendingPage'
 import Arrastrar from './components/pages/ejercicios/Arrastrar';
 import Arrastrar2 from './components/pages/ejercicios/Arrastrar2';
-import Evaluacion from './components/pages/Evaluacion';
+import Evaluacion from './components/pages/Evaluacion/Evaluacion';
 
 
 function App() {
@@ -42,7 +42,7 @@ function App() {
       <Route path="/a">
         <Arrastrar/>
       </Route>
-      <Route path="/b">
+      <Route path="/evaluacion">
         <Evaluacion/>
       </Route>
 
