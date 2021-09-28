@@ -1,113 +1,15 @@
 import React, { createRef, useRef, useState } from "react";
 import shortid from "shortid";
 import { OpcionCorrecta_1 } from "./OpcionCorrecta_1";
-import Seleccionar from "./Seleccionar";
 
-const VerdaderoFalso = () => {
-
-    let data = {
-        "options": [],
-        "body": [
-            {
-                "Item": [
-                    "The book belongs to me. It is",
-                    "___________",
-                    "book."
-                ],
-                "answer": [
-                    [
-                        "my",
-                        true
-                    ],
-                    [
-                        "our",
-                        false
-                    ]
-                ]
-            },
-            {
-                "item": [
-                    "The bike belongs to him. It is",
-                    "___________",
-                    "bike."
-                ],
-                "respuesta": [
-                    [
-                        "him",
-                        false
-                    ],
-                    [
-                        "his",
-                        true
-                    ]
-                ]
-            },
-            {
-                "item": [
-                    "The computer belongs to her. It is",
-                    "___________",
-                    "computer"
-                ],
-                "answer": [
-                    [
-                        "her",
-                        true
-                    ],
-                    [
-                        "his",
-                        false
-                    ]
-                ]
-            },
-            {
-                "item": [
-                    "The phone belongs to you. It is",
-                    "___________",
-                    "phone."
-                ],
-                "answer": [
-                    [
-                        "your",
-                        true
-                    ],
-                    [
-                        "his",
-                        false
-                    ]
-                ]
-            },
-            {
-                "item": [
-                    "The house belongs to us. It is",
-                    "___________",
-                    "house."
-                ],
-                "answer": [
-                    [
-                        "our",
-                        true
-                    ],
-                    [
-                        "her",
-                        false
-                    ]
-                ]
-            }
-        ],
-        "_id": "6133b40062a77824887c0fe1",
-        "task_id": "6133ad8d62a77824887c0fc9",
-        "type": "true_false",
-        "question": "Select the correct possessive adjective.",
-        "__v": 0
-    }
-    
+const VerdaderoFalso = (props) => {
     return (
-        <div className="flex flex-col flex-wrap mt-8">
-          <h2 className="m-auto p-auto text-2xl">{(data.question)}</h2>
+        <div className="flex flex-col flex-wrap mt-8">  
+          <h2 className="m-auto p-auto text-2xl">{(props.ejercicio.question)}</h2>
         <div className="container m-auto p-auto w-auto">
           <div
-            className="flex flex-col items-center justify-center  	gap-2 my-20">
-            {data.body.map((item, index) => {
+            className="flex flex-col items-center justify-center  	gap-2 my-20" ref={props.miref}>
+            {props.ejercicio.body.map((item, index) => {
                 if(item.item  && item.answer){
                     let juego = [];
                     item.item.map((texto, index) => {
@@ -155,16 +57,19 @@ const VerdaderoFalso = () => {
   const TextoMarcar = (props) => {
 
     const quitarActivados = (event) => {
-        let div = event.target.parentNode.parentNode.children;
-        
+        let div = event.target.parentNode.parentNode.parentNode.getElementsByTagName('div');
         for (let index = 0; index < div.length; index++) {
-            const element = div[index];
-            if(element.classList.contains("cardCheck")){
-                element.children[0].classList.remove("activado");
-            }
+          const element = div[index].getElementsByTagName("button");
+          for (let index = 0; index < element.length; index++) {
+            const boton = element[index];
+            boton.classList.remove("activado")
+            
+          }
+          
         }
         
-        event.target.classList.toggle("activado");
+        (event.target.parentNode.classList.toggle("activado"));
+        // event.target.getElementsByTagName("p")[0].toggle("activado");
         
     }
 
@@ -176,7 +81,7 @@ const VerdaderoFalso = () => {
           tabIndex="-1"
           
         >
-         <button onClick={quitarActivados}>{props.texto}</button>
+         <button onClick={quitarActivados}><p>{props.texto}</p></button>
         </div>
       );      
   }

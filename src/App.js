@@ -14,7 +14,6 @@ import AccountPendingPage from './components/pages/AccountPendingPage/AccountPen
 import Arrastrar from './components/pages/ejercicios/Arrastrar';
 import Evaluacion from './components/pages/Evaluacion/Evaluacion';
 import Pruebas from './components/pages/Pruebas/Pruebas';
-import VerdaderoFalso from './components/pages/ejercicios/VerdaderoFalso';
 
 
 
@@ -47,10 +46,6 @@ function App() {
 
       <Route path="/pruebas/libro/:idlibro">
         <Pruebas/>
-      </Route>      
-
-      <Route path="/v">
-        <VerdaderoFalso />
       </Route>      
 
 

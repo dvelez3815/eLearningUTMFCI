@@ -65,8 +65,59 @@ const validarRespuesta = async(props)=>{
     })
     await verificarOrdenar(props,hijos,contadorRespuestas,respuestasBackEndOrdenadas);
     
+  }else if(tipo_ejercicio === "true_false"){
+    let hijos = props.miref.current.children;
+    await verificarVerdadero_Falso(props,hijos,contadorRespuestas);
+
   }
   
+  else{
+    noEsCorrecta(props)
+  }
+  
+
+}
+
+const verificarVerdadero_Falso = async(props,hijos,contadorRespuestas)=>{
+
+  let respuestasBack = []
+    
+  props.ejercicio.props.ejercicio.body.map((item, index) => {
+    item.answer.map((item2, index2) => {
+      if(item2[1]){
+        respuestasBack.push(item2[0])
+      }
+    })
+  })
+  let respuestasUser = [];
+  //obtengo el div del ejercicio y lo guardo en un array
+  
+  for (let index = 0; index < hijos.length; index++) {
+    //guardo las etiquetas de cada ejercicio
+    const seleccionados = hijos[index].getElementsByTagName('div');
+    //recorro los ejercicios
+    for (let index = 0; index < seleccionados.length; index++) {
+      const element = seleccionados[index];
+      if(element.getElementsByTagName("button")[0].classList.contains("activado")){
+        respuestasUser.push(element.getElementsByTagName("p")[0].innerText.toString().replace(/\n/g, '').trim());
+      }
+      
+      
+    }
+  }
+  let esCorrecta = false;
+
+  if(JSON.stringify(respuestasUser) === JSON.stringify(respuestasBack)){
+    esCorrecta = true;
+  }else{
+    esCorrecta = false;
+  }
+  
+  if(esCorrecta){
+    enviarSiEsCorrecta(props,contadorRespuestas);
+  }else{
+    noEsCorrecta(props)
+  }
 
 }
 
