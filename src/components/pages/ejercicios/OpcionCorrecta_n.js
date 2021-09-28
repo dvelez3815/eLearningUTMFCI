@@ -52,6 +52,7 @@ export const OpcionCorrecta_n = (props) => {
     </div>
   );
 };
+
 const Texto = (props) => {
 
   return (

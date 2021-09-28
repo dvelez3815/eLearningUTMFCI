@@ -13,9 +13,6 @@ const Evaluacion = () => {
                 <li>Evaluar mis conocimientos <a className="bg-yellow-400" href="/pruebas/libro/3">libro 3</a></li>
                 <li>Evaluar mis conocimientos <a className="bg-yellow-400" href="/pruebas/libro/4">libro 4</a></li>
                 <li>Evaluar mis conocimientos <a className="bg-yellow-400" href="/pruebas/libro/5">libro 5</a></li>
-                
-                
-
             </ul>
         </div>
     )
