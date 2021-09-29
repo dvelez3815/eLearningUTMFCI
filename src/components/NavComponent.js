@@ -1,6 +1,6 @@
-import React, { useRef, createRef } from "react";
+import React, {createRef } from "react";
 import { Fragment } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
+import {Menu, Transition } from "@headlessui/react";
 import Cookie from "universal-cookie";
 
 import user from "../assets/resource/user.png";
@@ -43,14 +43,14 @@ class NavComponent extends React.Component {
                 <div className="hidden md:block">
                   <div className="ml-10 flex items-baseline space-x-4">
                     <a
-                      className="text-gray-800  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                      href="/#"
+                      className={this.props.activado===1?"text-gray-800  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium":"text-gray-300 dark:text-white  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"}
+                      href="/dashboard"
                     >
                       APRENDIZAJE
                     </a>
                     <a
-                      className="text-gray-300 dark:text-white  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                      href="/#"
+                      className={this.props.activado===2?"text-gray-800  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium":"text-gray-300 dark:text-white  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"}
+                      href="/evaluacion"
                     >
                       EVALUACIÓN
                     </a>

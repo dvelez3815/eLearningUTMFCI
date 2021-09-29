@@ -52,6 +52,7 @@ export const OpcionCorrecta_n = (props) => {
     </div>
   );
 };
+
 const Texto = (props) => {
 
   return (
@@ -63,7 +64,7 @@ const Texto = (props) => {
       tabIndex="-1"
       ref={props.myref}
     >
-      <button
+      <button className="h-full"
         onClick={() => {
           props.marcar(props.myref);
         }}

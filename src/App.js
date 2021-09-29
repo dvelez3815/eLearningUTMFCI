@@ -1,22 +1,20 @@
 import './App.css';
-import {NavComponent} from './components/NavComponent';
-import EModule from './components/EModules/EModule';
+
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom"
-import Grammar from './components/pages/ejercicios/Grammar';
 /* PAGES */
 import  Inicio  from './components/pages/inicio/Inicio.js';
 import HomePage from './components/pages/HomePage/HomePage'
 import SignUpPage from './components/pages/SignUpPage/SignUpPage'
 import SigInPage from './components/pages/SigInPage/SigInPage'
 import NotFoundPage from './components/pages/NotFoundPage/NotFoundPage'
-import { OpcionCorrecta_1 } from './components/pages/ejercicios/OpcionCorrecta_1';
-import { Drag } from './components/pages/ejercicios/Drag';
-import NuevaaG from './components/pages/ParaVideo/NuevaaG';
+
+import { Drag } from './components/pages/ejercicios/Drag';  
 import { Grammar2 } from './components/pages/ejercicios/Grammar2';
 import AccountPendingPage from './components/pages/AccountPendingPage/AccountPendingPage'
 import Arrastrar from './components/pages/ejercicios/Arrastrar';
-import Arrastrar2 from './components/pages/ejercicios/Arrastrar2';
-import Evaluacion from './components/pages/Evaluacion';
+import Evaluacion from './components/pages/Evaluacion/Evaluacion';
+import Pruebas from './components/pages/Pruebas/Pruebas';
+
 
 
 function App() {
@@ -42,9 +40,13 @@ function App() {
       <Route path="/a">
         <Arrastrar/>
       </Route>
-      <Route path="/b">
+      <Route path="/evaluacion">
         <Evaluacion/>
       </Route>
+
+      <Route path="/pruebas/libro/:idlibro">
+        <Pruebas/>
+      </Route>      
 
 
 

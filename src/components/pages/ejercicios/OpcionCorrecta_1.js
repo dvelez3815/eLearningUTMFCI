@@ -1,6 +1,9 @@
 
-import React, { createRef, useRef, useState } from "react";
+import React, { createRef, useRef } from "react";
 import { useHistory } from "react-router-dom";
+
+
+import "../../pages/ejercicios/CheckExercise.css"
 
 export const OpcionCorrecta_1 = (props) => {
   const history = useHistory();
@@ -68,7 +71,7 @@ const Texto = (props) => {
       tabIndex="-1"
       ref={props.myref}
     >
-      <button
+      <button className="h-full"
         onClick={() => {
           props.marcar(props.myref);
         }}

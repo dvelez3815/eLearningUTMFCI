@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useRef, createRef } from "react";
+import { useState} from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const Arrastrar2 = () => {
