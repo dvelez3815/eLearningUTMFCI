@@ -25,14 +25,20 @@ const Evaluacion = () => {
           <div className="flex flex-row w-full">
             <div className="lg:w-2/4 md:w-screen">
               {[1, 2, 3, 4, 5].map((item, index) => (
-                <div className="space-y-3">
-                 <h2 className="text-xl "> Evaluar conocimientos del Libro {item}</h2>
-                  <button className="h-8 px-5 text-gray-400 transition-colors duration-150 border border-gray-300  rounded-lg focus:shadow-outline hover:bg-gray-300 hover:text-white font-bold">
-                    <Link to={`/pruebas/libro/` + item} >Empezar</Link>
-                  </button>
+                <div className="my-5">
+                  <div className="inline-block">
+                    <h2 className="text-xl ">
+                      {" "}
+                      Evaluar conocimientos del Libro {item} 
+                    </h2>
+                  </div>
+                  <div className="inline-block">
+                    <button className="h-8 mx-2 px-5 text-gray-400 transition-colors duration-150 border border-gray-300  rounded-lg focus:shadow-outline hover:bg-gray-300 hover:text-white font-bold">
+                      <Link to={`/pruebas/libro/` + item}>Empezar</Link>
+                    </button>
+                  </div>
                 </div>
               ))}
-                
             </div>
             <div className="lg:w-2/4 hidden md:block">
               <img
