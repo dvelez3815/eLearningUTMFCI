@@ -23,19 +23,19 @@ const Arrastrar = (props) => {
     margin: "0.5rem",
     width: "70%",
     // change background colour if dragging
-    background: isDragging ? "lightgreen" : "white",
+    background: isDragging ? "#E5E7EB" : "white",
 
     // styles we need to apply on draggables
     ...draggableStyle,
 
     "--border-color": "#e5e5e5",
     "borderRadius": "12px",
-    "borderWidth": "2px 2px 4px",
+    "borderWidth": "2px 2px 2px",
     height: "50px",
   });
 
   const getListStyle = (isDraggingOver, itemsLength) => ({
-    background: isDraggingOver ? "lightblue" : "white",
+    background: isDraggingOver ? "white" : "#E5E7EB",
     borderRadius: "12px",
     display: "flex",
     padding: "2px",
@@ -52,18 +52,16 @@ const Arrastrar = (props) => {
   const [items, setItems] = useState(data);
 
   return (
-    <div className="flex flex-col flex-wrap" ref={props.miref}>
+    <div className="flex flex-col flex-wrap mb-4" ref={props.miref}>
       <h2 className="mt-10 text-2xl font-bold ">{(props.ejercicio.question)}</h2>
       {items.map((preguntas, index) => (
         <div
-          className="container m-auto p-auto w-auto w-full"
+          className="container lg:m-auto lg:p-auto lg:w-auto lg:w-full md:m-7 "
           key={shortid.generate()}
           id="arrastrar"
         >
-          <div className="flex">
-            {/* <h2>ejercicio: {index + 1}</h2> */}
+          <h2 className="text-md font-bold text-left my-4 uppercase"> Sentence {index+1}</h2>
           
-          </div>
           <DragDropContext
             onDragEnd={(result) => {
               if (!result.destination) {
@@ -102,7 +100,7 @@ const Arrastrar = (props) => {
                     >
                       {(provided, snapshot) => (
                         <div
-                          className="rounded h-10 justify-center flex items-center	"
+                          className="rounded h-10 justify-center flex items-center 	"
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
