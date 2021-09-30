@@ -12,10 +12,12 @@ export const Grammar2 = () => {
 
 
     React.useEffect(() => {
+
         getExercises().then(data => {
             setEjercicios(data);
             setLoadingData(false);
         });
+        
     }, [])
 
 

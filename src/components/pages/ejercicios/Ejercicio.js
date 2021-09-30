@@ -28,9 +28,6 @@ export const Ejercicio = (props) => {
         if(juego.length === 0){
             cargarEjercicios2(props.ejercicios, setJuego, panelJuego,setCargado,preguntasValidas,setPreguntasValidas);
         }
-
-             
-
         
 
     }, []) //cuando haya un cambio de pregunta se actualiza el estado del componente.
@@ -38,7 +35,7 @@ export const Ejercicio = (props) => {
 
     return (
         <div className={"ejercicio"}>
-            {}
+            
             {cargado || <ProgressBar totalEjercicios = {preguntasValidas} resueltos ={contadorRespondidas} contadorRespondidas={contadorRespondidas} />}
             {finJuego? <h2 className="container m-auto p-auto w-6/12">Fin del juego...</h2>:juego[juego.length-1]}
             {/* Eejercicio footer se encarga de verificar mediante el botoòn de comprobar la respuesta correcta.
@@ -65,27 +62,10 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado,preguntas
         
         if(ejercicio.type === "opcion_correcta_1"){  
             if(!ejercicio.img)
+            
             setJuego(juego => [...juego, <OpcionCorrecta_1 key={index} ejercicio={ejercicio} miref={panelJuego}/>])
             contador++;
 
-            //aca leon lo que se debe de hacer es pasarle una propiedad que diga, tieneImagen
-            //luego en la vista OpcionCorrecta cargas unos estilos o otros dependiendo de si tieneImagen o no.
-        }else if(ejercicio.type === "opcion_correcta_n"){
-            if(!ejercicio.img)
-            setJuego(juego => [...juego, <OpcionCorrecta_n key={index} ejercicio={ejercicio} miref={panelJuego}/>])
-            contador++;
-            //aca leon lo que se debe de hacer es pasarle una propiedad que diga, tieneImagen
-            //luego en la vista OpcionCorrecta cargas unos estilos o otros dependiendo de si tieneImagen o no.
-        }else if(ejercicio.type === "ordenar"){
-            if(!ejercicio.img)
-            setJuego(juego => [...juego, <Arrastrar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
-            contador++;
-            //aca leon lo que se debe de hacer es pasarle una propiedad que diga, tieneImagen
-            //luego en la vista OpcionCorrecta cargas unos estilos o otros dependiendo de si tieneImagen o no.
-        }else if(ejercicio.type === "true_false"){
-            if(!ejercicio.img)
-                setJuego(juego => [...juego, <VerdaderoFalso key={index} ejercicio={ejercicio} miref={panelJuego}/>])
-            contador++;
             //aca leon lo que se debe de hacer es pasarle una propiedad que diga, tieneImagen
             //luego en la vista OpcionCorrecta cargas unos estilos o otros dependiendo de si tieneImagen o no.
         }

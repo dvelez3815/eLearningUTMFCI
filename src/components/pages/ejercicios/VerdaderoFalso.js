@@ -64,8 +64,7 @@ const VerdaderoFalso = (props) => {
             const boton = element[index];
             boton.classList.remove("activado")
             
-          }
-          
+          }          
         }
         
         (event.target.parentNode.classList.toggle("activado"));

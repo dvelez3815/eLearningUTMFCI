@@ -24,6 +24,7 @@ export const Inicio = () => {
 
   const [userProgress, setuserProgress] = useState([]);
   const [cargando, setcargando] = useState(true);
+  
 
   //get user progress from api
   const getData = async () => {
@@ -38,25 +39,6 @@ export const Inicio = () => {
   useEffect(() => {
     let llenarInfo = async () => {
       let userInfo = await getData();
-      for (let i = 0; i < userInfo.length - 1; i++) {
-        for (let j = 0; j < userInfo.length - i - 1; j++) {
-          if (
-            parseInt(
-              "" + userInfo[j].book_info.module + userInfo[j].book_info.unit
-            ) >
-            parseInt(
-              "" +
-                userInfo[j + 1].book_info.module +
-                userInfo[j + 1].book_info.unit
-            )
-          ) {
-            let aux = userInfo[j];
-            userInfo[j] = userInfo[j + 1];
-            userInfo[j + 1] = aux;
-          }
-        }
-      }
-
       setuserProgress(await userInfo);
       setcargando(false);
     };
@@ -89,6 +71,7 @@ export const Inicio = () => {
   <div className="grid grid-cols-12">
   <div className="xl:col-span-9 col-span-12">
     {userProgress.map((modulo, index) => {
+
       if ((index + 1) % 2 === 0) {
         return (
           <div key={shortid.generate()}> 
@@ -248,7 +231,7 @@ export const Inicio = () => {
 
   {/* BARRA LATERAL */}
 
-  <div className="col-span-3  ml-7 ">
+  <div className="hidden md:block md:col-span-3  ml-7 ">
     <div className="flex flex-wrap flex-col">
       <div className="py-5  hidden md:block">
         <div className="border shadow rounded-2xl flex flex-col w-4/6 text-left p-2">
