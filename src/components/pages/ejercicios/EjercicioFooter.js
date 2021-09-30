@@ -127,15 +127,18 @@ const verificarOrdenar = async(props,hijos,contadorRespuestas,respuestasBackEndO
  //aca en este for se agarran los div que tengan id agarrar el texto y agregarlo a un array
  for(let i = 0; i < hijos.length; i++){
   if(hijos[i].id === 'arrastrar'){
-    respuestasUser.push(hijos[i].innerText.toString().replace(/\n/g, '').trim())
+    let respuesta = hijos[i].children[1].innerText.toString().replace(/\n/g, '').trim();
+    respuesta.replace(/\s\s+/g, ' ');
+    respuestasUser.push(respuesta)
   }
-  } 
+  }
+  
   if(JSON.stringify(respuestasUser) === JSON.stringify(respuestasBackEndOrdenadas)){
     esCorrecta = true;
   }else{
     esCorrecta = false;
   }
-  console.log(respuestasBackEndOrdenadas);
+  
   if(esCorrecta){
     enviarSiEsCorrecta(props,contadorRespuestas);
   }else{
