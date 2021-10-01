@@ -83,9 +83,7 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado,preguntas
             contador++;
             //aca leon lo que se debe de hacer es pasarle una propiedad que diga, tieneImagen
             //luego en la vista OpcionCorrecta cargas unos estilos o otros dependiendo de si tieneImagen o no.
-        }else{
-            console.log(ejercicio);
-        } 
+        }
         }
     )
     
