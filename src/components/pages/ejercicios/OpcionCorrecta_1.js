@@ -20,10 +20,19 @@ export const OpcionCorrecta_1 = (props) => {
         ref.current.classList.contains("activado") &&
           ref.current.classList.remove("activado");
         imagenRef.current.setAttribute("aria-checked", "false");
+        if(speechSynthesis.speaking){
+          speechSynthesis.cancel();
+        }
+        
+
       });
 
       imagenRef.current.classList.toggle("activado");
       imagenRef.current.setAttribute("aria-checked", "true");
+      setTimeout(() => {
+        SpeechReader(imagenRef.current.children[0].innerText);
+      }, 50);
+        
     } catch (error) {
       console.log(error);
     }
@@ -81,3 +90,17 @@ const Texto = (props) => {
     </div>
   );
 };
+
+
+function SpeechReader (texto){
+  let voices =  window.speechSynthesis.getVoices();
+  //englich voice
+  let voice = voices.filter(voice => voice.lang === 'en-US')[0];
+
+  
+  let utterance = new SpeechSynthesisUtterance(texto);
+  utterance.voice = voice;
+  utterance.pitch = 1;
+  utterance.rate = 0.8;
+  window.speechSynthesis.speak(utterance);   
+}

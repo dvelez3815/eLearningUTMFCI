@@ -59,12 +59,33 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado,preguntas
     //De esta manera la renderización del mensaje con estado cargando se va a mostrar hasta que se carguen todos los ejercicios.
     let contador = 0;
     ejercicios.map((ejercicio, index) => {
+        
+        if(ejercicio.type === "opcion_correcta_1"){  
+            if(!ejercicio.img)
 
-        if(ejercicio.type === "ordenar"){
-            console.log(ejercicio);
+            setJuego(juego => [...juego, <OpcionCorrecta_1 key={index} ejercicio={ejercicio} miref={panelJuego}/>])
+            contador++;
+
+            //aca leon lo que se debe de hacer es pasarle una propiedad que diga, tieneImagen
+            //luego en la vista OpcionCorrecta cargas unos estilos o otros dependiendo de si tieneImagen o no.
+        }else if(ejercicio.type === "opcion_correcta_n"){
+            if(!ejercicio.img)
+            setJuego(juego => [...juego, <OpcionCorrecta_n key={index} ejercicio={ejercicio} miref={panelJuego}/>])
+            contador++;
+            //aca leon lo que se debe de hacer es pasarle una propiedad que diga, tieneImagen
+            //luego en la vista OpcionCorrecta cargas unos estilos o otros dependiendo de si tieneImagen o no.
+        }else if(ejercicio.type === "ordenar"){
             if(!ejercicio.img)
             setJuego(juego => [...juego, <Arrastrar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
             contador++;
+            //aca leon lo que se debe de hacer es pasarle una propiedad que diga, tieneImagen
+            //luego en la vista OpcionCorrecta cargas unos estilos o otros dependiendo de si tieneImagen o no.
+        }else if(ejercicio.type === "true_false"){
+            if(!ejercicio.img)
+                setJuego(juego => [...juego, <VerdaderoFalso key={index} ejercicio={ejercicio} miref={panelJuego}/>])
+            contador++;
+            //aca leon lo que se debe de hacer es pasarle una propiedad que diga, tieneImagen
+            //luego en la vista OpcionCorrecta cargas unos estilos o otros dependiendo de si tieneImagen o no.
         }
     }
     )
