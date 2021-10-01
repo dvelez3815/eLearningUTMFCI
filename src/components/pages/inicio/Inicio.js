@@ -39,6 +39,25 @@ export const Inicio = () => {
   useEffect(() => {
     let llenarInfo = async () => {
       let userInfo = await getData();
+      for (let i = 0; i < userInfo.length - 1; i++) {
+        for (let j = 0; j < userInfo.length - i - 1; j++) {
+          if (
+            parseInt(
+              "" + userInfo[j].book_info.module + userInfo[j].book_info.unit
+            ) >
+            parseInt(
+              "" +
+                userInfo[j + 1].book_info.module +
+                userInfo[j + 1].book_info.unit
+            )
+          ) {
+            let aux = userInfo[j];
+            userInfo[j] = userInfo[j + 1];
+            userInfo[j + 1] = aux;
+          }
+        }
+      }
+
       setuserProgress(await userInfo);
       setcargando(false);
     };

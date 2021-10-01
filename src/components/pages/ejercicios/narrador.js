@@ -1,6 +1,6 @@
 
-export default async function SpeechReader (texto){
-    let voices = await window.speechSynthesis.getVoices();
+export default  function SpeechReader (texto){
+    let voices =  window.speechSynthesis.getVoices();
     //englich voice
     let voice = voices.filter(voice => voice.lang === 'en-US')[0];
 
