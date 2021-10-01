@@ -22,6 +22,7 @@ const Arrastrar = (props) => {
     // padding: grid * 2,
     margin: "0.5rem",
     width: "100%",
+    padding: "2%",
     // change background colour if dragging
     background: isDragging ? "#E5E7EB" : "white",
 
@@ -31,41 +32,37 @@ const Arrastrar = (props) => {
     "--border-color": "#e5e5e5",
     "borderRadius": "12px",
     "borderWidth": "2px 2px 2px",
-    height: "auto",
-    
+    height: "0%",
   });
 
   const getListStyle = (isDraggingOver, itemsLength) => ({
     background: isDraggingOver ? "white" : "#E5E7EB",
-
     borderRadius: "12px",
     display: "flex",
     padding: "2px",
     width: "100%",
     border: "1px solid #e5e5e5",
-    height: "auto",    
-    
   });
 
 
-
-  const getDraggabletyle = () => ({
-
+  const esArrastrarN = () => ({
     
   });
+
 
   const [items, setItems] = useState(data);
 
   return (
-    <div className="flex flex-col flex-wrap mb-4 md:mr-8 md:ml-8" ref={props.miref}>
-      <h2 className="mt-10 text-xl md:text-2xl font-bold mb-7">{(props.ejercicio.question)}</h2>
+    <div className="flex flex-col flex-wrap mb-4 mx-3" ref={props.miref}>
+      <h2 className="mt-10 text-2xl font-bold ">{(props.ejercicio.question)}</h2>
       {items.map((preguntas, index) => (
         <div
-          className="lg:m-auto lg:p-auto lg:w-auto lg:w-full md:m-7"
+        /*  */
+          className=" lg:m-auto lg:w-full lg:p-auto md:m-7 "
           key={shortid.generate()}
           id="arrastrar"
         >
-          <h2 className=" mt-6 text-sm text-sm md:text-2xl font-bold text-left uppercase"> Sentence {index+1}</h2>
+          <h2 className="text-md font-bold text-left my-4 uppercase"> Sentence {index+1}</h2>
           
           <DragDropContext
             onDragEnd={(result) => {
@@ -95,7 +92,6 @@ const Arrastrar = (props) => {
                     preguntas.length
                   )}
                   {...provided.droppableProps}
-                  className="mt-10 text-sm md:mr-8 md:ml-8 md:text-2xl"
                 >
                     
                   {preguntas.map((ordenar, index) => (
@@ -103,11 +99,10 @@ const Arrastrar = (props) => {
                       key={ordenar.answer}
                       draggableId={ordenar.answer.toString()}
                       index={index}
-                      style={getDraggabletyle()}
                     >
                       {(provided, snapshot) => (
                         <div
-                          className="rounded h-10 justify-center flex items-center 	"
+                          className="rounded h-4 justify-center flex items-center "
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
@@ -116,7 +111,7 @@ const Arrastrar = (props) => {
                             provided.draggableProps.style
                           )}
                         >
-                          <p className="text-xs">{ordenar.item}</p>
+                          <h2 className="text-md ">{ordenar.item}</h2>
                         </div>
                       )}
                     </Draggable>
