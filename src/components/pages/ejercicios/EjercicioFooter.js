@@ -6,7 +6,9 @@ const cookies = new Cookies();
 
 const EjercicioFooter = (props) => {
   useEffect(() => {
-
+    if(speechSynthesis.ispeaking){
+      speechSynthesis.cancel();
+    }
   }, [])
 
     return (

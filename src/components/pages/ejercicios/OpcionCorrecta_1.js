@@ -40,7 +40,7 @@ export const OpcionCorrecta_1 = (props) => {
 
   return (
     <div className="flex flex-col flex-wrap">
-      <h2 className="mt-10 text-2xl font-bold ">{(props.ejercicio.question)}</h2>
+      <h2 className="mt-10 text-sm mr-8 ml-8 md:text-2xl font-bold ">{(props.ejercicio.question)}</h2>
     <div className="container m-auto p-auto w-auto">
       <div
         className="flex flex-wrap items-center justify-center gap-2"
