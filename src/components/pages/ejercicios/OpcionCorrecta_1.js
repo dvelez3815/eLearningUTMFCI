@@ -61,6 +61,7 @@ export const OpcionCorrecta_1 = (props) => {
               marcar={marcar}
               myref={imagesRef.current[index]}
               data={props.ejercicio.options[index]}
+              ejercicio={props.ejercicio}
             />
           );
         })}
@@ -80,7 +81,9 @@ const Texto = (props) => {
       tabIndex="-1"
       ref={props.myref}
     >
-      {/* <img href={`https://drive.google.com/uc?export=view&id=${props.ejercicio.img}`}></img> */}
+      {/* <img src={`https://drive.google.com/uc?export=view&id=${props.ejercicio.img}`}></img> */}
+      
+      
       <button className="h-full"
         onClick={() => {
           props.marcar(props.myref);
