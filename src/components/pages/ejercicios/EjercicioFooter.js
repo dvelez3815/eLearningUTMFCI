@@ -114,17 +114,20 @@ const verificarCompletar_Texto = async(props,hijos,contadorRespuestas)=>{
   if(aRespondido){
     if(JSON.stringify(respuestaUser) === JSON.stringify(respuestaBackEnd)){
       esCorrecta = true;
-
-      if(esCorrecta){
-        enviarSiEsCorrecta(props,contadorRespuestas);
-      }else{
-        noEsCorrecta(props)
-      }
+    }else{
+      esCorrecta = false;
     }
   }else{
     alert("Todos los campos deben estar rellenos")
+    console.log(respuestaBackEnd);
     
   }
+  if(aRespondido && esCorrecta){
+    enviarSiEsCorrecta(props,contadorRespuestas);
+  }else if(aRespondido && !esCorrecta){
+    noEsCorrecta(props)
+  }
+
   
   
   
