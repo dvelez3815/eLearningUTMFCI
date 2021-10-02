@@ -50,10 +50,6 @@ function App() {
       </Route>      
 
 
-      <Route path="/c">
-        <CompletarTexto />
-      </Route>      
-
       <Route exact path="/modulo/1/writting/1">
         <Drag />
       </Route>      

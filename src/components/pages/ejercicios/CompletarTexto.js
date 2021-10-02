@@ -40,7 +40,7 @@ const InputCompletarTexto = (props) => {
     const [texto, setTexto] = React.useState('');
 
     return (
-             <input className={"shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"} type="text" name="name" value={texto} onChange={(e)=>{setTexto(e.target.value)}}/>
+             <input className={"shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"} type="text" value={texto} onChange={(e)=>{setTexto(e.target.value)}}/>
       );      
         
 }
