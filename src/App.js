@@ -14,6 +14,7 @@ import AccountPendingPage from './components/pages/AccountPendingPage/AccountPen
 import Arrastrar from './components/pages/ejercicios/Arrastrar';
 import Evaluacion from './components/pages/Evaluacion/Evaluacion';
 import Pruebas from './components/pages/Pruebas/Pruebas';
+import CompletarTexto from './components/pages/ejercicios/CompletarTexto';
 
 
 
@@ -49,6 +50,9 @@ function App() {
       </Route>      
 
 
+      <Route path="/c">
+        <CompletarTexto />
+      </Route>      
 
       <Route exact path="/modulo/1/writting/1">
         <Drag />

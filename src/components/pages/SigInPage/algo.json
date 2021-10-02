@@ -1,154 +1,50 @@
 {
-    "options": [
-        [
-            {
-                "item": "Peter: My name is Peter.",
-                "answer": 2
-            },
-            {
-                "item": "Peter : I’m a Doctor Nice to meet you, too.",
-                "answer": 4
-            },
-            {
-                "item": "Mary:  What´s your name?",
-                "answer": 1
-            },
-            {
-                "item": "Mary: Nice to meet you. What´s your job?",
-                "answer": 3
-            }
-        ],
-        [
-            {
-                "item": "Peter: My name is Peter.",
-                "answer": 2
-            },
-            {
-                "item": "Peter : I’m a Doctor Nice to meet you, too.",
-                "answer": 4
-            },
-            {
-                "item": "Mary:  What´s your name?",
-                "answer": 1
-            },
-            {
-                "item": "Mary: Nice to meet you. What´s your job?",
-                "answer": 3
-            }
-        ],
-        [
-            {
-                "item": "Peter: My name is Peter.",
-                "answer": 2
-            },
-            {
-                "item": "Peter : I’m a Doctor Nice to meet you, too.",
-                "answer": 4
-            },
-            {
-                "item": "Mary:  What´s your name?",
-                "answer": 1
-            },
-            {
-                "item": "Mary: Nice to meet you. What´s your job?",
-                "answer": 3
-            }
-        ],
-        [
-            {
-                "item": "Peter: My name is Peter.",
-                "answer": 2
-            },
-            {
-                "item": "Peter : I’m a Doctor Nice to meet you, too.",
-                "answer": 4
-            },
-            {
-                "item": "Mary:  What´s your name?",
-                "answer": 1
-            },
-            {
-                "item": "Mary: Nice to meet you. What´s your job?",
-                "answer": 3
-            }
-        ],
-        [
-            {
-                "item": "Peter: My name is Peter.",
-                "answer": 2
-            },
-            {
-                "item": "Peter : I’m a Doctor Nice to meet you, too.",
-                "answer": 4
-            },
-            {
-                "item": "Mary:  What´s your name?",
-                "answer": 1
-            },
-            {
-                "item": "Mary: Nice to meet you. What´s your job?",
-                "answer": 3
-            }
-        ],
-        [
-            {
-                "item": "Peter: My name is Peter.",
-                "answer": 2
-            },
-            {
-                "item": "Peter : I’m a Doctor Nice to meet you, too.",
-                "answer": 4
-            },
-            {
-                "item": "Mary:  What´s your name?",
-                "answer": 1
-            },
-            {
-                "item": "Mary: Nice to meet you. What´s your job?",
-                "answer": 3
-            }
-        ],
-        [
-            {
-                "item": "Peter: My name is Peter.",
-                "answer": 2
-            },
-            {
-                "item": "Peter : I’m a Doctor Nice to meet you, too.",
-                "answer": 4
-            },
-            {
-                "item": "Mary:  What´s your name?",
-                "answer": 1
-            },
-            {
-                "item": "Mary: Nice to meet you. What´s your job?",
-                "answer": 3
-            }
-        ],
-        [
-            {
-                "item": "Peter: My name is Peter.",
-                "answer": 2
-            },
-            {
-                "item": "Peter : I’m a Doctor Nice to meet you, too.",
-                "answer": 4
-            },
-            {
-                "item": "Mary:  What´s your name?",
-                "answer": 1
-            },
-            {
-                "item": "Mary: Nice to meet you. What´s your job?",
-                "answer": 3
-            }
-        ]                                                       
+    "options": [],
+    "body": [
+        {
+            "item": [
+                "My keys are",
+                "___________",
+                "the car."
+            ],
+            "answer": "in"
+        },
+        {
+            "item": [
+                "There is a beautiful picture",
+                "___________",
+                "the wall."
+            ],
+            "answer": "on"
+        },
+        {
+            "item": [
+                "My father works",
+                "___________",
+                "the airport."
+            ],
+            "answer": "at"
+        },
+        {
+            "item": [
+                "There was an accident",
+                "___________",
+                "Pedro Gual Street."
+            ],
+            "answer": "on"
+        },
+        {
+            "item": [
+                "I feel safe when I am",
+                "___________",
+                "home."
+            ],
+            "answer": "at"
+        }
     ],
-    "body": [],
-    "_id": "6133aa1062a77824887c0f77",
-    "task_id": "6133a93562a77824887c0f6b",
-    "type": "ordenar",
-    "question": "Order the next dialogue",
+    "_id": "613fb98230e723162ca28bbf",
+    "task_id": "613fb94330e723162ca28bb3",
+    "type": "completar_texto",
+    "question": "Complete the following sentences. Use in – on – at.",
     "__v": 0
 }

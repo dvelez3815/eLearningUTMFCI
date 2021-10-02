@@ -8,6 +8,7 @@ import { OpcionCorrecta_1 } from './OpcionCorrecta_1'
 import { OpcionCorrecta_n } from './OpcionCorrecta_n'
 import Arrastrar from './Arrastrar'
 import VerdaderoFalso from './VerdaderoFalso'
+import CompletarTexto from './CompletarTexto'
 
 
 export const Ejercicio = (props) => {
@@ -61,11 +62,14 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado,preguntas
     ejercicios.map((ejercicio, index) => {
         
 
-        if(ejercicio.type === "opcion_correcta_1"){  
-            if(ejercicio.img)
-                setJuego(juego => [...juego, <OpcionCorrecta_1 key={index} ejercicio={ejercicio} miref={panelJuego}/>])
+        if(ejercicio.type === "completar_texto"){
+            setJuego(juego => [...juego, <CompletarTexto key={index} ejercicio={ejercicio} miref={panelJuego}/>])
             contador++;
         }
+        else{
+            console.log(ejercicio);
+        }
+    
     }
     )
     

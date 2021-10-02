@@ -70,7 +70,9 @@ const validarRespuesta = async(props)=>{
   }else if(tipo_ejercicio === "true_false"){
     let hijos = props.miref.current.children;
     await verificarVerdadero_Falso(props,hijos,contadorRespuestas);
-
+  }else if(tipo_ejercicio === "completar_texto"){
+    let hijos = Array.from(props.miref.current.children);
+    await verificarCompletar_Texto(props,hijos,contadorRespuestas);
   }
   
   else{
@@ -79,6 +81,58 @@ const validarRespuesta = async(props)=>{
   
 
 }
+
+
+const verificarCompletar_Texto = async(props,hijos,contadorRespuestas)=>{
+  let respuestaUser = [];
+  let respuestaBackEnd = [];
+
+  //rellena las respuestas del back end y las formatea, le quita los espacios en blanco y los transforma a minusculas
+  props.ejercicio.props.ejercicio.body.forEach((item)=>{
+    let answer = item.answer.toString().toLowerCase();
+    answer = answer.replace(/\s/g, '');
+    respuestaBackEnd.push(answer);
+  })
+
+  //rellena las respuestas del usuario y las formatea, le quita los espacios en blanco y los transforma a minusculas
+  hijos.forEach((item)=>{
+    let answer = item.children[1].value.toString().toLowerCase();
+    answer = answer.replace(/\s/g, '');
+    respuestaUser.push(answer);
+    
+  })
+
+  let aRespondido = true;
+  respuestaUser.forEach((item,index)=>{
+    if(item === ""){
+      aRespondido = false;
+    }
+  })
+  
+  let esCorrecta = false;
+
+  if(aRespondido){
+    if(JSON.stringify(respuestaUser) === JSON.stringify(respuestaBackEnd)){
+      esCorrecta = true;
+
+      if(esCorrecta){
+        enviarSiEsCorrecta(props,contadorRespuestas);
+      }else{
+        noEsCorrecta(props)
+      }
+    }
+  }else{
+    alert("Todos los campos deben estar rellenos")
+    
+  }
+  
+  
+  
+  // console.log(hijos[0].children[1].value);
+
+}
+
+
 
 const verificarVerdadero_Falso = async(props,hijos,contadorRespuestas)=>{
 
