@@ -1,50 +1,42 @@
-    {
-    "options": [],
+{
+    "options": [
+        "Twelve-one",
+        "Eihgt",
+        "One hundre, eighty two"
+    ],
     "body": [
         {
             "item": [
-                "My keys are",
-                "___________",
-                "the car."
+                "182",
+                "____________"
             ],
-            "answer": "in"
+            "answer": "One hundred, eighty two"
         },
         {
             "item": [
-                "There is a beautiful picture",
-                "___________",
-                "the wall."
+                "21",
+                "____________"
             ],
-            "answer": "on"
+            "answer": "Twenty-one"
         },
         {
             "item": [
-                "My father works",
-                "___________",
-                "the airport."
+                "11",
+                "____________"
             ],
-            "answer": "at"
+            "answer": "Eleven"
         },
         {
             "item": [
-                "There was an accident",
-                "___________",
-                "Pedro Gual Street."
+                "8",
+                "____________"
             ],
-            "answer": "on"
-        },
-        {
-            "item": [
-                "I feel safe when I am",
-                "___________",
-                "home."
-            ],
-            "answer": "at"
+            "answer": "Eight"
         }
     ],
-    "_id": "613fb98230e723162ca28bbf",
-    "task_id": "613fb94330e723162ca28bb3",
-    "type": "completar_texto",
-    "question": "Complete the following sentences. Use in – on – at.",
+    "_id": "612ef2b34ed1a5407853d23b",
+    "task_id": "612ef0904ed1a5407853d237",
+    "type": "emparejar",
+    "question": "Identify the correct writing of the following numbers.",
     "__v": 0
 }
