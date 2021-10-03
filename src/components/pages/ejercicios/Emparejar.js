@@ -45,18 +45,17 @@ const Emparejar = (props) => {
         
         let contador = 0;
         aMarcar.forEach(element => {
-            
-            if(element.children[1].innerText === "click en las opciones"){
+            if(element.getElementsByTagName("button")[0].innerText === "click en las opciones"){
                 contador += 1;
             }
         });
 
         //Si ya se han completado todas las opciones
-        console.log(contador, aMarcar.length);
+        
         if(contador  !== 0){
             aMarcar.some(element => {
-                if(element.children[1].innerText === "click en las opciones"){
-                    element.children[1].innerText = event.target.innerText;
+                if(element.getElementsByTagName("button")[0].innerText === "click en las opciones"){
+                    element.getElementsByTagName("button")[0].innerText = event.target.innerText;
                     event.target.parentNode.parentNode.classList.add("bg-gray-400");
                     event.target.parentNode.classList.add("invisible");                    
                     return true 
@@ -110,7 +109,6 @@ const InputCompletarTexto = (props) => {
         
         let opciones = Array.from(props.opcionesRef.current.children);
         opciones.forEach((element,index) => {
-            
             if(props.opt[index] === event.target.innerText){
                 element.firstChild.classList.remove("invisible");
                 element.classList.remove("bg-gray-400");
@@ -123,7 +121,7 @@ const InputCompletarTexto = (props) => {
     }
 
     return (
-             <button className={"shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xs"} onClick={volverALaNormalidad}>click en las opciones</button>
+             <button className={"shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xs "} onClick={volverALaNormalidad}>click en las opciones</button>
       );      
         
 }
@@ -131,10 +129,10 @@ const InputCompletarTexto = (props) => {
 
 const JuegoCompletarTexto= (props) => {
     return (
-      <div className="flex w-full justify-items-center	items-center">
+      <div className="flex w-full md:w-11/12 justify-items-center	items-center">
           {props.juego.map((juego,index)=>{
               if(typeof juego === 'string'){
-                  return <p key={shortid.generate()} className={"w-full mx-2 text-justify	text-xs sm:text-xl"}>{juego}</p>
+                  return <p key={shortid.generate()} className={"w-full mx-2 text-justify text-xs sm:text-base"}>{juego}</p>
               }else{
                     return juego
               }
