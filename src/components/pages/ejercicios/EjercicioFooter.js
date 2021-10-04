@@ -77,6 +77,7 @@ const validarRespuesta = async (props) => {
     );
   } else if (tipo_ejercicio === "true_false") {
     let hijos = props.miref.current.children;
+    console.log(hijos);
     await verificarVerdadero_Falso(props, hijos, contadorRespuestas);
   } else if (tipo_ejercicio === "completar_texto") {
     let hijos = Array.from(props.miref.current.children);
@@ -185,25 +186,21 @@ const verificarVerdadero_Falso = async (props, hijos, contadorRespuestas) => {
   let respuestasUser = [];
   //obtengo el div del ejercicio y lo guardo en un array
 
+
   for (let index = 0; index < hijos.length; index++) {
-    //guardo las etiquetas de cada ejercicio
-    const seleccionados = hijos[index].getElementsByTagName("div");
-    //recorro los ejercicios
-    for (let index = 0; index < seleccionados.length; index++) {
-      const element = seleccionados[index];
-      if (
-        element.getElementsByTagName("button")[0].classList.contains("activado")
-      ) {
-        respuestasUser.push(
-          element
-            .getElementsByTagName("p")[0]
-            .innerText.toString()
+    const element = Array.from(hijos[index].getElementsByTagName("button"));
+    element.forEach((item) => {
+      if(item.classList.contains("activado")){
+                respuestasUser.push(
+          item.innerText.toString()
             .replace(/\n/g, "")
             .trim()
         );
       }
-    }
+    });
+  
   }
+  
   let esCorrecta = false;
 
   if (JSON.stringify(respuestasUser) === JSON.stringify(respuestasBack)) {
