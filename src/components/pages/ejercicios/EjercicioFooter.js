@@ -22,6 +22,7 @@ const EjercicioFooter = (props) => {
           <button
             disabled={false}
             className="bg-transparent text-xs sm:text-xl tracking-wider  my-2 text-gray-500 font-semibold hover:text-gray-400 py-2 px-4 border border-gray-500 hover:border-gray-500 rounded"
+            onClick={() => {console.log(props.ejercicio.props.ejercicio)} /*props.onClick()*/}
           >
             Saltar
           </button>
@@ -108,7 +109,7 @@ const verificarEmparejar = async (props, hijos, contadorRespuestas) => {
     }
   });
   if (faltaMarcar) {
-    enviarSiEsCorrecta(props, contadorRespuestas);
+    alert("Todos los campos deben estar rellenos");
   } else {
     hijos.some((element) => {
       respuestaUser.push(element.getElementsByTagName("button")[0].innerText);
