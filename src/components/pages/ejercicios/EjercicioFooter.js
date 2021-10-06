@@ -22,7 +22,7 @@ const EjercicioFooter = (props) => {
           <button
             disabled={false}
             className="bg-transparent text-xs sm:text-xl tracking-wider  my-2 text-gray-500 font-semibold hover:text-gray-400 py-2 px-4 border border-gray-500 hover:border-gray-500 rounded"
-            onClick={() => {console.log(props.ejercicio.props.ejercicio)} /*props.onClick()*/}
+            onClick={() => {noEsCorrecta(props, skipExercise(props))} /*props.onClick()*/}
           >
             Saltar
           </button>
@@ -41,6 +41,86 @@ const EjercicioFooter = (props) => {
     </div>
   );
 };
+
+const skipExercise = (props) => {
+
+  let tipo_ejercicio = props.ejercicio.props.ejercicio.type;
+  let contadorRespuestas = props.contadorRespondidas;
+
+  if (tipo_ejercicio === "opcion_correcta_1") {
+    let correctAnswer = props.ejercicio.props.ejercicio.options
+    .filter((option) => option.answer === true)[0]
+    .item.toString()
+    .trim();
+    return correctAnswer;
+    
+  } else if (tipo_ejercicio === "opcion_correcta_n") {
+    let correctAnswer = [];
+    props.ejercicio.props.ejercicio.options.forEach((option) => {
+      if (option.answer === true) {
+        correctAnswer.push(option.item);
+      }
+    });
+    return correctAnswer;
+    
+  } else if (tipo_ejercicio === "ordenar") {
+    let hijos = [...props.miref.current.children];
+
+    //se quita la ref
+    const respuestasBack = Array.from(
+      props.ejercicio.props.ejercicio.options
+    ).map((item) => [...item]);
+    const respuestasBackEndOrdenadas = [...respuestasBack].map((item) => {
+      if (item) {
+        item = [...item.sort((a, b) => (a.answer > b.answer ? 1 : -1))];
+        let texto = "";
+        for (let i = 0; i < item.length; i++) {
+          const element = item[i];
+          texto += element.item;
+        }
+        return texto;
+      }
+    });
+    return respuestasBackEndOrdenadas;
+
+  } else if (tipo_ejercicio === "true_false") {
+    let respuestasBack = [];
+
+    props.ejercicio.props.ejercicio.body.map((item, index) => {
+      item.answer.map((item2, index2) => {
+        if (item2[1]) {
+          respuestasBack.push(item2[0]);
+        }
+      });
+    });
+
+    return respuestasBack;
+    
+    
+  } else if (tipo_ejercicio === "completar_texto") {
+    let respuestaBackEnd = [];
+
+    //rellena las respuestas del back end y las formatea, le quita los espacios en blanco y los transforma a minusculas
+    props.ejercicio.props.ejercicio.body.forEach((item) => {
+      let answer = item.answer.toString().toLowerCase();
+      answer = answer.replace(/\s/g, "");
+      respuestaBackEnd.push(answer);
+    });
+  
+    return respuestaBackEnd;
+    
+  } else if (tipo_ejercicio === "emparejar") {
+    let respuestasBack = [];
+    props.ejercicio.props.ejercicio.body.forEach((item) => {
+      respuestasBack.push(item.answer);
+    });    
+    return respuestasBack;
+ 
+  } else {
+    noEsCorrecta(props,"asd");
+  }
+
+}
 
 const validarRespuesta = async (props) => {
   let tipo_ejercicio = props.ejercicio.props.ejercicio.type;
@@ -87,7 +167,7 @@ const validarRespuesta = async (props) => {
     let hijos = Array.from(props.miref.current.children);
     await verificarEmparejar(props, hijos, contadorRespuestas);
   } else {
-    noEsCorrecta(props);
+    noEsCorrecta(props,"asd");
   }
 };
 
@@ -122,7 +202,7 @@ const verificarEmparejar = async (props, hijos, contadorRespuestas) => {
     if (esCorrecta) {
       enviarSiEsCorrecta(props, contadorRespuestas);
     } else {
-      noEsCorrecta(props);
+      noEsCorrecta(props,respuestasBack);
     }
 
   }
@@ -168,7 +248,7 @@ const verificarCompletar_Texto = async (props, hijos, contadorRespuestas) => {
   if (aRespondido && esCorrecta) {
     enviarSiEsCorrecta(props, contadorRespuestas);
   } else if (aRespondido && !esCorrecta) {
-    noEsCorrecta(props);
+    noEsCorrecta(props,respuestaBackEnd);
   }
 
   // console.log(hijos[0].children[1].value);
@@ -213,7 +293,7 @@ const verificarVerdadero_Falso = async (props, hijos, contadorRespuestas) => {
   if (esCorrecta) {
     enviarSiEsCorrecta(props, contadorRespuestas);
   } else {
-    noEsCorrecta(props);
+    noEsCorrecta(props,respuestasBack);
   }
 };
 
@@ -249,7 +329,7 @@ const verificarOrdenar = async (
   if (esCorrecta) {
     enviarSiEsCorrecta(props, contadorRespuestas);
   } else {
-    noEsCorrecta(props);
+    noEsCorrecta(props,respuestasBackEndOrdenadas);
   }
 };
 
@@ -282,7 +362,7 @@ const verificarOpcion_Correcta_1 = async (
     if (esCorrecta) {
       enviarSiEsCorrecta(props, contadorRespondidas);
     } else {
-      noEsCorrecta(props);
+      noEsCorrecta(props,correctAnswer);
     }
   } else {
     alert("No seleccionaste nada");
@@ -329,7 +409,7 @@ const verificarOpcion_Correcta_n = async (
     if (esCorrecta) {
       enviarSiEsCorrecta(props, contadorRespondidas);
     } else {
-      noEsCorrecta(props);
+      noEsCorrecta(props,correctAnswer);
     }
   } else {
     alert("No seleccionaste nada");
@@ -346,7 +426,7 @@ function randomizarArray(array) {
   return array;
 }
 
-async function noEsCorrecta(props) {
+async function noEsCorrecta(props, respuesta) {
   //Se crea otro stack para guardar las respuestas pendiente, se elimina el ejercicio actual se trabaja con la stack creada y se randomiza la stack
   //Se muestra una alerta de que la respuesta es incorrecta
   let aux = [...props.juego];
@@ -359,7 +439,7 @@ async function noEsCorrecta(props) {
   aux = aux.filter((e) => e !== actual);
 
   aux.unshift(actual);
-  mostrarAlertaError("Respuesta incorrecta");
+  mostrarAlertaError(respuesta);
   props.setJuego(aux);
 }
 

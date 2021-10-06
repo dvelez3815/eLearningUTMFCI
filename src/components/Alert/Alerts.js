@@ -15,10 +15,15 @@ const SuccessData = {
   };
 
 
-export const mostrarAlertaError= ()=>{
-    Swal.fire({
-        ...ErrorData
-    }).then((result) => {
+export const mostrarAlertaError= (respuesta)=>{
+    Swal.fire(
+        {
+            title: "Oops..",
+            type: "error",
+            text: "Correct Answer: "+respuesta,
+            confirmButtonText: "Ok",
+        },
+    ).then((result) => {
         if (result.value) {
             
             // window.location = "/modulo/1/grammar/2";
