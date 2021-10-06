@@ -69,10 +69,10 @@ const Emparejar = (props) => {
 
 
     return (
-        <div className="flex flex-col flex-wrap my-5">  
+        <div className="flex flex-col flex-wrap mt-8">  
           <h2 className="m-auto p-auto text-sm font-bold sm:text-2xl">{(props.ejercicio.question)}</h2>
         <div className="container m-auto p-auto w-auto" ref={divRef}>
-          <div className="flex flex-col items-center justify-center gap-2 mr-8 ml-8" ref={props.miref}>
+          <div className="flex flex-col items-center justify-center gap-2 my-20 mr-8 ml-8" ref={props.miref}>
         {props.ejercicio.body.map((item, index) => {
                 if(item.item  && item.answer){
                     let juego = [];
@@ -92,9 +92,9 @@ const Emparejar = (props) => {
             })
             }
         </div>
-        <div className="flex flex-wrap gap-2 my-4" ref={opcionesRef}>
+        <div className="flex flex-wrap gap-2" ref={opcionesRef}>
         {opciones.length>0 && opciones.map((opcion, index) => {
-            return <div key={shortid.generate()} className={"rounded-full"}><button onClick = {(event, props)=>{cambiarVisibilidad(event, props)}}><span className="text-sm sm:text-lg p-2 cardCheck">{opcion}</span></button></div>
+            return <div key={shortid.generate()} className={"rounded-full"}><button onClick = {(event, props)=>{cambiarVisibilidad(event, props)}}><span className="text-sm sm:text-lg cardCheck">{opcion}</span></button></div>
         })}
         </div> 
         </div>
@@ -131,20 +131,14 @@ const InputCompletarTexto = (props) => {
 
 const JuegoCompletarTexto= (props) => {
     return (
-      <div className="grid grid-cols-2 w-full sm:w-full  items-center gap-4 space-y-2">
-          <div >{props.juego.map((juego,index)=>{
-              if(typeof juego === 'string'){
-                  return <h2 key={shortid.generate()} className={"w-auto sm:w-auto mx-2 text-right text-xs sm:text-xl"}>{juego}</h2>
-              }
-          })}</div>
-          <div>
+      <div className="flex w-full sm:w-full justify-items-center	items-center gap-4">
           {props.juego.map((juego,index)=>{
-              if(typeof juego !== 'string'){
-                  return juego
+              if(typeof juego === 'string'){
+                  return <p key={shortid.generate()} className={"w-auto sm:w-auto mx-2 text-justify	text-xs sm:text-xl"}>{juego}</p>
+              }else{
+                    return juego
               }
           })}
-          </div>
-          
       </div>
     );
   };
