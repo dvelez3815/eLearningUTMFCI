@@ -43,16 +43,16 @@ class NavComponent extends React.Component {
                 <div className="hidden md:block">
                   <div className="ml-10 flex items-baseline space-x-4">
                     <a
-                      className={this.props.activado===1?"text-gray-800  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium":"text-gray-300 dark:text-white  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"}
+                      className={this.props.activado===1?"text-gray-800 uppercase  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium":"text-gray-300 dark:text-white  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"}
                       href="/dashboard"
                     >
-                      APRENDIZAJE
+                      Learning
                     </a>
                     <a
-                      className={this.props.activado===2?"text-gray-800  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium":"text-gray-300 dark:text-white  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"}
+                      className={this.props.activado===2?"text-gray-800 uppercase hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium":"text-gray-300 dark:text-white  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"}
                       href="/evaluacion"
                     >
-                      EVALUACIÓN
+                      Evaluation
                     </a>
                   </div>
                 </div>
@@ -115,7 +115,7 @@ class NavComponent extends React.Component {
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
                           >
-                            Configuración
+                            Settings
                           </a>
                         )}
                       </Menu.Item>
@@ -127,7 +127,7 @@ class NavComponent extends React.Component {
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
                           >
-                            <button onClick={this.logout}>Cerrar Sesión</button>
+                            <button onClick={this.logout}>Logout</button>
                           </a>
                         )}
                       </Menu.Item>

@@ -63,7 +63,7 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado,preguntas
     ejercicios.map((ejercicio, index) => {
         
 
-        if(ejercicio.type === "completar_texto" && !ejercicio.img){
+       /*  if(ejercicio.type === "completar_texto" && !ejercicio.img){
             setJuego(juego => [...juego, <CompletarTexto key={index} ejercicio={ejercicio} miref={panelJuego}/>])
             contador++;
         }else if(ejercicio.type === "ordenar" && !ejercicio.img){
@@ -78,7 +78,7 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado,preguntas
         }else if(ejercicio.type === "opcion_correcta_n" && !ejercicio.img){
             setJuego(juego => [...juego, <OpcionCorrecta_n key={index} ejercicio={ejercicio} miref={panelJuego}/>])
             contador++;
-        }else if(ejercicio.type === "emparejar"  && !ejercicio.img){
+        }else */ if(ejercicio.type === "emparejar"  && !ejercicio.img){
             setJuego(juego => [...juego, <Emparejar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
             contador++;
         }

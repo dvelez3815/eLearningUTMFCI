@@ -15,7 +15,7 @@ export function ModuleProgress(props) {
       </figure>  
     <div className="">
       <span className="text-xl font-bold text-lowercase  inline-block text-gray-800">
-      {props.percent}% completado
+      {props.percent}% completed
       </span> 
         
     </div>
