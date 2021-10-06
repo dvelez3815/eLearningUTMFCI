@@ -22,7 +22,7 @@ export default function EModule(props) {
               return (
                 <Activity
                   img={props.imagen}
-                  moduleName="Modulo 1"
+                  moduleName="Module 1"
                   percent={props.percent}
                   name={props.actividades[index].nombre}
                   colspan={

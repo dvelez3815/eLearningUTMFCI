@@ -59,16 +59,18 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado,preguntas
     //De esta manera la renderización del mensaje con estado cargando se va a mostrar hasta que se carguen todos los ejercicios.
     let contador = 0;
     ejercicios.map((ejercicio, index) => {
-        
-        if(ejercicio.type === "ordenar"){
+        if(ejercicio.type === "true_false"){
             if(!ejercicio.img)
-            setJuego(juego => [...juego, <Arrastrar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
+                setJuego(juego => [...juego, <VerdaderoFalso key={index} ejercicio={ejercicio} miref={panelJuego}/>])
             contador++;
             //aca leon lo que se debe de hacer es pasarle una propiedad que diga, tieneImagen
             //luego en la vista OpcionCorrecta cargas unos estilos o otros dependiendo de si tieneImagen o no.
+        }else{
+            console.log(ejercicio);
+        } 
         }
-    }
     )
+    
     setPreguntasValidas(contador);
     setCargado(false);
 

@@ -96,7 +96,7 @@ export const Inicio = () => {
           <div key={shortid.generate()}> 
             <ModuleProgress
             key={shortid.generate()}
-              moduleName={"Unidad: " + modulo.book_info.unit}
+              moduleName={"Unit: " + modulo.book_info.unit}
               percent={parseInt(
                 ((modulo.writing.user_progress +
                   modulo.reading.user_progress +
@@ -111,7 +111,7 @@ export const Inicio = () => {
             ></ModuleProgress>
 
             <Activity
-              moduleName={`Modulo: ${modulo.book_info.module}`}
+              moduleName={`Module: ${modulo.book_info.module}`}
               ruta={`/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}/${modulo.writing.task_id}`}
               taskid={modulo.writing.task_id}
               percent={parseInt(
@@ -125,7 +125,7 @@ export const Inicio = () => {
             />
 
             <Activity
-              moduleName={`Modulo: ${modulo.book_info.module}`}
+              moduleName={`Module: ${modulo.book_info.module}`}
               ruta={`/modulo/${modulo.book_info.module}/vocabulary/${modulo.book_info.unit}/${modulo.vocabulary.task_id}`}
               taskid={modulo.vocabulary.task_id}
               percent={parseInt(
@@ -139,7 +139,7 @@ export const Inicio = () => {
             />
 
             <Activity
-              moduleName={`Modulo: ${modulo.book_info.module}`}
+              moduleName={`Module: ${modulo.book_info.module}`}
               ruta={`/modulo/${modulo.book_info.module}/reading/${modulo.book_info.unit}/${modulo.reading.task_id}`}
               taskid={modulo.reading.task_id}
               percent={parseInt(
@@ -153,7 +153,7 @@ export const Inicio = () => {
             />
 
             <Activity
-              moduleName={`Modulo: ${modulo.book_info.module}`}
+              moduleName={`Module: ${modulo.book_info.module}`}
               ruta={`/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}/${modulo.grammar.task_id}`}
               taskid={modulo.grammar.task_id}
               percent={parseInt(
@@ -173,7 +173,7 @@ export const Inicio = () => {
             <h2  key={shortid.generate()} className="text-2xl text-left text-green-600 mt-5 mx-10 font-bold">{`Módulo ${modulo.book_info.module}`}</h2>
             <ModuleProgress
             key={shortid.generate()}
-              moduleName={"Unidad: " + modulo.book_info.unit}
+              moduleName={"Unit: " + modulo.book_info.unit}
               percent={parseInt(
                 ((modulo.writing.user_progress +
                   modulo.reading.user_progress +
@@ -188,7 +188,7 @@ export const Inicio = () => {
             ></ModuleProgress>
 
             <Activity
-              moduleName={`Modulo: ${modulo.book_info.module}`}
+              moduleName={`Module: ${modulo.book_info.module}`}
               ruta={`/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}/${modulo.writing.task_id}`}
               taskid={modulo.writing.task_id}
               percent={parseInt(
@@ -202,7 +202,7 @@ export const Inicio = () => {
             />
 
             <Activity
-              moduleName={`Modulo: ${modulo.book_info.module}`}
+              moduleName={`Module: ${modulo.book_info.module}`}
               ruta={`/modulo/${modulo.book_info.module}/vocabulary/${modulo.book_info.unit}/${modulo.vocabulary.task_id}`}
               taskid={modulo.vocabulary.task_id}
               percent={parseInt(
@@ -216,7 +216,7 @@ export const Inicio = () => {
             />
 
             <Activity
-              moduleName={`Modulo: ${modulo.book_info.module}`}
+              moduleName={`Module: ${modulo.book_info.module}`}
               ruta={`/modulo/${modulo.book_info.module}/reading/${modulo.book_info.unit}/${modulo.reading.task_id}`}
               taskid={modulo.reading.task_id}
               percent={parseInt(
@@ -230,7 +230,7 @@ export const Inicio = () => {
             />
 
             <Activity
-              moduleName={`Modulo: ${modulo.book_info.module}`}
+              moduleName={`Module: ${modulo.book_info.module}`}
               ruta={`/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}/${modulo.grammar.task_id}`}
               taskid={modulo.grammar.task_id}
               percent={parseInt(

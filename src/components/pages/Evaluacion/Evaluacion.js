@@ -10,7 +10,7 @@ const Evaluacion = () => {
     <div>
       <NavComponent logo={logo} activado={2} />
 
-      <div className="flex flex-col my-8  space-y-3">
+      <div className="flex flex-col my-10  space-y-3">
         <div>
           <h2 className="text-4xl font-bold ">
             Mide tu nivel actual de Ingles
@@ -23,13 +23,13 @@ const Evaluacion = () => {
         </div>
         <div>
           <div className="flex flex-row w-full">
-            <div className="lg:w-2/4 md:w-screen">
+            <div className="lg:w-2/4 md:w-screen m-auto">
               {[1, 2, 3, 4, 5].map((item, index) => (
-                <div className="my-5">
-                  <div className="inline-block">
+                <div className="my-5 space-x-7">
+                  <div className="inline-block ">
                     <h2 className="text-xl ">
                       {" "}
-                      Evaluar conocimientos del Libro {item} 
+                      Libro {item} 
                     </h2>
                   </div>
                   <div className="inline-block">

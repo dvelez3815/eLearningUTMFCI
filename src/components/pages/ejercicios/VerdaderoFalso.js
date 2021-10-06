@@ -13,6 +13,7 @@ const VerdaderoFalso = (props) => {
                 if(item.item  && item.answer){
                     let juego = [];
                     item.item.map((texto, index) => {
+                      console.log(texto)
                         if(texto[0]==='_'){
                             // aqui van las opciones del juego true/false
                             if(item.answer)
@@ -45,7 +46,7 @@ const VerdaderoFalso = (props) => {
       <div className="flex">
           {props.juego.map((juego,index)=>{
               if(typeof juego === 'string'){
-                  return <p key={shortid.generate()} >{juego}</p>
+                  return<div> <h2 key={shortid.generate()} >{juego}  {"\n"}</h2> </div>
               }else if(typeof juego === 'object'){
                     return juego
               }
@@ -81,6 +82,7 @@ const VerdaderoFalso = (props) => {
           
         >
          <button onClick={quitarActivados}><p>{props.texto}</p></button>
+         
         </div>
       );      
   }

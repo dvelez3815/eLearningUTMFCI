@@ -58,7 +58,7 @@ const Arrastrar = (props) => {
       {items.map((preguntas, index) => (
         <div
         /*  */
-          className=" lg:m-auto lg:w-full lg:p-auto md:m-7 "
+          className=" lg:m-auto lg:w-full lg:p-auto md:m-7  "
           key={shortid.generate()}
           id="arrastrar"
         >
