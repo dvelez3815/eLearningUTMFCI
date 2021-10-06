@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import CancelIcon from "@material-ui/icons/Cancel";
 import { useHistory } from 'react-router';
+import { mostrarAlertaSalir } from '../../Alert/Alerts';
 
 
 const ProgressBar = (props) => {
@@ -13,7 +14,7 @@ const ProgressBar = (props) => {
         <div className="flex justify-between">
           <div></div>
           <div className="order-last my-3 ">
-            <button onClick={()=>history.push('/dashboard')}
+            <button onClick={salirVentana}
               className="bg-transparent tracking-wider  my-2 text-yellow-500 font-semibold hover:text-yellow-400 py-2 px-4 border border-yellow-500 hover:border-yellow-500 rounded">
               <CancelIcon style={{ fontSize: 27 }}/> Salir
             </button>
@@ -28,6 +29,11 @@ const ProgressBar = (props) => {
       </div>
         </div>
     )
+}
+
+const salirVentana = () => {
+
+  mostrarAlertaSalir();
 }
 
 export default ProgressBar

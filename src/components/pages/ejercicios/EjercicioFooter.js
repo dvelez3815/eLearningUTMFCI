@@ -116,8 +116,6 @@ const skipExercise = (props) => {
     });    
     return respuestasBack;
  
-  } else {
-    noEsCorrecta(props,"asd");
   }
 
 }

@@ -92,7 +92,7 @@ const Emparejar = (props) => {
             })
             }
         </div>
-        <div className="flex flex-wrap gap-4" ref={opcionesRef}>
+        <div className="flex flex-wrap gap-4 items-center justify-center" ref={opcionesRef}>
         {opciones.length>0 && opciones.map((opcion, index) => {
             return <div key={shortid.generate()} className={"rounded-full"}><button onClick = {(event, props)=>{cambiarVisibilidad(event, props)}}><span className="text-sm sm:text-lg cardCheck px-5">{opcion}</span></button></div>
         })}

@@ -256,7 +256,7 @@ export const Inicio = () => {
         <div className="border shadow rounded-2xl flex flex-col w-4/6 text-left p-2">
           <div className="flex flex-col-2">
             <div className="text-left">
-              <h2 className="font-semibold text-xl m-2">Libros</h2>
+              <h2 className="font-semibold text-xl m-2">Module</h2>
             </div>
       
           </div>
@@ -265,7 +265,7 @@ export const Inicio = () => {
               className="flex justify-center items-start rounded-2xl"
               id="estrella"
             >
-              <CollectionsBookmarkIcon color="action" fontSize="large" />
+              {/* <CollectionsBookmarkIcon color="action" fontSize="large" /> */}
             </div>
             <div className="flex flex-col " id="info">
               <div>
@@ -278,7 +278,7 @@ export const Inicio = () => {
                         rel="noopener noreferrer"
                         href="https://drive.google.com/file/d/1pwa9ffmEMoHOJBa98KDNpONhp92DtoL6/view?usp=sharing"
                       >
-                        Libro 1
+                        Module 1
                       </a>{" "}
                     </li>
                     <li className="hover:text-green-500">
@@ -288,7 +288,7 @@ export const Inicio = () => {
                         rel="noopener noreferrer"
                         href="https://drive.google.com/file/d/1zSL78FugkafrXulTG9Wb3CcHwouNr62y/view?usp=sharing"
                       >
-                        Libro 2
+                        Module 2
                       </a>{" "}
                     </li>
                     <li className="hover:text-green-500">
@@ -298,7 +298,7 @@ export const Inicio = () => {
                         rel="noopener noreferrer"
                         href="https://drive.google.com/file/d/1kVydGHFB5M59yMLyAQVM6w0YnN-uf4zJ/view?usp=sharing"
                       >
-                        Libro 3
+                        Module 3
                       </a>{" "}
                     </li>
                     <li className="hover:text-green-500">
@@ -308,7 +308,7 @@ export const Inicio = () => {
                         rel="noopener noreferrer"
                         href="https://drive.google.com/file/d/1Q8COVdO2dGtjDt6mrdb4I1HuqB3w_yxb/view?usp=sharing"
                       >
-                        Libro 4
+                        Module 4
                       </a>{" "}
                     </li>
                     <li className="hover:text-green-500">
@@ -318,7 +318,7 @@ export const Inicio = () => {
                         rel="noopener noreferrer"
                         href="https://drive.google.com/file/d/158WHHjUUYaFvTJaxBK5-SbDS-Fxz1BAy/view?usp=sharing"
                       >
-                        Libro 5
+                        Module 5
                       </a>{" "}
                     </li>
                   </ol>

@@ -76,7 +76,7 @@ export default function Activity(props) {
                     'block px-4 py-2 text-sm'
                   )} */
                   >
-                    Apuntes
+                    Content
                   </a>
                 </button>
               )}
@@ -91,7 +91,7 @@ export default function Activity(props) {
                       "block px-4 py-2 text-sm"
                     )} */
                   >
-                    Empezar
+                    Start
                   </a>
                 </button>
               )}
