@@ -22,7 +22,14 @@ const Evaluacion = () => {
           </button>
         </div>
         <div>
-          <div className="flex flex-row w-full">
+
+            <div className="mt-7 text-center">
+              <h3 className="text-2xl font-sans font-bold text-green-400">
+                  Evaluar conocimientos por módulo
+              </h3>
+            </div>
+
+          <div className="flex flex-row w-full"> 
             <div className="lg:w-2/4 md:w-screen m-auto">
               {[1, 2, 3, 4, 5].map((item, index) => (
                 <div className="my-5 space-x-7">

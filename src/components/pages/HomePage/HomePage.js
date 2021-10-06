@@ -17,14 +17,10 @@ class HomePage extends React.Component {
         <div className=" flex-grow  ">
           <div className=" flex justify-end flex-wrap my-2">
             <a className=" px-2 xl:py-0  lg:py-0 md:py-0 py-1">
-              <button className=" inline-flex items-center justify-center px-7 py-2 bg-yellow-400 hover:bg-yellow-500 text-white rounded-full font-semibold text-xs   uppercase tracking-widest ">
-                <Link to="/signup">Registrate</Link>
-              </button>
+              
             </a>
             <a className="px-2 xl:py-0  lg:py-0 md:py-0 py-1">
-              <button className=" inline-flex items-center justify-center px-4 py-2  bg-gray-400 hover:bg-gray-300 text-white  rounded-full font-semibold text-xs   uppercase tracking-widest ">
-                <Link to="/signin">Iniciar sesion</Link>
-              </button>
+              
             </a>
           </div>
         </div>
@@ -44,7 +40,7 @@ class HomePage extends React.Component {
               <div className="pt-4">
                 <a className=" px-2 xl:py-0  lg:py-0 md:py-0 py-1">
                   <button className=" inline-flex items-center justify-center px-10 py-2  bg-yellow-400 hover:bg-yellow-500 text-white rounded-full font-semibold text-xs   uppercase tracking-widest ">
-                    <Link to="/dashboard">Empieza</Link>
+                    <Link to="/dashboard">Ingresar</Link>
                   </button>
                 </a>
               </div>
@@ -53,7 +49,7 @@ class HomePage extends React.Component {
                 ubicandola afuera */}
                 <a className="px-2 xl:py-0  lg:py-0 md:py-0 py-1">
                   <button className=" inline-flex items-center justify-center px-4 py-2  bg-gray-400 hover:bg-gray-300 text-white  rounded-full font-semibold text-xs   uppercase tracking-widest ">
-                    <Link to="/signin">Tengo una cuenta</Link>
+                    <Link to="/signup">Crear una cuenta</Link>
                   </button>
                 </a>
               </div>

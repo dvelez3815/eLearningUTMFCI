@@ -94,19 +94,21 @@ const SigInPage = () => {
             <div className="min-h-screen flex items-center justify-center  py-12 px-4 sm:px-6 lg:px-8">
               <div className="max-w-md w-full space-y-2">
                 <div>
+                  <a href="/">
                   <img
                     className="mx-auto h-12 w-auto"
                     src={logo}
                     alt="Workflow"
                   />
+                  </a>
                   <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-                    Inicia sesión en tu cuenta
+                    Inicia sesión 
                   </h2>
                   <p className="mt-2 text-center text-sm text-gray-600">
                     O
                     <a
                       href="/signup"
-                      className="font-medium text-green-600 hover:text-green-500"
+                      className="font-medium m-2 text-green-600 hover:text-green-500"
                     >
                       Registrate
                     </a>
