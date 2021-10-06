@@ -170,7 +170,7 @@ export const Inicio = () => {
       } else {
         return (
           <div key={shortid.generate()}>
-            <h2  key={shortid.generate()} className="text-2xl text-left text-green-600 mt-5 mx-10 font-bold">{`Módulo ${modulo.book_info.module}`}</h2>
+            <h2  key={shortid.generate()} className="text-2xl text-left text-green-600 mt-5 mx-10 font-bold">{`Module ${modulo.book_info.module}`}</h2>
             <ModuleProgress
             key={shortid.generate()}
               moduleName={"Unit: " + modulo.book_info.unit}

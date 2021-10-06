@@ -8,6 +8,8 @@ import { OpcionCorrecta_1 } from './OpcionCorrecta_1'
 import { OpcionCorrecta_n } from './OpcionCorrecta_n'
 import Arrastrar from './Arrastrar'
 import VerdaderoFalso from './VerdaderoFalso'
+import CompletarTexto from './CompletarTexto'
+import Emparejar from './Emparejar'
 
 
 export const Ejercicio = (props) => {
@@ -59,16 +61,32 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado,preguntas
     //De esta manera la renderización del mensaje con estado cargando se va a mostrar hasta que se carguen todos los ejercicios.
     let contador = 0;
     ejercicios.map((ejercicio, index) => {
-        if(ejercicio.type === "true_false"){
-            if(!ejercicio.img)
-                setJuego(juego => [...juego, <VerdaderoFalso key={index} ejercicio={ejercicio} miref={panelJuego}/>])
+        
+
+        if(ejercicio.type === "completar_texto" && !ejercicio.img){
+            setJuego(juego => [...juego, <CompletarTexto key={index} ejercicio={ejercicio} miref={panelJuego}/>])
             contador++;
-            //aca leon lo que se debe de hacer es pasarle una propiedad que diga, tieneImagen
-            //luego en la vista OpcionCorrecta cargas unos estilos o otros dependiendo de si tieneImagen o no.
-        }else{
-            console.log(ejercicio);
-        } 
+        }else if(ejercicio.type === "ordenar" && !ejercicio.img){
+            setJuego(juego => [...juego, <Arrastrar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
+            contador++;
+        }else if(ejercicio.type === "true_false" && !ejercicio.img){
+            setJuego(juego => [...juego, <VerdaderoFalso key={index} ejercicio={ejercicio} miref={panelJuego}/>])
+            contador++;
+        }else if(ejercicio.type === "opcion_correcta_1" && !ejercicio.img){
+            setJuego(juego => [...juego, <OpcionCorrecta_1 key={index} ejercicio={ejercicio} miref={panelJuego}/>])
+            contador++;
+        }else if(ejercicio.type === "opcion_correcta_n" && !ejercicio.img){
+            setJuego(juego => [...juego, <OpcionCorrecta_n key={index} ejercicio={ejercicio} miref={panelJuego}/>])
+            contador++;
+        }else if(ejercicio.type === "emparejar"  && !ejercicio.img){
+            setJuego(juego => [...juego, <Emparejar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
+            contador++;
         }
+
+        else{
+        }
+    
+    }
     )
     
     setPreguntasValidas(contador);

@@ -23,14 +23,15 @@ export default function Activity(props) {
 
   return (
     <Menu
+      
       as="div"
-      className={props.colspan + " relative inline-block "}
+      className={"relative inline-block"}
       ref={props.myref}
     >
       <div>
-        <Menu.Button className="inline-flex justify-center w-full  px-4 py-2 bg-white text-sm font-medium text-gray-700">
+        <Menu.Button className="inline-flex justify-center w-full  px-4 py-2 bg-white text-sm font-medium text-gray-700" disabled={props.percent===100?true:false}>
           <div
-            className="circle"
+            className={props.percent !== 100?"circle":"completed"}
           >
             <div className="fill" ref={circlePercent}></div>
             <img

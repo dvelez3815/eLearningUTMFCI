@@ -12,12 +12,31 @@
     box-sizing: border-box;
     box-shadow: 0 0 0 10px rgba(229, 231, 235, 1);;
     /* margin: 50px */
-    margin: 8px;
+    margin: 8px;;
   }
   .circle:hover{
     border: 10px solid rgb(197, 255, 178);
   }
 
+  .completed {
+    display: inline-block;
+    width: 16vh;
+    height: 16vh;
+    border-radius: 50%;
+    border: 10px solid white;
+    text-align: center;
+    line-height: 250px;
+    overflow: hidden;
+    padding: 3px;
+    position: relative;
+    box-sizing: border-box;
+    box-shadow: 0 0 0 10px rgba(229, 231, 235, 1);;
+    /* margin: 50px */
+    margin: 8px;;
+    
+  }
+
+  
 
   .fill {
     background-color: teal;

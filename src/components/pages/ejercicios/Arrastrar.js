@@ -21,8 +21,7 @@ const Arrastrar = (props) => {
     userSelect: "none",
     // padding: grid * 2,
     margin: "0.5rem",
-    width: "100%",
-    padding: "2%",
+    width: "70%",
     // change background colour if dragging
     background: isDragging ? "#E5E7EB" : "white",
 
@@ -32,7 +31,7 @@ const Arrastrar = (props) => {
     "--border-color": "#e5e5e5",
     "borderRadius": "12px",
     "borderWidth": "2px 2px 2px",
-    height: "0%",
+    height: "50px",
   });
 
   const getListStyle = (isDraggingOver, itemsLength) => ({
@@ -40,7 +39,7 @@ const Arrastrar = (props) => {
     borderRadius: "12px",
     display: "flex",
     padding: "2px",
-    width: "100%",
+    width: "auto",
     border: "1px solid #e5e5e5",
   });
 
@@ -53,12 +52,11 @@ const Arrastrar = (props) => {
   const [items, setItems] = useState(data);
 
   return (
-    <div className="flex flex-col flex-wrap mb-4 mx-3" ref={props.miref}>
+    <div className="flex flex-col flex-wrap mb-4" ref={props.miref}>
       <h2 className="mt-10 text-2xl font-bold ">{(props.ejercicio.question)}</h2>
       {items.map((preguntas, index) => (
         <div
-        /*  */
-          className=" lg:m-auto lg:w-full lg:p-auto md:m-7  "
+          className="container lg:m-auto lg:p-auto lg:w-auto lg:w-full md:m-7 "
           key={shortid.generate()}
           id="arrastrar"
         >
@@ -102,7 +100,7 @@ const Arrastrar = (props) => {
                     >
                       {(provided, snapshot) => (
                         <div
-                          className="rounded h-4 justify-center flex items-center "
+                          className="rounded h-10 justify-center flex items-center 	"
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
@@ -111,7 +109,7 @@ const Arrastrar = (props) => {
                             provided.draggableProps.style
                           )}
                         >
-                          <h2 className="text-md ">{ordenar.item}</h2>
+                          <p className="text-xs">{ordenar.item}</p>
                         </div>
                       )}
                     </Draggable>

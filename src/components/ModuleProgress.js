@@ -7,7 +7,7 @@ export function ModuleProgress(props) {
   <div className="flex flex-col sm:flex-row mb-7 items-center justify-between">
     <div>
       <span className="text-xl text-lowercase capitalize  font-bold inline-block py-5 px-2 uppercase rounded-full text-gray-800 bg-amber-200">
-        {props.moduleName}
+        {props.moduleName} 
       </span>
     </div>
     <figure>

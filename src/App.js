@@ -14,6 +14,8 @@ import AccountPendingPage from './components/pages/AccountPendingPage/AccountPen
 import Arrastrar from './components/pages/ejercicios/Arrastrar';
 import Evaluacion from './components/pages/Evaluacion/Evaluacion';
 import Pruebas from './components/pages/Pruebas/Pruebas';
+import CompletarTexto from './components/pages/ejercicios/CompletarTexto';
+import Emparejar from './components/pages/ejercicios/Emparejar';
 
 
 
@@ -37,9 +39,6 @@ function App() {
       <Route path="/modulo/:pmodulo/writing/:punidad/:id">
         <Grammar2 />
       </Route>
-      <Route path="/a">
-        <Arrastrar/>
-      </Route>
       <Route path="/evaluacion">
         <Evaluacion/>
       </Route>
@@ -48,11 +47,6 @@ function App() {
         <Pruebas/>
       </Route>      
 
-
-
-      <Route exact path="/modulo/1/writting/1">
-        <Drag />
-      </Route>      
 
       <Route exact path="/dashboard">
         <Inicio />
