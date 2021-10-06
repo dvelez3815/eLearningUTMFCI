@@ -92,9 +92,9 @@ const Emparejar = (props) => {
             })
             }
         </div>
-        <div className="flex flex-wrap gap-2" ref={opcionesRef}>
+        <div className="flex flex-wrap gap-4" ref={opcionesRef}>
         {opciones.length>0 && opciones.map((opcion, index) => {
-            return <div key={shortid.generate()} className={"rounded-full"}><button onClick = {(event, props)=>{cambiarVisibilidad(event, props)}}><span className="text-sm sm:text-lg cardCheck">{opcion}</span></button></div>
+            return <div key={shortid.generate()} className={"rounded-full"}><button onClick = {(event, props)=>{cambiarVisibilidad(event, props)}}><span className="text-sm sm:text-lg cardCheck px-5">{opcion}</span></button></div>
         })}
         </div> 
         </div>
@@ -123,7 +123,7 @@ const InputCompletarTexto = (props) => {
     }
 
     return (
-             <button className={"shadow appearance-none border rounded w-full h-13 sm:h-12 sm:w-72 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xs"} onClick={volverALaNormalidad}>click en las opciones</button>
+             <button className={"shadow appearance-none border rounded w-full h-13 sm:h-12 sm:full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xs"} onClick={volverALaNormalidad}>click en las opciones</button>
       );      
         
 }
@@ -134,7 +134,7 @@ const JuegoCompletarTexto= (props) => {
       <div className="flex w-full sm:w-full justify-items-center	items-center gap-4">
           {props.juego.map((juego,index)=>{
               if(typeof juego === 'string'){
-                  return <p key={shortid.generate()} className={"w-auto sm:w-auto mx-2 text-justify	text-xs sm:text-xl"}>{juego}</p>
+                  return <p key={shortid.generate()} className={"w-auto sm:w-full mx-2 text-justify	text-xs sm:text-xl"}>{juego}</p>
               }else{
                     return juego
               }
