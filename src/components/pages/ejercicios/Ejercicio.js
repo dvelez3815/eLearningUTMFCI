@@ -10,6 +10,7 @@ import Arrastrar from './Arrastrar'
 import VerdaderoFalso from './VerdaderoFalso'
 import CompletarTexto from './CompletarTexto'
 import Emparejar from './Emparejar'
+import EjercicioFooterPruebaLibros from './EjercicioFooterPruebaLibros'
 
 
 export const Ejercicio = (props) => {
@@ -19,6 +20,7 @@ export const Ejercicio = (props) => {
     const [finJuego, setFinJuego] = React.useState(false);
     const [contadorRespondidas, setContadorRespondidas] = React.useState(0);
     const [preguntasValidas, setPreguntasValidas] = React.useState(0);
+    const [aciertos, setAciertos] = React.useState(0);
 
     const panelJuego = useRef(null);
     
@@ -45,7 +47,8 @@ export const Ejercicio = (props) => {
             Tambièn se debe de enviar el contador para ir incrementando el estado de respondidas. */}
         
 
-            {finJuego || <EjercicioFooter ejercicio={juego[juego.length-1]} juego={juego} setJuego = {setJuego} cargado={cargado} setCargado={setCargado} setFinJuego={setFinJuego} miref={panelJuego} contadorRespondidas={contadorRespondidas} setContadorRespondidas={setContadorRespondidas}/>}
+            
+            {finJuego || props.esPrueba?<EjercicioFooterPruebaLibros totalEjercicios = {preguntasValidas} ejercicio={juego[juego.length-1]} juego={juego} setJuego = {setJuego} cargado={cargado} setCargado={setCargado} setFinJuego={setFinJuego} miref={panelJuego} contadorRespondidas={contadorRespondidas} setContadorRespondidas={setContadorRespondidas} aciertos={aciertos} setAciertos={setAciertos}/>:<EjercicioFooter ejercicio={juego[juego.length-1]} juego={juego} setJuego = {setJuego} cargado={cargado} setCargado={setCargado} setFinJuego={setFinJuego} miref={panelJuego} contadorRespondidas={contadorRespondidas} setContadorRespondidas={setContadorRespondidas}/>}
         </div>
     )
 }

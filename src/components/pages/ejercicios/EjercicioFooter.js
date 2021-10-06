@@ -120,6 +120,7 @@ const skipExercise = (props) => {
 
 }
 
+
 const validarRespuesta = async (props) => {
   let tipo_ejercicio = props.ejercicio.props.ejercicio.type;
   let contadorRespuestas = props.contadorRespondidas;
@@ -168,6 +169,7 @@ const validarRespuesta = async (props) => {
     noEsCorrecta(props,"asd");
   }
 };
+
 
 const verificarEmparejar = async (props, hijos, contadorRespuestas) => {
   let respuestaUser = [];

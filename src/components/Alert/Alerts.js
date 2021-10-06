@@ -34,6 +34,23 @@ export const mostrarAlertaError= (respuesta)=>{
     });
 }
 
+export const finPrueba= (aciertos, total)=>{
+    Swal.fire(
+        {
+            title: "Total aciertos",
+            type: "success",
+            text: aciertos+"/"+total,
+            confirmButtonText: "Ok",
+        },
+    ).then((result) => {
+        if (result.value) {
+            
+            window.location = "/dashboard";
+        } else {
+            
+        }
+    });
+}
 
 
 export const mostrarAlertaExito= ()=>{
