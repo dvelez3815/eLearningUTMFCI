@@ -8,6 +8,9 @@ const VerdaderoFalso = (props) => {
       <h2 className="m-auto p-auto text-sm font-bold sm:text-2xl">{(props.ejercicio.question)}</h2>
     <div className="container m-auto p-auto w-auto">
       <div className="flex flex-col items-center justify-center gap-2 my-20 mr-8 ml-8" ref={props.miref}>
+
+        {console.log(props.ejercicio.img)}
+        
             {props.ejercicio.body.map((item, index) => {
                 if(item.item  && item.answer){
                     let juego = [];

@@ -25,6 +25,7 @@ export const OpcionCorrecta_n = (props) => {
     <div className="flex flex-col flex-wrap mt-8">
       <h2 className="m-auto p-auto text-2xl">{(props.ejercicio.question)}</h2>
     <div className="container m-auto p-auto w-auto">
+      {console.log(props.ejercicio.img)}
       <div
         className="flex flex-wrap items-center justify-center  	gap-2 my-20"
         aria-label="choice"

@@ -117,40 +117,29 @@ const cargarEjercicios2 = (
         <Arrastrar key={index} ejercicio={ejercicio} miref={panelJuego} />,
       ]);
       contador++;
-    } else  */if (ejercicio.type === "true_false" ) {
+    } else  */
+
+
+    if (ejercicio.type === "true_false"  && ejercicio.img) {
       setJuego((juego) => [
         ...juego,
         <VerdaderoFalso key={index} ejercicio={ejercicio} miref={panelJuego} />,
       ]);
       contador++;
-    } else  if (ejercicio.type === "opcion_correcta_1") {
+    }
+    if (ejercicio.type === "ordenar"  && ejercicio.img) {
       setJuego((juego) => [
         ...juego,
-        <OpcionCorrecta_1
-          key={index}
-          ejercicio={ejercicio}
-          miref={panelJuego}
-        />,
+        <Arrastrar key={index} ejercicio={ejercicio} miref={panelJuego} />,
       ]);
-      contador++;
-    }  else if (ejercicio.type === "opcion_correcta_n" ) {
-        console.log("este:  ", ejercicio)
-      setJuego((juego) => [
-        ...juego,
-        <OpcionCorrecta_n
-          key={index}
-          ejercicio={ejercicio}
-          miref={panelJuego}
-        />,
-      ]);
-      contador++;
-    } else if (ejercicio.type === "emparejar" ) {
-      setJuego((juego) => [
-        ...juego,
-        <Emparejar key={index} ejercicio={ejercicio} miref={panelJuego} />,
-      ]);
-      contador++;
     } 
+
+    if (ejercicio.type === "opcion_correcta_n"  && ejercicio.img) {
+      setJuego((juego) => [
+        ...juego,
+        <OpcionCorrecta_n key={index} ejercicio={ejercicio} miref={panelJuego} />,
+      ]);
+    }
   });
 
   setPreguntasValidas(contador);
