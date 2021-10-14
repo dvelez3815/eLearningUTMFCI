@@ -17,11 +17,19 @@ const SuccessData = {
 
 
 export const mostrarAlertaError= (respuesta)=>{
+    let cadena = "";
+    if(Array.isArray(respuesta)){
+        respuesta.forEach((item)=>{
+            cadena+= (item + " <br/>")
+        })
+    }
+
     Swal.fire(
         {
             title: "Oops..",
             type: "error",
-            text: "Correct Answer: "+respuesta,
+            html: Array.isArray(respuesta)?"<p style='color:green; font-weight: bold;'>Correct Answer: </p>"+cadena:"<p style='color:green; font-weight: bold;'>Correct Answer: </p>"+respuesta,
+            customClass: 'swal-wide',
             confirmButtonText: "Ok",
         },
     ).then((result) => {
@@ -37,15 +45,15 @@ export const mostrarAlertaError= (respuesta)=>{
 export const finPrueba= (aciertos, total)=>{
     Swal.fire(
         {
-            title: "Total aciertos",
+            title: "Resultado",
             type: "success",
-            text: aciertos+"/"+total,
+            text: "HAS ACERTADO " + aciertos+" DE "+total + " PREGUNTAS",
             confirmButtonText: "Ok",
         },
     ).then((result) => {
         if (result.value) {
             
-            window.location = "/dashboard";
+            window.location = "/evaluacion";
         } else {
             
         }

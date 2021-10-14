@@ -46,7 +46,7 @@ const Emparejar = (props) => {
         let contador = 0;
         aMarcar.forEach(element => {
             console.log(element.getElementsByTagName("button")[0].innerText);    
-            if(element.getElementsByTagName("button")[0].innerText === "click en las opciones"){
+            if(element.getElementsByTagName("button")[0].innerText === "esperando respuesta..."){
                 contador += 1;
             }
         });
@@ -55,7 +55,7 @@ const Emparejar = (props) => {
         console.log(contador, aMarcar.length);
         if(contador  !== 0){
             aMarcar.some(element => {
-                if(element.getElementsByTagName("button")[0].innerText === "click en las opciones"){
+                if(element.getElementsByTagName("button")[0].innerText === "esperando respuesta..."){
                     element.getElementsByTagName("button")[0].innerText = event.target.innerText;
                     event.target.parentNode.parentNode.classList.add("bg-gray-400");
                     event.target.parentNode.classList.add("invisible");                    
@@ -69,10 +69,10 @@ const Emparejar = (props) => {
 
 
     return (
-        <div className="flex flex-col flex-wrap mt-8">  
-          <h2 className="m-auto p-auto text-sm font-bold sm:text-2xl">{(props.ejercicio.question)}</h2>
-        <div className="container m-auto p-auto w-auto" ref={divRef}>
-          <div className="flex flex-col items-center justify-center gap-2 my-20 mr-8 ml-8" ref={props.miref}>
+        <div className="flex flex-col flex-wrap mt-8 sm:px-80 ">  
+          <h2 className="m-auto p-auto text-sm font-bold sm:text-2xl text-green-700">{(props.ejercicio.question)}</h2>
+        <div className="container m-auto p-auto w-auto " ref={divRef}>
+          <div className="flex flex-col items-center justify-center gap-2 my-20 mr-8 ml-8  " ref={props.miref}>
         {props.ejercicio.body.map((item, index) => {
                 if(item.item  && item.answer){
                     let juego = [];
@@ -94,7 +94,7 @@ const Emparejar = (props) => {
         </div>
         <div className="flex flex-wrap gap-4 items-center justify-center" ref={opcionesRef}>
         {opciones.length>0 && opciones.map((opcion, index) => {
-            return <div key={shortid.generate()} className={"rounded-full"}><button onClick = {(event, props)=>{cambiarVisibilidad(event, props)}}><span className="text-sm sm:text-lg cardCheck px-5">{opcion}</span></button></div>
+            return <div key={shortid.generate()} className={"rounded-full "}><button onClick = {(event, props)=>{cambiarVisibilidad(event, props)}}><span className="text-sm sm:text-lg cardCheck px-5 border-yellow-200 ">{opcion}</span></button></div>
         })}
         </div> 
         </div>
@@ -114,7 +114,7 @@ const InputCompletarTexto = (props) => {
             if(props.opt[index] === event.target.innerText){
                 element.firstChild.classList.remove("invisible");
                 element.classList.remove("bg-gray-400");
-                event.target.innerText = "click en las opciones";
+                event.target.innerText = "esperando respuesta...";
 
             }
 
@@ -123,7 +123,7 @@ const InputCompletarTexto = (props) => {
     }
 
     return (
-             <button className={"shadow appearance-none border rounded w-full h-13 sm:h-12 sm:full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xs"} onClick={volverALaNormalidad}>click en las opciones</button>
+             <button className={"shadow appearance-none border rounded w-full h-13 sm:h-12 sm:full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xs "} onClick={volverALaNormalidad}>esperando respuesta...</button>
       );      
         
 }
@@ -131,7 +131,7 @@ const InputCompletarTexto = (props) => {
 
 const JuegoCompletarTexto= (props) => {
     return (
-      <div className="flex w-full sm:w-full justify-items-center	items-center gap-4">
+      <div className="flex w-full sm:w-full justify-items-center items-center gap-4">
           {props.juego.map((juego,index)=>{
               if(typeof juego === 'string'){
                   return <p key={shortid.generate()} className={"w-auto sm:w-full mx-2 text-justify	text-xs sm:text-xl"}>{juego}</p>

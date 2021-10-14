@@ -4,6 +4,7 @@ import {Menu, Transition } from "@headlessui/react";
 import Cookie from "universal-cookie";
 
 import user from "../assets/resource/user.png";
+import logobn from "../assets/resource/Logo_Provicional_bn.png";
 const cookies = new Cookie();
 
 class NavComponent extends React.Component {
@@ -23,12 +24,12 @@ class NavComponent extends React.Component {
     cookies.remove("name", { path: "/" });
     cookies.remove("lastname", { path: "/" });
     cookies.remove("mail", { path: "/" });
-    window.location.href = "./signin";
+    window.location.href = "./";
   }
   render() {
     return (
       <div>
-        <nav className="bg-white dark:bg-gray-800  shadow ">
+        <nav className="bg-green-800  dark:bg-gray-800  shadow  ">
           <div className="max-w-7xl mx-auto ">
             <div className="flex items-center justify-between h-16">
               <div className=" flex items-center">
@@ -36,29 +37,23 @@ class NavComponent extends React.Component {
                   <img
                     className=""
                     width="125px"
-                    src={this.props.logo}
+                    src={logobn}
                     alt="Workflow"
                   />
                 </a>
                 <div className="hidden md:block">
-                  <div className="ml-10 flex items-baseline space-x-4">
+                  <div className=" ml-10 flex items-baseline space-x-4">
                     <a
-                      className={this.props.activado===1?"text-gray-800   hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium":"text-gray-300 dark:text-white  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"}
+                      className={this.props.activado===1?"font-semibold text-yellow-400 uppercase  hover:text-white dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium":"text-white dark:text-white  hover:text-yellow-400 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"}
                       href="/dashboard"
                     >
                       Learning
                     </a>
                     <a
-                      className={this.props.activado===2?"text-gray-800 uppercase hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium":"text-gray-300 dark:text-white  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"}
+                      className={this.props.activado===2?"font-semibold text-yellow-400  uppercase hover:text-white  dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium":"text-white dark:text-white  hover:text-yellow-400 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"}
                       href="/evaluacion"
                     >
                       Evaluation
-                    </a>
-                    <a
-                      className={this.props.activado===3?"text-gray-800 uppercase hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium":"text-gray-300 dark:text-white  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"}
-                      href="/evaluacion"
-                    >
-                      Resource
                     </a>
                   </div>
                 </div>
@@ -86,7 +81,7 @@ class NavComponent extends React.Component {
                 </button>
               </div>
               <div className="-mr-2 flex ">
-                <h2 className="text-xl font-semibold py-1 text-gray-800">
+                <h2 className="text-xl font-semibold py-1 text-white">
                   {cookies.get('name') + ' ' + cookies.get('lastname')}
                 </h2>
                 <Menu as="div" className="ml-3 relative">
@@ -115,19 +110,6 @@ class NavComponent extends React.Component {
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="#"
-                            className={this.classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
-                            )}
-                          >
-                            Settings
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
                             className={this.classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
@@ -150,13 +132,13 @@ class NavComponent extends React.Component {
             >
               <a
                 className="text-gray-800 hover:text-gray-800 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                href="/#"
+                href="/dashboard"
               >
                 APRENDIZAJE
               </a>
               <a
                 className="text-gray-300 hover:text-gray-800 dark:text-white block px-3 py-2 rounded-md text-base font-medium"
-                href="/#"
+                href="/evaluacion"
               >
                 EVALUACIÓN
               </a>

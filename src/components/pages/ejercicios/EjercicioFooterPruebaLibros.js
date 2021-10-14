@@ -100,7 +100,7 @@ async function noEsCorrecta(props) {
     hijos.some((element) => {
       if (
         element.getElementsByTagName("button")[0].innerText ===
-        "click en las opciones"
+        "esperando respuesta..."
       ) {
         faltaMarcar = true;
         return true;

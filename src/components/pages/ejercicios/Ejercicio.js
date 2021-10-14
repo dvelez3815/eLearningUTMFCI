@@ -66,30 +66,30 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado,preguntas
     ejercicios.map((ejercicio, index) => {
         
 
-        // if(ejercicio.type === "completar_texto" && !ejercicio.img){
-        //     setJuego(juego => [...juego, <CompletarTexto key={index} ejercicio={ejercicio} miref={panelJuego}/>])
-        //     contador++;
-        // }else if(ejercicio.type === "ordenar" && !ejercicio.img){
-        //     setJuego(juego => [...juego, <Arrastrar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
-        //     contador++;
-        // }else if(ejercicio.type === "true_false" && !ejercicio.img){
-        //     setJuego(juego => [...juego, <VerdaderoFalso key={index} ejercicio={ejercicio} miref={panelJuego}/>])
-        //     contador++;
-        // }else if(ejercicio.type === "opcion_correcta_1" && !ejercicio.img){
-        //     setJuego(juego => [...juego, <OpcionCorrecta_1 key={index} ejercicio={ejercicio} miref={panelJuego}/>])
-        //     contador++;
-        // }else if(ejercicio.type === "opcion_correcta_n" && !ejercicio.img){
-        //     setJuego(juego => [...juego, <OpcionCorrecta_n key={index} ejercicio={ejercicio} miref={panelJuego}/>])
-        //     contador++;
-        // }else if(ejercicio.type === "emparejar"  && !ejercicio.img){
-        //     setJuego(juego => [...juego, <Emparejar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
-        //     contador++;
-        // }
+         if(ejercicio.type === "completar_texto" && !ejercicio.img){
+             setJuego(juego => [...juego, <CompletarTexto key={index} ejercicio={ejercicio} miref={panelJuego}/>])
+             contador++;
+         }else if(ejercicio.type === "ordenar" && !ejercicio.img){
+             setJuego(juego => [...juego, <Arrastrar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
+             contador++;
+         }else if(ejercicio.type === "true_false" && !ejercicio.img){
+             setJuego(juego => [...juego, <VerdaderoFalso key={index} ejercicio={ejercicio} miref={panelJuego}/>])
+             contador++;
+         }else if(ejercicio.type === "opcion_correcta_1" && !ejercicio.img){
+             setJuego(juego => [...juego, <OpcionCorrecta_1 key={index} ejercicio={ejercicio} miref={panelJuego}/>])
+             contador++;
+         }else if(ejercicio.type === "opcion_correcta_n" && !ejercicio.img){
+             setJuego(juego => [...juego, <OpcionCorrecta_n key={index} ejercicio={ejercicio} miref={panelJuego}/>])
+             contador++;
+         }else if(ejercicio.type === "emparejar"  && !ejercicio.img){
+             setJuego(juego => [...juego, <Emparejar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
+             contador++;
+         }
 
-        if(ejercicio.type === "emparejar"  && !ejercicio.img){
-                setJuego(juego => [...juego, <Emparejar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
-                contador++;
-            }
+        //if(ejercicio.type === "emparejar"  && !ejercicio.img){
+         //       setJuego(juego => [...juego, <Emparejar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
+          //      contador++;
+         //   }
     
     }
     )

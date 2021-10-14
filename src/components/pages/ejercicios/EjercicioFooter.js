@@ -133,7 +133,7 @@ const validarRespuesta = async (props) => {
     await verificarOpcion_Correcta_n(props, hijos, contadorRespuestas);
   } else if (tipo_ejercicio === "ordenar") {
     let hijos = [...props.miref.current.children];
-
+    let respuestaBackEndBase = [];
     //se quita la ref
     const respuestasBack = Array.from(
       props.ejercicio.props.ejercicio.options
@@ -142,10 +142,15 @@ const validarRespuesta = async (props) => {
       if (item) {
         item = [...item.sort((a, b) => (a.answer > b.answer ? 1 : -1))];
         let texto = "";
+        let textoBase = "";
         for (let i = 0; i < item.length; i++) {
           const element = item[i];
           texto += element.item;
+          textoBase += (element.item + " ")
+          
         }
+        respuestaBackEndBase.push((textoBase+" \n"));
+        texto = texto.replace(/\s/g, "");
         return texto;
       }
     });
@@ -153,7 +158,8 @@ const validarRespuesta = async (props) => {
       props,
       hijos,
       contadorRespuestas,
-      respuestasBackEndOrdenadas
+      respuestasBackEndOrdenadas,
+      respuestaBackEndBase
     );
   } else if (tipo_ejercicio === "true_false") {
     let hijos = props.miref.current.children;
@@ -301,7 +307,8 @@ const verificarOrdenar = async (
   props,
   hijos,
   contadorRespuestas,
-  respuestasBackEndOrdenadas
+  respuestasBackEndOrdenadas,
+  respuestaBackEndBase
 ) => {
   let esCorrecta = false;
   let respuestasUser = [];
@@ -310,8 +317,10 @@ const verificarOrdenar = async (
     if (hijos[i].id === "arrastrar") {
       let respuesta = hijos[i].children[1].innerText
         .toString()
-        .replace(/\n/g, "")
+        .replace(/\n/g, " ")
         .trim();
+        
+      respuesta = respuesta.replace(/\s/g, "");        
       respuesta.replace(/\s\s+/g, " ");
       respuestasUser.push(respuesta);
     }
@@ -325,11 +334,12 @@ const verificarOrdenar = async (
   } else {
     esCorrecta = false;
   }
+  console.log(respuestasUser, respuestasBackEndOrdenadas);
 
   if (esCorrecta) {
     enviarSiEsCorrecta(props, contadorRespuestas);
   } else {
-    noEsCorrecta(props,respuestasBackEndOrdenadas);
+    noEsCorrecta(props,respuestaBackEndBase);
   }
 };
 

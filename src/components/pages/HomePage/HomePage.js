@@ -1,5 +1,6 @@
 import React from "react";
 import NavBar from "../../NavBar/NavBar";
+
 import Circulo from "../../../assets/resource/Semi_Circulo.png";
 import Chica from "../../../assets/resource/CHICA.png";
 import LogoProvicional from "../../../assets/resource/Logo_Provicional.png";
@@ -65,13 +66,16 @@ class HomePage extends React.Component {
             <img className=" h-1/2 w-10/12 md:w-auto " src={Chica} alt=" circulo" />
           </div>
         </div>
-        <div className="absolute   bottom-0 left-0 z-10">
+        <div className="absolute bottom-0 left-0 z-10">
           <div className=" flex xl:max-w-xl  lg:max-w-xl md:max-w-md sm:max-w-xs   h-auto">
-            <img className="h-1/2 w-auto hidden sm:block" src={Circulo} alt=" circulo" />
+            <img className="h-1/4 w-auto hidden sm:block" src={Circulo} alt=" circulo" />
           </div>
         </div>
       </div>
+      <div className='relative py-20'>
+      </div>
     </div>
+    
   );
 
   }

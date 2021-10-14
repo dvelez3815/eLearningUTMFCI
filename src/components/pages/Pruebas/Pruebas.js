@@ -15,15 +15,21 @@ const Pruebas = () => {
         const id = window.location.href.split('/')[window.location.href.split('/').length - 1];
 
         let prueba = window.location.href.split('/')[3];
-        if(prueba === 'pruebas'){
-            setPrueba(true);
-        }
+
         setIdlibro(id);
         getData(id).then(data => {
-            setData(data);
+            if (prueba==='pruebas') {
+                let dataPrueba = cutData(data);
+                setData(dataPrueba);
+                setPrueba(true);
+            } else {
+                setData(data)
+                
+            }
             setLoadingData(false);
         });
-        console.log(id);
+        
+        
     }, [])
 
 
@@ -43,4 +49,14 @@ const getData = async(idlibro) => {
     return data;
 }
 
+
+const cutData = (data) => {
+    let newData = [];
+
+    for (let i = 0; i < 60; i++) {
+        let random = Math.floor(Math.random() * data.length);
+        newData.push(data[random]);
+    }
+    return newData;
+}
 export default Pruebas

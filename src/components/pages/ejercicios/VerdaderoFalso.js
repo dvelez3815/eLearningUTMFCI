@@ -43,7 +43,7 @@ const VerdaderoFalso = (props) => {
   const TextoGeneral= (props) => {
     return (
       <div className="text-left w-full">
-        <h2 className="text-md font-bold text-left my-4 uppercase block">---------------</h2>
+        <h2 className="text-md font-bold text-left my-4 uppercase block"></h2>
 
       <div className="flex gap-3 flex-wrap">
           {props.juego.map((juego,index)=>{

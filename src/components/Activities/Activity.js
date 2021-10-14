@@ -29,7 +29,7 @@ export default function Activity(props) {
       ref={props.myref}
     >
       <div>
-        <Menu.Button className="inline-flex justify-center w-full  px-4 py-2 bg-white text-sm font-medium text-gray-700" disabled={props.percent===100?true:false}>
+        <Menu.Button className="inline-flex justify-center w-full  px-4 py-2 bg-white text-sm font-medium text-gray-700" /*disabled={props.percent===100?true:false}*/>
           <div
             className={props.percent !== 100?"circle":"completed"}
           >
@@ -59,31 +59,17 @@ export default function Activity(props) {
           <div className="py-1">
             <div className="p-2 text-left">
               <h2 className="text-lg mx-2 font-bold text-gray-900">
-                {props.moduleName}
+                Completed: {props.percent}% 
               </h2>
               <h2 className="text-sm mx-2 font-bold text-gray-500">
-                {props.name}
+                {props.percent == 100?"activities completed":"Do activities"}
               </h2>
             </div>
 
-            <Menu.Item>
+          
+            <Menu.Item className="bg-green-600 w-3/4 my-2 hover:bg-green-800 text-white font-bold py-2 px-4 rounded" disabled={props.percent===100?true:false}>
               {({ active }) => (
-                <button className="bg-transparent w-3/4 my-2 text-yellow-500 font-semibold hover:text-yellow-400 py-2 px-4 border border-yellow-500 hover:border-yellow-500 rounded">
-                  <a
-                    href="#"
-                    /* className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm'
-                  )} */
-                  >
-                    Content
-                  </a>
-                </button>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <button className="bg-green-600 w-3/4 my-2 hover:bg-green-800 text-white font-bold py-2 px-4 rounded">
+                <button >
                   <a className="block"
                     href={props.ruta}
                    /*  className={classNames(
@@ -91,7 +77,7 @@ export default function Activity(props) {
                       "block px-4 py-2 text-sm"
                     )} */
                   >
-                    Start
+                     {props.percent == 100?"Good Job":"start"}
                   </a>
                 </button>
               )}

@@ -1,5 +1,6 @@
 import React, { createRef, useEffect } from "react";
 import NavComponent from "../../NavComponent";
+import Footer from "../../Footer";
 import logo from "../../../assets/resource/Logo_Provicional.png";
 import CollectionsBookmarkIcon from "@material-ui/icons/CollectionsBookmark";
 import { useState } from "react";
@@ -87,8 +88,8 @@ export const Inicio = () => {
     <div>
       <NavComponent logo={logo} activado={1} />
       {cargando?<div className="cargando"><img src={loading}></img></div>:
-  <div className="grid grid-cols-12">
-  <div className="xl:col-span-9 col-span-12">
+  <div className="grid grid-cols-12 ">
+    <div className="xl:col-span-9 col-span-12 justify-center">
     {userProgress.map((modulo, index) => {
 
       if ((index + 1) % 2 === 0) {
@@ -246,17 +247,18 @@ export const Inicio = () => {
         );
       }
     })}
+    
   </div>
 
   {/* BARRA LATERAL */}
 
-  <div className="hidden md:block md:col-span-3  mx-auto w-full ">
-    <div className="flex flex-wrap flex-col justify-center">
-      <div className="py-5  hidden md:block">
-        <div className="border shadow rounded-2xl flex flex-col w-4/6 text-left p-2">
+  <div className="hidden md:block md:col-span-3  w-auto fixed inset-y-30 right-10 ">
+    <div className="py-5 flex flex-wrap flex-col justify-center">
+      <div className="border shadow rounded-2xl py-5  hidden md:block p-4">
+        <div>
           <div className="flex flex-col-2">
             <div className="text-left">
-              <h2 className="font-semibold text-xl m-2">Module</h2>
+              <h2 className="font-semibold text-xl m-2">Content</h2>
             </div>
       
           </div>
@@ -269,56 +271,56 @@ export const Inicio = () => {
             </div>
             <div className="flex flex-col " id="info">
               <div>
-                <h2 className="text-gray-700 text-lg">
+                <h2 className="text-gray-700 text-lg text-left">
                   <ol>
-                    <li className="hover:text-green-500">
+                    <li className="text-base hover:text-green-500 py-1">
                       {" "}
                       <a
                         target="_blank"
                         rel="noopener noreferrer"
-                        href="https://drive.google.com/file/d/1pwa9ffmEMoHOJBa98KDNpONhp92DtoL6/view?usp=sharing"
+                        //href=""
                       >
-                        Module 1
+                        º Book 1 (Module 1 - Module 2)
                       </a>{" "}
                     </li>
-                    <li className="hover:text-green-500">
+                    <li className="text-base hover:text-green-500 py-1">
                       {" "}
                       <a
                         target="_blank"
                         rel="noopener noreferrer"
-                        href="https://drive.google.com/file/d/1zSL78FugkafrXulTG9Wb3CcHwouNr62y/view?usp=sharing"
+                        //href=""
                       >
-                        Module 2
+                        º Book 2 (Module 3 - Module 4)
                       </a>{" "}
                     </li>
-                    <li className="hover:text-green-500">
+                    <li className="text-base hover:text-green-500 py-1">
                       {" "}
                       <a
                         target="_blank"
                         rel="noopener noreferrer"
-                        href="https://drive.google.com/file/d/1kVydGHFB5M59yMLyAQVM6w0YnN-uf4zJ/view?usp=sharing"
+                        //href=""
                       >
-                        Module 3
+                        º Book 3 (Module 5 - Module 6)
                       </a>{" "}
                     </li>
-                    <li className="hover:text-green-500">
+                    <li className="text-base hover:text-green-500 py-1">
                       {" "}
                       <a
                         target="_blank"
                         rel="noopener noreferrer"
-                        href="https://drive.google.com/file/d/1Q8COVdO2dGtjDt6mrdb4I1HuqB3w_yxb/view?usp=sharing"
+                        //href=""
                       >
-                        Module 4
+                        º Book 4 (Module 7 - Module 8)
                       </a>{" "}
                     </li>
-                    <li className="hover:text-green-500">
+                    <li className="text-base hover:text-green-500 py-1">
                       {" "}
                       <a
                         target="_blank"
                         rel="noopener noreferrer"
-                        href="https://drive.google.com/file/d/158WHHjUUYaFvTJaxBK5-SbDS-Fxz1BAy/view?usp=sharing"
+                        //href=""
                       >
-                        Module 5
+                        º Book 5 (Module 9 - Module 10)
                       </a>{" "}
                     </li>
                   </ol>
@@ -330,15 +332,98 @@ export const Inicio = () => {
       </div>
                       
     </div>
+    <div className="py-5 flex flex-wrap flex-col justify-center">
+      <div className="border shadow rounded-2xl py-5  hidden md:block p-4">
+        <div>
+          <div className="flex flex-col-2">
+            <div className="text-left">
+              <h2 className="font-semibold text-xl m-2">Digital Resources</h2>
+            </div>
+      
+          </div>
+          <div className="flex p-2 gap-4 flex-col md:flex-row">
+            <div
+              className="flex justify-center items-start rounded-2xl"
+              id="estrella"
+            >
+              {/* <CollectionsBookmarkIcon color="action" fontSize="large" /> */}
+            </div>
+            <div className="flex flex-col  " id="info">
+              <div>
+                <h2 className=" text-gray-700 text-lg text-center">
+                  <ol>
+                    <li className=" text-base hover:text-green-500 py-1">
+                      {" "}
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href="https://drive.google.com/file/d/1pwa9ffmEMoHOJBa98KDNpONhp92DtoL6/view?usp=sharing"
+                      >
+                       { <CollectionsBookmarkIcon color="action" fontSize="large" /> } Download Book 1
+                      </a>{" "}
+                    </li>
+                    <li className="text-base hover:text-green-500 py-1">
+                      {" "}
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href="https://drive.google.com/file/d/1zSL78FugkafrXulTG9Wb3CcHwouNr62y/view?usp=sharing"
+                      >
+                        { <CollectionsBookmarkIcon color="action" fontSize="large" /> } Download Book 2 
+                      </a>{" "}
+                    </li>
+                    <li className="text-base hover:text-green-500 py-1">
+                      {" "}
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href="https://drive.google.com/file/d/1kVydGHFB5M59yMLyAQVM6w0YnN-uf4zJ/view?usp=sharing"
+                      >
+                        { <CollectionsBookmarkIcon color="action" fontSize="large" /> } Download Book 3 
+                      </a>{" "}
+                    </li>
+                    <li className="text-base hover:text-green-500 py-1">
+                      {" "}
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href="https://drive.google.com/file/d/1Q8COVdO2dGtjDt6mrdb4I1HuqB3w_yxb/view?usp=sharing"
+                      >
+                        { <CollectionsBookmarkIcon color="action" fontSize="large" /> } Download Book 4 
+                      </a>{" "}
+                    </li>
+                    <li className="text-base hover:text-green-500 py-1">
+                      {" "}
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href="https://drive.google.com/file/d/158WHHjUUYaFvTJaxBK5-SbDS-Fxz1BAy/view?usp=sharing"
+                      >
+                        { <CollectionsBookmarkIcon color="action" fontSize="large" /> } Download Book 5 
+                      </a>{" "}
+                    </li>
+                  </ol>
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+                      
+    </div>
+  
   </div>
 </div>
 
-    
-      
       }
+      <div className='relative py-20'>
+      </div>
+      
     </div>
+    
   );
 };
+
 
 export default Inicio;
 /* 
