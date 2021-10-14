@@ -5,7 +5,7 @@ import { finPrueba, mostrarAlertaError } from '../../Alert/Alerts';
 const EjercicioFooterPruebaLibros = (props) => {
     return (
        
-        <div className="flex items-center justify-center flex-row container">
+        <div className="flex items-center justify-center  ">
           <div className="">
             <button
               className=" text-xs sm:text-xl tracking-wider  text-white bg-green-500 font-semibold  hover:bg-green-400 py-2 px-4 capitalize border border-green-500 hover:border-green-600 rounded "

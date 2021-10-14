@@ -80,6 +80,13 @@ export const mostrarAlertaExitoFin= ()=>{
     });
 }
 
+export const mostrarImagen = (img) =>{
+Swal.fire({
+    imageUrl: img, 
+    imageAlt: "Text img", 
+    showCloseButton: true
+})
+}
 
 export const mostrarAlertaSalir= ()=>{
     Swal.fire(

@@ -1,8 +1,7 @@
 import React, { createRef, useRef } from "react";
 import { useHistory } from "react-router-dom";
-
 import "../../pages/ejercicios/CheckExercise.css";
-
+import ViewImage from '../../ViewImage/ViewImage'
 export const OpcionCorrecta_1 = (props) => {
   const history = useHistory();
   const opciones = useRef(null);
@@ -40,14 +39,9 @@ export const OpcionCorrecta_1 = (props) => {
       </h2>
 
       {props.ejercicio.img && (
-        <div className="m-auto">
-          <img
-            src={`https://drive.google.com/uc?export=view&id=${props.ejercicio.img}`}
-            width="400px"
-          ></img>
-        </div>
-      )}
-      {!props.ejercicio.img && <div className="h-20"></div>}
+          <ViewImage img={props.ejercicio.img} />
+        )}
+     {/*  {!props.ejercicio.img && <div className="h-20"></div>} */}
       <div className="container w-auto ">
         <div
           className="flex flex-wrap items-center justify-center gap-2"

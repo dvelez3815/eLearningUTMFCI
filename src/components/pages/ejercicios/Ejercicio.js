@@ -105,41 +105,42 @@ const cargarEjercicios2 = (
   //De esta manera la renderización del mensaje con estado cargando se va a mostrar hasta que se carguen todos los ejercicios.
   let contador = 0;
   ejercicios.map((ejercicio, index) => {
-     /* if (ejercicio.type === "completar_texto") {
+    /*  if (ejercicio.type === "completar_texto"  ) {
       setJuego((juego) => [
         ...juego,
         <CompletarTexto key={index} ejercicio={ejercicio} miref={panelJuego} />,
       ]);
       contador++;
-    } else if (ejercicio.type === "ordenar") {
+    } else if (ejercicio.type === "ordenar" ) {
       setJuego((juego) => [
         ...juego,
         <Arrastrar key={index} ejercicio={ejercicio} miref={panelJuego} />,
       ]);
       contador++;
-    } else  */
-
-
-    if (ejercicio.type === "true_false"  && ejercicio.img) {
+    } else */ if (ejercicio.type === "true_false" ) {
       setJuego((juego) => [
         ...juego,
         <VerdaderoFalso key={index} ejercicio={ejercicio} miref={panelJuego} />,
       ]);
       contador++;
     }
-    if (ejercicio.type === "ordenar"  && ejercicio.img) {
+    /* else if (ejercicio.type === "ordenar" ) {
       setJuego((juego) => [
         ...juego,
         <Arrastrar key={index} ejercicio={ejercicio} miref={panelJuego} />,
       ]);
     } 
 
-    if (ejercicio.type === "opcion_correcta_n"  && ejercicio.img) {
+    else if (ejercicio.type === "opcion_correcta_n" ) {
       setJuego((juego) => [
         ...juego,
-        <OpcionCorrecta_n key={index} ejercicio={ejercicio} miref={panelJuego} />,
+        <OpcionCorrecta_n
+          key={index}
+          ejercicio={ejercicio}
+          miref={panelJuego}
+        />,
       ]);
-    }
+    } */
   });
 
   setPreguntasValidas(contador);

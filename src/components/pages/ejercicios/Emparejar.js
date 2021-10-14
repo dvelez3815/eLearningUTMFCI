@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import shortid from "shortid";
 import "../../pages/ejercicios/CheckExercise.css";
-
+import ViewImage from '../../ViewImage/ViewImage'
 const Emparejar = (props) => {
   const [opciones, setOpciones] = useState([]);
   const divRef = React.useRef(null);
@@ -75,7 +75,9 @@ const Emparejar = (props) => {
       <h2 className="m-auto p-auto text-sm font-bold sm:text-2xl">
         {props.ejercicio.question}
       </h2>
-     
+      {props.ejercicio.img && (
+           <ViewImage img={props.ejercicio.img} />
+        )}
       <div className="container m-auto p-auto w-auto" ref={divRef}>
         <div
           className="flex flex-col items-center justify-center gap-2 mr-8 ml-8"

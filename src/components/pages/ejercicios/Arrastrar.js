@@ -2,7 +2,7 @@ import React from "react";
 import { useState} from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import shortid from "shortid";
-
+import ViewImage from '../../ViewImage/ViewImage'
 const Arrastrar = (props) => {
   let data = props.ejercicio.options;
 
@@ -54,6 +54,9 @@ const Arrastrar = (props) => {
   return (
     <div className="flex flex-col flex-wrap mb-4" ref={props.miref}>
       <h2 className="mt-10 text-2xl font-bold ">{(props.ejercicio.question)}</h2>
+      {props.ejercicio.img && (
+          <ViewImage img={props.ejercicio.img} />
+        )}
       {items.map((preguntas, index) => (
         <div
           className="container lg:m-auto lg:p-auto lg:w-auto lg:w-full md:m-7 "

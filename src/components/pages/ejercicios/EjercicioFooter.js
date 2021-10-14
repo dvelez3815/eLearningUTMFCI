@@ -16,7 +16,7 @@ const EjercicioFooter = (props) => {
   }, []);
 
   return (
-    <div className="mr-8 ml-8 mt-8">
+    <div className="m-8">
       <div className="flex justify-between flex-row container m-auto p-auto">
         <div className="mb-4">
           <button

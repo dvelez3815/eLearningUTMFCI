@@ -1,15 +1,18 @@
 import React, { createRef, useRef, useState } from "react";
 import shortid from "shortid";
 import { OpcionCorrecta_1 } from "./OpcionCorrecta_1";
-
+import ViewImage from '../../ViewImage/ViewImage'
 const VerdaderoFalso = (props) => {
     return (
       <div className="flex flex-col flex-wrap mt-8">  
       <h2 className="m-auto p-auto text-sm font-bold sm:text-2xl">{(props.ejercicio.question)}</h2>
+      {props.ejercicio.img && (
+          <ViewImage img={props.ejercicio.img}/>
+        )}
     <div className="container m-auto p-auto w-auto">
-      <div className="flex flex-col items-center justify-center gap-2 my-20 mr-8 ml-8" ref={props.miref}>
+      <div className="flex flex-col items-center justify-center gap-2 mr-8 ml-8  divide-y-4 divide-gray-200 divide-dotted" ref={props.miref}>
 
-        {console.log(props.ejercicio.img)}
+        
         
             {props.ejercicio.body.map((item, index) => {
                 if(item.item  && item.answer){
@@ -28,7 +31,7 @@ const VerdaderoFalso = (props) => {
                         }
                         
                     })
-                    return <TextoGeneral key={shortid.generate()} juego={juego}/>
+                    return <TextoGeneral key={shortid.generate()} juego={juego} index={index}/>
                 }else{
                     
                 }
@@ -45,8 +48,8 @@ const VerdaderoFalso = (props) => {
 
   const TextoGeneral= (props) => {
     return (
-      <div className="text-left w-full">
-        <h2 className="text-md font-bold text-left my-4 uppercase block">---------------</h2>
+      <div className="text-left w-full ">
+        <h2 className="text-md font-bold text-left my-4 uppercase block"></h2>
 
       <div className="flex gap-3 flex-wrap">
           {props.juego.map((juego,index)=>{

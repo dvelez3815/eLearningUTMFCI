@@ -1,7 +1,6 @@
-
 import React, { createRef, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
-
+import ViewImage from '../../ViewImage/ViewImage'
 export const OpcionCorrecta_n = (props) => {
   const history = useHistory();
   const opciones = useRef(null);
@@ -9,7 +8,6 @@ export const OpcionCorrecta_n = (props) => {
   const imagesRef = useRef(
     [...Array(props.ejercicio.options.length)].map(() => createRef())
   );
-
 
   const marcar = (imagenRef) => {
     try {
@@ -23,39 +21,40 @@ export const OpcionCorrecta_n = (props) => {
 
   return (
     <div className="flex flex-col flex-wrap mt-8">
-      <h2 className="m-auto p-auto text-2xl">{(props.ejercicio.question)}</h2>
-    <div className="container m-auto p-auto w-auto">
-      {console.log(props.ejercicio.img)}
-      <div
-        className="flex flex-wrap items-center justify-center  	gap-2 my-20"
-        aria-label="choice"
-        role="radiogroup"
-        ref={opciones}
-        ref={props.miref}
-      >
-        {props.ejercicio.options.map((ejercicio, index) => {
-          return (
-            <Texto
-              key={index}
-              src={
-                "https://d2pur3iezf4d1j.cloudfront.net/images/18a521f1507cb86689faa5b2e8277703"
-              }
-              alt={"agua"}
-              nombre={"agua"}
-              marcar={marcar}
-              myref={imagesRef.current[index]}
-              data={props.ejercicio.options[index]}
-            />
-          );
-        })}
+      <h2 className="m-auto p-auto text-2xl">{props.ejercicio.question}</h2>
+        {props.ejercicio.img && (
+          <ViewImage img={props.ejercicio.img} />
+        )}
+      <div className="container m-auto p-auto w-auto">
+        <div
+          className="flex flex-wrap items-center justify-center gap-2 "
+          aria-label="choice"
+          role="radiogroup"
+          ref={opciones}
+          ref={props.miref}
+        >
+          {props.ejercicio.options.map((ejercicio, index) => {
+            return (
+              <Texto
+                key={index}
+                src={
+                  "https://d2pur3iezf4d1j.cloudfront.net/images/18a521f1507cb86689faa5b2e8277703"
+                }
+                alt={"agua"}
+                nombre={"agua"}
+                marcar={marcar}
+                myref={imagesRef.current[index]}
+                data={props.ejercicio.options[index]}
+              />
+            );
+          })}
+        </div>
       </div>
-    </div>
     </div>
   );
 };
 
 const Texto = (props) => {
-
   return (
     <div
       style={{ height: "70px" }}
@@ -65,7 +64,8 @@ const Texto = (props) => {
       tabIndex="-1"
       ref={props.myref}
     >
-      <button className="h-full"
+      <button
+        className="h-full"
         onClick={() => {
           props.marcar(props.myref);
         }}
