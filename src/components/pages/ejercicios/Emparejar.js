@@ -44,7 +44,7 @@ const Emparejar = (props) => {
       console.log(element.getElementsByTagName("button")[0].innerText);
       if (
         element.getElementsByTagName("button")[0].innerText ===
-        "esperando respuesta..."
+        "Waiting answer..."
       ) {
         contador += 1;
       }
@@ -56,7 +56,7 @@ const Emparejar = (props) => {
       aMarcar.some((element) => {
         if (
           element.getElementsByTagName("button")[0].innerText ===
-          "esperando respuesta..."
+          "Waiting answer..."
         ) {
           element.getElementsByTagName("button")[0].innerText =
             event.target.innerText;
@@ -125,7 +125,7 @@ const InputCompletarTexto = (props) => {
       if (props.opt[index] === event.target.innerText) {
         element.firstChild.classList.remove("invisible");
         element.classList.remove("bg-gray-400");
-        event.target.innerText = "esperando respuesta...";
+        event.target.innerText = "Waiting answer...";
       }
     });
   };
@@ -137,7 +137,7 @@ const InputCompletarTexto = (props) => {
       }
       onClick={volverALaNormalidad}
     >
-      esperando respuesta...
+      Waiting answer...
     </button>
   );
 };
@@ -155,6 +155,7 @@ const JuegoCompletarTexto = (props) => {
                   "w-auto sm:w-auto mx-2 text-justify text-xs sm:text-lg"
                 } */
               >
+                 
                   <ViewImage img={juego}/>
               </div>
             );

@@ -13,7 +13,7 @@ const EjercicioFooterPruebaLibros = (props) => {
                 className=" text-xs sm:text-xl tracking-wider  text-white bg-green-500 font-semibold  hover:bg-green-400 py-2 px-4 capitalize border border-green-500 hover:border-green-600 rounded "
                 onClick={() => {validarRespuesta(props)} }>
                 <span>
-                  <p>Siguiente</p>    
+                  <p>Next</p>    
                 </span>
               </button>   
               ): <div className='flex flex-col justify-center items-center'>
