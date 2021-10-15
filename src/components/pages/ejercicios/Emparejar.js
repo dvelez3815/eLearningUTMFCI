@@ -78,7 +78,7 @@ const Emparejar = (props) => {
               <ViewImage img={props.ejercicio.img} />
             )}
        < div  className = "contenedor m-auto p-auto w-auto"  ref = { divRef } >
-       < div  className = "flex flex-col items-center justify-center gap-2 my-10 sm:my-20 mr-8 ml-8   "  ref = { props.miref } >
+       < div  className = "flex flex-col items-center justify-center my-5 sm:my-1 mr-8 ml-8   "  ref = { props.miref } >
           {props.ejercicio.body.map((item, index) => {
             if (item.item && item.answer) {
               let juego = [];
@@ -144,19 +144,19 @@ const InputCompletarTexto = (props) => {
 
 const JuegoCompletarTexto = (props) => {
   return (
-    <div className="grid grid-cols-2 w-full sm:w-full py-3 items-center gap-2 space-y-2">
+    <div className="grid grid-cols-2 w-full sm:w-full items-center gap-2 ">
       <div>
         {props.juego.map((juego, index) => {
           if (typeof juego === "string") {
             return (
-              <h2
+              <div
                 key={shortid.generate()}
-                className={
+               /*  className={
                   "w-auto sm:w-auto mx-2 text-justify text-xs sm:text-lg"
-                }
+                } */
               >
-                {juego}
-              </h2>
+                  <ViewImage img={juego}/>
+              </div>
             );
           }
         })}
