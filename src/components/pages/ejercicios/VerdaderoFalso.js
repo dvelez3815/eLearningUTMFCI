@@ -48,11 +48,7 @@ const VerdaderoFalso = (props) => {
 
   const TextoGeneral= (props) => {
     return (
-<<<<<<< HEAD
-      <div className="text-left w-full">
-=======
       <div className="text-left w-full ">
->>>>>>> c38d659446e195f104aaea7c5d3dbedebc567a31
         <h2 className="text-md font-bold text-left my-4 uppercase block"></h2>
 
       <div className="flex gap-3 flex-wrap">

@@ -56,7 +56,6 @@ export const Ejercicio = (props) => {
             Para esto es necesario enviar el juego actual es decir juego[juego.length-1]	y el panel del juego actual, es decir lo que està en el medio de la pantalla, que es el juego actual.
             Tambièn se debe de enviar el contador para ir incrementando el estado de respondidas. */}
 
-<<<<<<< HEAD
             
             {finJuego || props.esPrueba?<EjercicioFooterPruebaLibros totalEjercicios = {preguntasValidas} ejercicio={juego[juego.length-1]} juego={juego} setJuego = {setJuego} cargado={cargado} setCargado={setCargado} setFinJuego={setFinJuego} miref={panelJuego} contadorRespondidas={contadorRespondidas} setContadorRespondidas={setContadorRespondidas} aciertos={aciertos} setAciertos={setAciertos}/>:<EjercicioFooter ejercicio={juego[juego.length-1]} juego={juego} setJuego = {setJuego} cargado={cargado} setCargado={setCargado} setFinJuego={setFinJuego} miref={panelJuego} contadorRespondidas={contadorRespondidas} setContadorRespondidas={setContadorRespondidas}/>}
         </div>
@@ -76,100 +75,31 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado,preguntas
     ejercicios.map((ejercicio, index) => {
         
 
-         if(ejercicio.type === "completar_texto" && !ejercicio.img){
+         if(ejercicio.type === "completar_texto"){
              setJuego(juego => [...juego, <CompletarTexto key={index} ejercicio={ejercicio} miref={panelJuego}/>])
              contador++;
-         }else if(ejercicio.type === "ordenar" && !ejercicio.img){
+         }else if(ejercicio.type === "ordenar"){
              setJuego(juego => [...juego, <Arrastrar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
              contador++;
-         }else if(ejercicio.type === "true_false" && !ejercicio.img){
+         }else if(ejercicio.type === "true_false"){
              setJuego(juego => [...juego, <VerdaderoFalso key={index} ejercicio={ejercicio} miref={panelJuego}/>])
              contador++;
-         }else if(ejercicio.type === "opcion_correcta_1" && !ejercicio.img){
+         }else if(ejercicio.type === "opcion_correcta_1"){
              setJuego(juego => [...juego, <OpcionCorrecta_1 key={index} ejercicio={ejercicio} miref={panelJuego}/>])
              contador++;
-         }else if(ejercicio.type === "opcion_correcta_n" && !ejercicio.img){
+         }else if(ejercicio.type === "opcion_correcta_n"){
              setJuego(juego => [...juego, <OpcionCorrecta_n key={index} ejercicio={ejercicio} miref={panelJuego}/>])
              contador++;
-         }else if(ejercicio.type === "emparejar"  && !ejercicio.img){
+         }else if(ejercicio.type === "emparejar" ){
              setJuego(juego => [...juego, <Emparejar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
              contador++;
          }
 
-        //if(ejercicio.type === "emparejar"  && !ejercicio.img){
+        //if(ejercicio.type === "emparejar" ){
          //       setJuego(juego => [...juego, <Emparejar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
           //      contador++;
          //   }
     
-=======
-      {finJuego || props.esPrueba ? (
-        <EjercicioFooterPruebaLibros
-          totalEjercicios={preguntasValidas}
-          ejercicio={juego[juego.length - 1]}
-          juego={juego}
-          setJuego={setJuego}
-          cargado={cargado}
-          setCargado={setCargado}
-          setFinJuego={setFinJuego}
-          miref={panelJuego}
-          contadorRespondidas={contadorRespondidas}
-          setContadorRespondidas={setContadorRespondidas}
-          aciertos={aciertos}
-          setAciertos={setAciertos}
-        />
-      ) : (
-        <EjercicioFooter
-          ejercicio={juego[juego.length - 1]}
-          juego={juego}
-          setJuego={setJuego}
-          cargado={cargado}
-          setCargado={setCargado}
-          setFinJuego={setFinJuego}
-          miref={panelJuego}
-          contadorRespondidas={contadorRespondidas}
-          setContadorRespondidas={setContadorRespondidas}
-        />
-      )}
-    </div>
-  );
-};
-
-const cargarEjercicios2 = (
-  ejercicios,
-  setJuego,
-  panelJuego,
-  setCargado,
-  preguntasValidas,
-  setPreguntasValidas
-) => {
-  //los ejercicios ya están cargando desde la vista anterior, solo se necesita una estructura que almacene los ejercicios de forma con componente
-  // para esto se iterra atravez de ejercicios y en una variable llamada Juego se guardan los ejercicios en forma de componentes
-
-  //finalmente iteramos los ejercicios, preguntamos el tipo, cargamos la variable juego con el tipo de juego correspondiente y una vez se cargan todos los juegos
-  //se actualiza el estado de cargando.
-
-  //De esta manera la renderización del mensaje con estado cargando se va a mostrar hasta que se carguen todos los ejercicios.
-  let contador = 0;
-  ejercicios.map((ejercicio, index) => {
-    /*  if (ejercicio.type === "completar_texto"  ) {
-      setJuego((juego) => [
-        ...juego,
-        <CompletarTexto key={index} ejercicio={ejercicio} miref={panelJuego} />,
-      ]);
-      contador++;
-    } else if (ejercicio.type === "ordenar" ) {
-      setJuego((juego) => [
-        ...juego,
-        <Arrastrar key={index} ejercicio={ejercicio} miref={panelJuego} />,
-      ]);
-      contador++;
-    } else */ if (ejercicio.type === "true_false" ) {
-      setJuego((juego) => [
-        ...juego,
-        <VerdaderoFalso key={index} ejercicio={ejercicio} miref={panelJuego} />,
-      ]);
-      contador++;
->>>>>>> c38d659446e195f104aaea7c5d3dbedebc567a31
     }
     /* else if (ejercicio.type === "ordenar" ) {
       setJuego((juego) => [
@@ -188,7 +118,7 @@ const cargarEjercicios2 = (
         />,
       ]);
     } */
-  });
+  );
 
   setPreguntasValidas(contador);
   setCargado(false);
