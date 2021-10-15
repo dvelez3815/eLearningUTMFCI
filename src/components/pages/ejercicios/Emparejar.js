@@ -44,7 +44,7 @@ const Emparejar = (props) => {
       console.log(element.getElementsByTagName("button")[0].innerText);
       if (
         element.getElementsByTagName("button")[0].innerText ===
-        "click en las opciones"
+        "esperando respuesta..."
       ) {
         contador += 1;
       }
@@ -56,7 +56,7 @@ const Emparejar = (props) => {
       aMarcar.some((element) => {
         if (
           element.getElementsByTagName("button")[0].innerText ===
-          "click en las opciones"
+          "esperando respuesta..."
         ) {
           element.getElementsByTagName("button")[0].innerText =
             event.target.innerText;
@@ -71,18 +71,14 @@ const Emparejar = (props) => {
   };
 
   return (
-    <div className="flex flex-col flex-wrap my-5">
-      <h2 className="m-auto p-auto text-sm font-bold sm:text-2xl">
-        {props.ejercicio.question}
-      </h2>
-      {props.ejercicio.img && (
-           <ViewImage img={props.ejercicio.img} />
-        )}
-      <div className="container m-auto p-auto w-auto" ref={divRef}>
-        <div
-          className="flex flex-col items-center justify-center gap-2 mr-8 ml-8"
-          ref={props.miref}
-        >
+    < div  className = "flex flex-col flex-wrap mt-8 sm:px-80 " >  
+          < h2  className = "m-auto p-3 text-sm  font-bold sm:text-2xl text-green-700 " > 
+          { ( props.ejercicio.question ) } </h2>
+          {props.ejercicio.img && (
+              <ViewImage img={props.ejercicio.img} />
+            )}
+       < div  className = "contenedor m-auto p-auto w-auto"  ref = { divRef } >
+       < div  className = "flex flex-col items-center justify-center gap-2 my-10 sm:my-20 mr-8 ml-8   "  ref = { props.miref } >
           {props.ejercicio.body.map((item, index) => {
             if (item.item && item.answer) {
               let juego = [];
@@ -108,23 +104,14 @@ const Emparejar = (props) => {
             }
           })}
         </div>
-        <div className="flex flex-wrap gap-2 my-4" ref={opcionesRef}>
+        <div className="flex flex-wrap gap-2 my-4 justify-center" ref={opcionesRef}>
           {opciones.length > 0 &&
             opciones.map((opcion, index) => {
-              return (
-                <div key={shortid.generate()} className={"rounded-full"}>
-                  <button
-                    onClick={(event, props) => {
-                      cambiarVisibilidad(event, props);
-                    }}
-                  >
-                    <span className="text-sm sm:text-lg p-2 cardCheck">
-                      {opcion}
-                    </span>
-                  </button>
-                </div>
-              );
-            })}
+              return <div key={shortid.generate()} className={"rounded-full "}>
+                <button onClick = {(event, props)=>{cambiarVisibilidad(event, props)}}>
+                  <span className="text-sm sm:text-lg cardCheck px-5 border-yellow-200 ">{opcion}</span>
+                  </button></div>
+              })}
         </div>
       </div>
     </div>
@@ -138,7 +125,7 @@ const InputCompletarTexto = (props) => {
       if (props.opt[index] === event.target.innerText) {
         element.firstChild.classList.remove("invisible");
         element.classList.remove("bg-gray-400");
-        event.target.innerText = "click en las opciones";
+        event.target.innerText = "esperando respuesta...";
       }
     });
   };
@@ -150,14 +137,14 @@ const InputCompletarTexto = (props) => {
       }
       onClick={volverALaNormalidad}
     >
-      click en las opciones
+      esperando respuesta...
     </button>
   );
 };
 
 const JuegoCompletarTexto = (props) => {
   return (
-    <div className="grid grid-cols-2 w-full sm:w-full  items-center gap-4 space-y-2">
+    <div className="grid grid-cols-2 w-full sm:w-full py-3 items-center gap-2 space-y-2">
       <div>
         {props.juego.map((juego, index) => {
           if (typeof juego === "string") {
@@ -165,7 +152,7 @@ const JuegoCompletarTexto = (props) => {
               <h2
                 key={shortid.generate()}
                 className={
-                  "w-auto sm:w-auto mx-2 text-right text-xs sm:text-xl"
+                  "w-auto sm:w-auto mx-2 text-justify text-xs sm:text-lg"
                 }
               >
                 {juego}

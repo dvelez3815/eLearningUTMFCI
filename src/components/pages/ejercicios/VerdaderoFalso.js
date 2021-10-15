@@ -5,7 +5,7 @@ import ViewImage from '../../ViewImage/ViewImage'
 const VerdaderoFalso = (props) => {
     return (
       <div className="flex flex-col flex-wrap mt-8">  
-      <h2 className="m-auto p-auto text-sm font-bold sm:text-2xl">{(props.ejercicio.question)}</h2>
+      <h2 className="m-auto p-auto text-sm font-bold sm:text-2xl text-green-700">{(props.ejercicio.question)}</h2>
       {props.ejercicio.img && (
           <ViewImage img={props.ejercicio.img}/>
         )}
@@ -51,10 +51,10 @@ const VerdaderoFalso = (props) => {
       <div className="text-left w-full ">
         <h2 className="text-md font-bold text-left my-4 uppercase block"></h2>
 
-      <div className="flex gap-3 flex-wrap">
+      <div className=" md:items-center md:text-justify w-full">
           {props.juego.map((juego,index)=>{
             if(typeof juego === 'string'){
-              return <p key={shortid.generate()} className={"w-auto sm:w-auto mx-2 text-justify	text-xs sm:text-xl"}>{juego}</p>
+              return <p key={shortid.generate()} className={"w-auto py-2 sm:w-auto font-medium mx-2 text-justify	text-xs sm:text-lg"}>{juego}</p>
             }else if(typeof juego === 'object'){
               return juego
             }

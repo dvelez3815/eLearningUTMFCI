@@ -33,8 +33,8 @@ export const OpcionCorrecta_1 = (props) => {
   };
 
   return (
-    <div className="flex flex-col space-y-10">
-      <h2 className="mt-10 text-sm mr-8 ml-8 md:text-2xl font-bold ">
+    <div className="flex flex-col space-y-10 sm:px-80">
+      <h2 className="mt-10 text-sm mr-8 ml-8 md:text-2xl font-bold text-green-700 py-5">
         {props.ejercicio.question}
       </h2>
 
@@ -87,7 +87,7 @@ const Texto = (props) => {
           props.marcar(props.myref);
         }}
       >
-        <h2 className="text-xs sm:text-base font-medium	">{props.data.item}</h2>
+        <h2 className="text-xs sm:text-xs ">{props.data.item}</h2>
       </button>
     </div>
   );

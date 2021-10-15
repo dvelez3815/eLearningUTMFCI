@@ -52,18 +52,18 @@ const Arrastrar = (props) => {
   const [items, setItems] = useState(data);
 
   return (
-    <div className="flex flex-col flex-wrap mb-4" ref={props.miref}>
-      <h2 className="mt-10 text-2xl font-bold ">{(props.ejercicio.question)}</h2>
+    <div className="flex flex-col flex-wrap mb-4 sm:px-80 " ref={props.miref}>
+      <h2 className="mt-10 text-2xl font-bold text-green-700 ">{(props.ejercicio.question)}</h2>
       {props.ejercicio.img && (
           <ViewImage img={props.ejercicio.img} />
         )}
       {items.map((preguntas, index) => (
         <div
-          className="container lg:m-auto lg:p-auto lg:w-auto lg:w-full md:m-7 "
+          className="container lg:m-auto lg:p-auto lg:w-auto lg:w-full md:m-7  "
           key={shortid.generate()}
           id="arrastrar"
         >
-          <h2 className="text-md font-bold text-left my-4 uppercase"> Sentence {index+1}</h2>
+          <h2 className="text-md font-medium text-left my-4  "> Sentence {index+1}</h2>
           {console.log(props.ejercicio.img)}
           
           <DragDropContext
@@ -104,7 +104,7 @@ const Arrastrar = (props) => {
                     >
                       {(provided, snapshot) => (
                         <div
-                          className="rounded h-10 justify-center flex items-center 	"
+                          className="rounded h-10 justify-center flex items-center  	"
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}

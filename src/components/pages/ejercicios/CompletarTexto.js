@@ -5,17 +5,17 @@ import shortid from "shortid";
 import ViewImage from '../../ViewImage/ViewImage'
 const CompletarTexto = (props) => {
   return (
-    <div className="flex flex-col flex-wrap mt-8">
-      <h2 className="m-auto p-auto text-sm font-bold sm:text-2xl">
+    <div className="flex flex-col  flex-wrap mt-8 sm:px-60 my-10">
+      <h2 className="m-auto p-auto text-sm font-bold sm:text-2xl text-green-700 p-5">
         {props.ejercicio.question}
       </h2>
       {props.ejercicio.img && (
       
         <ViewImage img={props.ejercicio.img} />
       )}
-      <div className="container m-auto p-auto w-auto my-2">
+      <div className="container m-auto p-auto w-auto my-2 ">
         <div
-          className="flex flex-col items-center justify-center gap-2  mr-8 ml-8"
+          className="flex flex-col items-center justify-center gap-2 text-xs   mr-8 ml-8"
           ref={props.miref}
         >
           {props.ejercicio.body.map((item, index) => {
@@ -49,7 +49,7 @@ const InputCompletarTexto = (props) => {
   return (
     <input
       className={
-        "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        "shadow  appearance-none border text-center rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
       }
       type="text"
       value={texto}
@@ -62,7 +62,7 @@ const InputCompletarTexto = (props) => {
 
 const JuegoCompletarTexto = (props) => {
   return (
-    <div className="flex w-full justify-items-center	items-center">
+    <div className="flex w-full  justify-items-center py-1	items-center">
       {props.juego.map((juego, index) => {
         if (typeof juego === "string") {
           return (
