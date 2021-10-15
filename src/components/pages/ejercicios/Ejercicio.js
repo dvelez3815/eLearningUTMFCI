@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import ProgressBar from "./ProgressBar";
+import {Link} from  "react-router-dom"
 
 //load ejercicio.css
 import "./Ejercicio.css";
@@ -11,6 +12,7 @@ import VerdaderoFalso from "./VerdaderoFalso";
 import CompletarTexto from "./CompletarTexto";
 import Emparejar from "./Emparejar";
 import EjercicioFooterPruebaLibros from "./EjercicioFooterPruebaLibros";
+import Morty from "../../../assets/resource/Morty.gif";
 
 export const Ejercicio = (props) => {
   const [juego, setJuego] = React.useState([]);
@@ -48,7 +50,11 @@ export const Ejercicio = (props) => {
         />
       )}
       {finJuego ? (
-        <h2 className="container m-auto p-auto w-6/12">Fin del juego...</h2>
+        <div className='flex flex-col justify-center items-center'>
+          <h2 className="container font-bold  text-2xl  text-yellow-400  ">Congrulation | Activity Completed...</h2>
+          <img className="h-1/2" src={Morty} alt=" Animación" />
+        </div>
+
       ) : (
         juego[juego.length - 1]
       )}
@@ -57,7 +63,13 @@ export const Ejercicio = (props) => {
             Tambièn se debe de enviar el contador para ir incrementando el estado de respondidas. */}
 
             
-            {finJuego || props.esPrueba?<EjercicioFooterPruebaLibros totalEjercicios = {preguntasValidas} ejercicio={juego[juego.length-1]} juego={juego} setJuego = {setJuego} cargado={cargado} setCargado={setCargado} setFinJuego={setFinJuego} miref={panelJuego} contadorRespondidas={contadorRespondidas} setContadorRespondidas={setContadorRespondidas} aciertos={aciertos} setAciertos={setAciertos}/>:<EjercicioFooter ejercicio={juego[juego.length-1]} juego={juego} setJuego = {setJuego} cargado={cargado} setCargado={setCargado} setFinJuego={setFinJuego} miref={panelJuego} contadorRespondidas={contadorRespondidas} setContadorRespondidas={setContadorRespondidas}/>}
+            {finJuego ? (
+              <a className=" ">
+                <button className=" inline-flex items-center justify-center px-10 py-2  bg-green-400 hover:bg-yellow-500 text-white rounded-full font-semibold text-xs   uppercase tracking-widest ">
+                  <Link to="/dashboard">Continue</Link>
+                </button>
+              </a>
+            ): props.esPrueba?<EjercicioFooterPruebaLibros totalEjercicios = {preguntasValidas} ejercicio={juego[juego.length-1]} juego={juego} setJuego = {setJuego} cargado={cargado} setCargado={setCargado} setFinJuego={setFinJuego} miref={panelJuego} contadorRespondidas={contadorRespondidas} setContadorRespondidas={setContadorRespondidas} aciertos={aciertos} setAciertos={setAciertos}/>:<EjercicioFooter ejercicio={juego[juego.length-1]} juego={juego} setJuego = {setJuego} cargado={cargado} setCargado={setCargado} setFinJuego={setFinJuego} miref={panelJuego} contadorRespondidas={contadorRespondidas} setContadorRespondidas={setContadorRespondidas}/>}
         </div>
     )
 }
@@ -81,7 +93,7 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado,preguntas
          }else if(ejercicio.type === "ordenar"){
              setJuego(juego => [...juego, <Arrastrar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
              contador++;
-         }else if(ejercicio.type === "true_false"){
+         }else  if(ejercicio.type === "true_false" && ejercicio.img){
              setJuego(juego => [...juego, <VerdaderoFalso key={index} ejercicio={ejercicio} miref={panelJuego}/>])
              contador++;
          }else if(ejercicio.type === "opcion_correcta_1"){
@@ -90,7 +102,7 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado,preguntas
          }else if(ejercicio.type === "opcion_correcta_n"){
              setJuego(juego => [...juego, <OpcionCorrecta_n key={index} ejercicio={ejercicio} miref={panelJuego}/>])
              contador++;
-         }else if(ejercicio.type === "emparejar" ){
+         }else if(ejercicio.type === "emparejar"   ){
              setJuego(juego => [...juego, <Emparejar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
              contador++;
          }

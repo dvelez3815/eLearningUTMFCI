@@ -1,5 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { finPrueba, mostrarAlertaError } from '../../Alert/Alerts';
+import Morty from "../../../assets/resource/pensar.gif";
 
 
 const EjercicioFooterPruebaLibros = (props) => {
@@ -7,14 +9,24 @@ const EjercicioFooterPruebaLibros = (props) => {
        
         <div className="flex items-center justify-center  ">
           <div className="">
-            <button
-              className=" text-xs sm:text-xl tracking-wider  text-white bg-green-500 font-semibold  hover:bg-green-400 py-2 px-4 capitalize border border-green-500 hover:border-green-600 rounded "
-              onClick={() => {validarRespuesta(props)} }
-            >
-              <span>
-                <p>Siguiente</p>    
-              </span>
-            </button>
+          { (props.juego.length > 0) ?( <button
+                className=" text-xs sm:text-xl tracking-wider  text-white bg-green-500 font-semibold  hover:bg-green-400 py-2 px-4 capitalize border border-green-500 hover:border-green-600 rounded "
+                onClick={() => {validarRespuesta(props)} }>
+                <span>
+                  <p>Siguiente</p>    
+                </span>
+              </button>   
+              ): <div className='flex flex-col justify-center items-center'>
+                <h2 className="container font-bold  text-2xl  text-yellow-400  "></h2>
+                <img className="h-1/2" src={Morty} alt=" Animación" />
+                <a className=" ">
+                  <button className=" inline-flex items-center justify-center px-10 py-2  bg-gray-200 hover:bg-yellow-500 text-black rounded-full font-semibold text-xs   uppercase tracking-widest ">
+                    <Link to="/evaluacion">Continue</Link>
+                  </button>
+                </a>
+            </div>
+           }
+            
           </div>
         </div>
     );

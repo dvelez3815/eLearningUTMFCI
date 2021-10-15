@@ -52,7 +52,7 @@ export const finPrueba= (aciertos, total)=>{
         },
     ).then((result) => {
         if (result.value) {
-            
+            //console.log('.')
             window.location = "/evaluacion";
         } else {
             
