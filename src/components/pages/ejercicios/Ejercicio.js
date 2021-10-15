@@ -86,14 +86,14 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado,preguntas
     let contador = 0;
     ejercicios.map((ejercicio, index) => {
         
-/*
-          if(ejercicio.type === "completar_texto"){
+
+         if(ejercicio.type === "completar_texto"){
              setJuego(juego => [...juego, <CompletarTexto key={index} ejercicio={ejercicio} miref={panelJuego}/>])
              contador++;
          }else  if(ejercicio.type === "ordenar"){
              setJuego(juego => [...juego, <Arrastrar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
              contador++; 
-         }else  if(ejercicio.type === "true_false" && ejercicio.img){
+         }else  if((ejercicio.type === "true_false" && ejercicio.img) || ejercicio.type === "true_false" ){
              setJuego(juego => [...juego, <VerdaderoFalso key={index} ejercicio={ejercicio} miref={panelJuego}/>])
              contador++;
          }else if(ejercicio.type === "opcion_correcta_1"){
@@ -102,9 +102,8 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado,preguntas
          }else if(ejercicio.type === "opcion_correcta_n"){
              setJuego(juego => [...juego, <OpcionCorrecta_n key={index} ejercicio={ejercicio} miref={panelJuego}/>])
              contador++;
-         }else*/ if(ejercicio.type === "emparejar"    ){
-            console.log(ejercicio) 
-            setJuego(juego => [...juego, <Emparejar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
+         }else if(ejercicio.type === "emparejar"  ||  ejercicio.type === "emparejar_img"  ){
+             setJuego(juego => [...juego, <Emparejar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
              contador++;
          } 
 

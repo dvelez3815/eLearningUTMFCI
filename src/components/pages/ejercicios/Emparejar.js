@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import shortid from "shortid";
 import "../../pages/ejercicios/CheckExercise.css";
-import ViewImage from '../../ViewImage/ViewImage'
+import ViewImage from "../../ViewImage/ViewImage";
 const Emparejar = (props) => {
   const [opciones, setOpciones] = useState([]);
   const divRef = React.useRef(null);
@@ -71,14 +71,16 @@ const Emparejar = (props) => {
   };
 
   return (
-    < div  className = "flex flex-col flex-wrap mt-8 sm:px-80 " >  
-          < h2  className = "m-auto p-3 text-sm  font-bold sm:text-2xl text-green-700 " > 
-          { ( props.ejercicio.question ) } </h2>
-          {props.ejercicio.img && (
-              <ViewImage img={props.ejercicio.img} />
-            )}
-       < div  className = "contenedor m-auto p-auto w-auto"  ref = { divRef } >
-       < div  className = "flex flex-col items-center justify-center my-5 sm:my-1 mr-8 ml-8   "  ref = { props.miref } >
+    <div className="flex flex-col flex-wrap mt-8 sm:px-80  ">
+      <h2 className="m-auto p-3 text-sm  font-bold sm:text-2xl text-green-700 ">
+        {props.ejercicio.question}{" "}
+      </h2>
+      {props.ejercicio.img && <ViewImage img={props.ejercicio.img} />}
+      <div className="contenedor m-auto p-auto w-auto my-1 " ref={divRef}>
+        <div
+          className="flex flex-col items-center justify-center my-5 sm:my-1 mr-8 ml-8   "
+          ref={props.miref}
+        >
           {props.ejercicio.body.map((item, index) => {
             if (item.item && item.answer) {
               let juego = [];
@@ -98,20 +100,36 @@ const Emparejar = (props) => {
                 }
               });
               return (
-                <JuegoCompletarTexto key={shortid.generate()} juego={juego} />
+                <JuegoCompletarTexto
+                  key={shortid.generate()}
+                  type={props.ejercicio.type}
+                  juego={juego}
+                />
               );
             } else {
             }
           })}
         </div>
-        <div className="flex flex-wrap gap-2 my-4 justify-center" ref={opcionesRef}>
+        <div
+          className="flex flex-wrap gap-2 py-10 justify-center"
+          ref={opcionesRef}
+        >
           {opciones.length > 0 &&
             opciones.map((opcion, index) => {
-              return <div key={shortid.generate()} className={"rounded-full "}>
-                <button onClick = {(event, props)=>{cambiarVisibilidad(event, props)}}>
-                  <span className="text-sm sm:text-lg cardCheck px-5 border-yellow-200 ">{opcion}</span>
-                  </button></div>
-              })}
+              return (
+                <div key={shortid.generate()} className={"rounded-full "}>
+                  <button
+                    onClick={(event, props) => {
+                      cambiarVisibilidad(event, props);
+                    }}
+                  >
+                    <span className="text-sm sm:text-lg cardCheck px-5 border-yellow-200 ">
+                      {opcion}
+                    </span>
+                  </button>
+                </div>
+              );
+            })}
         </div>
       </div>
     </div>
@@ -144,19 +162,20 @@ const InputCompletarTexto = (props) => {
 
 const JuegoCompletarTexto = (props) => {
   return (
-    <div className="grid grid-cols-2 w-full sm:w-full items-center gap-2 ">
+    <div className="grid grid-cols-2 text-justify items-center  my-2 ">
       <div>
         {props.juego.map((juego, index) => {
           if (typeof juego === "string") {
+              console.log(juego)
             return (
               <div
                 key={shortid.generate()}
-               /*  className={
-                  "w-auto sm:w-auto mx-2 text-justify text-xs sm:text-lg"
-                } */
               >
-                 
-                  <ViewImage img={juego}/>
+                  {/* <ViewImage img={juego}/> */}
+                {props.type === "emparejar_img" && <ViewImage img={juego} />}
+                {props.type == "emparejar" && <h2 className=
+                  "mx-2 text-justify text-xs sm:text-lg"
+                 >{ juego }</h2>}
               </div>
             );
           }

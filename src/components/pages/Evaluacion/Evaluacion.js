@@ -113,7 +113,7 @@ const Evaluacion = () => {
                             </div>
                           </td>
                           <td className="p-3 text-left">
-                          more than 50 correct
+                          more than 25 correct
                           </td>
                           <td className="p-3">
                             <span className="bg-green-400 text-gray-50 rounded-md px-2 sm:p-1">Excellent</span>
@@ -127,7 +127,7 @@ const Evaluacion = () => {
                             </div>
                           </td>
                           <td className="p-3 text-left">
-                          between 30 to 49 correct
+                          between 10 to 24 correct
                           </td>
                           <td className="p-3">
                             <span className="bg-yellow-500 text-gray-50 rounded-md px-2 sm:p-1">you're doing well</span>
@@ -140,7 +140,7 @@ const Evaluacion = () => {
                             </div>
                           </td>
                           <td className="p-3 text-left">
-                          less than 30 correct
+                          less than 10 correct
                           </td>
                           <td className="p-3">
                             <span className="bg-red-500  text-gray-50  rounded-md px-2 sm:p-1">keep practicing</span>

@@ -4,7 +4,7 @@ import { OpcionCorrecta_1 } from "./OpcionCorrecta_1";
 import ViewImage from '../../ViewImage/ViewImage'
 const VerdaderoFalso = (props) => {
     return (
-      <div className="flex flex-col flex-wrap mt-8">  
+      <div className="flex flex-col flex-wrap mt-8 sm:px-60">  
       <h2 className="m-auto p-auto text-sm font-bold sm:text-2xl text-green-700">{(props.ejercicio.question)}</h2>
       {props.ejercicio.img && (
           <ViewImage img={props.ejercicio.img}/>

@@ -47,7 +47,7 @@ export const finPrueba= (aciertos, total)=>{
         {
             title: "Resultado",
             type: "success",
-            text: "HAS ACERTADO " + aciertos+ " PREGUNTAS",
+            text: "You have answered " + aciertos+ " questions correctly out of "+total,
             confirmButtonText: "Ok",
         },
     ).then((result) => {

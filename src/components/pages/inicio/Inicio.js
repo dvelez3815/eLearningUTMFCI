@@ -191,6 +191,7 @@ export const Inicio = () => {
             <Activity
               moduleName={`Module: ${modulo.book_info.module}`}
               ruta={`/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}/${modulo.writing.task_id}`}
+              ruta2 = {`/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}/1`}
               taskid={modulo.writing.task_id}
               percent={parseInt(
                 (modulo.writing.user_progress /
@@ -280,7 +281,7 @@ export const Inicio = () => {
                         rel="noopener noreferrer"
                         //href=""
                       >
-                        º Book 1 (Module 1 - Module 2)
+                        Book 1 (Module 1 - Module 2)
                       </a>{" "}
                     </li>
                     <li className="text-sm hover:text-green-500 py-1">
@@ -290,7 +291,7 @@ export const Inicio = () => {
                         rel="noopener noreferrer"
                         //href=""
                       >
-                        º Book 2 (Module 3 - Module 4)
+                        Book 2 (Module 3 - Module 4)
                       </a>{" "}
                     </li>
                     <li className="text-sm hover:text-green-500 py-1">
@@ -300,7 +301,7 @@ export const Inicio = () => {
                         rel="noopener noreferrer"
                         //href=""
                       >
-                        º Book 3 (Module 5 - Module 6)
+                        Book 3 (Module 5 - Module 6)
                       </a>{" "}
                     </li>
                     <li className="text-sm hover:text-green-500 py-1">
@@ -310,7 +311,7 @@ export const Inicio = () => {
                         rel="noopener noreferrer"
                         //href=""
                       >
-                        º Book 4 (Module 7 - Module 8)
+                        Book 4 (Module 7 - Module 8)
                       </a>{" "}
                     </li>
                     <li className="text-sm hover:text-green-500 py-1">
@@ -320,7 +321,7 @@ export const Inicio = () => {
                         rel="noopener noreferrer"
                         //href=""
                       >
-                        º Book 5 (Module 9 - Module 10)
+                        Book 5 (Module 9 - Module 10)
                       </a>{" "}
                     </li>
                   </ol>

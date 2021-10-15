@@ -29,7 +29,7 @@ class NavComponent extends React.Component {
   render() {
     return (
       <div>
-        <nav className="bg-green-800  dark:bg-gray-800  shadow  ">
+        <nav className="static bg-green-800  dark:bg-gray-800  shadow  ">
           <div className="max-w-7xl mx-auto ">
             <div className="flex items-center justify-between h-16">
               <div className=" flex items-center">
@@ -63,7 +63,7 @@ class NavComponent extends React.Component {
               </div>
               <div className="-mr-2 flex md:hidden">
                 <button
-                  className="text-gray-800 dark:text-white hover:text-gray-300 inline-flex items-center justify-center p-2 rounded-md focus:outline-none"
+                  className="text-gray-100  dark:text-white hover:text-yellow-500 inline-flex items-center justify-center p-2 rounded-md focus:outline-none"
                   id="hamburger"
                   ref={this.hamburgerBtn}
                   onClick={this.handleHamburgerButton}
@@ -80,8 +80,8 @@ class NavComponent extends React.Component {
                   </svg>
                 </button>
               </div>
-              <div className="-mr-2 flex ">
-                <h2 className="text-xl font-semibold py-1 text-white">
+              <div className="p-2 flex ">
+                <h2 className="tex-sm sm:text-base font-medium py-1 text-white">
                   {cookies.get('name') + ' ' + cookies.get('lastname')}
                 </h2>
                 <Menu as="div" className="ml-3 relative">
@@ -127,20 +127,20 @@ class NavComponent extends React.Component {
           </div>
           <div className="md:hidden">
             <div
-              className="px-2 pt-2 pb-3 space-y-1 sm:px-3 hidden"
+              className="px-2 pt-2  pb-3 space-y-1 sm:px-3 hidden"
               ref={this.hamburgerItems}
             >
               <a
-                className="text-gray-800 hover:text-gray-800 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                className="text-gray-100 hover:text-yellow-500 dark:hover:text-yellow block px-3 py-2 rounded-md text-base font-medium"
                 href="/dashboard"
               >
-                APRENDIZAJE
+                Learning
               </a>
               <a
-                className="text-gray-300 hover:text-gray-800 dark:text-white block px-3 py-2 rounded-md text-base font-medium"
+                className="text-gray-100 hover:text-yellow-500 dark:text-white block px-3 py-2 rounded-md text-base font-medium"
                 href="/evaluacion"
               >
-                EVALUACIÓN
+                Evaluation
               </a>
             </div>
           </div>

@@ -8,7 +8,7 @@ const EjercicioFooterPruebaLibros = (props) => {
     return (
        
         <div className="flex items-center justify-center  ">
-          <div className="">
+          <div className="my-10">
           { (props.juego.length > 0) ?( <button
                 className=" text-xs sm:text-xl tracking-wider  text-white bg-green-500 font-semibold  hover:bg-green-400 py-2 px-4 capitalize border border-green-500 hover:border-green-600 rounded "
                 onClick={() => {validarRespuesta(props)} }>
@@ -91,7 +91,7 @@ async function noEsCorrecta(props) {
     } else if (tipo_ejercicio === "completar_texto") {
       let hijos = Array.from(props.miref.current.children);
       await verificarCompletar_Texto(props, hijos, aciertos);
-    } else if (tipo_ejercicio === "emparejar") {
+    } else if (tipo_ejercicio === "emparejar" || tipo_ejercicio === "emparejar_img") {
       let hijos = Array.from(props.miref.current.children);
       await verificarEmparejar(props, hijos, aciertos);
     } else {
@@ -111,7 +111,7 @@ async function noEsCorrecta(props) {
     hijos.some((element) => {
       if (
         element.getElementsByTagName("button")[0].innerText ===
-        "esperando respuesta..."
+        "Waiting answer..."
       ) {
         faltaMarcar = true;
         return true;
