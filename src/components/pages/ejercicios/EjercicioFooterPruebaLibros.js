@@ -19,11 +19,11 @@ const EjercicioFooterPruebaLibros = (props) => {
               ): <div className='flex flex-col justify-center items-center'>
                 <h2 className="container font-bold  text-2xl  text-yellow-400  "></h2>
                 <img className="h-1/2" src={Morty} alt=" Animación" />
-                <a className=" ">
+                
                   <button className=" inline-flex items-center justify-center px-10 py-2  bg-gray-200 hover:bg-yellow-500 text-black rounded-full font-semibold text-xs   uppercase tracking-widest ">
                     <Link to="/evaluacion">Continue</Link>
                   </button>
-                </a>
+                
             </div>
            }
             
