@@ -191,6 +191,7 @@ export const Inicio = () => {
             <Activity
               moduleName={`Module: ${modulo.book_info.module}`}
               ruta={`/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}/${modulo.writing.task_id}`}
+              ruta2 = {`/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}/1`}
               taskid={modulo.writing.task_id}
               percent={parseInt(
                 (modulo.writing.user_progress /
@@ -258,7 +259,7 @@ export const Inicio = () => {
         <div>
           <div className="flex flex-col-2">
             <div className="text-left">
-              <h2 className="font-semibold text-xl m-2">Content</h2>
+              <h2 className="font-semibold text-base m-2">Content</h2>
             </div>
       
           </div>
@@ -273,54 +274,54 @@ export const Inicio = () => {
               <div>
                 <h2 className="text-gray-700 text-lg text-left">
                   <ol>
-                    <li className="text-base hover:text-green-500 py-1">
+                    <li className="text-sm hover:text-green-500 py-1">
                       {" "}
                       <a
                         target="_blank"
                         rel="noopener noreferrer"
                         //href=""
                       >
-                        º Book 1 (Module 1 - Module 2)
+                        Book 1 (Module 1 - Module 2)
                       </a>{" "}
                     </li>
-                    <li className="text-base hover:text-green-500 py-1">
+                    <li className="text-sm hover:text-green-500 py-1">
                       {" "}
                       <a
                         target="_blank"
                         rel="noopener noreferrer"
                         //href=""
                       >
-                        º Book 2 (Module 3 - Module 4)
+                        Book 2 (Module 3 - Module 4)
                       </a>{" "}
                     </li>
-                    <li className="text-base hover:text-green-500 py-1">
+                    <li className="text-sm hover:text-green-500 py-1">
                       {" "}
                       <a
                         target="_blank"
                         rel="noopener noreferrer"
                         //href=""
                       >
-                        º Book 3 (Module 5 - Module 6)
+                        Book 3 (Module 5 - Module 6)
                       </a>{" "}
                     </li>
-                    <li className="text-base hover:text-green-500 py-1">
+                    <li className="text-sm hover:text-green-500 py-1">
                       {" "}
                       <a
                         target="_blank"
                         rel="noopener noreferrer"
                         //href=""
                       >
-                        º Book 4 (Module 7 - Module 8)
+                        Book 4 (Module 7 - Module 8)
                       </a>{" "}
                     </li>
-                    <li className="text-base hover:text-green-500 py-1">
+                    <li className="text-sm hover:text-green-500 py-1">
                       {" "}
                       <a
                         target="_blank"
                         rel="noopener noreferrer"
                         //href=""
                       >
-                        º Book 5 (Module 9 - Module 10)
+                        Book 5 (Module 9 - Module 10)
                       </a>{" "}
                     </li>
                   </ol>
@@ -332,12 +333,12 @@ export const Inicio = () => {
       </div>
                       
     </div>
-    <div className="py-5 flex flex-wrap flex-col justify-center">
-      <div className="border shadow rounded-2xl py-5  hidden md:block p-4">
+    <div className="py-2 flex flex-wrap flex-col justify-center">
+      <div className="border shadow rounded-2xl py-2  hidden md:block p-4">
         <div>
           <div className="flex flex-col-2">
             <div className="text-left">
-              <h2 className="font-semibold text-xl m-2">Digital Resources</h2>
+              <h2 className="font-semibold text-base m-2">Digital Resources</h2>
             </div>
       
           </div>
@@ -352,7 +353,7 @@ export const Inicio = () => {
               <div>
                 <h2 className=" text-gray-700 text-lg text-center">
                   <ol>
-                    <li className=" text-base hover:text-green-500 py-1">
+                    <li className=" text-sm hover:text-green-500 py-1">
                       {" "}
                       <a
                         target="_blank"
@@ -362,7 +363,7 @@ export const Inicio = () => {
                        { <CollectionsBookmarkIcon color="action" fontSize="large" /> } Download Book 1
                       </a>{" "}
                     </li>
-                    <li className="text-base hover:text-green-500 py-1">
+                    <li className="text-sm hover:text-green-500 py-1">
                       {" "}
                       <a
                         target="_blank"
@@ -372,7 +373,7 @@ export const Inicio = () => {
                         { <CollectionsBookmarkIcon color="action" fontSize="large" /> } Download Book 2 
                       </a>{" "}
                     </li>
-                    <li className="text-base hover:text-green-500 py-1">
+                    <li className="text-sm hover:text-green-500 py-1">
                       {" "}
                       <a
                         target="_blank"
@@ -382,7 +383,7 @@ export const Inicio = () => {
                         { <CollectionsBookmarkIcon color="action" fontSize="large" /> } Download Book 3 
                       </a>{" "}
                     </li>
-                    <li className="text-base hover:text-green-500 py-1">
+                    <li className="text-sm hover:text-green-500 py-1">
                       {" "}
                       <a
                         target="_blank"
@@ -392,7 +393,7 @@ export const Inicio = () => {
                         { <CollectionsBookmarkIcon color="action" fontSize="large" /> } Download Book 4 
                       </a>{" "}
                     </li>
-                    <li className="text-base hover:text-green-500 py-1">
+                    <li className="text-sm hover:text-green-500 py-1">
                       {" "}
                       <a
                         target="_blank"

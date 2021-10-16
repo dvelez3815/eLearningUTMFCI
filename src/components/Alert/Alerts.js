@@ -47,12 +47,12 @@ export const finPrueba= (aciertos, total)=>{
         {
             title: "Resultado",
             type: "success",
-            text: "HAS ACERTADO " + aciertos+" DE "+total + " PREGUNTAS",
+            text: "You have answered " + aciertos+ " questions correctly out of "+total,
             confirmButtonText: "Ok",
         },
     ).then((result) => {
         if (result.value) {
-            
+            //console.log('.')
             window.location = "/evaluacion";
         } else {
             
