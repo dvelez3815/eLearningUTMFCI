@@ -4,13 +4,13 @@ import { OpcionCorrecta_1 } from "./OpcionCorrecta_1";
 import ViewImage from '../../ViewImage/ViewImage'
 const VerdaderoFalso = (props) => {
     return (
-      <div className="flex flex-col flex-wrap mt-8 sm:px-60">  
+      <div className="flex flex-col flex-wrap mt-8 xl:px-60 sm:px-20 ">  
       <h2 className="m-auto p-auto text-sm font-bold sm:text-2xl text-green-700">{(props.ejercicio.question)}</h2>
       {props.ejercicio.img && (
           <ViewImage img={props.ejercicio.img}/>
         )}
     <div className="container m-auto p-auto w-auto">
-      <div className="flex flex-col items-center justify-center gap-2 mr-8 ml-8  divide-y-4 divide-gray-200 divide-dotted" ref={props.miref}>
+      <div className="flex flex-col  items-center justify-center gap-2 mr-8 ml-8  divide-y-4 divide-gray-200 divide-dotted" ref={props.miref}>
 
         
         
@@ -48,10 +48,10 @@ const VerdaderoFalso = (props) => {
 
   const TextoGeneral= (props) => {
     return (
-      <div className="text-left w-full ">
+      <div className="text-center w-full p-4 ">
         <h2 className="text-md font-bold text-left my-4 uppercase block"></h2>
 
-      <div className=" md:items-center md:text-justify w-full">
+      <div className="  w-full">
           {props.juego.map((juego,index)=>{
             if(typeof juego === 'string'){
               return <p key={shortid.generate()} className={"w-auto py-2 sm:w-auto font-medium mx-2 text-justify	text-xs sm:text-lg"}>{juego}</p>

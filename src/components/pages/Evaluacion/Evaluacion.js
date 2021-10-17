@@ -26,9 +26,9 @@ const Evaluacion = () => {
         </div>
         <div>
 
-          <div className="container mx-auto justify-center ">
+          <div className="container mx-auto justify-center  ">
             <div className="h-48 flex flex-wrap justify-center content-start">
-              <div className="py-10 p-5  sm:w-5/12">
+              <div className="py-10 p-5  md:w-5/12">
                 <h3 className="text-left text-2xl sm:text-3xl font-sans font-bold text-green-400">
                   Assess knowledge by book
                 </h3>

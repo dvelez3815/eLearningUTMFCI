@@ -64,8 +64,8 @@ export const Ejercicio = (props) => {
 
             
             {finJuego ? (
-              <button className=" inline-flex items-center justify-center px-10 py-2  bg-gray-200 hover:bg-yellow-500 text-black rounded-full font-semibold text-xs   uppercase tracking-widest ">
-                    <Link to="/evaluacion">Continue</Link>
+              <button className=" inline-flex items-center justify-center px-10 py-2 my-4 p-10 bg-gray-100 hover:bg-gray-300 text-black  font-semibold text-xs   uppercase tracking-widest">
+                    <Link to="/dashboard">Continue</Link>
               </button>
             ): props.esPrueba?<EjercicioFooterPruebaLibros totalEjercicios = {preguntasValidas} ejercicio={juego[juego.length-1]} juego={juego} setJuego = {setJuego} cargado={cargado} setCargado={setCargado} setFinJuego={setFinJuego} miref={panelJuego} contadorRespondidas={contadorRespondidas} setContadorRespondidas={setContadorRespondidas} aciertos={aciertos} setAciertos={setAciertos}/>:<EjercicioFooter ejercicio={juego[juego.length-1]} juego={juego} setJuego = {setJuego} cargado={cargado} setCargado={setCargado} setFinJuego={setFinJuego} miref={panelJuego} contadorRespondidas={contadorRespondidas} setContadorRespondidas={setContadorRespondidas}/>}
         </div>
@@ -84,14 +84,26 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado,preguntas
     let contador = 0;
     ejercicios.map((ejercicio, index) => {
         
-if(ejercicio.type === "emparejar_img"  ){
-             setJuego(juego => [...juego, <Emparejar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
-             contador++;
-         } 
-
-       
-    
-    }
+      if(ejercicio.type === "completar_texto"){
+        setJuego(juego => [...juego, <CompletarTexto key={index} ejercicio={ejercicio} miref={panelJuego}/>])
+        contador++;
+      }else  if(ejercicio.type === "ordenar"){
+        setJuego(juego => [...juego, <Arrastrar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
+        contador++; 
+      }else  if((ejercicio.type === "true_false" && ejercicio.img) || ejercicio.type === "true_false" ){
+        setJuego(juego => [...juego, <VerdaderoFalso key={index} ejercicio={ejercicio} miref={panelJuego}/>])
+        contador++;
+      }else if(ejercicio.type === "opcion_correcta_1"){
+          setJuego(juego => [...juego, <OpcionCorrecta_1 key={index} ejercicio={ejercicio} miref={panelJuego}/>])
+          contador++;
+      }else if(ejercicio.type === "opcion_correcta_n"){
+          setJuego(juego => [...juego, <OpcionCorrecta_n key={index} ejercicio={ejercicio} miref={panelJuego}/>])
+          contador++; 
+      }else if(ejercicio.type === "emparejar"  ||  ejercicio.type === "emparejar_img"  ){
+          setJuego(juego => [...juego, <Emparejar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
+          contador++;
+      }
+    } 
     /* else if (ejercicio.type === "ordenar" ) {
       setJuego((juego) => [
         ...juego,

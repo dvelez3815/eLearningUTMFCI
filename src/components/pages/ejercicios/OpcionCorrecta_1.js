@@ -33,7 +33,7 @@ export const OpcionCorrecta_1 = (props) => {
   };
 
   return (
-    <div className="flex flex-col space-y-10 sm:px-80">
+    <div className="flex flex-col space-y-10 xl:px-80 sm:px-20 ">
       <h2 className="mt-10 text-sm mr-8 ml-8 md:text-2xl font-bold text-green-700 py-5">
         {props.ejercicio.question}
       </h2>

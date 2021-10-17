@@ -253,7 +253,7 @@ export const Inicio = () => {
 
   {/* BARRA LATERAL */}
 
-  <div className="hidden md:block md:col-span-3  w-auto fixed inset-y-30 right-10 ">
+  <div className="hidden xl:block md:col-span-3  w-auto fixed inset-y-30 right-10 ">
     <div className="py-5 flex flex-wrap flex-col justify-center">
       <div className="border shadow rounded-2xl py-5  hidden md:block p-4">
         <div>

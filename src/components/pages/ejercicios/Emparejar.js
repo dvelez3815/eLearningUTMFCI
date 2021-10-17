@@ -72,7 +72,7 @@ const Emparejar = (props) => {
   };
 
   return (
-    <div className="flex flex-col flex-wrap mt-8 sm:px-80  ">
+    <div className="flex flex-col flex-wrap mt-8 xl:px-80 sm:px-20  ">
       <h2 className="m-auto p-3 text-sm  font-bold sm:text-2xl text-green-700 ">
         {props.ejercicio.question}{" "}
       </h2>
