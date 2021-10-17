@@ -70,18 +70,18 @@ export const Inicio = () => {
     if (!cookies.get("_id")) {
       window.location.href = "./signin";
     }
-    // if (cookies.get("status") !== "Active") {
-    //   const user_response = await fetch(`${api_url}/user/${userid}`, {
-    //     method: "GET",
-    //   });
-    //   const user_json = await user_response.json();
+    if (cookies.get("status") !== "Active") {
+      const user_response = await fetch(`${api_url}/user/${userid}`, {
+        method: "GET",
+      });
+      const user_json = await user_response.json();
 
-    //   if (user_json.status == "Active") {
-    //     cookies.set("status", user_json.status, { path: "/" });
-    //   } else {
-    //     window.location.href = "./PendingAccount";
-    //   }
-    // }
+      if (user_json.status == "Active") {
+        cookies.set("status", user_json.status, { path: "/" });
+      } else {
+        window.location.href = "./PendingAccount";
+      }
+    }
   }, []);
 
   return (

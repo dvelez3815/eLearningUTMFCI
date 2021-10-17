@@ -88,7 +88,7 @@ const Arrastrar = (props) => {
             <Droppable droppableId="droppable" direction="vertical">
               {(provided, snapshot) => (
                 <div
-                className="mx-auto flex  flex-col rounded justify-center   items-center  	"
+                className="mx-auto flex  flex-col rounded justify-center items-center "
                   ref={provided.innerRef}
                   style={getListStyle(
                     snapshot.isDraggingOver,
