@@ -38,12 +38,13 @@ const Emparejar = (props) => {
 
   const cambiarVisibilidad = (event, props) => {
     let aMarcar = Array.from(divRef.current.firstChild.children);
+    console.log(aMarcar);
 
     let contador = 0;
     aMarcar.forEach((element) => {
-      console.log(element.getElementsByTagName("button")[0].innerText);
+      
       if (
-        element.getElementsByTagName("button")[0].innerText ===
+        element.getElementsByClassName('opt-1')[0].innerText ===
         "Waiting answer..."
       ) {
         contador += 1;
@@ -51,14 +52,14 @@ const Emparejar = (props) => {
     });
 
     //Si ya se han completado todas las opciones
-    console.log(contador, aMarcar.length);
+    
     if (contador !== 0) {
       aMarcar.some((element) => {
         if (
-          element.getElementsByTagName("button")[0].innerText ===
+          element.getElementsByClassName('opt-1')[0].innerText ===
           "Waiting answer..."
         ) {
-          element.getElementsByTagName("button")[0].innerText =
+          element.getElementsByClassName('opt-1')[0].innerText =
             event.target.innerText;
           event.target.parentNode.parentNode.classList.add("bg-gray-400");
           event.target.parentNode.classList.add("invisible");
@@ -151,7 +152,7 @@ const InputCompletarTexto = (props) => {
   return (
     <button
       className={
-        "shadow appearance-none border rounded w-full h-13 sm:h-12 sm:w-72 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xs"
+        "shadow appearance-none border rounded w-full h-13 sm:h-12 sm:w-72 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xs opt-1"
       }
       onClick={volverALaNormalidad}
     >
@@ -166,7 +167,7 @@ const JuegoCompletarTexto = (props) => {
       <div>
         {props.juego.map((juego, index) => {
           if (typeof juego === "string") {
-              console.log(juego)
+              
             return (
               <div
                 key={shortid.generate()}

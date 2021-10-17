@@ -187,7 +187,7 @@ const verificarEmparejar = async (props, hijos, contadorRespuestas) => {
   let faltaMarcar = false;
   hijos.some((element) => {
     if (
-      element.getElementsByTagName("button")[0].innerText ===
+      element.getElementsByClassName("opt-1")[0].innerText ===
       "Waiting answer..."
     ) {
       faltaMarcar = true;
@@ -198,13 +198,14 @@ const verificarEmparejar = async (props, hijos, contadorRespuestas) => {
     alert("All fields must be filled");
   } else {
     hijos.some((element) => {
-      respuestaUser.push(element.getElementsByTagName("button")[0].innerText);
+      respuestaUser.push(element.getElementsByClassName("opt-1")[0].innerText);
     });
     if (JSON.stringify(respuestaUser) === JSON.stringify(respuestasBack)) {
       esCorrecta = true;
     } else {
       esCorrecta = false;
     }
+    console.log(JSON.stringify(respuestaUser), JSON.stringify(respuestasBack));
     if (esCorrecta) {
       enviarSiEsCorrecta(props, contadorRespuestas);
     } else {
