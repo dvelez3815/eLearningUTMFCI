@@ -52,7 +52,7 @@ const Arrastrar = (props) => {
   const [items, setItems] = useState(data);
 
   return (
-    <div className="flex flex-col flex-wrap mb-4 sm:px-80  " ref={props.miref}>
+    <div className="flex flex-col flex-wrap mb-4 xl:px-80 sm:px-20   " ref={props.miref}>
       <h2 className="mt-10 text-2xl font-bold text-green-700 ">{(props.ejercicio.question)}</h2>
       {props.ejercicio.img && (
           <ViewImage img={props.ejercicio.img} />
@@ -88,7 +88,7 @@ const Arrastrar = (props) => {
             <Droppable droppableId="droppable" direction="vertical">
               {(provided, snapshot) => (
                 <div
-                className="mx-auto flex  flex-col rounded justify-center   items-center  	"
+                className="mx-auto flex  flex-col rounded justify-center items-center "
                   ref={provided.innerRef}
                   style={getListStyle(
                     snapshot.isDraggingOver,

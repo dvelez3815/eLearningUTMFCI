@@ -20,7 +20,7 @@ export const OpcionCorrecta_n = (props) => {
   };
 
   return (
-    <div className="flex flex-col flex-wrap mt-8 sm:px-80">
+    <div className="flex flex-col flex-wrap mt-8 xl:px-80 sm:px-20 ">
       <h2 className="mt-10 text-sm mr-8 ml-8 md:text-2xl font-bold text-green-700 py-5">{props.ejercicio.question}</h2>
         {props.ejercicio.img && (
           <ViewImage img={props.ejercicio.img} />

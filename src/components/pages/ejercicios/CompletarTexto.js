@@ -5,7 +5,7 @@ import shortid from "shortid";
 import ViewImage from '../../ViewImage/ViewImage'
 const CompletarTexto = (props) => {
   return (
-    <div className="flex flex-col  flex-wrap mt-8 sm:px-60 my-10">
+    <div className="flex flex-col  flex-wrap mt-8 xl:px-60 sm:px-20  my-10">
       <h2 className="m-auto p-auto text-sm font-bold sm:text-2xl text-green-700 p-5">
         {props.ejercicio.question}
       </h2>
