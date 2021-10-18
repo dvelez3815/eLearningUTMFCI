@@ -67,11 +67,11 @@ export default function Activity(props) {
             </div>
 
           
-            <Menu.Item className={props.percent == 100?"bg-yellow-500 w-3/4 my-2 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded":"bg-green-600 w-3/4 my-2 hover:bg-green-800 text-white font-bold py-2 px-4 rounded"} disabled={props.percent===100?true:false}  >
+            <Menu.Item className={props.percent == 100?"bg-yellow-500 w-3/4 my-2 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded":"bg-green-600 w-3/4 my-2 hover:bg-green-800 text-white font-bold py-2 px-4 rounded"}   >
               {({ active }) => (
                 <button >
                   <a className="block"
-                    href={props.percent == 100?"/dashboard":props.ruta} 
+                    href={props.percent == 100?props.ruta2:props.ruta} 
                    /*  className={classNames(
                       active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                       "block px-4 py-2 text-sm"

@@ -79,7 +79,7 @@ const Emparejar = (props) => {
       {props.ejercicio.img && <ViewImage img={props.ejercicio.img} />}
       <div className="contenedor m-auto p-auto w-auto my-1 " ref={divRef}>
         <div
-          className="flex flex-col items-center justify-center my-5 sm:my-1 mr-8 ml-8   "
+          className="flex flex-col sm:items-center sm:justify-center my-5 sm:my-1 mr-8 ml-8   "
           ref={props.miref}
         >
           {props.ejercicio.body.map((item, index) => {
