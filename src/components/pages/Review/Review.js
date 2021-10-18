@@ -26,7 +26,7 @@ const Review = () => {
 
     return (
         <div>
-            {loadingData ? <div className="cargando"><img src={loading}></img></div> :data.length>0?<Ejercicio ejercicios={data} esPrueba = {true}/>:<NotFoundPage></NotFoundPage>}
+            {loadingData ? <div className="cargando"><img src={loading}></img></div> :data.length>0?<Ejercicio ejercicios={data} esPrueba = {false}/>:<NotFoundPage></NotFoundPage>}
             
         </div>
     )
