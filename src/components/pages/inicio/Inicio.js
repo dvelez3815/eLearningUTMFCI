@@ -112,6 +112,7 @@ export const Inicio = () => {
             ></ModuleProgress>
 
             <Activity
+              rutaReview={`/review/${modulo.book_info.book}/${modulo.book_info.module}/${modulo.book_info.unit}/writing`}
               moduleName={`Module: ${modulo.book_info.module}`}
               ruta={`/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}/${modulo.writing.task_id}`}
               taskid={modulo.writing.task_id}
@@ -126,6 +127,7 @@ export const Inicio = () => {
             />
 
             <Activity
+              rutaReview={`/review/${modulo.book_info.book}/${modulo.book_info.module}/${modulo.book_info.unit}/vocabulary`}
               moduleName={`Module: ${modulo.book_info.module}`}
               ruta={`/modulo/${modulo.book_info.module}/vocabulary/${modulo.book_info.unit}/${modulo.vocabulary.task_id}`}
               taskid={modulo.vocabulary.task_id}
@@ -140,6 +142,7 @@ export const Inicio = () => {
             />
 
             <Activity
+              rutaReview={`/review/${modulo.book_info.book}/${modulo.book_info.module}/${modulo.book_info.unit}/reading`}
               moduleName={`Module: ${modulo.book_info.module}`}
               ruta={`/modulo/${modulo.book_info.module}/reading/${modulo.book_info.unit}/${modulo.reading.task_id}`}
               taskid={modulo.reading.task_id}
@@ -154,6 +157,7 @@ export const Inicio = () => {
             />
 
             <Activity
+              rutaReview={`/review/${modulo.book_info.book}/${modulo.book_info.module}/${modulo.book_info.unit}/grammar`}
               moduleName={`Module: ${modulo.book_info.module}`}
               ruta={`/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}/${modulo.grammar.task_id}`}
               taskid={modulo.grammar.task_id}
@@ -189,6 +193,7 @@ export const Inicio = () => {
             ></ModuleProgress>
 
             <Activity
+              rutaReview={`/review/${modulo.book_info.book}/${modulo.book_info.module}/${modulo.book_info.unit}/writing`}
               moduleName={`Module: ${modulo.book_info.module}`}
               ruta={`/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}/${modulo.writing.task_id}`}
               ruta2 = {`/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}`}
@@ -204,6 +209,7 @@ export const Inicio = () => {
             />
 
             <Activity
+              rutaReview={`/review/${modulo.book_info.book}/${modulo.book_info.module}/${modulo.book_info.unit}/vocabulary`}
               moduleName={`Module: ${modulo.book_info.module}`}
               ruta={`/modulo/${modulo.book_info.module}/vocabulary/${modulo.book_info.unit}/${modulo.vocabulary.task_id}`}
               taskid={modulo.vocabulary.task_id}
@@ -218,6 +224,7 @@ export const Inicio = () => {
             />
 
             <Activity
+              rutaReview={`/review/${modulo.book_info.book}/${modulo.book_info.module}/${modulo.book_info.unit}/reading`}
               moduleName={`Module: ${modulo.book_info.module}`}
               ruta={`/modulo/${modulo.book_info.module}/reading/${modulo.book_info.unit}/${modulo.reading.task_id}`}
               taskid={modulo.reading.task_id}
@@ -232,6 +239,7 @@ export const Inicio = () => {
             />
 
             <Activity
+              rutaReview={`/review/${modulo.book_info.book}/${modulo.book_info.module}/${modulo.book_info.unit}/grammar`}
               moduleName={`Module: ${modulo.book_info.module}`}
               ruta={`/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}/${modulo.grammar.task_id}`}
               taskid={modulo.grammar.task_id}

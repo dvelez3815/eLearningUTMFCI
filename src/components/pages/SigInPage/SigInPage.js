@@ -72,6 +72,7 @@ const SigInPage = () => {
           cookies.set("lastname", res.data.res.lastname, { path: "/" });
           cookies.set("mail", res.data.res.mail, { path: "/" });
           cookies.set("status", res.data.res.status, { path: "/" });
+          cookies.set('token',res.data.res.confirmationCode,{path:'/'});
           window.location.href = "./dashboard"
         }
       })
