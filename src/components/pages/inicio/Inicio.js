@@ -196,7 +196,7 @@ export const Inicio = () => {
               rutaReview={`/review/${modulo.book_info.book}/${modulo.book_info.module}/${modulo.book_info.unit}/writing`}
               moduleName={`Module: ${modulo.book_info.module}`}
               ruta={`/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}/${modulo.writing.task_id}`}
-              ruta2 = {`/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}/1`}
+              ruta2 = {`/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}`}
               taskid={modulo.writing.task_id}
               percent={parseInt(
                 (modulo.writing.user_progress /
