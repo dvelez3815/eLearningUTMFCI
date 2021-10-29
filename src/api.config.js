@@ -1,3 +1,3 @@
 module.exports = {
-    api_url: 'https://utminglesapp.herokuapp.com'
+    api_url: 'http://68.183.133.134:5000'
   };

@@ -32,15 +32,22 @@ const SigInPage = () => {
     });
   }
 
-  const handleButtonSubmit = (event) =>{
+  const handleButtonSubmit = async (event) =>{
     setCargando(true);
     event.preventDefault();
+    const response = await fetch(`${api_url}/signin`, {
+      method: "GET"
+    });
+    console.log('Si Imprime xD')
+    console.log(response)
     axios
       .post(api_url+"/signin", {
         mail: form.mail,
         password: form.password,
       })
       .then((res) => {
+        
+        console.log(res)
         if (res.data.res === "USER NOT EXIST") {
           setDato("El usuario no existe");
           setCargando(false);

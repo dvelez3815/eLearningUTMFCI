@@ -23,6 +23,15 @@ class AccountPendingPage extends React.Component {
                 </span>
               </h3>
             </div>
+            <div className='py-4'>
+              <h3 className="text-xl p-2 font-semibold italic mt-3">
+              </h3>
+              <h3 className="text-lg p-2 text-gray-500 font-normal">
+                <span  className="text-green-600">
+                  <Link to="/"> Volver al Inicio</Link>
+                </span>
+              </h3>
+            </div>
           </div>
         </div>
       </div>
