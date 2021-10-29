@@ -20,8 +20,8 @@ const Arrastrar = (props) => {
     // some basic styles to make the items look a bit nicer
     userSelect: "none",
     // padding: grid * 2,
-    margin: "0.5rem",
-    width: "70%",
+    margin: "0.3rem",
+    width: "60%",
     // change background colour if dragging
     background: isDragging ? "#E5E7EB" : "white",
 
@@ -38,8 +38,8 @@ const Arrastrar = (props) => {
     background: isDraggingOver ? "white" : "#E5E7EB",
     borderRadius: "12px",
     display: "flex",
-    padding: "2px",
-    width: "auto",
+    padding: "10px",
+    width: "80%",
     border: "1px solid #e5e5e5",
   });
 
@@ -52,18 +52,18 @@ const Arrastrar = (props) => {
   const [items, setItems] = useState(data);
 
   return (
-    <div className="flex flex-col flex-wrap mb-4 sm:px-80 " ref={props.miref}>
+    <div className="flex flex-col flex-wrap mb-4 xl:px-80 sm:px-20   " ref={props.miref}>
       <h2 className="mt-10 text-2xl font-bold text-green-700 ">{(props.ejercicio.question)}</h2>
       {props.ejercicio.img && (
           <ViewImage img={props.ejercicio.img} />
         )}
       {items.map((preguntas, index) => (
         <div
-          className="container lg:m-auto lg:p-auto lg:w-auto lg:w-full md:m-7  "
+          className="container  lg:m-auto lg:p-auto lg:w-auto lg:w-full md:m-7  "
           key={shortid.generate()}
           id="arrastrar"
         >
-          <h2 className="text-md font-medium text-left my-4  "> Sentence {index+1}</h2>
+          <h2 className="text-md  font-medium text-left my-4  "> Sentence {index+1}</h2>
           {console.log(props.ejercicio.img)}
           
           <DragDropContext
@@ -85,9 +85,10 @@ const Arrastrar = (props) => {
             }}
             key={shortid.generate()}
           >
-            <Droppable droppableId="droppable" direction="horizontal">
+            <Droppable droppableId="droppable" direction="vertical">
               {(provided, snapshot) => (
                 <div
+                className="mx-auto flex  flex-col rounded justify-center items-center "
                   ref={provided.innerRef}
                   style={getListStyle(
                     snapshot.isDraggingOver,
@@ -104,7 +105,7 @@ const Arrastrar = (props) => {
                     >
                       {(provided, snapshot) => (
                         <div
-                          className="rounded h-10 justify-center flex items-center  	"
+                          className="rounded  justify-center flex items-center  	"
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
@@ -113,7 +114,7 @@ const Arrastrar = (props) => {
                             provided.draggableProps.style
                           )}
                         >
-                          <p className="text-xs">{ordenar.item}</p>
+                          <p className="sm:text-xs text-xs">{ordenar.item}</p>
                         </div>
                       )}
                     </Draggable>

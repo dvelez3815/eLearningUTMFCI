@@ -38,27 +38,28 @@ const Emparejar = (props) => {
 
   const cambiarVisibilidad = (event, props) => {
     let aMarcar = Array.from(divRef.current.firstChild.children);
+    console.log(aMarcar);
 
     let contador = 0;
     aMarcar.forEach((element) => {
-      console.log(element.getElementsByTagName("button")[0].innerText);
+      
       if (
-        element.getElementsByTagName("button")[0].innerText ===
-        "esperando respuesta..."
+        element.getElementsByClassName('opt-1')[0].innerText ===
+        "Waiting answer..."
       ) {
         contador += 1;
       }
     });
 
     //Si ya se han completado todas las opciones
-    console.log(contador, aMarcar.length);
+    
     if (contador !== 0) {
       aMarcar.some((element) => {
         if (
-          element.getElementsByTagName("button")[0].innerText ===
-          "esperando respuesta..."
+          element.getElementsByClassName('opt-1')[0].innerText ===
+          "Waiting answer..."
         ) {
-          element.getElementsByTagName("button")[0].innerText =
+          element.getElementsByClassName('opt-1')[0].innerText =
             event.target.innerText;
           event.target.parentNode.parentNode.classList.add("bg-gray-400");
           event.target.parentNode.classList.add("invisible");
@@ -71,14 +72,14 @@ const Emparejar = (props) => {
   };
 
   return (
-    <div className="flex flex-col flex-wrap mt-8 sm:px-80 ">
+    <div className="flex flex-col flex-wrap mt-8 xl:px-80 sm:px-20  ">
       <h2 className="m-auto p-3 text-sm  font-bold sm:text-2xl text-green-700 ">
         {props.ejercicio.question}{" "}
       </h2>
       {props.ejercicio.img && <ViewImage img={props.ejercicio.img} />}
-      <div className="contenedor m-auto p-auto w-auto" ref={divRef}>
+      <div className="contenedor m-auto p-auto w-auto my-1 " ref={divRef}>
         <div
-          className="flex flex-col items-center justify-center my-5 sm:my-1 mr-8 ml-8   "
+          className="flex flex-col sm:items-center sm:justify-center my-5 sm:my-1 mr-8 ml-8   "
           ref={props.miref}
         >
           {props.ejercicio.body.map((item, index) => {
@@ -111,7 +112,7 @@ const Emparejar = (props) => {
           })}
         </div>
         <div
-          className="flex flex-wrap gap-2 my-4 justify-center"
+          className="flex flex-wrap gap-2 py-10 justify-center"
           ref={opcionesRef}
         >
           {opciones.length > 0 &&
@@ -143,7 +144,7 @@ const InputCompletarTexto = (props) => {
       if (props.opt[index] === event.target.innerText) {
         element.firstChild.classList.remove("invisible");
         element.classList.remove("bg-gray-400");
-        event.target.innerText = "esperando respuesta...";
+        event.target.innerText = "Waiting answer...";
       }
     });
   };
@@ -151,22 +152,22 @@ const InputCompletarTexto = (props) => {
   return (
     <button
       className={
-        "shadow appearance-none border rounded w-full h-13 sm:h-12 sm:w-72 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xs"
+        "shadow appearance-none border rounded w-full h-13 sm:h-12 sm:w-72 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xs opt-1"
       }
       onClick={volverALaNormalidad}
     >
-      esperando respuesta...
+      Waiting answer...
     </button>
   );
 };
 
 const JuegoCompletarTexto = (props) => {
   return (
-    <div className="grid grid-cols-2 w-full sm:w-full items-center gap-7 my-2 ">
+    <div className="grid grid-cols-2 text-justify items-center  my-2 ">
       <div>
         {props.juego.map((juego, index) => {
           if (typeof juego === "string") {
-              console.log(juego)
+              
             return (
               <div
                 key={shortid.generate()}
@@ -174,7 +175,7 @@ const JuegoCompletarTexto = (props) => {
                   {/* <ViewImage img={juego}/> */}
                 {props.type === "emparejar_img" && <ViewImage img={juego} />}
                 {props.type == "emparejar" && <h2 className=
-                  "w-auto sm:w-auto mx-2 text-center text-xs sm:text-lg"
+                  "mx-2 text-justify text-xs sm:text-lg"
                  >{ juego }</h2>}
               </div>
             );

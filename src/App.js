@@ -16,6 +16,7 @@ import Evaluacion from './components/pages/Evaluacion/Evaluacion';
 import Pruebas from './components/pages/Pruebas/Pruebas';
 import CompletarTexto from './components/pages/ejercicios/CompletarTexto';
 import Emparejar from './components/pages/ejercicios/Emparejar';
+import Review from './components/pages/Review/Review';
 
 
 
@@ -45,6 +46,10 @@ function App() {
 
       <Route path="/pruebas/libro/:idlibro">
         <Pruebas/>
+      </Route>      
+
+      <Route path="/review/:book/:module/:unit/:type">
+        <Review/>
       </Route>      
 
 

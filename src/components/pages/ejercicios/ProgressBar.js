@@ -16,7 +16,7 @@ const ProgressBar = (props) => {
           <div className="order-last my-3 ">
             <button onClick={salirVentana}
               className="bg-transparent tracking-wider  my-2 text-yellow-500 font-semibold hover:text-yellow-400 py-2 px-4 border border-yellow-500 hover:border-yellow-500 rounded">
-              <CancelIcon style={{ fontSize: 27 }}/> Salir
+              <CancelIcon style={{ fontSize: 27 }}/> Exit
             </button>
           </div>
         </div>

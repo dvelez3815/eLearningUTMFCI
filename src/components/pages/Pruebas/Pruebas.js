@@ -53,7 +53,7 @@ const getData = async(idlibro) => {
 const cutData = (data) => {
     let newData = [];
 
-    for (let i = 0; i < 60; i++) {
+    for (let i = 0; i < 30; i++) {
         let random = Math.floor(Math.random() * data.length);
         newData.push(data[random]);
     }

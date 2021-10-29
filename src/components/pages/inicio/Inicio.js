@@ -70,18 +70,18 @@ export const Inicio = () => {
     if (!cookies.get("_id")) {
       window.location.href = "./signin";
     }
-    // if (cookies.get("status") !== "Active") {
-    //   const user_response = await fetch(`${api_url}/user/${userid}`, {
-    //     method: "GET",
-    //   });
-    //   const user_json = await user_response.json();
+    if (cookies.get("status") !== "Active") {
+      const user_response = await fetch(`${api_url}/user/${userid}`, {
+        method: "GET",
+      });
+      const user_json = await user_response.json();
 
-    //   if (user_json.status == "Active") {
-    //     cookies.set("status", user_json.status, { path: "/" });
-    //   } else {
-    //     window.location.href = "./PendingAccount";
-    //   }
-    // }
+      if (user_json.status == "Active") {
+        cookies.set("status", user_json.status, { path: "/" });
+      } else {
+        window.location.href = "./PendingAccount";
+      }
+    }
   }, []);
 
   return (
@@ -112,6 +112,7 @@ export const Inicio = () => {
             ></ModuleProgress>
 
             <Activity
+              rutaReview={`/review/${modulo.book_info.book}/${modulo.book_info.module}/${modulo.book_info.unit}/writing`}
               moduleName={`Module: ${modulo.book_info.module}`}
               ruta={`/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}/${modulo.writing.task_id}`}
               taskid={modulo.writing.task_id}
@@ -126,6 +127,7 @@ export const Inicio = () => {
             />
 
             <Activity
+              rutaReview={`/review/${modulo.book_info.book}/${modulo.book_info.module}/${modulo.book_info.unit}/vocabulary`}
               moduleName={`Module: ${modulo.book_info.module}`}
               ruta={`/modulo/${modulo.book_info.module}/vocabulary/${modulo.book_info.unit}/${modulo.vocabulary.task_id}`}
               taskid={modulo.vocabulary.task_id}
@@ -140,6 +142,7 @@ export const Inicio = () => {
             />
 
             <Activity
+              rutaReview={`/review/${modulo.book_info.book}/${modulo.book_info.module}/${modulo.book_info.unit}/reading`}
               moduleName={`Module: ${modulo.book_info.module}`}
               ruta={`/modulo/${modulo.book_info.module}/reading/${modulo.book_info.unit}/${modulo.reading.task_id}`}
               taskid={modulo.reading.task_id}
@@ -154,6 +157,7 @@ export const Inicio = () => {
             />
 
             <Activity
+              rutaReview={`/review/${modulo.book_info.book}/${modulo.book_info.module}/${modulo.book_info.unit}/grammar`}
               moduleName={`Module: ${modulo.book_info.module}`}
               ruta={`/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}/${modulo.grammar.task_id}`}
               taskid={modulo.grammar.task_id}
@@ -189,8 +193,10 @@ export const Inicio = () => {
             ></ModuleProgress>
 
             <Activity
+              rutaReview={`/review/${modulo.book_info.book}/${modulo.book_info.module}/${modulo.book_info.unit}/writing`}
               moduleName={`Module: ${modulo.book_info.module}`}
               ruta={`/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}/${modulo.writing.task_id}`}
+              ruta2 = {`/modulo/${modulo.book_info.module}/writing/${modulo.book_info.unit}`}
               taskid={modulo.writing.task_id}
               percent={parseInt(
                 (modulo.writing.user_progress /
@@ -203,6 +209,7 @@ export const Inicio = () => {
             />
 
             <Activity
+              rutaReview={`/review/${modulo.book_info.book}/${modulo.book_info.module}/${modulo.book_info.unit}/vocabulary`}
               moduleName={`Module: ${modulo.book_info.module}`}
               ruta={`/modulo/${modulo.book_info.module}/vocabulary/${modulo.book_info.unit}/${modulo.vocabulary.task_id}`}
               taskid={modulo.vocabulary.task_id}
@@ -217,6 +224,7 @@ export const Inicio = () => {
             />
 
             <Activity
+              rutaReview={`/review/${modulo.book_info.book}/${modulo.book_info.module}/${modulo.book_info.unit}/reading`}
               moduleName={`Module: ${modulo.book_info.module}`}
               ruta={`/modulo/${modulo.book_info.module}/reading/${modulo.book_info.unit}/${modulo.reading.task_id}`}
               taskid={modulo.reading.task_id}
@@ -231,6 +239,7 @@ export const Inicio = () => {
             />
 
             <Activity
+              rutaReview={`/review/${modulo.book_info.book}/${modulo.book_info.module}/${modulo.book_info.unit}/grammar`}
               moduleName={`Module: ${modulo.book_info.module}`}
               ruta={`/modulo/${modulo.book_info.module}/grammar/${modulo.book_info.unit}/${modulo.grammar.task_id}`}
               taskid={modulo.grammar.task_id}
@@ -252,7 +261,7 @@ export const Inicio = () => {
 
   {/* BARRA LATERAL */}
 
-  <div className="hidden md:block md:col-span-3  w-auto fixed inset-y-30 right-10 ">
+  <div className="hidden xl:block md:col-span-3  w-auto fixed inset-y-30 right-10 ">
     <div className="py-5 flex flex-wrap flex-col justify-center">
       <div className="border shadow rounded-2xl py-5  hidden md:block p-4">
         <div>
@@ -280,7 +289,7 @@ export const Inicio = () => {
                         rel="noopener noreferrer"
                         //href=""
                       >
-                        º Book 1 (Module 1 - Module 2)
+                        Book 1 (Module 1 - Module 2)
                       </a>{" "}
                     </li>
                     <li className="text-sm hover:text-green-500 py-1">
@@ -290,7 +299,7 @@ export const Inicio = () => {
                         rel="noopener noreferrer"
                         //href=""
                       >
-                        º Book 2 (Module 3 - Module 4)
+                        Book 2 (Module 3 - Module 4)
                       </a>{" "}
                     </li>
                     <li className="text-sm hover:text-green-500 py-1">
@@ -300,7 +309,7 @@ export const Inicio = () => {
                         rel="noopener noreferrer"
                         //href=""
                       >
-                        º Book 3 (Module 5 - Module 6)
+                        Book 3 (Module 5 - Module 6)
                       </a>{" "}
                     </li>
                     <li className="text-sm hover:text-green-500 py-1">
@@ -310,7 +319,7 @@ export const Inicio = () => {
                         rel="noopener noreferrer"
                         //href=""
                       >
-                        º Book 4 (Module 7 - Module 8)
+                        Book 4 (Module 7 - Module 8)
                       </a>{" "}
                     </li>
                     <li className="text-sm hover:text-green-500 py-1">
@@ -320,7 +329,7 @@ export const Inicio = () => {
                         rel="noopener noreferrer"
                         //href=""
                       >
-                        º Book 5 (Module 9 - Module 10)
+                        Book 5 (Module 9 - Module 10)
                       </a>{" "}
                     </li>
                   </ol>

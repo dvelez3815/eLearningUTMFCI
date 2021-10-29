@@ -26,9 +26,9 @@ const Evaluacion = () => {
         </div>
         <div>
 
-          <div className="container mx-auto justify-center ">
+          <div className="container mx-auto justify-center  ">
             <div className="h-48 flex flex-wrap justify-center content-start">
-              <div className="py-10 p-5  sm:w-5/12">
+              <div className="py-10 p-5  md:w-5/12">
                 <h3 className="text-left text-2xl sm:text-3xl font-sans font-bold text-green-400">
                   Assess knowledge by book
                 </h3>
@@ -113,7 +113,7 @@ const Evaluacion = () => {
                             </div>
                           </td>
                           <td className="p-3 text-left">
-                          more than 50 correct
+                          more than 25 correct
                           </td>
                           <td className="p-3">
                             <span className="bg-green-400 text-gray-50 rounded-md px-2 sm:p-1">Excellent</span>
@@ -121,13 +121,13 @@ const Evaluacion = () => {
                         </tr>
                         <tr className="bg-gray-200">
                           <td className="p-3">
-                            <div cclassNamelass="flex align-items-center">
+                            <div className="flex align-items-center">
                               <img className="rounded-full h-12 w-12   object-cover" src="https://images.unsplash.com/photo-1423784346385-c1d4dac9893a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="unsplash image"/>
 
                             </div>
                           </td>
                           <td className="p-3 text-left">
-                          between 30 to 49 correct
+                          between 10 to 24 correct
                           </td>
                           <td className="p-3">
                             <span className="bg-yellow-500 text-gray-50 rounded-md px-2 sm:p-1">you're doing well</span>
@@ -140,7 +140,7 @@ const Evaluacion = () => {
                             </div>
                           </td>
                           <td className="p-3 text-left">
-                          less than 30 correct
+                          less than 10 correct
                           </td>
                           <td className="p-3">
                             <span className="bg-red-500  text-gray-50  rounded-md px-2 sm:p-1">keep practicing</span>

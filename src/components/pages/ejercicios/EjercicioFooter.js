@@ -16,15 +16,15 @@ const EjercicioFooter = (props) => {
   }, []);
 
   return (
-    <div className="m-8">
-      <div className="flex justify-between flex-row container m-auto p-auto">
-        <div className="mb-4">
+    <div className="m-8 ">
+      <div className="flex justify-between flex-row container m-auto p-auto ">
+        <div className="mb-4 ">
           <button
             disabled={false}
             className="bg-transparent text-xs sm:text-xl tracking-wider  my-2 text-gray-500 font-semibold hover:text-gray-400 py-2 px-4 border border-gray-500 hover:border-gray-500 rounded"
             onClick={() => {noEsCorrecta(props, skipExercise(props))} /*props.onClick()*/}
           >
-            Saltar
+            skip
           </button>
         </div>
         <div className="mb-4">
@@ -33,7 +33,7 @@ const EjercicioFooter = (props) => {
             onClick={() => validarRespuesta(props)}
           >
             <span>
-              <p>comprobar</p>
+              <p>check</p>
             </span>
           </button>
         </div>
@@ -109,7 +109,7 @@ const skipExercise = (props) => {
   
     return respuestaBackEnd;
     
-  } else if (tipo_ejercicio === "emparejar") {
+  } else if (tipo_ejercicio === "emparejar" || tipo_ejercicio === "emparejar_img" ) {
     let respuestasBack = [];
     props.ejercicio.props.ejercicio.body.forEach((item) => {
       respuestasBack.push(item.answer);
@@ -168,7 +168,7 @@ const validarRespuesta = async (props) => {
   } else if (tipo_ejercicio === "completar_texto") {
     let hijos = Array.from(props.miref.current.children);
     await verificarCompletar_Texto(props, hijos, contadorRespuestas);
-  } else if (tipo_ejercicio === "emparejar") {
+  } else if (tipo_ejercicio === "emparejar" || tipo_ejercicio === "emparejar_img") {
     let hijos = Array.from(props.miref.current.children);
     await verificarEmparejar(props, hijos, contadorRespuestas);
   } else {
@@ -187,24 +187,25 @@ const verificarEmparejar = async (props, hijos, contadorRespuestas) => {
   let faltaMarcar = false;
   hijos.some((element) => {
     if (
-      element.getElementsByTagName("button")[0].innerText ===
-      "click en las opciones"
+      element.getElementsByClassName("opt-1")[0].innerText ===
+      "Waiting answer..."
     ) {
       faltaMarcar = true;
       return true;
     }
   });
   if (faltaMarcar) {
-    alert("Todos los campos deben estar rellenos");
+    alert("All fields must be filled");
   } else {
     hijos.some((element) => {
-      respuestaUser.push(element.getElementsByTagName("button")[0].innerText);
+      respuestaUser.push(element.getElementsByClassName("opt-1")[0].innerText);
     });
     if (JSON.stringify(respuestaUser) === JSON.stringify(respuestasBack)) {
       esCorrecta = true;
     } else {
       esCorrecta = false;
     }
+    console.log(JSON.stringify(respuestaUser), JSON.stringify(respuestasBack));
     if (esCorrecta) {
       enviarSiEsCorrecta(props, contadorRespuestas);
     } else {
@@ -248,7 +249,7 @@ const verificarCompletar_Texto = async (props, hijos, contadorRespuestas) => {
       esCorrecta = false;
     }
   } else {
-    alert("Todos los campos deben estar rellenos");
+    alert("All fields must be filled");
     console.log(respuestaBackEnd);
   }
   if (aRespondido && esCorrecta) {
@@ -375,7 +376,7 @@ const verificarOpcion_Correcta_1 = async (
       noEsCorrecta(props,correctAnswer);
     }
   } else {
-    alert("No seleccionaste nada");
+    alert("You did not select anything");
   }
 };
 
@@ -422,7 +423,7 @@ const verificarOpcion_Correcta_n = async (
       noEsCorrecta(props,correctAnswer);
     }
   } else {
-    alert("No seleccionaste nada");
+    alert("You did not select anything");
   }
 };
 
@@ -487,10 +488,10 @@ async function enviarSiEsCorrecta(props, contadorRespondidas) {
     props.setContadorRespondidas(contadorRespondidas + 1);
     props.juego.pop();
     setInterval(() => {}, 4000);
-    mostrarAlertaExitoFin(`Fin del juego`);
+    mostrarAlertaExitoFin(`End of the game`);
     props.setFinJuego(true);
   } else {
-    mostrarAlertaExito(`Respuesta correcta`);
+    mostrarAlertaExito(`Correct answer`);
     props.juego.pop();
     props.setContadorRespondidas(contadorRespondidas + 1);
   }
