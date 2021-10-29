@@ -35,12 +35,54 @@ const SigInPage = () => {
   const handleButtonSubmit = async (event) =>{
     setCargando(true);
     event.preventDefault();
-    const response = await fetch(`${api_url}/signin`, {
-      method: "GET"
+    const body =  {
+      mail: form.mail,
+      password: form.password,
+    }
+    console.log('BODY: ',body)
+    const res = await fetch(`${api_url}/signin`, {
+      method: "POST",
+      body: JSON.stringify(body), 
+      headers:{
+        'Content-Type': 'application/json'
+      }
     });
-    console.log('Si Imprime xD')
-    console.log(response)
-    axios
+    console.log('prueba',res)
+    if (res.data.res === "USER NOT EXIST") {
+      setDato("El usuario no existe");
+      setCargando(false);
+      setIsVisibleDato("");
+      setInterval(() => {
+        setDato("");
+        setIsVisibleDato("hidden");
+      }, 10000);
+    } else if (res.data.res === "PASSWORD INCORRECT") {
+      setDato("La contraseña es incorrecta");
+      setIsVisibleDato("");
+      setCargando(false);
+      setInterval(() => {
+        setDato("");
+        setIsVisibleDato("hidden");
+      }, 10000);
+    } else if(res.data.res === "ERROR"){
+      setDato("Hubo un problema al conectar con el servidor");
+      setIsVisibleDato("");
+      setCargando(false);
+      setInterval(() => {
+        setDato("");
+        setIsVisibleDato("hidden");
+      }, 10000);
+    }
+    else {
+      cookies.set("_id", res.data.res._id, { path: "/" });
+      cookies.set("name", res.data.res.name, { path: "/" });
+      cookies.set("lastname", res.data.res.lastname, { path: "/" });
+      cookies.set("mail", res.data.res.mail, { path: "/" });
+      cookies.set("status", res.data.res.status, { path: "/" });
+      window.location.href = "./dashboard"
+    }
+
+    /* axios
       .post(api_url+"/signin", {
         mail: form.mail,
         password: form.password,
@@ -83,7 +125,7 @@ const SigInPage = () => {
           window.location.href = "./dashboard"
         }
       })
-      .catch((err) => {});
+      .catch((err) => {}); */
       
   }
   

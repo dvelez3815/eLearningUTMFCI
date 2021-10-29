@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import {api_url} from '../../../api.config'
 import Cookies from "universal-cookie";
 import {
   mostrarAlertaError,
@@ -477,9 +478,9 @@ async function enviarSiEsCorrecta(props, contadorRespondidas) {
       headers: myHeaders,
       body: raw,
     };
-
+    
     await fetch(
-      "https://utminglesapp.herokuapp.com/progress/update",
+      api_url+"/progress/update",
       requestOptions
     )
       .then((response) => response.text())
