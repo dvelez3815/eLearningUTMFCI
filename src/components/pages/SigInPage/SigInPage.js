@@ -32,7 +32,7 @@ const SigInPage = () => {
     });
   }
 
-  const handleButtonSubmit = (event) =>{
+  const handleButtonSubmit = async  (event) =>{
     setCargando(true);
     event.preventDefault();
     const body =  {
