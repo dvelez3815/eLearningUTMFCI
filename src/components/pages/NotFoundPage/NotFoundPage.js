@@ -19,7 +19,7 @@ class NotFoundPage extends React.Component {
               <h3 className="text-lg p-2 text-gray-500 font-normal">
                 Déjame guiarte de
                 <span  className="text-green-600">
-                  <Link to="/">regreso a casa</Link>
+                  <Link to="/dashboard"> regreso a casa</Link>
                 </span>
               </h3>
             </div>
