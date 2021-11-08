@@ -7,7 +7,7 @@ import { api_url, api_utm } from "../../../api.config";
 import Cookies from "universal-cookie";
 import loading from "../../../assets/resource/loading.svg";
 import validator from "validator";
-const cookies = new Cookies();
+const cookie = new Cookies();
 
 const SigInPage = () => {
   const [isVisibleDato, setIsVisibleDato] = useState("hidden");
@@ -52,88 +52,31 @@ const SigInPage = () => {
   const handleButtonSubmit = async (event) => {
     setCargando(true);
     event.preventDefault();
-    if (validator.contains(form.mail, "utm.edu.ec")) {
-      console.log("es dominio utm");
-      var myHeaders = new Headers();
-      myHeaders.append("X-API-KEY", "3ecbcb4e62a00d2bc58080218a4376f24a8079e1");
-      myHeaders.append("Access-Control-Allow-Origin", "*");
-      let body = {
-        usuario: form.mail,
-        clave: form.password,
-      };
-      let res = await fetch(api_utm, {
-        method: "POST",
-        body: body,
-        headers: myHeaders,
-      });
-      console.log(res);
-      if (res.state === "success") {
-        //ingresó
-        let datos = {
-          name: res.value.nombres,
-          mail: form.mail,
-        };
-        let user = await fetch(api_url + "/user/" + datos.mail, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        if (user.res !== "User Not Exist") {
-          settingCookies(user);
-          window.location.href = "./dashboard";
-        } else {
-          let response = await fetch(api_url + "/signup", {
-            method: "POST",
-            body: JSON.stringify(datos),
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
-          if (response.data.res === "USER EXITS") {
-            settingCookies(response.data.user);
-            window.location.href = "./dashboard";
-          } else if (response.data.res === "ERROR") {
-            viewTextMessage(false, "Hubo un error al conectar con el servidor");
-          } else {
-            var user = response.data.res;
-            settingCookies(user);
-            if (user.status === "Active") {
-              window.location.href = "./dashboard";
-            } else {
-              window.location.href = "./PendingAccount";
-            }
-          }
-        }
-        
-      } else {
-        //contraseñas incorrectas
-        viewTextMessage(false, "El usuario no existe");
-      }
+
+    const res = await fetch(`${api_url}/signin`, {
+      method: "POST",
+      body: JSON.stringify({
+        mail: form.mail,
+        password: form.password,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (res.data.res === "USER NOT EXIST") {
+      viewTextMessage(false, "El usuario no existe");
+    } else if (res.data.res === "PASSWORD INCORRECT") {
+      viewTextMessage(false, "La contraseña es incorrecta");
+    } else if (res.data.res === "ERROR") {
+      viewTextMessage(false, "Hubo un problema al conectar con el servidor");
     } else {
-      //No es usuario de la UTM
-      const res = await fetch(`${api_url}/signin`, {
-        method: "POST",
-        body: JSON.stringify(body),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (res.data.res === "USER NOT EXIST") {
-        viewTextMessage(false, "El usuario no existe");
-      } else if (res.data.res === "PASSWORD INCORRECT") {
-        viewTextMessage(false, "La contraseña es incorrecta");
-      } else if (res.data.res === "ERROR") {
-        viewTextMessage(false, "Hubo un problema al conectar con el servidor");
-      } else {
-        settingCookies(res.data.res);
-        window.location.href = "./dashboard";
-      }
+      settingCookies(res.data.res);
+      window.location.href = "./dashboard";
     }
   };
 
   useEffect(() => {
-    if (cookies.get("_id")) {
+    if (cookie.get("_id")) {
       window.location.href = "./dashboard";
     }
   });
