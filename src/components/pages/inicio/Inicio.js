@@ -33,10 +33,9 @@ export const Inicio = () => {
       method: "POST",
     });
     const data = await response.json();
-    console.log(data);
-
     return data;
   };
+  
 
   useEffect(() => {
     let llenarInfo = async () => {

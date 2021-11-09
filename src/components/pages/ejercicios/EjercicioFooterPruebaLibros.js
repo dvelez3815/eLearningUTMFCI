@@ -86,7 +86,7 @@ async function noEsCorrecta(props) {
       );
     } else if (tipo_ejercicio === "true_false") {
       let hijos = props.miref.current.children;
-      console.log(hijos);
+      //console.log(hijos);
       await verificarVerdadero_Falso(props, hijos, aciertos);
     } else if (tipo_ejercicio === "completar_texto") {
       let hijos = Array.from(props.miref.current.children);
@@ -172,7 +172,7 @@ async function noEsCorrecta(props) {
       }
     } else {
       noEsCorrecta(props)
-      console.log(respuestaBackEnd);
+      //console.log(respuestaBackEnd);
     }
     if (aRespondido && esCorrecta) {
       enviarSiEsCorrecta(props, aciertos);
@@ -180,7 +180,7 @@ async function noEsCorrecta(props) {
       noEsCorrecta(props,respuestaBackEnd);
     }
   
-    // console.log(hijos[0].children[1].value);
+    // //console.log(hijos[0].children[1].value);
   };
   
   const verificarVerdadero_Falso = async (props, hijos, aciertos) => {

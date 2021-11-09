@@ -64,7 +64,6 @@ const Arrastrar = (props) => {
           id="arrastrar"
         >
           <h2 className="text-md  font-medium text-left my-4  "> Sentence {index+1}</h2>
-          {console.log(props.ejercicio.img)}
           
           <DragDropContext
             onDragEnd={(result) => {
