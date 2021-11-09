@@ -81,9 +81,6 @@ const SignUpPage = () => {
         
         if(user.status === 'Active'){
           window.location.href = "./dashboard";
-        }else{
-          window.location.href = "./PendingAccount";
-
         }
       }
     })
@@ -93,9 +90,7 @@ const SignUpPage = () => {
   }
   
   useEffect(() => {
-    if (cookie.get("_id")) {
-      window.location.href = "./dashboard";
-    }
+    
   })
 
     return (
