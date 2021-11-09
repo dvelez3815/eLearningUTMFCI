@@ -7,7 +7,7 @@ import { api_url, api_utm } from "../../../api.config";
 import Cookies from "universal-cookie";
 import loading from "../../../assets/resource/loading.svg";
 import validator from "validator";
-const cookie = new Cookies();
+const cookies = new Cookies();
 
 const SigInPage = () => {
   const [isVisibleDato, setIsVisibleDato] = useState("hidden");
@@ -28,54 +28,10 @@ const SigInPage = () => {
       [e.target.name]: e.target.checked,
     });
   };
-  const settingCookies = (user) => {
-    cookie.set("_id", user._id, { path: "/" });
-    cookie.set("name", user.name, { path: "/" });
-    cookie.set("lastname", user.lastname, { path: "/" });
-    cookie.set("mail", user.mail, { path: "/" });
-    cookie.set("status", user.status, { path: "/" });
-  };
-  const viewTextMessage = (visible, text) => {
-    setDato(text);
-    if (visible) {
-      setIsVisibleDato("visible");
-    } else {
-      setIsVisibleDato("");
-    }
-    setCargando(false);
-    setInterval(() => {
-      setDato("");
-      setIsVisibleDato("hidden");
-    }, 10000);
-  };
 
   const handleButtonSubmit = async (event) => {
     setCargando(true);
     event.preventDefault();
-<<<<<<< HEAD
-
-    const res = await fetch(`${api_url}/signin`, {
-      method: "POST",
-      body: JSON.stringify({
-        mail: form.mail,
-        password: form.password,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (res.data.res === "USER NOT EXIST") {
-      viewTextMessage(false, "El usuario no existe");
-    } else if (res.data.res === "PASSWORD INCORRECT") {
-      viewTextMessage(false, "La contraseña es incorrecta");
-    } else if (res.data.res === "ERROR") {
-      viewTextMessage(false, "Hubo un problema al conectar con el servidor");
-    } else {
-      settingCookies(res.data.res);
-      window.location.href = "./dashboard";
-    }
-  };
-=======
     axios
       .post(api_url+"/signin", {
         mail: form.mail,
@@ -123,13 +79,6 @@ const SigInPage = () => {
       
   }
   
->>>>>>> 17b953b498855ed3bdf2d019171cd9a86b6eff12
-
-  useEffect(() => {
-    if (cookie.get("_id")) {
-      window.location.href = "./dashboard";
-    }
-  });
 
   return (
     <div className=" ">
