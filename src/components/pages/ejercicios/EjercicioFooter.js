@@ -484,8 +484,8 @@ async function enviarSiEsCorrecta(props, contadorRespondidas) {
       requestOptions
     )
       .then((response) => response.text())
-      .then((result) => //console.log(result))
-      .catch((error) => //console.log("error", error));
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
     props.setContadorRespondidas(contadorRespondidas + 1);
     props.juego.pop();
     setInterval(() => {}, 4000);
