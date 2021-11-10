@@ -1,6 +1,5 @@
 import React, { createRef, useEffect } from "react";
 import NavComponent from "../../NavComponent";
-import Footer from "../../Footer";
 import logo from "../../../assets/resource/Logo_Provicional.png";
 import CollectionsBookmarkIcon from "@material-ui/icons/CollectionsBookmark";
 import { useState } from "react";
@@ -8,8 +7,6 @@ import { useState } from "react";
 import "./inicio.css";
 
 import Cookies from "universal-cookie";
-import { ModuleProgress } from "../../ModuleProgress";
-import Activity from "../../Activities/Activity";
 
 import grammarimg from "../../../assets/icons/Grammar.png";
 import readingimg from "../../../assets/icons/Reading.png";
