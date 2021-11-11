@@ -27,8 +27,12 @@ export const Inicio = () => {
 
   //get user progress from api
   const getData = async () => {
+
     const response = await fetch(`${api_url}/user_progress/${userid}`, {
       method: "POST",
+      headers: {
+        'token': cookies.get("token"),
+      },
     });
     const data = await response.json();
     return data;
@@ -71,6 +75,9 @@ export const Inicio = () => {
     if (cookies.get("status") !== "Active") {
       const user_response = await fetch(`${api_url}/user/${userid}`, {
         method: "GET",
+        headers: {
+          'token': cookies.get("token"),
+        },                
       });
       const user_json = await user_response.json();
 
@@ -89,11 +96,14 @@ export const Inicio = () => {
   <div className="grid grid-cols-12 ">
     <div className="xl:col-span-9 col-span-12 justify-center">
     {userProgress.map((modulo, index) => {
-      
-      
+
+
       if ((index + 1) % 2 === 0) {
         return (
+          <div key={shortid.generate()}>
           <Progreso key={shortid.generate()} modulo = {modulo} writingimg = {writingimg} vocabularyimg = {vocabularyimg} readingimg = {readingimg} grammarimg = {grammarimg}/>
+          
+          </div>
         )
       } else {
         return (

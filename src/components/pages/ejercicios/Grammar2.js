@@ -4,7 +4,8 @@ import { Ejercicio } from './Ejercicio'
 import {api_url} from '../../../api.config'
 import NotFoundPage from '../NotFoundPage/NotFoundPage'
 import loading from "../../../assets/resource/loading.svg";
-
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 export const Grammar2 = () => {
 
     const [ejercicios, setEjercicios] = React.useState(null);
@@ -39,6 +40,9 @@ const getExercises = async() => {
     const response = await fetch(url,
         {
             method: 'POST',
+            headers: {
+                'token': cookies.get("token"),
+              },            
         });
     const data = await response.json();
     return data;

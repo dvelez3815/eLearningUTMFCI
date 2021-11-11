@@ -467,6 +467,7 @@ async function enviarSiEsCorrecta(props, contadorRespondidas) {
 
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("token", cookies.get("token"));
 
     var raw = JSON.stringify({
       user_id: `${id}`,
