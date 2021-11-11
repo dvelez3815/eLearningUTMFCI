@@ -3,7 +3,6 @@ import logo from "../../../assets/resource/Logo_Provicional.png";
 import img1 from "../../../assets/resource/sign.svg";
 import axios from "axios";
 import Cookies from "universal-cookie";
-import {api_url} from '../../../api.config'
 import loading from "../../../assets/resource/loading.svg"
 const cookie = new Cookies();
 
@@ -47,7 +46,7 @@ const SignUpPage = () => {
   setIsVisibleDato("hidden");
 
   axios
-    .post(api_url+"/signup", {
+    .post(process.env.APP_BACKEND_URL+"/signup", {
       name: form.name,
       lastname: form.lastname,
       mail: form.mail,

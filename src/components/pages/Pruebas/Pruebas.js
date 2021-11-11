@@ -1,5 +1,4 @@
 import React from 'react'
-import { api_url } from '../../../api.config';
 import { Ejercicio } from '../ejercicios/Ejercicio';
 import loading from "../../../assets/resource/loading.svg";
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
@@ -45,7 +44,7 @@ const Pruebas = () => {
 
 
 const getData = async(idlibro) => {
-    const response = await fetch(`${api_url}/book/${idlibro}`, {
+    const response = await fetch(`${process.env.APP_BACKEND_URL}/book/${idlibro}`, {
         method: 'GET',
         headers: {
             'token': cookies.get("token"),

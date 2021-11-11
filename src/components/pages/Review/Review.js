@@ -1,5 +1,4 @@
 import React from 'react'
-import { api_url } from '../../../api.config';
 import { Ejercicio } from '../ejercicios/Ejercicio';
 import loading from "../../../assets/resource/loading.svg";
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
@@ -36,7 +35,7 @@ const Review = () => {
 
 
 const getData = async(book,modulo,unit,tipo) => {
-    const response = await fetch(`${api_url}/review/${book}/${modulo}/${unit}/${tipo}`,
+    const response = await fetch(`${process.env.APP_BACKEND_URL}/review/${book}/${modulo}/${unit}/${tipo}`,
         {
             method: 'GET',
             headers: {

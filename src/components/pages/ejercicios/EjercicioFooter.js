@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import {api_url} from '../../../api.config'
 import Cookies from "universal-cookie";
 import {
   mostrarAlertaError,
@@ -481,7 +480,7 @@ async function enviarSiEsCorrecta(props, contadorRespondidas) {
     };
     
     await fetch(
-      api_url+"/progress/update",
+      process.env.APP_BACKEND_URL+"/progress/update",
       requestOptions
     )
       .then((response) => response.text())

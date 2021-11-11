@@ -3,7 +3,6 @@ import logo from "../../../assets/resource/Logo_Provicional.png";
 import img1 from "../../../assets/resource/sign.svg";
 import "./SigInPage.css";
 import axios from "axios";
-import { api_url, api_utm } from "../../../api.config";
 import Cookies from "universal-cookie";
 import loading from "../../../assets/resource/loading.svg";
 import validator from "validator";
@@ -33,7 +32,7 @@ const SigInPage = () => {
     setCargando(true);
     event.preventDefault();
     axios
-      .post(api_url+"/signin", {
+      .post(process.env.APP_BACKEND_URL+"/signin", {
         mail: form.mail,
         password: form.password,
       })

@@ -13,7 +13,6 @@ import readingimg from "../../../assets/icons/Reading.png";
 import vocabularyimg from "../../../assets/icons/Vocabulary.png";
 import writingimg from "../../../assets/icons/Writing.png";
 import loading from "../../../assets/resource/loading.svg";
-import { api_url } from "../../../api.config";
 import shortid from "shortid";
 import Progreso from "./Progreso";
 const cookies = new Cookies();
@@ -28,7 +27,7 @@ export const Inicio = () => {
   //get user progress from api
   const getData = async () => {
 
-    const response = await fetch(`${api_url}/user_progress/${userid}`, {
+    const response = await fetch(`${process.env.APP_BACKEND_URL}/user_progress/${userid}`, {
       method: "POST",
       headers: {
         'token': cookies.get("token"),
@@ -73,7 +72,7 @@ export const Inicio = () => {
       window.location.href = "./signin";
     }
     if (cookies.get("status") !== "Active") {
-      const user_response = await fetch(`${api_url}/user/${userid}`, {
+      const user_response = await fetch(`${process.env.APP_BACKEND_URL}/user/${userid}`, {
         method: "GET",
         headers: {
           'token': cookies.get("token"),

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Ejercicio } from './Ejercicio'
 
-import {api_url} from '../../../api.config'
+
 import NotFoundPage from '../NotFoundPage/NotFoundPage'
 import loading from "../../../assets/resource/loading.svg";
 import Cookies from 'universal-cookie';
@@ -36,7 +36,7 @@ export const Grammar2 = () => {
 const getExercises = async() => {
 
     let taskid = window.location.href.split('/')[window.location.href.split('/').length - 1];
-    const url = `${api_url}/task/${taskid}`;
+    const url = `${process.env.APP_BACKEND_URL}/task/${taskid}`;
     const response = await fetch(url,
         {
             method: 'POST',
