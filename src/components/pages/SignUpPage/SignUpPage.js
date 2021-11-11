@@ -46,13 +46,17 @@ const SignUpPage = () => {
   setIsVisibleDato("hidden");
 
   axios
-    .post(process.env.APP_BACKEND_URL+"/signup", {
+    .post(process.env.REACT_APP_BACKEND_URL+"/signup", {
       name: form.name,
       lastname: form.lastname,
       mail: form.mail,
       password: form.password,
-    })
-    .then((response) => {
+    },
+    {
+      headers: {
+        'token': process.env.REACT_APP_SECRET_TOKEN
+    }
+    }).then((response) => {
       if (response.data.res === "USER EXITS") {
         setDato("El usuario ya existe");
         setIsVisibleDato("visible");

@@ -44,7 +44,7 @@ const Pruebas = () => {
 
 
 const getData = async(idlibro) => {
-    const response = await fetch(`${process.env.APP_BACKEND_URL}/book/${idlibro}`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/book/${idlibro}`, {
         method: 'GET',
         headers: {
             'token': cookies.get("token"),

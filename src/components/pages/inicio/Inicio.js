@@ -27,7 +27,7 @@ export const Inicio = () => {
   //get user progress from api
   const getData = async () => {
 
-    const response = await fetch(`${process.env.APP_BACKEND_URL}/user_progress/${userid}`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/user_progress/${userid}`, {
       method: "POST",
       headers: {
         'token': cookies.get("token"),
@@ -72,7 +72,7 @@ export const Inicio = () => {
       window.location.href = "./signin";
     }
     if (cookies.get("status") !== "Active") {
-      const user_response = await fetch(`${process.env.APP_BACKEND_URL}/user/${userid}`, {
+      const user_response = await fetch(`${process.env.REACT_APP_API_URL}/user/${userid}`, {
         method: "GET",
         headers: {
           'token': cookies.get("token"),

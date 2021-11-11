@@ -36,7 +36,7 @@ export const Grammar2 = () => {
 const getExercises = async() => {
 
     let taskid = window.location.href.split('/')[window.location.href.split('/').length - 1];
-    const url = `${process.env.APP_BACKEND_URL}/task/${taskid}`;
+    const url = `${process.env.REACT_APP_API_URL}/task/${taskid}`;
     const response = await fetch(url,
         {
             method: 'POST',

@@ -480,7 +480,7 @@ async function enviarSiEsCorrecta(props, contadorRespondidas) {
     };
     
     await fetch(
-      process.env.APP_BACKEND_URL+"/progress/update",
+      process.env.REACT_APP_API_URL+"/progress/update",
       requestOptions
     )
       .then((response) => response.text())

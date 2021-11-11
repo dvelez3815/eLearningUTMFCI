@@ -5,7 +5,6 @@ import "./SigInPage.css";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import loading from "../../../assets/resource/loading.svg";
-import validator from "validator";
 const cookies = new Cookies();
 
 const SigInPage = () => {
@@ -32,13 +31,17 @@ const SigInPage = () => {
     setCargando(true);
     event.preventDefault();
     axios
-      .post(process.env.APP_BACKEND_URL+"/signin", {
+      .post(process.env.REACT_APP_API_URL+"/signin", {
         mail: form.mail,
         password: form.password,
-      })
-      .then((res) => {
+      },
+      {
+        headers: {
+          'token': process.env.REACT_APP_SECRET_TOKEN
+      }
+    }).then((res) => {
         //console.log('Si Imprime xD')
-        //console.log(res)
+        console.log(res)
         if (res.data.res === "USER NOT EXIST") {
           setDato("El usuario no existe");
           setCargando(false);
