@@ -78,7 +78,6 @@ const SignUpPage = () => {
     setIsVisibleDato("visible");
     setCargando(false);
     return true;
-
   }
 
   setCargando(true);

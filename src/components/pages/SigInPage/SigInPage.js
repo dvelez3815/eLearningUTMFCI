@@ -76,6 +76,15 @@ const SigInPage = () => {
             setIsVisibleDato("hidden");
           }, 20000);
         }
+        else if(res.data.res === 'incorrecta'){
+          setDato("Usuario o contraseña incorrectas, por favor verificar.");
+          setIsVisibleDato("");
+          setCargando(false);
+          setInterval(() => {
+            setDato("");
+            setIsVisibleDato("hidden");
+          }, 20000);          
+        }
         else {
           cookies.set("_id", res.data.res._id, { path: "/" });
           cookies.set("name", res.data.res.name, { path: "/" });
