@@ -230,17 +230,17 @@ const SignUpPage = () => {
                         Recuerdame
                       </label>
                     </div>
-
+{/* 
                     <div className="text-sm">
                       <a
-                        href="#"
+                        href=""
                         className="font-medium text-green-600 hover:text-green-500"
                       >
                         Olvidaste tu contraseña?
                       </a>
-                    </div>
+                    </div> */}
                   </div>
-                  {cargando && <div className="flex items-center justify-center"><img src={loading} width={50}></img></div>}
+                  {cargando && <div className="flex items-center justify-center"><img src={loading} width={50} alt="cargando"></img></div>}
                   <div>
                     <button
                       type="submit"
@@ -274,7 +274,7 @@ const SignUpPage = () => {
           <div className="lg:w-2/3 hidden md:block ">
             <div className="min-h-screen flex-col flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
               <div>
-                <img src={img1} width="400"></img>
+                <img src={img1} width="400" alt="aprende ingles"></img>
               </div>
               <div>
                 <h3 className="text-lg p-2 font-semibold italic">

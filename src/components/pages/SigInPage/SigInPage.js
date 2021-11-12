@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import logo from "../../../assets/resource/Logo_Provicional.png";
 import img1 from "../../../assets/resource/sign.svg";
 import "./SigInPage.css";
@@ -170,18 +170,18 @@ const SigInPage = () => {
                     </label>
                   </div>
 
-                  <div className="text-sm">
+                  {/* <div className="text-sm">
                     <a
                       href="#"
                       className="font-medium text-green-600 hover:text-green-500"
                     >
                       Olvidaste tu contraseña?
                     </a>
-                  </div>
+                  </div> */}
                 </div>
                 {cargando && (
                   <div className="flex items-center justify-center">
-                    <img src={loading} width={50}></img>
+                    <img src={loading} width={50} alt="cargando"></img>
                   </div>
                 )}
                 <div>
@@ -216,7 +216,7 @@ const SigInPage = () => {
         <div className="lg:w-2/3 hidden md:block ">
           <div className="min-h-screen flex-col flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
             <div>
-              <img src={img1} width="400"></img>
+              <img src={img1} width="400" alt="aprende"></img>
             </div>
             <div>
               <h3 className="text-lg p-2 font-semibold italic">

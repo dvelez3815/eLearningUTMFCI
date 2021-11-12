@@ -16,9 +16,6 @@ class HomePage extends React.Component {
         </div>
         <div className=" flex-grow  ">
           <div className=" flex justify-end flex-wrap my-2">
-            <a className="px-2 xl:py-0  lg:py-0 md:py-0 py-1">
-              
-            </a>
           </div>
         </div>
       </div>
