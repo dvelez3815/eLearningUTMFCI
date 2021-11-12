@@ -12,7 +12,14 @@ const SignUpPage = () => {
   
   const [isVisibleDato, setIsVisibleDato] = useState("hidden");
   const [dato, setDato] = useState("");
-  const [form, setForm] = useState({});
+  const [form, setForm] = useState({
+    name: "",
+    lastname: "",
+    mail: "",
+    password: "",
+    password2: "",
+
+  });
   const [cargando, setCargando] = useState(false);
 
   const handleChange = (e) => {
@@ -25,6 +32,7 @@ const SignUpPage = () => {
     if (form.password === e.target.value) {
       setDato("");
       setIsVisibleDato("hidden");
+      handleChange(e);
     } else {
       setDato("Las contraseñas no coinciden");
       setIsVisibleDato("visible");
@@ -39,14 +47,47 @@ const SignUpPage = () => {
 
 
   const handleSubmit = (event) => {
-  setCargando(true);
   event.preventDefault();
+  //check if inputs are undefined
+  if (form.name === undefined || form.lastname === undefined || form.mail === undefined || form.password === undefined || form.password2 === undefined ){
+    alert("Por favor llene todos los campos");
+    return true;
+  } else if(form.name === "" || form.lastname === "" || form.mail === "" || form.password === "" || form.password2 === ""){
+    alert("Por favor llene todos los campos");
+    return true;
+  } else if (form.password !== form.password2) {
+    alert("Las contraseñas no coinciden");
+    return true;
+  }else if(!isValidEmail(form.mail)){
+    alert("Por favor ingrese un correo valido");
+    return true;
+  }else if(isUTM(form.mail)){
+    setCargando(true);
+    setDato("");
+    setIsVisibleDato("hidden");    
+    setDato("Su cuenta de dominio utm ya está habilitada, solo realice el login");
+    setIsVisibleDato("visible");
+    setCargando(false);
+    return true;    
+  }
+  else{
+    setCargando(true);
+    setDato("");
+    setIsVisibleDato("hidden");    
+    setDato("El registro de usuario no está disponible");
+    setIsVisibleDato("visible");
+    setCargando(false);
+    return true;
+
+  }
+
+  setCargando(true);
   setCargando(true);
   setDato("");
   setIsVisibleDato("hidden");
 
   axios
-    .post(process.env.REACT_APP_BACKEND_URL+"/signup", {
+    .post(`${process.env.REACT_APP_API_URL}/signup`, {
       name: form.name,
       lastname: form.lastname,
       mail: form.mail,
@@ -85,6 +126,8 @@ const SignUpPage = () => {
         
         if(user.status === 'Active'){
           window.location.href = "./dashboard";
+        }else{
+          window.location.href = "./pendingAccount";
         }
       }
     })
@@ -143,7 +186,7 @@ const SignUpPage = () => {
                         value={form.username}
                         onChange={handleChange}
                         className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
-                        placeholder="Nombres"
+                        placeholder="Nombres"                        
                       />
                     </div>
                     <div>
@@ -176,7 +219,7 @@ const SignUpPage = () => {
                         onChange={handleChange}
                         value={form.mail}
                         className=" border-gray-300 placeholder-gray-500 text-gray-900 focus:ring-yellow-500 focus:border-yellow-500  focus:z-10 sm:text-sm appearance-none rounded-none relative block w-full px-3 py-2 border rounded-t-md focus:outline-none "
-                        placeholder="Correo electrónico"
+                        placeholder="Correo electrónico"                        
                       />
                     </div>
                     <div>
@@ -189,28 +232,28 @@ const SignUpPage = () => {
                         type="password"
                         autoComplete="current-password"
                         onChange={handleChange}
-                        value={form.pass}
+                        value={form.password}
                         required
                         className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
-                        placeholder="Contraseña"
+                        placeholder="Contraseña"                        
                       />
-                    </div>
+                    </div>                    
                     <div>
-                      <label htmlFor="password" className="sr-only">
+                      <label htmlFor="password2" className="sr-only">
                         Password
                       </label>
                       <input
                         id="password2"
                         name="password2"
                         type="password"
-                        autoComplete="current-password"
+                        autoComplete="current-password2"
+                        onChange={handleChange}
+                        value={form.password2}
                         required
-                        value={form.pass2}
-                        onChange={handlePassWord2}
                         className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
-                        placeholder="Repetir contraseña"
+                        placeholder="Contraseña"                        
                       />
-                    </div>
+                    </div>                    
                   </div>
 
                   <div className="flex items-center justify-between">
@@ -291,5 +334,19 @@ const SignUpPage = () => {
       </div>
     );
 }
+
+
+//is valid email
+function isValidEmail(email) {
+  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+}
+
+//es gmail domain
+const isUTM = (email) => {
+  const domain = email.split("@")[1];
+  return domain === "utm.edu.ec";  
+};
+
 
 export default SignUpPage
