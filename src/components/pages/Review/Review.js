@@ -1,8 +1,9 @@
 import React from 'react'
-import { api_url } from '../../../api.config';
 import { Ejercicio } from '../ejercicios/Ejercicio';
 import loading from "../../../assets/resource/loading.svg";
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 const Review = () => {
 
@@ -34,7 +35,13 @@ const Review = () => {
 
 
 const getData = async(book,modulo,unit,tipo) => {
-    const response = await fetch(`${api_url}/review/${book}/${modulo}/${unit}/${tipo}`);
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/review/${book}/${modulo}/${unit}/${tipo}`,
+        {
+            method: 'GET',
+            headers: {
+                'token': cookies.get("token"),
+              },
+            });
 
 
     const data = await response.json();

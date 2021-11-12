@@ -18,7 +18,7 @@ const VerdaderoFalso = (props) => {
                 if(item.item  && item.answer){
                     let juego = [];
                     item.item.map((texto, index) => {
-                      console.log(texto)
+                      //console.log(texto)
                         if(texto[0]==='_'){
                             // aqui van las opciones del juego true/false
                             if(item.answer)
@@ -71,7 +71,7 @@ const VerdaderoFalso = (props) => {
         
         for (let index = 0; index < div.length; index++) {
           const element = div[index].getElementsByTagName("button");
-          console.log(div[index]);
+          //console.log(div[index]);
           if(div[index].classList.contains("activado")){
             div[index].classList.remove("activado");
           }

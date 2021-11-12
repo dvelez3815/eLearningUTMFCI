@@ -3,11 +3,11 @@ import logo from "../../../assets/resource/Logo_Provicional.png";
 import img1 from "../../../assets/resource/sign.svg";
 import "./SigInPage.css";
 import axios from "axios";
-import { api_url, api_utm } from "../../../api.config";
 import Cookies from "universal-cookie";
 import loading from "../../../assets/resource/loading.svg";
-import validator from "validator";
-const cookie = new Cookies();
+const cookies = new Cookies();
+
+require("dotenv").config();
 
 const SigInPage = () => {
   const [isVisibleDato, setIsVisibleDato] = useState("hidden");
@@ -28,32 +28,12 @@ const SigInPage = () => {
       [e.target.name]: e.target.checked,
     });
   };
-  const settingCookies = (user) => {
-    cookie.set("_id", user._id, { path: "/" });
-    cookie.set("name", user.name, { path: "/" });
-    cookie.set("lastname", user.lastname, { path: "/" });
-    cookie.set("mail", user.mail, { path: "/" });
-    cookie.set("status", user.status, { path: "/" });
-  };
-  const viewTextMessage = (visible, text) => {
-    setDato(text);
-    if (visible) {
-      setIsVisibleDato("visible");
-    } else {
-      setIsVisibleDato("");
-    }
-    setCargando(false);
-    setInterval(() => {
-      setDato("");
-      setIsVisibleDato("hidden");
-    }, 10000);
-  };
 
   const handleButtonSubmit = async (event) => {
     setCargando(true);
     event.preventDefault();
 
-    const res = await fetch(`${api_url}/signin`, {
+    const res = await fetch(process.env.REACT_APP_API_URL+"/signin", {
       method: "POST",
       body: JSON.stringify({
         mail: form.mail,

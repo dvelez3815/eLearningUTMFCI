@@ -37,7 +37,7 @@ const NuevaaG = (props) => {
   const marcar = (imagenRef)=>{
     try {
       
-      console.log(imagenRef);
+      //console.log(imagenRef);
       //borrar todas las otras referencias
       (imagesRef.current.forEach(ref => {
         (ref.current.classList.contains("activado"))&&ref.current.classList.remove("activado");
@@ -47,7 +47,7 @@ const NuevaaG = (props) => {
       imagenRef.current.classList.toggle("activado");
       (imagenRef.current.setAttribute("aria-checked", "true"));
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   }
 
@@ -87,7 +87,7 @@ const NuevaaG = (props) => {
 
       <div className="flex justify-between flex-col sm:flex-row">
         <div className="mb-4">
-          <button className="btn-exercise" disabled={false} onClick={()=>console.log("hola")}>
+          <button className="btn-exercise" disabled={false} onClick={()=>//console.log("hola")}>
             <span>
               <p>saltar</p>
             </span>

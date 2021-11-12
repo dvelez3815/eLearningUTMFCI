@@ -44,7 +44,6 @@ const Arrastrar2 = () => {
     const [removed] = result.splice(startIndex, 1);
     //se inserta el item movido en la posicion donde se ha soltado
     result.splice(endIndex, 0, removed);
-    console.log("hola result es: ",result);
     return result;
   };
 

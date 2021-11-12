@@ -3,7 +3,6 @@ import logo from "../../../assets/resource/Logo_Provicional.png";
 import img1 from "../../../assets/resource/sign.svg";
 import axios from "axios";
 import Cookies from "universal-cookie";
-import {api_url} from '../../../api.config'
 import loading from "../../../assets/resource/loading.svg"
 const cookie = new Cookies();
 
@@ -47,13 +46,17 @@ const SignUpPage = () => {
   setIsVisibleDato("hidden");
 
   axios
-    .post(api_url+"/signup", {
+    .post(process.env.REACT_APP_BACKEND_URL+"/signup", {
       name: form.name,
       lastname: form.lastname,
       mail: form.mail,
       password: form.password,
-    })
-    .then((response) => {
+    },
+    {
+      headers: {
+        'token': process.env.REACT_APP_SECRET_TOKEN
+    }
+    }).then((response) => {
       if (response.data.res === "USER EXITS") {
         setDato("El usuario ya existe");
         setIsVisibleDato("visible");
@@ -81,21 +84,16 @@ const SignUpPage = () => {
         
         if(user.status === 'Active'){
           window.location.href = "./dashboard";
-        }else{
-          window.location.href = "./PendingAccount";
-
         }
       }
     })
     .catch((error) => {
-      console.log(error);
+      //console.log(error);
     });
   }
   
   useEffect(() => {
-    if (cookie.get("_id")) {
-      window.location.href = "./dashboard";
-    }
+    
   })
 
     return (

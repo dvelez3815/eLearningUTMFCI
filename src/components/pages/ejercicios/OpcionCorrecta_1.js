@@ -28,7 +28,7 @@ export const OpcionCorrecta_1 = (props) => {
         SpeechReader(imagenRef.current.children[0].innerText);
       }, 50);
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 

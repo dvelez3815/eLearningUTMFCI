@@ -57,7 +57,7 @@ const Grammar = (props) => {
       imagenRef.current.classList.toggle("activado");
       imagenRef.current.setAttribute("aria-checked", "true");
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 

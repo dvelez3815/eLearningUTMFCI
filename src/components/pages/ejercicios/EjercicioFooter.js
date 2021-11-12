@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import {api_url} from '../../../api.config'
 import Cookies from "universal-cookie";
 import {
   mostrarAlertaError,
@@ -164,7 +163,7 @@ const validarRespuesta = async (props) => {
     );
   } else if (tipo_ejercicio === "true_false") {
     let hijos = props.miref.current.children;
-    console.log(hijos);
+    //console.log(hijos);
     await verificarVerdadero_Falso(props, hijos, contadorRespuestas);
   } else if (tipo_ejercicio === "completar_texto") {
     let hijos = Array.from(props.miref.current.children);
@@ -206,7 +205,7 @@ const verificarEmparejar = async (props, hijos, contadorRespuestas) => {
     } else {
       esCorrecta = false;
     }
-    console.log(JSON.stringify(respuestaUser), JSON.stringify(respuestasBack));
+    //console.log(JSON.stringify(respuestaUser), JSON.stringify(respuestasBack));
     if (esCorrecta) {
       enviarSiEsCorrecta(props, contadorRespuestas);
     } else {
@@ -251,7 +250,7 @@ const verificarCompletar_Texto = async (props, hijos, contadorRespuestas) => {
     }
   } else {
     alert("All fields must be filled");
-    console.log(respuestaBackEnd);
+    //console.log(respuestaBackEnd);
   }
   if (aRespondido && esCorrecta) {
     enviarSiEsCorrecta(props, contadorRespuestas);
@@ -259,7 +258,7 @@ const verificarCompletar_Texto = async (props, hijos, contadorRespuestas) => {
     noEsCorrecta(props,respuestaBackEnd);
   }
 
-  // console.log(hijos[0].children[1].value);
+  // //console.log(hijos[0].children[1].value);
 };
 
 const verificarVerdadero_Falso = async (props, hijos, contadorRespuestas) => {
@@ -336,7 +335,7 @@ const verificarOrdenar = async (
   } else {
     esCorrecta = false;
   }
-  console.log(respuestasUser, respuestasBackEndOrdenadas);
+  //console.log(respuestasUser, respuestasBackEndOrdenadas);
 
   if (esCorrecta) {
     enviarSiEsCorrecta(props, contadorRespuestas);
@@ -467,6 +466,7 @@ async function enviarSiEsCorrecta(props, contadorRespondidas) {
 
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("token", cookies.get("token"));
 
     var raw = JSON.stringify({
       user_id: `${id}`,
@@ -480,7 +480,7 @@ async function enviarSiEsCorrecta(props, contadorRespondidas) {
     };
     
     await fetch(
-      api_url+"/progress/update",
+      process.env.REACT_APP_API_URL+"/progress/update",
       requestOptions
     )
       .then((response) => response.text())

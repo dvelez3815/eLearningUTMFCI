@@ -38,7 +38,7 @@ const Emparejar = (props) => {
 
   const cambiarVisibilidad = (event, props) => {
     let aMarcar = Array.from(divRef.current.firstChild.children);
-    console.log(aMarcar);
+    //console.log(aMarcar);
 
     let contador = 0;
     aMarcar.forEach((element) => {
