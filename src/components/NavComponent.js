@@ -1,6 +1,6 @@
-import React, {createRef } from "react";
+import React, { createRef } from "react";
 import { Fragment } from "react";
-import {Menu, Transition } from "@headlessui/react";
+import { Menu, Transition } from "@headlessui/react";
 import Cookie from "universal-cookie";
 
 import user from "../assets/resource/user.png";
@@ -34,23 +34,26 @@ class NavComponent extends React.Component {
             <div className="flex items-center justify-between h-16">
               <div className=" flex items-center">
                 <a className="flex-shrink-0" href="/">
-                  <img
-                    className=""
-                    width="125px"
-                    src={logobn}
-                    alt="Workflow"
-                  />
+                  <img className="" width="125px" src={logobn} alt="Workflow" />
                 </a>
                 <div className="hidden md:block">
                   <div className=" ml-10 flex items-baseline space-x-4">
                     <a
-                      className={this.props.activado===1?"font-semibold text-yellow-400 uppercase  hover:text-white dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium":"text-white dark:text-white  hover:text-yellow-400 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"}
+                      className={
+                        this.props.activado === 1
+                          ? "font-semibold text-yellow-400 uppercase  hover:text-white dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                          : "text-white dark:text-white  hover:text-yellow-400 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                      }
                       href="/dashboard"
                     >
                       Learning
                     </a>
                     <a
-                      className={this.props.activado===2?"font-semibold text-yellow-400  uppercase hover:text-white  dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium":"text-white dark:text-white  hover:text-yellow-400 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"}
+                      className={
+                        this.props.activado === 2
+                          ? "font-semibold text-yellow-400  uppercase hover:text-white  dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                          : "text-white dark:text-white  hover:text-yellow-400 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                      }
                       href="/evaluacion"
                     >
                       Evaluation
@@ -82,7 +85,9 @@ class NavComponent extends React.Component {
               </div>
               <div className="p-2 flex ">
                 <h2 className="tex-sm sm:text-base font-medium py-1 text-white">
-                  {cookies.get('name') + ' ' + cookies.get('lastname')}
+                  {cookies.get("lastname") == null && cookies.get("name")}
+                  {cookies.get("lastname") != null &&
+                    cookies.get("name") + " " + cookies.get("lastname")}
                 </h2>
                 <Menu as="div" className="ml-3 relative">
                   <div>
@@ -106,7 +111,6 @@ class NavComponent extends React.Component {
                     leaveTo="transform opacity-0 scale-95"
                   >
                     <Menu.Items className="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      
                       <Menu.Item>
                         {({ active }) => (
                           <a

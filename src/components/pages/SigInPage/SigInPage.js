@@ -63,7 +63,7 @@ const SigInPage = () => {
         "Content-Type": "application/json",
       },
     });
-    console.log(res.data)
+    console.log(res)
     if (res.data.res === "USER NOT EXIST") {
       viewTextMessage(false, "El usuario no existe");
     } else if (res.data.res === "PASSWORD INCORRECT") {
