@@ -40,8 +40,6 @@ const SigInPage = () => {
           'token': process.env.REACT_APP_SECRET_TOKEN
       }
     }).then((res) => {
-        //console.log('Si Imprime xD')
-        console.log(res)
         if (res.data.res === "USER NOT EXIST") {
           setDato("El usuario no existe");
           setCargando(false);
@@ -68,8 +66,6 @@ const SigInPage = () => {
           }, 10000);
         }
         else {
-          console.log(res);
-
           cookies.set("_id", res.data.res._id, { path: "/" });
           cookies.set("name", res.data.res.name, { path: "/" });
           cookies.set("lastname", res.data.res.lastname, { path: "/" });
@@ -79,7 +75,9 @@ const SigInPage = () => {
           window.location.href = "./dashboard"
         }
       })
-      .catch((err) => {});
+      .catch((err) => {
+        
+      });
       
   }
   
