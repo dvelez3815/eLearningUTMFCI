@@ -28,8 +28,19 @@ const SigInPage = () => {
   };
 
   const handleButtonSubmit = async (event) => {
-    setCargando(true);
     event.preventDefault();
+    //check it input type are correct
+    if (form.mail === "" || form.password === "") {
+      alert("Por favor llene todos los campos");
+      return;
+    }
+    else if(!isUTM(form.mail)){
+      alert("Por favor ingrese un correo institucional");
+      return;
+    }
+
+
+    setCargando(true);
     axios
       .post(process.env.REACT_APP_API_URL+"/signin", {
         mail: form.mail,
@@ -47,7 +58,7 @@ const SigInPage = () => {
           setInterval(() => {
             setDato("");
             setIsVisibleDato("hidden");
-          }, 10000);
+          }, 20000);
         } else if (res.data.res === "PASSWORD INCORRECT") {
           setDato("La contraseña es incorrecta");
           setIsVisibleDato("");
@@ -55,7 +66,7 @@ const SigInPage = () => {
           setInterval(() => {
             setDato("");
             setIsVisibleDato("hidden");
-          }, 10000);
+          }, 20000);
         } else if(res.data.res === "ERROR"){
           setDato("Hubo un problema al conectar con el servidor");
           setIsVisibleDato("");
@@ -63,7 +74,7 @@ const SigInPage = () => {
           setInterval(() => {
             setDato("");
             setIsVisibleDato("hidden");
-          }, 10000);
+          }, 20000);
         }
         else {
           cookies.set("_id", res.data.res._id, { path: "/" });
@@ -231,5 +242,16 @@ const SigInPage = () => {
     </div>
   );
 };
+
+
+//function to know if domain is @gmail.com
+const isUTM = (email) => {
+  const domain = email.split("@")[1];
+  return domain === "utm.edu.ec";
+  
+};
+
+
+
 
 export default SigInPage;
