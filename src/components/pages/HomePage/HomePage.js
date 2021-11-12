@@ -34,21 +34,19 @@ class HomePage extends React.Component {
               <h3 className="lg:text-lg md:text-lg text-base  font-sans text-gray-500 pt-2">
                 Comprometidos con tu formación acádemica
               </h3>
-              <div className="pt-4">
-                <a className=" px-2 xl:py-0  lg:py-0 md:py-0 py-1">
+              <div className="pt-4 px-2 xl:py-0  lg:py-0 md:py-0 py-1">
                   <button className=" inline-flex items-center justify-center px-10 py-2  bg-yellow-400 hover:bg-yellow-500 text-white rounded-full font-semibold text-xs   uppercase tracking-widest ">
                     <Link to="/dashboard">Ingresar</Link>
                   </button>
-                </a>
               </div>
               <div className="pt-4">
                 {/*  si se ubica la etiqueta " a " o link dentro del button no hace efecto al menos que le des click a las letras esto se evita
                 ubicandola afuera */}
-                <a className="px-2 xl:py-0  lg:py-0 md:py-0 py-1">
+                <div className="px-2 xl:py-0  lg:py-0 md:py-0 py-1">
                   <button className=" inline-flex items-center justify-center px-4 py-2  bg-gray-400 hover:bg-gray-300 text-white  rounded-full font-semibold text-xs   uppercase tracking-widest ">
                     <Link to="/signup">Crear una cuenta</Link>
                   </button>
-                </a>
+                </div>
               </div>
             </div>
           </div>

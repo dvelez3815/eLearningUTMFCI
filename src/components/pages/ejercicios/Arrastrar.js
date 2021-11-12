@@ -44,11 +44,6 @@ const Arrastrar = (props) => {
   });
 
 
-  const esArrastrarN = () => ({
-    
-  });
-
-
   const [items, setItems] = useState(data);
 
   return (
