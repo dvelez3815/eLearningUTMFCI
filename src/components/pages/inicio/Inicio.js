@@ -71,7 +71,7 @@ export const Inicio = () => {
     if (!cookies.get("_id")) {
       window.location.href = "./signin";
     }
-    if (cookies.get("status") !== "Active") {
+    /* if (cookies.get("status") !== "Active") {
       const user_response = await fetch(`${process.env.REACT_APP_API_URL}/user/${userid}`, {
         method: "GET",
         headers: {
@@ -84,8 +84,8 @@ export const Inicio = () => {
         cookies.set("status", user_json.status, { path: "/" });
       } else {
         window.location.href = "./PendingAccount";
-      }
-    }
+      } 
+    }*/
   }, []);
 
   return (
