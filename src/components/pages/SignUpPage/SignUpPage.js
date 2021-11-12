@@ -75,6 +75,7 @@ const SignUpPage = () => {
         }, 10000);
 
       } else {
+        console.log(response);
         var user = response.data.res;
         cookie.set("_id", user._id, { path: "/" });
         cookie.set("name", user.name, { path: "/" });
@@ -88,7 +89,7 @@ const SignUpPage = () => {
       }
     })
     .catch((error) => {
-      //console.log(error);
+      console.log(error);
     });
   }
   

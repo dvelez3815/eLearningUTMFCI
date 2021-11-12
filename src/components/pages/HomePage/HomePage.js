@@ -1,5 +1,4 @@
 import React from "react";
-import NavBar from "../../NavBar/NavBar";
 
 import Circulo from "../../../assets/resource/Semi_Circulo.png";
 import Chica from "../../../assets/resource/CHICA.png";
@@ -17,9 +16,6 @@ class HomePage extends React.Component {
         </div>
         <div className=" flex-grow  ">
           <div className=" flex justify-end flex-wrap my-2">
-            <a className=" px-2 xl:py-0  lg:py-0 md:py-0 py-1">
-              
-            </a>
             <a className="px-2 xl:py-0  lg:py-0 md:py-0 py-1">
               
             </a>

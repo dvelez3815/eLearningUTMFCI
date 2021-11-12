@@ -2,10 +2,8 @@ import './Evaluacion.css';
 
 import React from "react";
 import NavComponent from "../../NavComponent";
-import Footer from "../../Footer";
 
 import logo from "../../../assets/resource/Logo_Provicional.png";
-import recurso_evaluacion from "../../../assets/resource/recurso_evaluacion.png";
 import { Link } from "react-router-dom";
 
 const Evaluacion = () => {
@@ -109,7 +107,7 @@ const Evaluacion = () => {
                         <tr className="bg-gray-200">
                           <td className="p-3">
                             <div className="flex align-items-center">
-                              <img className="rounded-full h-12 w-12  object-cover" src="https://images.unsplash.com/photo-1613588718956-c2e80305bf61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=634&q=80" alt="unsplash image"/>
+                              <img className="rounded-full h-12 w-12  object-cover" src="https://images.unsplash.com/photo-1613588718956-c2e80305bf61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=634&q=80" alt="unsplash"/>
                             </div>
                           </td>
                           <td className="p-3 text-left">
@@ -122,7 +120,7 @@ const Evaluacion = () => {
                         <tr className="bg-gray-200">
                           <td className="p-3">
                             <div className="flex align-items-center">
-                              <img className="rounded-full h-12 w-12   object-cover" src="https://images.unsplash.com/photo-1423784346385-c1d4dac9893a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="unsplash image"/>
+                              <img className="rounded-full h-12 w-12   object-cover" src="https://images.unsplash.com/photo-1423784346385-c1d4dac9893a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="unsplash"/>
 
                             </div>
                           </td>
@@ -136,7 +134,7 @@ const Evaluacion = () => {
                         <tr className="bg-gray-200">
                           <td className="p-3">
                             <div className="flex align-items-center">
-                              <img className="rounded-full h-12 w-12   object-cover" src="https://images.unsplash.com/photo-1600856209923-34372e319a5d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2135&q=80" alt="unsplash image"/>
+                              <img className="rounded-full h-12 w-12   object-cover" src="https://images.unsplash.com/photo-1600856209923-34372e319a5d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2135&q=80" alt="unsplash"/>
                             </div>
                           </td>
                           <td className="p-3 text-left">

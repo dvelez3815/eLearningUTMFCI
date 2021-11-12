@@ -2,9 +2,7 @@ import React, { Component } from "react";
 
 import {mostrarImagen} from '../Alert/Alerts';
 class Viewimage extends Component {
-    constructor(props){
-        super(props);
-    }
+    
   render() {
     return (
       <div className="m-auto my-6">
