@@ -1,13 +1,6 @@
 import Swal from "sweetalert2";
 import "./Alert.css";
 
-const ErrorData = {
-    title: "Oops..",
-    type: "error",
-    text: "Wrong answer!",
-    confirmButtonText: "Ok",
-
-};
   
 const SuccessData = {
     title: "Great",

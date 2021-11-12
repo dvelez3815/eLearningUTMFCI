@@ -10,7 +10,7 @@ class AccountPendingPage extends React.Component {
         <div className="container mx-auto w-screen ">
           <div className="min-h-full flex-col flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
             <div>
-              <img src={img1} width="400"></img>
+              <img src={img1} width="400" alt="cuanta pendiente"></img>
             </div>
             <div>
               <h3 className="text-xl p-2 font-semibold italic mt-3">

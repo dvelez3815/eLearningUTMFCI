@@ -62,22 +62,22 @@ export default function Activity(props) {
                 Completed: {props.percent}% 
               </h2>
               <h2 className="text-sm mx-2 font-bold text-gray-500">
-                {props.percent == 100?"activities completed":"Do activities"}
+                {props.percent === 100?"activities completed":"Do activities"}
               </h2>
             </div>
 
           
-            <Menu.Item className={props.percent == 100?"bg-yellow-500 w-3/4 my-2 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded":"bg-green-600 w-3/4 my-2 hover:bg-green-800 text-white font-bold py-2 px-4 rounded"}  >
+            <Menu.Item className={props.percent === 100?"bg-yellow-500 w-3/4 my-2 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded":"bg-green-600 w-3/4 my-2 hover:bg-green-800 text-white font-bold py-2 px-4 rounded"}  >
               {({ active }) => (
                 <button >
                   <a className="block"
-                    href={props.percent == 100?props.rutaReview:props.ruta} 
+                    href={props.percent === 100?props.rutaReview:props.ruta} 
                    /*  className={classNames(
                       active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                       "block px-4 py-2 text-sm"
                     )} */
                   >
-                     {props.percent == 100?"review":"start"}
+                     {props.percent === 100?"review":"start"}
                   </a>
                 </button>
               )}

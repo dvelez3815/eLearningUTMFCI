@@ -68,6 +68,8 @@ const SigInPage = () => {
           }, 10000);
         }
         else {
+          console.log(res);
+
           cookies.set("_id", res.data.res._id, { path: "/" });
           cookies.set("name", res.data.res.name, { path: "/" });
           cookies.set("lastname", res.data.res.lastname, { path: "/" });

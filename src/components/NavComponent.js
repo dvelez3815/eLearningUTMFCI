@@ -109,14 +109,15 @@ class NavComponent extends React.Component {
                       
                       <Menu.Item>
                         {({ active }) => (
-                          <a
+
+                          <div
                             className={this.classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
                           >
                             <button onClick={this.logout}>Logout</button>
-                          </a>
+                          </div>
                         )}
                       </Menu.Item>
                     </Menu.Items>

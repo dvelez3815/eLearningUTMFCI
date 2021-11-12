@@ -7,15 +7,10 @@ import HomePage from './components/pages/HomePage/HomePage'
 import SignUpPage from './components/pages/SignUpPage/SignUpPage'
 import SigInPage from './components/pages/SigInPage/SigInPage'
 import NotFoundPage from './components/pages/NotFoundPage/NotFoundPage'
-
-import { Drag } from './components/pages/ejercicios/Drag';  
 import { Grammar2 } from './components/pages/ejercicios/Grammar2';
 import AccountPendingPage from './components/pages/AccountPendingPage/AccountPendingPage'
-import Arrastrar from './components/pages/ejercicios/Arrastrar';
 import Evaluacion from './components/pages/Evaluacion/Evaluacion';
 import Pruebas from './components/pages/Pruebas/Pruebas';
-import CompletarTexto from './components/pages/ejercicios/CompletarTexto';
-import Emparejar from './components/pages/ejercicios/Emparejar';
 import Review from './components/pages/Review/Review';
 
 

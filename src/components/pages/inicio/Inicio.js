@@ -101,7 +101,6 @@ export const Inicio = () => {
         return (
           <div key={shortid.generate()}>
           <Progreso key={shortid.generate()} modulo = {modulo} writingimg = {writingimg} vocabularyimg = {vocabularyimg} readingimg = {readingimg} grammarimg = {grammarimg}/>
-          
           </div>
         )
       } else {
