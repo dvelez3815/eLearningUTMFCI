@@ -5,7 +5,7 @@ import "./SigInPage.css";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import loading from "../../../assets/resource/loading.svg";
-const cookies = new Cookies();
+const cookie = new Cookies();
 
 const SigInPage = () => {
   const [isVisibleDato, setIsVisibleDato] = useState("hidden");
@@ -26,22 +26,44 @@ const SigInPage = () => {
       [e.target.name]: e.target.checked,
     });
   };
+  const settingCookies = (user) => {
+    cookie.set("_id", user._id, { path: "/" });
+    cookie.set("name", user.name, { path: "/" });
+    cookie.set("lastname", user.lastname, { path: "/" });
+    cookie.set("mail", user.mail, { path: "/" });
+    cookie.set("status", user.status, { path: "/" });
+  };
+  const viewTextMessage = (visible, text) => {
+    setDato(text);
+    if (visible) {
+      setIsVisibleDato("visible");
+    } else {
+      setIsVisibleDato("");
+    }
+    setCargando(false);
+    setInterval(() => {
+      setDato("");
+      setIsVisibleDato("hidden");
+    }, 10000);
+  };
 
   const handleButtonSubmit = async (event) => {
     setCargando(true);
     event.preventDefault();
-    const res = await axios
-      .post(process.env.REACT_APP_API_URL+"/signin", {
+    fetch(process.env.REACT_APP_API_URL+"/signin",{
+      method: 'POST', 
+      body: JSON.stringify({
         mail: form.mail,
         password: form.password,
-      }, 
-      {
-        header: process.env.REACT_APP_SECRET_TOKEN
+      }), 
+      header: {
+        'token': process.env.REACT_APP_SECRET_TOKEN, 
+        'Content-Type': 'application/json', 
       }
-    );
+    }).then(res=>{res.json()}).then(data=>{console.log("datos", data)})
+    
 
-    console.log(res)
-    if (res.data.res === "USER NOT EXIST") {
+    /* if (res.data.res === "USER NOT EXIST") {
       viewTextMessage(false, "El usuario no existe");
     } else if (res.data.res === "PASSWORD INCORRECT") {
       viewTextMessage(false, "La contraseña es incorrecta");
@@ -54,7 +76,7 @@ const SigInPage = () => {
     } else {
       settingCookies(res.data.res);
       window.location.href = "./dashboard";
-    }
+    } */
   };
   
 
