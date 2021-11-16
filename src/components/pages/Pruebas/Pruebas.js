@@ -7,7 +7,6 @@ const cookies = new Cookies();
 const Pruebas = () => {
 
     const [data, setData] = React.useState([]);
-    const [idlibro, setIdlibro] = React.useState(null);
     const [loadingData, setLoadingData] = React.useState(true);
     const [esPrueba, setPrueba] = React.useState(false);
 
@@ -15,8 +14,6 @@ const Pruebas = () => {
         const id = window.location.href.split('/')[window.location.href.split('/').length - 1];
 
         let prueba = window.location.href.split('/')[3];
-
-        setIdlibro(id);
         getData(id).then(data => {
             if (prueba==='pruebas') {
                 let dataPrueba = cutData(data);
@@ -35,7 +32,7 @@ const Pruebas = () => {
 
     return (
         <div>
-            {loadingData ? <div className="cargando"><img src={loading}></img></div> :data.length>0?<Ejercicio ejercicios={data} esPrueba = {esPrueba}/>:<NotFoundPage></NotFoundPage>}
+            {loadingData ? <div className="cargando"><img src={loading} alt="cargando"></img></div> :data.length>0?<Ejercicio ejercicios={data} esPrueba = {esPrueba}/>:<NotFoundPage></NotFoundPage>}
             
             
         </div>

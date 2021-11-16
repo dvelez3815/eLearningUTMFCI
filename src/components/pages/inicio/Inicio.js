@@ -26,7 +26,6 @@ export const Inicio = () => {
 
   //get user progress from api
   const getData = async () => {
-
     const response = await fetch(`${process.env.REACT_APP_API_URL}/user_progress/${userid}`, {
       method: "POST",
       headers: {

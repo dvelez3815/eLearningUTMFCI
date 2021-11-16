@@ -1,5 +1,4 @@
 import React from "react";
-import ProgressBar from "./ProgressBar";
 import "./Ejercicio.css";
 import shortid from "shortid";
 import ViewImage from '../../ViewImage/ViewImage'
@@ -34,7 +33,6 @@ const CompletarTexto = (props) => {
               return (
                 <JuegoCompletarTexto key={shortid.generate()} juego={juego} />
               );
-            } else {
             }
           })}
         </div>

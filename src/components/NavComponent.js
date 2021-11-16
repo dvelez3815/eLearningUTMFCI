@@ -85,9 +85,8 @@ class NavComponent extends React.Component {
               </div>
               <div className="p-2 flex ">
                 <h2 className="tex-sm sm:text-base font-medium py-1 text-white">
-                  {cookies.get("lastname") == null && cookies.get("name")}
-                  {cookies.get("lastname") != null &&
-                    cookies.get("name") + " " + cookies.get("lastname")}
+                  
+                  {cookies.get('name') + ' ' + (cookies.get('lastname') === 'undefined'?'':cookies.get('lastname'))}
                 </h2>
                 <Menu as="div" className="ml-3 relative">
                   <div>

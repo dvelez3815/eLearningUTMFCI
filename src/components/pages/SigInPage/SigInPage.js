@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import logo from "../../../assets/resource/Logo_Provicional.png";
 import img1 from "../../../assets/resource/sign.svg";
 import "./SigInPage.css";
@@ -48,11 +48,21 @@ const SigInPage = () => {
   };
 
   const handleButtonSubmit = async (event) => {
-    setCargando(true);
     event.preventDefault();
-    fetch(process.env.REACT_APP_API_URL+"/signin",{
-      method: 'POST', 
-      body: JSON.stringify({
+    //check it input type are correct
+    if (form.mail === "" || form.password === "") {
+      alert("Por favor llene todos los campos");
+      return;
+    }
+    else if(!isUTM(form.mail)){
+      alert("Por favor ingrese un correo institucional");
+      return;
+    }
+
+
+    setCargando(true);
+    axios
+      .post(process.env.REACT_APP_API_URL+"/signin", {
         mail: form.mail,
         password: form.password,
       }), 
@@ -65,25 +75,56 @@ const SigInPage = () => {
 
     /* if (res.data.res === "USER NOT EXIST") {
       viewTextMessage(false, "El usuario no existe");
-    } else if (res.data.res === "PASSWORD INCORRECT") {
-      viewTextMessage(false, "La contraseña es incorrecta");
-    } else if (res.data.res === "ERROR") {
-      viewTextMessage(false, "Hubo un problema al conectar con el servidor");
-    } else if (res.data.res === "INCORRECT_PASSWORD_UTM") {
-      viewTextMessage(false, "Credenciales incorrectas para dominio UTM");
-    } else if (res.data.res === "USER_NOT_EXIST_UTM") {
-      viewTextMessage(false, "El usuario no existe para dominio UTM");
-    } else {
-      settingCookies(res.data.res);
-      window.location.href = "./dashboard";
-    } */
-  };
+            setDato("");
+            setIsVisibleDato("hidden");
+          }, 20000);
+        } else if (res.data.res === "PASSWORD INCORRECT") {
+          setDato("La contraseña es incorrecta");
+          setIsVisibleDato("");
+          setCargando(false);
+          setInterval(() => {
+            setDato("");
+            setIsVisibleDato("hidden");
+          }, 20000);
+        } else if(res.data.res === "ERROR"){
+          setDato("Hubo un problema al conectar con el servidor");
+          setIsVisibleDato("");
+          setCargando(false);
+          setInterval(() => {
+            setDato("");
+            setIsVisibleDato("hidden");
+          }, 20000);
+        }
+        else if(res.data.res === 'incorrecta'){
+          setDato("Usuario o contraseña incorrectas, por favor verificar.");
+          setIsVisibleDato("");
+          setCargando(false);
+          setInterval(() => {
+            setDato("");
+            setIsVisibleDato("hidden");
+          }, 20000);          
+        }
+        else {
+          cookies.set("_id", res.data.res._id, { path: "/" });
+          cookies.set("name", res.data.res.name, { path: "/" });
+          cookies.set("lastname", res.data.res.lastname, { path: "/" });
+          cookies.set("mail", res.data.res.mail, { path: "/" });
+          cookies.set("status", res.data.res.status, { path: "/" });
+          cookies.set('token',res.data.res.confirmationCode,{path:'/'});
+          window.location.href = "./dashboard"
+        }
+      })
+      .catch((err) => {
+        //
+      });
+      
+  }
+*/
   
 
   return (
     <div className=" ">
       <div className="flex h-screen ">
-        <div className="lg:w-1/3 md:w-screen ">
           <div className="min-h-screen flex items-center justify-center  py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-md w-full space-y-2">
               <div>
@@ -166,18 +207,18 @@ const SigInPage = () => {
                     </label>
                   </div>
 
-                  <div className="text-sm">
+                  {/* <div className="text-sm">
                     <a
                       href="#"
                       className="font-medium text-green-600 hover:text-green-500"
                     >
                       Olvidaste tu contraseña?
                     </a>
-                  </div>
+                  </div> */}
                 </div>
                 {cargando && (
                   <div className="flex items-center justify-center">
-                    <img src={loading} width={50}></img>
+                    <img src={loading} width={50} alt="cargando"></img>
                   </div>
                 )}
                 <div>
@@ -212,7 +253,7 @@ const SigInPage = () => {
         <div className="lg:w-2/3 hidden md:block ">
           <div className="min-h-screen flex-col flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
             <div>
-              <img src={img1} width="400"></img>
+              <img src={img1} width="400" alt="aprende"></img>
             </div>
             <div>
               <h3 className="text-lg p-2 font-semibold italic">
@@ -229,5 +270,16 @@ const SigInPage = () => {
     </div>
   );
 };
+
+
+//function to know if domain is @gmail.com
+const isUTM = (email) => {
+  const domain = email.split("@")[1];
+  return domain === "utm.edu.ec";
+  
+};
+
+
+
 
 export default SigInPage;
