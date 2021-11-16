@@ -33,13 +33,41 @@ export const Inicio = () => {
       },
     });
     const data = await response.json();
+    console.log(data);
     return data;
   };
   
 
+  useEffect(async () => {
+    if (!cookies.get("_id")) {
+      window.location.href = "./signin";
+    }
+    /* if (cookies.get("status") !== "Active") {
+      const user_response = await fetch(`${process.env.REACT_APP_API_URL}/user/${userid}`, {
+        method: "GET",
+        headers: {
+          'token': cookies.get("token"),
+        },                
+      });
+      const user_json = await user_response.json();
+
+      if (user_json.status == "Active") {
+        cookies.set("status", user_json.status, { path: "/" });
+      } else {
+        window.location.href = "./PendingAccount";
+      } 
+    }*/
+  }, []);
+
+
   useEffect(() => {
     let llenarInfo = async () => {
       let userInfo = await getData();
+      if (userInfo.name === "JsonWebTokenError") {
+        window.location.href = "./signin";
+      }
+
+
       for (let i = 0; i < userInfo.length - 1; i++) {
         for (let j = 0; j < userInfo.length - i - 1; j++) {
           if (
@@ -66,34 +94,13 @@ export const Inicio = () => {
     llenarInfo();
   }, []);
 
-  useEffect(async () => {
-    if (!cookies.get("_id")) {
-      window.location.href = "./signin";
-    }
-    /* if (cookies.get("status") !== "Active") {
-      const user_response = await fetch(`${process.env.REACT_APP_API_URL}/user/${userid}`, {
-        method: "GET",
-        headers: {
-          'token': cookies.get("token"),
-        },                
-      });
-      const user_json = await user_response.json();
-
-      if (user_json.status == "Active") {
-        cookies.set("status", user_json.status, { path: "/" });
-      } else {
-        window.location.href = "./PendingAccount";
-      } 
-    }*/
-  }, []);
-
   return (
     <div>
       <NavComponent logo={logo} activado={1} />
       {cargando?<div className="cargando"><img src={loading}></img></div>:
   <div className="grid grid-cols-12 ">
     <div className="xl:col-span-9 col-span-12 justify-center">
-    {userProgress.map((modulo, index) => {
+    {userProgress && userProgress.map((modulo, index) => {
 
 
       if ((index + 1) % 2 === 0) {
