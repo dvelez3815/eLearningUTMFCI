@@ -22,24 +22,25 @@ export const Inicio = () => {
 
   const [userProgress, setuserProgress] = useState([]);
   const [cargando, setcargando] = useState(true);
-  
 
   //get user progress from api
   const getData = async () => {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/user_progress/${userid}`, {
-      method: "POST",
-      headers: {
-        'token': cookies.get("token"),
-      },
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/user_progress/${userid}`,
+      {
+        method: "POST",
+        headers: {
+          token: cookies.get("token"),
+        },
+      }
+    );
     const data = await response.json();
     console.log(data);
     return data;
   };
-  
 
   useEffect(async () => {
-    if (!cookies.get("_id")) {
+    if (cookies.get("_id") == null) {
       window.location.href = "./signin";
     }
     /* if (cookies.get("status") !== "Active") {
@@ -59,14 +60,12 @@ export const Inicio = () => {
     }*/
   }, []);
 
-
   useEffect(() => {
     let llenarInfo = async () => {
       let userInfo = await getData();
       if (userInfo.name === "JsonWebTokenError") {
         window.location.href = "./signin";
       }
-
 
       for (let i = 0; i < userInfo.length - 1; i++) {
         for (let j = 0; j < userInfo.length - i - 1; j++) {
@@ -97,204 +96,245 @@ export const Inicio = () => {
   return (
     <div>
       <NavComponent logo={logo} activado={1} />
-      {cargando?<div className="cargando"><img src={loading}></img></div>:
-  <div className="grid grid-cols-12 ">
-    <div className="xl:col-span-9 col-span-12 justify-center">
-    {userProgress && userProgress.map((modulo, index) => {
-
-
-      if ((index + 1) % 2 === 0) {
-        return (
-          <div key={shortid.generate()}>
-          <Progreso key={shortid.generate()} modulo = {modulo} writingimg = {writingimg} vocabularyimg = {vocabularyimg} readingimg = {readingimg} grammarimg = {grammarimg}/>
+      {cargando ? (
+        <div className="cargando">
+          <img src={loading}></img>
+        </div>
+      ) : (
+        <div className="grid grid-cols-12 ">
+          <div className="xl:col-span-9 col-span-12 justify-center">
+            {userProgress &&
+              userProgress.map((modulo, index) => {
+                if ((index + 1) % 2 === 0) {
+                  return (
+                    <div key={shortid.generate()}>
+                      <Progreso
+                        key={shortid.generate()}
+                        modulo={modulo}
+                        writingimg={writingimg}
+                        vocabularyimg={vocabularyimg}
+                        readingimg={readingimg}
+                        grammarimg={grammarimg}
+                      />
+                    </div>
+                  );
+                } else {
+                  return (
+                    <div key={shortid.generate()}>
+                      <h2
+                        key={shortid.generate()}
+                        className="text-2xl text-left text-green-600 mt-5 mx-10 font-bold"
+                      >{`Module ${modulo.book_info.module}`}</h2>
+                      <Progreso
+                        key={shortid.generate()}
+                        modulo={modulo}
+                        writingimg={writingimg}
+                        vocabularyimg={vocabularyimg}
+                        readingimg={readingimg}
+                        grammarimg={grammarimg}
+                      />
+                    </div>
+                  );
+                }
+              })}
           </div>
-        )
-      } else {
-        return (
-          <div key={shortid.generate()}>
-            <h2  key={shortid.generate()} className="text-2xl text-left text-green-600 mt-5 mx-10 font-bold">{`Module ${modulo.book_info.module}`}</h2>
-            <Progreso key={shortid.generate()} modulo = {modulo} writingimg = {writingimg} vocabularyimg = {vocabularyimg} readingimg = {readingimg} grammarimg = {grammarimg}/>            
-          </div>
-        );
-      }
-    })}
-    
-  </div>
 
-  {/* BARRA LATERAL */}
+          {/* BARRA LATERAL */}
 
-  <div className="hidden xl:block md:col-span-3  w-auto fixed inset-y-30 right-10 ">
-    <div className="py-5 flex flex-wrap flex-col justify-center">
-      <div className="border shadow rounded-2xl py-5  hidden md:block p-4">
-        <div>
-          <div className="flex flex-col-2">
-            <div className="text-left">
-              <h2 className="font-semibold text-base m-2">Content</h2>
+          <div className="hidden xl:block md:col-span-3  w-auto fixed inset-y-30 right-10 ">
+            <div className="py-5 flex flex-wrap flex-col justify-center">
+              <div className="border shadow rounded-2xl py-5  hidden md:block p-4">
+                <div>
+                  <div className="flex flex-col-2">
+                    <div className="text-left">
+                      <h2 className="font-semibold text-base m-2">Content</h2>
+                    </div>
+                  </div>
+                  <div className="flex p-2 gap-4 flex-col md:flex-row">
+                    <div
+                      className="flex justify-center items-start rounded-2xl"
+                      id="estrella"
+                    >
+                      {/* <CollectionsBookmarkIcon color="action" fontSize="large" /> */}
+                    </div>
+                    <div className="flex flex-col " id="info">
+                      <div>
+                        <h2 className="text-gray-700 text-lg text-left">
+                          <ol>
+                            <li className="text-sm hover:text-green-500 py-1">
+                              {" "}
+                              <a
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                //href=""
+                              >
+                                Book 1 (Module 1 - Module 2)
+                              </a>{" "}
+                            </li>
+                            <li className="text-sm hover:text-green-500 py-1">
+                              {" "}
+                              <a
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                //href=""
+                              >
+                                Book 2 (Module 3 - Module 4)
+                              </a>{" "}
+                            </li>
+                            <li className="text-sm hover:text-green-500 py-1">
+                              {" "}
+                              <a
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                //href=""
+                              >
+                                Book 3 (Module 5 - Module 6)
+                              </a>{" "}
+                            </li>
+                            <li className="text-sm hover:text-green-500 py-1">
+                              {" "}
+                              <a
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                //href=""
+                              >
+                                Book 4 (Module 7 - Module 8)
+                              </a>{" "}
+                            </li>
+                            <li className="text-sm hover:text-green-500 py-1">
+                              {" "}
+                              <a
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                //href=""
+                              >
+                                Book 5 (Module 9 - Module 10)
+                              </a>{" "}
+                            </li>
+                          </ol>
+                        </h2>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-      
-          </div>
-          <div className="flex p-2 gap-4 flex-col md:flex-row">
-            <div
-              className="flex justify-center items-start rounded-2xl"
-              id="estrella"
-            >
-              {/* <CollectionsBookmarkIcon color="action" fontSize="large" /> */}
-            </div>
-            <div className="flex flex-col " id="info">
-              <div>
-                <h2 className="text-gray-700 text-lg text-left">
-                  <ol>
-                    <li className="text-sm hover:text-green-500 py-1">
-                      {" "}
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        //href=""
-                      >
-                        Book 1 (Module 1 - Module 2)
-                      </a>{" "}
-                    </li>
-                    <li className="text-sm hover:text-green-500 py-1">
-                      {" "}
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        //href=""
-                      >
-                        Book 2 (Module 3 - Module 4)
-                      </a>{" "}
-                    </li>
-                    <li className="text-sm hover:text-green-500 py-1">
-                      {" "}
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        //href=""
-                      >
-                        Book 3 (Module 5 - Module 6)
-                      </a>{" "}
-                    </li>
-                    <li className="text-sm hover:text-green-500 py-1">
-                      {" "}
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        //href=""
-                      >
-                        Book 4 (Module 7 - Module 8)
-                      </a>{" "}
-                    </li>
-                    <li className="text-sm hover:text-green-500 py-1">
-                      {" "}
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        //href=""
-                      >
-                        Book 5 (Module 9 - Module 10)
-                      </a>{" "}
-                    </li>
-                  </ol>
-                </h2>
+            <div className="py-2 flex flex-wrap flex-col justify-center">
+              <div className="border shadow rounded-2xl py-2  hidden md:block p-4">
+                <div>
+                  <div className="flex flex-col-2">
+                    <div className="text-left">
+                      <h2 className="font-semibold text-base m-2">
+                        Digital Resources
+                      </h2>
+                    </div>
+                  </div>
+                  <div className="flex p-2 gap-4 flex-col md:flex-row">
+                    <div
+                      className="flex justify-center items-start rounded-2xl"
+                      id="estrella"
+                    >
+                      {/* <CollectionsBookmarkIcon color="action" fontSize="large" /> */}
+                    </div>
+                    <div className="flex flex-col  " id="info">
+                      <div>
+                        <h2 className=" text-gray-700 text-lg text-center">
+                          <ol>
+                            <li className=" text-sm hover:text-green-500 py-1">
+                              {" "}
+                              <a
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                href="https://drive.google.com/file/d/1pwa9ffmEMoHOJBa98KDNpONhp92DtoL6/view?usp=sharing"
+                              >
+                                {
+                                  <CollectionsBookmarkIcon
+                                    color="action"
+                                    fontSize="large"
+                                  />
+                                }{" "}
+                                Download Book 1
+                              </a>{" "}
+                            </li>
+                            <li className="text-sm hover:text-green-500 py-1">
+                              {" "}
+                              <a
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                href="https://drive.google.com/file/d/1zSL78FugkafrXulTG9Wb3CcHwouNr62y/view?usp=sharing"
+                              >
+                                {
+                                  <CollectionsBookmarkIcon
+                                    color="action"
+                                    fontSize="large"
+                                  />
+                                }{" "}
+                                Download Book 2
+                              </a>{" "}
+                            </li>
+                            <li className="text-sm hover:text-green-500 py-1">
+                              {" "}
+                              <a
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                href="https://drive.google.com/file/d/1kVydGHFB5M59yMLyAQVM6w0YnN-uf4zJ/view?usp=sharing"
+                              >
+                                {
+                                  <CollectionsBookmarkIcon
+                                    color="action"
+                                    fontSize="large"
+                                  />
+                                }{" "}
+                                Download Book 3
+                              </a>{" "}
+                            </li>
+                            <li className="text-sm hover:text-green-500 py-1">
+                              {" "}
+                              <a
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                href="https://drive.google.com/file/d/1Q8COVdO2dGtjDt6mrdb4I1HuqB3w_yxb/view?usp=sharing"
+                              >
+                                {
+                                  <CollectionsBookmarkIcon
+                                    color="action"
+                                    fontSize="large"
+                                  />
+                                }{" "}
+                                Download Book 4
+                              </a>{" "}
+                            </li>
+                            <li className="text-sm hover:text-green-500 py-1">
+                              {" "}
+                              <a
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                href="https://drive.google.com/file/d/158WHHjUUYaFvTJaxBK5-SbDS-Fxz1BAy/view?usp=sharing"
+                              >
+                                {
+                                  <CollectionsBookmarkIcon
+                                    color="action"
+                                    fontSize="large"
+                                  />
+                                }{" "}
+                                Download Book 5
+                              </a>{" "}
+                            </li>
+                          </ol>
+                        </h2>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-                      
+      )}
+      <div className="relative py-20"></div>
     </div>
-    <div className="py-2 flex flex-wrap flex-col justify-center">
-      <div className="border shadow rounded-2xl py-2  hidden md:block p-4">
-        <div>
-          <div className="flex flex-col-2">
-            <div className="text-left">
-              <h2 className="font-semibold text-base m-2">Digital Resources</h2>
-            </div>
-      
-          </div>
-          <div className="flex p-2 gap-4 flex-col md:flex-row">
-            <div
-              className="flex justify-center items-start rounded-2xl"
-              id="estrella"
-            >
-              {/* <CollectionsBookmarkIcon color="action" fontSize="large" /> */}
-            </div>
-            <div className="flex flex-col  " id="info">
-              <div>
-                <h2 className=" text-gray-700 text-lg text-center">
-                  <ol>
-                    <li className=" text-sm hover:text-green-500 py-1">
-                      {" "}
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://drive.google.com/file/d/1pwa9ffmEMoHOJBa98KDNpONhp92DtoL6/view?usp=sharing"
-                      >
-                       { <CollectionsBookmarkIcon color="action" fontSize="large" /> } Download Book 1
-                      </a>{" "}
-                    </li>
-                    <li className="text-sm hover:text-green-500 py-1">
-                      {" "}
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://drive.google.com/file/d/1zSL78FugkafrXulTG9Wb3CcHwouNr62y/view?usp=sharing"
-                      >
-                        { <CollectionsBookmarkIcon color="action" fontSize="large" /> } Download Book 2 
-                      </a>{" "}
-                    </li>
-                    <li className="text-sm hover:text-green-500 py-1">
-                      {" "}
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://drive.google.com/file/d/1kVydGHFB5M59yMLyAQVM6w0YnN-uf4zJ/view?usp=sharing"
-                      >
-                        { <CollectionsBookmarkIcon color="action" fontSize="large" /> } Download Book 3 
-                      </a>{" "}
-                    </li>
-                    <li className="text-sm hover:text-green-500 py-1">
-                      {" "}
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://drive.google.com/file/d/1Q8COVdO2dGtjDt6mrdb4I1HuqB3w_yxb/view?usp=sharing"
-                      >
-                        { <CollectionsBookmarkIcon color="action" fontSize="large" /> } Download Book 4 
-                      </a>{" "}
-                    </li>
-                    <li className="text-sm hover:text-green-500 py-1">
-                      {" "}
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://drive.google.com/file/d/158WHHjUUYaFvTJaxBK5-SbDS-Fxz1BAy/view?usp=sharing"
-                      >
-                        { <CollectionsBookmarkIcon color="action" fontSize="large" /> } Download Book 5 
-                      </a>{" "}
-                    </li>
-                  </ol>
-                </h2>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-                      
-    </div>
-  
-  </div>
-</div>
-
-      }
-      <div className='relative py-20'>
-      </div>
-      
-    </div>
-    
   );
 };
-
 
 export default Inicio;
 /* 

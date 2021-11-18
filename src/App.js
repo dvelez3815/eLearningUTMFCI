@@ -13,7 +13,8 @@ import Evaluacion from './components/pages/Evaluacion/Evaluacion';
 import Pruebas from './components/pages/Pruebas/Pruebas';
 import Review from './components/pages/Review/Review';
 
-
+import RestartPasswordPage from './components/pages/RestartPassword/RestartPasswordPage'
+import ChangePasswordPage from './components/pages/ChangePassword/ChangePasswordPage'
 
 function App() {
   
@@ -39,6 +40,7 @@ function App() {
         <Evaluacion/>
       </Route>
 
+
       <Route path="/pruebas/libro/:idlibro">
         <Pruebas/>
       </Route>      
@@ -63,9 +65,12 @@ function App() {
       <Route exact path="/PendingAccount">
         <AccountPendingPage />
       </Route>
-      {/* <Route exact path="/restartPassword">
-        <RestarPaswor />
-      </Route> */}
+       <Route exact path="/forgotPassword">
+        <RestartPasswordPage />
+      </Route> 
+       <Route  path="/fpassword/:id/:confirmCode">
+        <ChangePasswordPage />
+      </Route> 
       <Route > <NotFoundPage/> </Route>
       </Switch>
     </Router>

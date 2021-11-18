@@ -5,7 +5,7 @@ import "./SigInPage.css";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import loading from "../../../assets/resource/loading.svg";
-const cookie = new Cookies();
+const cookies = new Cookies();
 
 const SigInPage = () => {
   const [isVisibleDato, setIsVisibleDato] = useState("hidden");
@@ -27,11 +27,11 @@ const SigInPage = () => {
     });
   };
   const settingCookies = (user) => {
-    cookie.set("_id", user._id, { path: "/" });
-    cookie.set("name", user.name, { path: "/" });
-    cookie.set("lastname", user.lastname, { path: "/" });
-    cookie.set("mail", user.mail, { path: "/" });
-    cookie.set("status", user.status, { path: "/" });
+    cookies.set("_id", user._id, { path: "/" });
+    cookies.set("name", user.name, { path: "/" });
+    cookies.set("lastname", user.lastname, { path: "/" });
+    cookies.set("mail", user.mail, { path: "/" });
+    cookies.set("status", user.status, { path: "/" });
   };
   const viewTextMessage = (visible, text) => {
     setDato(text);
@@ -51,66 +51,39 @@ const SigInPage = () => {
     event.preventDefault();
     //check it input type are correct
     if (form.mail === "" || form.password === "") {
-      alert("Por favor llene todos los campos");
+      viewTextMessage(false, "Por favor llene todos los campos")
       return;
     }
     else if(!isUTM(form.mail)){
-      alert("Por favor ingrese un correo institucional");
+      viewTextMessage(false, "Por favor ingrese un correo institucional")
       return;
     }
 
 
     setCargando(true);
     axios
-      .post(process.env.REACT_APP_API_URL+"/signin", {
-        mail: form.mail,
-        password: form.password,
-      }), 
-      header: {
-        'token': process.env.REACT_APP_SECRET_TOKEN, 
-        'Content-Type': 'application/json', 
+    .post(process.env.REACT_APP_API_URL+"/signin", {
+      mail: form.mail,
+      password: form.password,
+    },
+    {
+      headers: {
+        'token': process.env.REACT_APP_SECRET_TOKEN
       }
-    }).then(res=>{res.json()}).then(data=>{console.log("datos", data)})
-    
-
-    /* if (res.data.res === "USER NOT EXIST") {
-      viewTextMessage(false, "El usuario no existe");
-            setDato("");
-            setIsVisibleDato("hidden");
-          }, 20000);
+    }).then((res) => {
+      if (res.data.res === "USER NOT EXIST") {
+        viewTextMessage(false, "El usuario no existe")
         } else if (res.data.res === "PASSWORD INCORRECT") {
-          setDato("La contraseña es incorrecta");
-          setIsVisibleDato("");
-          setCargando(false);
-          setInterval(() => {
-            setDato("");
-            setIsVisibleDato("hidden");
-          }, 20000);
+          viewTextMessage(false, "La contraseña es incorrecta")
         } else if(res.data.res === "ERROR"){
-          setDato("Hubo un problema al conectar con el servidor");
-          setIsVisibleDato("");
-          setCargando(false);
-          setInterval(() => {
-            setDato("");
-            setIsVisibleDato("hidden");
-          }, 20000);
+          viewTextMessage(false, "Hubo un problema al conectar con el servidor")
         }
         else if(res.data.res === 'incorrecta'){
-          setDato("Usuario o contraseña incorrectas, por favor verificar.");
-          setIsVisibleDato("");
-          setCargando(false);
-          setInterval(() => {
-            setDato("");
-            setIsVisibleDato("hidden");
-          }, 20000);          
+          viewTextMessage(false, "Usuario o contraseña incorrectas, por favor verificar.")
         }
         else {
-          cookies.set("_id", res.data.res._id, { path: "/" });
-          cookies.set("name", res.data.res.name, { path: "/" });
-          cookies.set("lastname", res.data.res.lastname, { path: "/" });
-          cookies.set("mail", res.data.res.mail, { path: "/" });
-          cookies.set("status", res.data.res.status, { path: "/" });
-          cookies.set('token',res.data.res.confirmationCode,{path:'/'});
+          console.log(res.data.res)
+          settingCookies(res.data.res)
           window.location.href = "./dashboard"
         }
       })
@@ -119,12 +92,12 @@ const SigInPage = () => {
       });
       
   }
-*/
   
 
   return (
     <div className=" ">
       <div className="flex h-screen ">
+        <div className="lg:w-1/3 md:w-screen ">
           <div className="min-h-screen flex items-center justify-center  py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-md w-full space-y-2">
               <div>
@@ -205,16 +178,17 @@ const SigInPage = () => {
                     >
                       Recuerdame
                     </label>
+                   
                   </div>
 
-                  {/* <div className="text-sm">
+                   <div className="text-sm">
                     <a
-                      href="#"
+                      href="/forgotPassword"
                       className="font-medium text-green-600 hover:text-green-500"
                     >
                       Olvidaste tu contraseña?
                     </a>
-                  </div> */}
+                  </div> 
                 </div>
                 {cargando && (
                   <div className="flex items-center justify-center">
