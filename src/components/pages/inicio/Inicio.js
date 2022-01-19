@@ -21,8 +21,11 @@ export const Inicio = () => {
   let userid = cookies.get("_id");
 
   const [userProgress, setuserProgress] = useState([]);
+  const [libros, setlibros] = useState("");
   const [cargando, setcargando] = useState(true);
-  
+  let libroActual = 1;
+  let totalLibro = 2;
+  let htmlObject;
 
   //get user progress from api
   const getData = async () => {
@@ -33,7 +36,6 @@ export const Inicio = () => {
       },
     });
     const data = await response.json();
-    console.log(data);
     return data;
   };
   
@@ -87,7 +89,60 @@ export const Inicio = () => {
         }
       }
 
-      setuserProgress(await userInfo);
+        let mergeBooks = {libros: []};
+        while(libroActual <= totalLibro){
+          let librox = userInfo.filter(book => book.book_info.book === libroActual);
+          let contador = 1;
+          //total de modulos
+          let startedmodulo = librox[0].book_info.module;
+          let contador2 = startedmodulo
+          let modulos = [];
+          while(contador <= 2){
+            let modulo = librox.filter(book => book.book_info.module === contador2);
+            contador2++;
+            contador++;
+            modulos.push(modulo);
+          }
+          
+          mergeBooks.libros['libro'+libroActual] = modulos;
+          
+          //console.log(librox);
+          libroActual++;
+        }
+        
+
+      let $libroswrapper = document.createElement("div"),
+        $libros = document.createElement("div"),
+        $modulos = document.createElement("div");
+
+      mergeBooks.libros.map((libro, index) => {
+        let $libro = document.createElement("div"),
+        $titulo = document.createElement("h2");
+
+        $titulo.innerHTML = "TITULO";
+        $libro.appendChild($titulo);
+        // $libro.setAttribute("class", "libro");
+        // $libro.setAttribute("id", "libro" + (index + 1));
+        // $modulo.setAttribute("class", "modulo");
+        // $modulo.setAttribute("id", "modulo" + (index + 1));
+        
+        // $libro.appendChild($modulo);
+        // $libros.appendChild($libro);
+        libro.map((modulo, index) => {
+          let $modulo = document.createElement("div"),
+            $titulo = document.createElement("h3");
+          $titulo.innerHTML = modulo.book_info.module + "." + modulo.book_info.unit;
+          $modulo.appendChild($titulo);
+          $libro.appendChild($modulo);
+        });
+        
+        $libroswrapper.appendChild($libro);
+      });
+
+
+      setlibros($libroswrapper);
+      console.log(mergeBooks);
+      setuserProgress(await mergeBooks);
       setcargando(false);
     };
 
@@ -100,7 +155,18 @@ export const Inicio = () => {
       {cargando?<div className="cargando"><img src={loading}></img></div>:
   <div className="grid grid-cols-12 ">
     <div className="xl:col-span-9 col-span-12 justify-center">
-    {userProgress && userProgress.map((modulo, index) => {
+      {userProgress.libros &&
+      
+        <div>asdasd
+          <h2>importal</h2>
+        </div>
+      }
+      {/* {libros &&  
+                <div dangerouslySetInnerHTML={{__html: libros.innerHTML}}></div>
+
+      } */}
+   
+    {/* {userProgress && userProgress.map((modulo, index) => {
 
 
       if ((index + 1) % 2 === 0) {
@@ -117,7 +183,7 @@ export const Inicio = () => {
           </div>
         );
       }
-    })}
+    })} */}
     
   </div>
 
