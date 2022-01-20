@@ -23,13 +23,12 @@ export default function Activity(props) {
 
   return (
     <Menu
-      
       as="div"
       className={"relative inline-block"}
       ref={props.myref}
     >
       <div>
-        <Menu.Button className="inline-flex justify-center w-full  px-4 py-2 bg-white text-sm font-medium text-gray-700" /*disabled={props.percent===100?true:false}*/>
+        <Menu.Button  disabled={props.bloqueo}  className="inline-flex justify-center w-full  px-4 py-2 bg-red text-sm font-medium text-gray-700" /*disabled={props.percent===100?true:false}*/>
           <div
             className={props.percent !== 100?"circle":"completed"}
           >
@@ -55,7 +54,7 @@ export default function Activity(props) {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="origin-center absolute  mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
+        <Menu.Items  className="origin-center absolute  mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
           <div className="py-1">
             <div className="p-2 text-left">
               <h2 className="text-lg mx-2 font-bold text-gray-900">
@@ -67,7 +66,7 @@ export default function Activity(props) {
             </div>
 
           
-            <Menu.Item className={props.percent === 100?"bg-yellow-500 w-3/4 my-2 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded":"bg-green-600 w-3/4 my-2 hover:bg-green-800 text-white font-bold py-2 px-4 rounded"}  >
+            <Menu.Item  className={props.percent === 100?"bg-yellow-500 w-3/4 my-2 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded":"bg-green-600 w-3/4 my-2 hover:bg-green-800 text-white font-bold py-2 px-4 rounded"}  >
               {({ active }) => (
                 <button >
                   <a className="block"
@@ -86,6 +85,7 @@ export default function Activity(props) {
         </Menu.Items>
       </Transition>
     </Menu>
+    
     /*   <div className={props.colspan + " p-2 relative inline-block text-left"} ref={props.myref}>
     <button type="button" className="inline-flex justify-center w-full rounded-md  shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 " id="menu-button-actividad" aria-expanded="true" aria-haspopup="true">
       <div className="circle" onClick={()=>props.handlerActivity(props.myref)}>

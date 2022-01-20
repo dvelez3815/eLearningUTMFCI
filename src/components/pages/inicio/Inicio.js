@@ -7,26 +7,25 @@ import { useState } from "react";
 import "./inicio.css";
 
 import Cookies from "universal-cookie";
+import writingimg from "../../../assets/icons/Writing.png";
 
 import grammarimg from "../../../assets/icons/Grammar.png";
 import readingimg from "../../../assets/icons/Reading.png";
 import vocabularyimg from "../../../assets/icons/Vocabulary.png";
-import writingimg from "../../../assets/icons/Writing.png";
+import Progreso from "./Progreso";
 import loading from "../../../assets/resource/loading.svg";
 import shortid from "shortid";
-import Progreso from "./Progreso";
+import Libro from "../../Libros/Libro";
 const cookies = new Cookies();
 
 export const Inicio = () => {
   let userid = cookies.get("_id");
 
   const [userProgress, setuserProgress] = useState([]);
-  const [libros, setlibros] = useState("");
   const [cargando, setcargando] = useState(true);
+  const [libros, setlibros] = useState([]);
   let libroActual = 1;
   let totalLibro = 2;
-  let htmlObject;
-
   //get user progress from api
   const getData = async () => {
     const response = await fetch(`${process.env.REACT_APP_API_URL}/user_progress/${userid}`, {
@@ -97,52 +96,41 @@ export const Inicio = () => {
           let startedmodulo = librox[0].book_info.module;
           let contador2 = startedmodulo
           let modulos = [];
+          let progresototal = 0;
+          let totalprogress = 0;
           while(contador <= 2){
             let modulo = librox.filter(book => book.book_info.module === contador2);
             contador2++;
             contador++;
             modulos.push(modulo);
           }
-          
-          mergeBooks.libros['libro'+libroActual] = modulos;
-          
-          //console.log(librox);
+          // mergeBooks.libros['libro'+libroActual] = modulos;
+          mergeBooks.libros.push(modulos)
           libroActual++;
         }
-        
 
-      let $libroswrapper = document.createElement("div"),
-        $libros = document.createElement("div"),
-        $modulos = document.createElement("div");
-
-      mergeBooks.libros.map((libro, index) => {
-        let $libro = document.createElement("div"),
-        $titulo = document.createElement("h2");
-
-        $titulo.innerHTML = "TITULO";
-        $libro.appendChild($titulo);
-        // $libro.setAttribute("class", "libro");
-        // $libro.setAttribute("id", "libro" + (index + 1));
-        // $modulo.setAttribute("class", "modulo");
-        // $modulo.setAttribute("id", "modulo" + (index + 1));
-        
-        // $libro.appendChild($modulo);
-        // $libros.appendChild($libro);
-        libro.map((modulo, index) => {
-          let $modulo = document.createElement("div"),
-            $titulo = document.createElement("h3");
-          $titulo.innerHTML = modulo.book_info.module + "." + modulo.book_info.unit;
-          $modulo.appendChild($titulo);
-          $libro.appendChild($modulo);
+        let contadormodulos = 0;
+        mergeBooks.libros.forEach((libro,index) => {
+          let totaluserprogress = 0;
+          let totaltask = 0;
+          let totalmoduleprogress = 0;
+          libro.forEach(modulo => {
+            modulo.forEach(unit => {
+              totaluserprogress = totaluserprogress + (unit.grammar.user_progress + unit.reading.user_progress + unit.vocabulary.user_progress + unit.writing.user_progress);
+              totaltask = totaltask + (unit.grammar.total_task + unit.reading.total_task + unit.vocabulary.total_task + unit.writing.total_task);
+            });
+          });
+          mergeBooks.libros[index] = {userprogress: totaluserprogress, totaltask: totaltask, modulos: mergeBooks.libros[index]}
         });
         
-        $libroswrapper.appendChild($libro);
-      });
-
-
-      setlibros($libroswrapper);
-      console.log(mergeBooks);
-      setuserProgress(await mergeBooks);
+        // mergeBooks.libros[(libroActual-1)][contador].map((e,index)=>{
+        //   // totalprogress = totalprogress + (e.grammar.user_progress + e.reading.user_progress + e.vocabulary.user_progress + e.writing.user_progress)
+        //   console.log(e);
+        // })
+        
+        mergeBooks.libros.forEach((book,index) => {
+          libros.push(<Libro modulos={book.modulos} key={shortid.generate()} libroactual={(index+1)} libroprogress={book.userprogress} totaltask={book.totaltask}/>)        });
+        setuserProgress(await mergeBooks);
       setcargando(false);
     };
 
@@ -155,12 +143,7 @@ export const Inicio = () => {
       {cargando?<div className="cargando"><img src={loading}></img></div>:
   <div className="grid grid-cols-12 ">
     <div className="xl:col-span-9 col-span-12 justify-center">
-      {userProgress.libros &&
-      
-        <div>asdasd
-          <h2>importal</h2>
-        </div>
-      }
+      {libros}
       {/* {libros &&  
                 <div dangerouslySetInnerHTML={{__html: libros.innerHTML}}></div>
 
@@ -213,9 +196,8 @@ export const Inicio = () => {
                     <li className="text-sm hover:text-green-500 py-1">
                       {" "}
                       <a
-                        target="_blank"
                         rel="noopener noreferrer"
-                        //href=""
+                        href="#libro1"
                       >
                         Book 1 (Module 1 - Module 2)
                       </a>{" "}
@@ -223,9 +205,8 @@ export const Inicio = () => {
                     <li className="text-sm hover:text-green-500 py-1">
                       {" "}
                       <a
-                        target="_blank"
                         rel="noopener noreferrer"
-                        //href=""
+                        href="#libro2"
                       >
                         Book 2 (Module 3 - Module 4)
                       </a>{" "}

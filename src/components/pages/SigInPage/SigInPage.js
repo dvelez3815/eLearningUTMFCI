@@ -30,14 +30,7 @@ const SigInPage = () => {
   const handleButtonSubmit = async (event) => {
     event.preventDefault();
     //check it input type are correct
-    if (form.mail === "" || form.password === "") {
-      alert("Por favor llene todos los campos");
-      return;
-    }
-    else if(!isUTM(form.mail)){
-      alert("Por favor ingrese un correo institucional");
-      return;
-    }
+
 
 
     setCargando(true);

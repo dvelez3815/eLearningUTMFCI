@@ -47,6 +47,15 @@
     left: 0;
   }
 
+  .fillf {
+    background-color: teal;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }  
+
   .activity-img{
     position: relative; 
 }
