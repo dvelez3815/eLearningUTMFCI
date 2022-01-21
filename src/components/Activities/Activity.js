@@ -10,13 +10,17 @@ export default function Activity(props) {
   
 
   let circlePercent = useRef();
+  let bcirclePercent = useRef();
 
   useEffect(
     (e) => {
-      circlePercent.current.style.height = `${props.percent}%`;
-      circlePercent.current.style.backgroundColor = getProgressColor(
-        props.percent
-      );
+      if(circlePercent.current){
+        circlePercent.current.style.height = `${props.percent}%`;
+        circlePercent.current.style.backgroundColor = getProgressColor(
+          props.percent
+        );
+  
+      }      
     },
     [props.percent]
   );
@@ -24,15 +28,15 @@ export default function Activity(props) {
   return (
     <Menu
       as="div"
-      className={"relative inline-block"}
+      className={`relative inline-block tooltip`}
       ref={props.myref}
     >
       <div>
         <Menu.Button  disabled={props.bloqueo}  className="inline-flex justify-center w-full  px-4 py-2 bg-red text-sm font-medium text-gray-700" /*disabled={props.percent===100?true:false}*/>
           <div
-            className={props.percent !== 100?"circle":"completed"}
+            className={props.percent !== 100?props.bloqueo?"bcircle":"circle":"circle"}
           >
-            <div className="fill" ref={circlePercent}></div>
+            <div className="bfill" ref={props.bloqueo?bcirclePercent:circlePercent}></div>
             <img
               src={props.img}
               alt="ActivityName"
@@ -43,6 +47,7 @@ export default function Activity(props) {
       </div>
       <div className="circle-text">
         <h2 className="text-base font-bold capitalize">{props.name}</h2>
+        <span className={`${props.bloqueo?'tooltiptext':'hidden'}`}>Activity blocked, must complete previous modules</span>
       </div>
 
       <Transition

@@ -11,6 +11,7 @@ const Libro = (props) => {
     const [habilitado, setHabilitado] = React.useState(true);
     let progresspasado = 0;
     let progressactual = 0;
+    let progressnext = 0;
     let bloqueo = false;
     const ocultarlibros = (event) => {
         let libro = (event.target.parentNode.parentNode.parentNode);
@@ -33,10 +34,35 @@ const Libro = (props) => {
         let userprogress = (modulo[index].writing.user_progress + modulo[index].grammar.user_progress + modulo[index].reading.user_progress + modulo[index].vocabulary.user_progress);
         let total_task = (modulo[index].writing.total_task + modulo[index].grammar.total_task + modulo[index].reading.total_task + modulo[index].vocabulary.total_task);
         let progress = (userprogress / total_task) * 100;  
+        progressactual = progress;
+        
 
-        if(progress<=99 && props.libroactual!=1){
-            bloqueo = true;
-        }
+        if(modulo[index].book_info.module === 1){
+          progresspasado = progress;
+        }else{
+          if(props.lastbook_is_aproved && index===0){
+            progresspasado = 100;
+          }else{
+            if(progressnext!==100){
+              bloqueo = true;
+            }
+          }            
+          }
+          progressnext = progress;
+          console.log(progresspasado,progress,progressnext);
+        //   if (progresspasado !== 100) {
+        //     bloqueo = true;
+        // }
+        //   if(progressactual !== 100){
+        //     progresspasado = progressactual;
+        //   }
+
+
+        
+        // console.log(progresspasado,progressactual);
+        // if(progress< 100 && index!=0){
+        //     bloqueo = true;
+        // }
 
         return <div key={index} className='modulos'>
           <div key={shortid.generate()}>

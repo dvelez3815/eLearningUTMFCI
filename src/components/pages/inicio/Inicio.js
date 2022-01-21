@@ -129,7 +129,17 @@ export const Inicio = () => {
         // })
         
         mergeBooks.libros.forEach((book,index) => {
-          libros.push(<Libro modulos={book.modulos} key={shortid.generate()} libroactual={(index+1)} libroprogress={book.userprogress} totaltask={book.totaltask}/>)        });
+          let lastbook_is_aproved = false;
+          if(index !== 0){
+            console.log((libros[index-1].props.libroprogress / libros[index-1].props.totaltask));
+            if((libros[index-1].props.libroprogress / libros[index-1].props.totaltask) * 100 === 100){
+              lastbook_is_aproved = true;
+            }else{
+              lastbook_is_aproved = false;
+            }
+            
+          }
+          libros.push(<Libro modulos={book.modulos} key={shortid.generate()} lastbook_is_aproved={lastbook_is_aproved} libroactual={(index+1)} libroprogress={book.userprogress} totaltask={book.totaltask}/>)        });
         setuserProgress(await mergeBooks);
       setcargando(false);
     };
