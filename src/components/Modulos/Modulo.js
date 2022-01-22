@@ -9,7 +9,6 @@ import readingimg from "../../assets/icons/Reading.png";
 import vocabularyimg from "../../assets/icons/Vocabulary.png";
 
 const Modulo = (props) => {
-    let completado = 0;
   return <div>
       <h2  key={shortid.generate()} className="text-2xl text-left text-green-600 mt-5 mx-10 font-bold">{`Module ${props.moduloindex}`}</h2>
       {props.modulo.map((modulo, index) => {

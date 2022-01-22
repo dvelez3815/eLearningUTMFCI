@@ -96,15 +96,24 @@ export const Inicio = () => {
           let startedmodulo = librox[0].book_info.module;
           let contador2 = startedmodulo
           let modulos = [];
-          let progresototal = 0;
-          let totalprogress = 0;
           while(contador <= 2){
             let modulo = librox.filter(book => book.book_info.module === contador2);
             contador2++;
             contador++;
-            modulos.push(modulo);
+
+            let userprogress = (modulo[0].writing.user_progress + modulo[0].grammar.user_progress + modulo[0].reading.user_progress + modulo[0].vocabulary.user_progress);
+            let total_task = (modulo[0].writing.total_task + modulo[0].grammar.total_task + modulo[0].reading.total_task + modulo[0].vocabulary.total_task);
+            let progress = (userprogress / total_task) * 100;  
+            
+            let userprogress2 = (modulo[1].writing.user_progress + modulo[1].grammar.user_progress + modulo[1].reading.user_progress + modulo[1].vocabulary.user_progress);
+            let total_task2 = (modulo[1].writing.total_task + modulo[1].grammar.total_task + modulo[1].reading.total_task + modulo[1].vocabulary.total_task);
+            let progress2 = (userprogress2 / total_task2) * 100;  
+
+            let totalmoduleprogress = (progress + progress2) / 2;
+
+
+            modulos.push({modulo, totalmoduleprogress});
           }
-          // mergeBooks.libros['libro'+libroActual] = modulos;
           mergeBooks.libros.push(modulos)
           libroActual++;
         }
@@ -115,7 +124,7 @@ export const Inicio = () => {
           let totaltask = 0;
           let totalmoduleprogress = 0;
           libro.forEach(modulo => {
-            modulo.forEach(unit => {
+            modulo.modulo.forEach(unit => {
               totaluserprogress = totaluserprogress + (unit.grammar.user_progress + unit.reading.user_progress + unit.vocabulary.user_progress + unit.writing.user_progress);
               totaltask = totaltask + (unit.grammar.total_task + unit.reading.total_task + unit.vocabulary.total_task + unit.writing.total_task);
             });
@@ -123,23 +132,22 @@ export const Inicio = () => {
           mergeBooks.libros[index] = {userprogress: totaluserprogress, totaltask: totaltask, modulos: mergeBooks.libros[index]}
         });
         
-        // mergeBooks.libros[(libroActual-1)][contador].map((e,index)=>{
-        //   // totalprogress = totalprogress + (e.grammar.user_progress + e.reading.user_progress + e.vocabulary.user_progress + e.writing.user_progress)
-        //   console.log(e);
-        // })
+
         
         mergeBooks.libros.forEach((book,index) => {
-          let lastbook_is_aproved = false;
-          if(index !== 0){
-            console.log((libros[index-1].props.libroprogress / libros[index-1].props.totaltask));
-            if((libros[index-1].props.libroprogress / libros[index-1].props.totaltask) * 100 === 100){
-              lastbook_is_aproved = true;
-            }else{
+          let lastbook_is_aproved = true;
+          if(index!==0){
+            let modulo1 = mergeBooks.libros[index-1].modulos[0].totalmoduleprogress;
+            let modulo2= mergeBooks.libros[index-1].modulos[1].totalmoduleprogress;
+            let totalmoduleprogress = (modulo1 + modulo2) / 2;
+
+            if(totalmoduleprogress!==100){
               lastbook_is_aproved = false;
-            }
-            
+            }            
           }
-          libros.push(<Libro modulos={book.modulos} key={shortid.generate()} lastbook_is_aproved={lastbook_is_aproved} libroactual={(index+1)} libroprogress={book.userprogress} totaltask={book.totaltask}/>)        });
+          libros.push(<Libro modulos={book.modulos} key={shortid.generate()} lastbook_is_aproved={lastbook_is_aproved} libroactual={(index+1)}/>)       
+
+         });
         setuserProgress(await mergeBooks);
       setcargando(false);
     };
@@ -154,30 +162,7 @@ export const Inicio = () => {
   <div className="grid grid-cols-12 ">
     <div className="xl:col-span-9 col-span-12 justify-center">
       {libros}
-      {/* {libros &&  
-                <div dangerouslySetInnerHTML={{__html: libros.innerHTML}}></div>
-
-      } */}
-   
-    {/* {userProgress && userProgress.map((modulo, index) => {
-
-
-      if ((index + 1) % 2 === 0) {
-        return (
-          <div key={shortid.generate()}>
-          <Progreso key={shortid.generate()} modulo = {modulo} writingimg = {writingimg} vocabularyimg = {vocabularyimg} readingimg = {readingimg} grammarimg = {grammarimg}/>
-          </div>
-        )
-      } else {
-        return (
-          <div key={shortid.generate()}>
-            <h2  key={shortid.generate()} className="text-2xl text-left text-green-600 mt-5 mx-10 font-bold">{`Module ${modulo.book_info.module}`}</h2>
-            <Progreso key={shortid.generate()} modulo = {modulo} writingimg = {writingimg} vocabularyimg = {vocabularyimg} readingimg = {readingimg} grammarimg = {grammarimg}/>            
-          </div>
-        );
-      }
-    })} */}
-    
+       
   </div>
 
   {/* BARRA LATERAL */}
