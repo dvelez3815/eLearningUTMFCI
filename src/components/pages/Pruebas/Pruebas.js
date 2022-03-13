@@ -3,6 +3,7 @@ import { Ejercicio } from '../ejercicios/Ejercicio';
 import loading from "../../../assets/resource/loading.svg";
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import Cookies from 'universal-cookie';
+import { useFetch } from '../../hooks/useFetch';
 const cookies = new Cookies();
 const Pruebas = () => {
 
@@ -10,29 +11,36 @@ const Pruebas = () => {
     const [loadingData, setLoadingData] = React.useState(true);
     const [esPrueba, setPrueba] = React.useState(false);
 
-    React.useEffect(() => {
-        const id = window.location.href.split('/')[window.location.href.split('/').length - 1];
+    //Se obtiene el id del libro a consultar
+    const id = window.location.href.split('/')[window.location.href.split('/').length - 1];
+    //se define la url de la api
+    const url = `${process.env.REACT_APP_API_URL}/book/${id}`;
+    //se obtiene el tipo de evaluación, puede ser de tipo prueba (la del libro) o solo la de una lección (grammar, etc..)
+    const tipoEvaluacion = window.location.href.split('/')[3];
+    //se llama al custom hook useFetch, que obtiene los datos del libro
+    let miData = useFetch(url);
 
-        let prueba = window.location.href.split('/')[3];
-        getData(id).then(data => {
-            if (prueba==='pruebas') {
-                let dataPrueba = cutData(data);
-                setData(dataPrueba);
-                setPrueba(true);
-            } else {
-                setData(data)
-                
+    React.useEffect(() => {
+        if(!miData.loading){
+            if(!miData.error){
+                if(tipoEvaluacion === 'pruebas'){
+                    let dataPrueba = cutData(miData.data);
+                    setData(dataPrueba);
+                    setPrueba(true);                    
+                }else{
+                    setData(miData.data);
+                    setPrueba(false);
+                }
+                setLoadingData(false);
             }
-            setLoadingData(false);
-        });
+        }
         
-        
-    }, [])
+    }, [miData.loading])
 
 
     return (
         <div>
-            {loadingData ? <div className="cargando"><img src={loading} alt="cargando"></img></div> :data.length>0?<Ejercicio ejercicios={data} esPrueba = {esPrueba}/>:<NotFoundPage></NotFoundPage>}
+            {loadingData ? <div className="cargando"><img src={loading} alt="cargando"></img></div> :miData.data.length>0?<Ejercicio ejercicios={data} esPrueba = {esPrueba}/>:<NotFoundPage></NotFoundPage>}
             
             
         </div>

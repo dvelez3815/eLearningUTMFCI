@@ -72,7 +72,7 @@ export const Ejercicio = (props) => {
     )
 }
 
-const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado,preguntasValidas,setPreguntasValidas)=>{
+const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado,setPreguntasValidas)=>{
 
     //los ejercicios ya están cargando desde la vista anterior, solo se necesita una estructura que almacene los ejercicios de forma con componente
     // para esto se iterra atravez de ejercicios y en una variable llamada Juego se guardan los ejercicios en forma de componentes
@@ -86,41 +86,21 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado,preguntas
         
       if(ejercicio.type === "completar_texto"){
         setJuego(juego => [...juego, <CompletarTexto key={index} ejercicio={ejercicio} miref={panelJuego}/>])
-        contador++;
       }else  if(ejercicio.type === "ordenar"){
         setJuego(juego => [...juego, <Arrastrar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
-        contador++; 
       }else  if((ejercicio.type === "true_false" && ejercicio.img) || ejercicio.type === "true_false" ){
         setJuego(juego => [...juego, <VerdaderoFalso key={index} ejercicio={ejercicio} miref={panelJuego}/>])
-        contador++;
       }else if(ejercicio.type === "opcion_correcta_1"){
           setJuego(juego => [...juego, <OpcionCorrecta_1 key={index} ejercicio={ejercicio} miref={panelJuego}/>])
-          contador++;
       }else if(ejercicio.type === "opcion_correcta_n"){
           setJuego(juego => [...juego, <OpcionCorrecta_n key={index} ejercicio={ejercicio} miref={panelJuego}/>])
-          contador++; 
+
       }else if(ejercicio.type === "emparejar"  ||  ejercicio.type === "emparejar_img"  ){
           setJuego(juego => [...juego, <Emparejar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
-          contador++;
       }
-    } 
-    /* else if (ejercicio.type === "ordenar" ) {
-      setJuego((juego) => [
-        ...juego,
-        <Arrastrar key={index} ejercicio={ejercicio} miref={panelJuego} />,
-      ]);
+      contador++;
     } 
 
-    else if (ejercicio.type === "opcion_correcta_n" ) {
-      setJuego((juego) => [
-        ...juego,
-        <OpcionCorrecta_n
-          key={index}
-          ejercicio={ejercicio}
-          miref={panelJuego}
-        />,
-      ]);
-    } */
   );
 
   setPreguntasValidas(contador);

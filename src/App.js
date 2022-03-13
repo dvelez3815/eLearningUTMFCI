@@ -12,6 +12,7 @@ import AccountPendingPage from './components/pages/AccountPendingPage/AccountPen
 import Evaluacion from './components/pages/Evaluacion/Evaluacion';
 import Pruebas from './components/pages/Pruebas/Pruebas';
 import Review from './components/pages/Review/Review';
+import { MisPruebas, misPruebas } from './components/pages/mispruebas/MisPruebas';
 
 
 
@@ -23,6 +24,19 @@ function App() {
 
     <Router>
     <Switch>
+      <Route exact path="/">
+        <HomePage />
+      </Route>
+      <Route exact path="/dashboard">
+        <Inicio />
+      </Route>
+      <Route exact path="/signup">
+        <SignUpPage />
+      </Route>
+      <Route exact path="/signin">
+        <SigInPage />
+      </Route>
+
       <Route path="/modulo/:pmodulo/grammar/:punidad/:id">
         <Grammar2 />
       </Route>
@@ -48,21 +62,10 @@ function App() {
       </Route>      
 
 
-      <Route exact path="/dashboard">
-        <Inicio />
-      </Route>
-      <Route exact path="/">
-        <HomePage />
-      </Route>
-      <Route exact path="/signup">
-        <SignUpPage />
-      </Route>
-      <Route exact path="/signin">
-        <SigInPage />
-      </Route>
       <Route exact path="/PendingAccount">
         <AccountPendingPage />
       </Route>
+
       {/* <Route exact path="/restartPassword">
         <RestarPaswor />
       </Route> */}
