@@ -87,7 +87,7 @@ class NavComponent extends React.Component {
                 </h2>
                 <Menu as="div" className="ml-3 relative">
                   <div>
-                    <Menu.Button className=" flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-white">
+                    <Menu.Button className=" flex text-sm rounded-full focus:outline-none ring-4 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-white">
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 "
@@ -110,15 +110,16 @@ class NavComponent extends React.Component {
                       
                       <Menu.Item>
                         {({ active }) => (
-
-                          <div
-                            className={this.classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
-                            )}
-                          >
-                            <button onClick={this.logout}>Logout</button>
-                          </div>
+                          <button className="container mx-auto" onClick={this.logout}>
+                            <div
+                              className={this.classNames(
+                                active ? "bg-gray-100" : "",
+                                "block px-4 py-2 text-sm text-gray-700 "
+                              )}
+                            >
+                              Logout
+                            </div>
+                          </button>
                         )}
                       </Menu.Item>
                     </Menu.Items>

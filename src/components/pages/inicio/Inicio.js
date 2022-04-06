@@ -3,6 +3,8 @@ import NavComponent from "../../NavComponent";
 import logo from "../../../assets/resource/Logo_Provicional.png";
 import CollectionsBookmarkIcon from "@material-ui/icons/CollectionsBookmark";
 import { useState } from "react";
+import LibroDescargar from "../../../assets/icons/book-arrow-down.png";
+
 
 import "./inicio.css";
 
@@ -167,75 +169,97 @@ export const Inicio = () => {
 
   {/* BARRA LATERAL */}
 
-  <div className="hidden xl:block md:col-span-3  w-auto fixed inset-y-30 right-10 ">
-    <div className="py-5 flex flex-wrap flex-col justify-center">
-      <div className="border shadow rounded-2xl py-5  hidden md:block p-4">
+  <div className="hidden xl:block md:col-span-3  w-auto fixed inset-y-30 right-8 ">
+    <div className="py-7 flex flex-wrap flex-col justify-center">
+      <div className="container mx-auto px-5  border shadow rounded-2xl   hidden md:block p-">
         <div>
-          <div className="flex flex-col-2">
-            <div className="text-left">
-              <h2 className="font-semibold text-base m-2">Content</h2>
+          <div className="">
+            <div className="text-center contend-center justify-center ">
+              <h2 className="font-semibold text-base p-2   ">Navegation</h2>
             </div>
-      
           </div>
           <div className="flex p-2 gap-4 flex-col md:flex-row">
-            <div
-              className="flex justify-center items-start rounded-2xl"
-              id="estrella"
-            >
-              {/* <CollectionsBookmarkIcon color="action" fontSize="large" /> */}
-            </div>
+            
             <div className="flex flex-col " id="info">
               <div>
                 <h2 className="text-gray-700 text-lg text-left">
                   <ol>
-                    <li className="text-sm hover:text-green-500 py-1">
-                      {" "}
-                      <a
-                        rel="noopener noreferrer"
-                        href="#libro1"
-                      >
-                        Book 1 (Module 1 - Module 2)
-                      </a>{" "}
-                    </li>
-                    <li className="text-sm hover:text-green-500 py-1">
-                      {" "}
-                      <a
-                        rel="noopener noreferrer"
-                        href="#libro2"
-                      >
-                        Book 2 (Module 3 - Module 4)
-                      </a>{" "}
-                    </li>
-                    <li className="text-sm hover:text-green-500 py-1">
-                      {" "}
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        //href=""
-                      >
-                        Book 3 (Module 5 - Module 6)
-                      </a>{" "}
-                    </li>
-                    <li className="text-sm hover:text-green-500 py-1">
-                      {" "}
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        //href=""
-                      >
-                        Book 4 (Module 7 - Module 8)
-                      </a>{" "}
-                    </li>
-                    <li className="text-sm hover:text-green-500 py-1">
-                      {" "}
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        //href=""
-                      >
-                        Book 5 (Module 9 - Module 10)
-                      </a>{" "}
-                    </li>
+                  <div className="py-1 ">
+                    <a  rel="noopener noreferrer" href="#libro1">
+                      <li className="container mx-auto px-20 rounded-lg border-2 border-gray-200 text-center text-xs hover:text-green-500 py-1">
+                        {" "}
+                        <div className="flex items-stretch">
+                          <div className="flex justify-center items-start rounded-2xl" id="estrella">
+                            {<CollectionsBookmarkIcon color="action" fontSize="small" /> }
+                          </div> 
+                          <div className="px-1 py-1 ">
+                            BOOK 1
+                          </div>
+                        </div>
+                      </li>
+                    </a>{" "}
+                  </div>
+                  <div className="py-1 ">
+                    <a  rel="noopener noreferrer" href="#libro2">
+                      <li className="container mx-auto px-20 p-3 rounded-lg border-2 border-gray-200 text-center text-xs hover:text-green-500 py-1">
+                        {" "}
+                        <div className="flex items-stretch">
+                          <div className="flex justify-center items-start rounded-2xl" id="estrella">
+                            {<CollectionsBookmarkIcon color="action" fontSize="small"  /> }
+                          </div> 
+                          <div className="px-1 py-1">
+                          BOOK 2
+                          </div>
+                        </div>
+                      </li>
+                    </a>{" "}
+                  </div>
+                  <div className="py-1 ">
+                    <a  rel="noopener noreferrer" href="#libro3">
+                      <li className="container mx-auto px-20 p-3 rounded-lg border-2 border-gray-200 text-center text-xs hover:text-green-500 py-1">
+                        {" "}
+                        <div className="flex items-stretch">
+                          <div className="flex justify-center items-start rounded-2xl" id="estrella">
+                            {<CollectionsBookmarkIcon color="action" fontSize="small" /> }
+                          </div> 
+                          <div className="px-1 py-1">
+                          BOOK 3
+                          </div>
+                        </div>
+                      </li>
+                    </a>{" "}
+                  </div>
+                  <div className="py-1 ">
+                    <a  rel="noopener noreferrer" href="#libro4">
+                      <li className="container mx-auto px-20 p-3 rounded-lg border-2 border-gray-200 text-center text-xs hover:text-green-500 py-1">
+                        {" "}
+                        <div className="flex items-stretch">
+                          <div className="flex justify-center items-start rounded-2xl" id="estrella">
+                            {<CollectionsBookmarkIcon color="action" fontSize="small" /> }
+                          </div> 
+                          <div className="px-1 py-1">
+                          BOOK 4
+                          </div>
+                        </div>
+                      </li>
+                    </a>{" "}
+                  </div>
+                  <div className="py-1 ">
+                    <a  rel="noopener noreferrer" href="#libro5">
+                      <li className="container mx-auto px-20 p-3 rounded-lg border-2 border-gray-200 text-center text-xs hover:text-green-500 py-1">
+                        {" "}
+                        <div className="flex items-stretch">
+                          <div className="flex justify-center items-start rounded-2xl" id="estrella">
+                            {<CollectionsBookmarkIcon color="action" fontSize="small" /> }
+                          </div> 
+                          <div className="px-1 py-1">
+                          BOOK 5
+                          </div>
+                        </div>
+                      </li>
+                    </a>{" "}
+                  </div>
+                    
                   </ol>
                 </h2>
               </div>
@@ -245,16 +269,15 @@ export const Inicio = () => {
       </div>
                       
     </div>
-    <div className="py-2 flex flex-wrap flex-col justify-center">
-      <div className="border shadow rounded-2xl py-2  hidden md:block p-4">
+    <div className="flex flex-wrap flex-col justify-center">
+      <div className="border shadow rounded-2xl  hidden md:block py-1">
         <div>
-          <div className="flex flex-col-2">
-            <div className="text-left">
-              <h2 className="font-semibold text-base m-2">Digital Resources</h2>
+          <div className="">
+            <div className="text-center p-1">
+              <h2 className="font-semibold text-base ">Digital Resources</h2>
             </div>
-      
           </div>
-          <div className="flex p-2 gap-4 flex-col md:flex-row">
+          <div className=" flex p-2 gap-4 flex-col md:flex-row">
             <div
               className="flex justify-center items-start rounded-2xl"
               id="estrella"
@@ -262,58 +285,100 @@ export const Inicio = () => {
               {/* <CollectionsBookmarkIcon color="action" fontSize="large" /> */}
             </div>
             <div className="flex flex-col  " id="info">
+              
               <div>
                 <h2 className=" text-gray-700 text-lg text-center">
                   <ol>
-                    <li className=" text-sm hover:text-green-500 py-1">
+                    <li className=" text-sm hover:text-yellow-500 py-1">
                       {" "}
                       <a
                         target="_blank"
                         rel="noopener noreferrer"
                         href="https://drive.google.com/file/d/1pwa9ffmEMoHOJBa98KDNpONhp92DtoL6/view?usp=sharing"
                       >
-                       { <CollectionsBookmarkIcon color="action" fontSize="large" /> } Download Book 1
+                        <div className="flex items-stretch">
+                          <div className="flex justify-center items-start rounded-2xl" id="estrella">
+                            <figure>
+                              <img src={LibroDescargar} alt="Descargar Libro" />
+                            </figure>                           
+                          </div> 
+                          <div className="px-1 ">
+                          Download book 1
+                          </div>
+                        </div>
                       </a>{" "}
                     </li>
-                    <li className="text-sm hover:text-green-500 py-1">
+                    <li className="text-sm hover:text-yellow-500 py-1">
                       {" "}
                       <a
                         target="_blank"
                         rel="noopener noreferrer"
                         href="https://drive.google.com/file/d/1zSL78FugkafrXulTG9Wb3CcHwouNr62y/view?usp=sharing"
                       >
-                        { <CollectionsBookmarkIcon color="action" fontSize="large" /> } Download Book 2 
-                      </a>{" "}
+                          <div className="flex items-stretch">
+                          <div className="flex justify-center items-start rounded-2xl" id="estrella">
+                            <figure>
+                                <img src={LibroDescargar} alt="Descargar Libro" />
+                            </figure>                              
+                            </div> 
+                          <div className="px-1 ">
+                          Download book 2
+                          </div>
+                        </div>                      </a>{" "}
                     </li>
-                    <li className="text-sm hover:text-green-500 py-1">
+                    <li className="text-sm hover:text-yellow-500 py-1">
                       {" "}
                       <a
                         target="_blank"
                         rel="noopener noreferrer"
                         href="https://drive.google.com/file/d/1kVydGHFB5M59yMLyAQVM6w0YnN-uf4zJ/view?usp=sharing"
                       >
-                        { <CollectionsBookmarkIcon color="action" fontSize="large" /> } Download Book 3 
-                      </a>{" "}
+                          <div className="flex items-stretch">
+                          <div className="flex justify-center items-start rounded-2xl" id="estrella">
+                            <figure>
+                                <img src={LibroDescargar} alt="Descargar Libro" />
+                            </figure>                            
+                          </div> 
+                          <div className="px-1 ">
+                          Download book 3
+                          </div>
+                        </div>                      </a>{" "}
                     </li>
-                    <li className="text-sm hover:text-green-500 py-1">
+                    <li className="text-sm hover:text-yellow-500 py-1">
                       {" "}
                       <a
                         target="_blank"
                         rel="noopener noreferrer"
                         href="https://drive.google.com/file/d/1Q8COVdO2dGtjDt6mrdb4I1HuqB3w_yxb/view?usp=sharing"
                       >
-                        { <CollectionsBookmarkIcon color="action" fontSize="large" /> } Download Book 4 
-                      </a>{" "}
+                          <div className="flex items-stretch">
+                          <div className="flex justify-center items-start rounded-2xl" id="estrella">
+                            <figure>
+                                <img src={LibroDescargar} alt="Descargar Libro" />
+                            </figure>                            
+                          </div> 
+                          <div className="px-1 ">
+                          Download book 4
+                          </div>
+                        </div>                      </a>{" "}
                     </li>
-                    <li className="text-sm hover:text-green-500 py-1">
+                    <li className="text-sm hover:text-yellow-500 py-1">
                       {" "}
                       <a
                         target="_blank"
                         rel="noopener noreferrer"
                         href="https://drive.google.com/file/d/158WHHjUUYaFvTJaxBK5-SbDS-Fxz1BAy/view?usp=sharing"
                       >
-                        { <CollectionsBookmarkIcon color="action" fontSize="large" /> } Download Book 5 
-                      </a>{" "}
+                          <div className="flex items-stretch">
+                          <div className="flex justify-center items-start rounded-2xl" id="estrella">
+                            <figure>
+                                <img src={LibroDescargar} alt="Descargar Libro" />
+                            </figure>                            
+                          </div> 
+                          <div className="px-1 ">
+                          Download  book 5
+                          </div>
+                        </div>                      </a>{" "}
                     </li>
                   </ol>
                 </h2>

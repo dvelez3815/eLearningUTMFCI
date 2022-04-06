@@ -27,7 +27,7 @@
     padding: 3px;
     position: relative;
     box-sizing: border-box;
-    box-shadow: 0 0 0 10px rgba(229, 231, 235, 1);;
+    box-shadow: 0 0 0 10px rgb(141, 138, 138);;
     /* margin: 50px */
     margin: 8px;;
   }
@@ -37,7 +37,7 @@
   }
 
   .bcircle:hover{
-    border: 10px solid rgb(49, 47, 47);
+    border: 10px solid rgb(216, 216, 216);
   }
 
 
@@ -71,7 +71,7 @@
   }
 
   .bfill {
-    background-color: rgb(89, 87, 87);
+    background-color: rgb(141, 138, 138);
     height: 100%;
     width: 100%;
     position: absolute;

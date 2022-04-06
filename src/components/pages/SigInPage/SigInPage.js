@@ -97,7 +97,7 @@ const SigInPage = () => {
 
   return (
     <div className=" ">
-      <div className="flex h-screen ">
+      <div className="md:flex h-screen ">
         <div className="lg:w-1/3 md:w-screen ">
           <div className="min-h-screen flex items-center justify-center  py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-md w-full space-y-2">
@@ -224,8 +224,8 @@ const SigInPage = () => {
             </div>
           </div>
         </div>
-        <div className="lg:w-2/3 hidden md:block ">
-          <div className="min-h-screen flex-col flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="bg-gray-50 lg:w-2/3 hidden md:block ">
+          <div className="min-h-screen flex-col flex items-center justify-center  py-12 px-4 sm:px-6 lg:px-8">
             <div>
               <img src={img1} width="400" alt="aprende"></img>
             </div>

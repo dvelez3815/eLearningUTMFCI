@@ -19,13 +19,19 @@ const Libro = (props) => {
 
 
   return <div>
-      {/* <h2>LIBRO {props.libroactual}</h2> */}
-      <div className='flex flex-col'>
-          <h2  key={shortid.generate()} id={`libro${props.libroactual}`} className="text-2xl text-left text-yellow-600 mt-5 mx-10 font-bold">{`Book ${props.libroactual}`}</h2>
-          <button onClick={ocultarlibros}>
-            <img className='w-8 mx-10' src="https://img.icons8.com/external-those-icons-lineal-those-icons/48/000000/external-down-arrows-those-icons-lineal-those-icons-1.png"/>
-          </button>
+     
+      <div className='flex flex-col justify-center'>
+        <button onClick={ocultarlibros} className=' p-2 rounded-lg text-2xl  text-yellow-600 mt-5 mx-5 font-bold'>
+          <h2  key={shortid.generate()} id={`libro${props.libroactual}`} className="shadow-lg hover:bg-gray-100 border-solid border-2 border-gray-300 p-2 rounded-lg text-2xl  text-yellow-600 font-bold">{`BOOK ${props.libroactual}`}
+          </h2>
+        </button>
+        <button onClick={ocultarlibros} className='text-yellow-600 content-center justify-center '>
+          <h2 className='font-bold'>
+            v
+          </h2>
+        </button>
       </div>
+      
       
       {props.modulos.map((modulo, index) => {
 

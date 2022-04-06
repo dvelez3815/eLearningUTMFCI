@@ -28,22 +28,26 @@ class HomePage extends React.Component {
               <h3 className="lg:text-4xl md:text-3xl   text-2xl font-sans font-bold text-green-500">
                 Aprende Inglés con los <br /> contenidos más relevantes
               </h3>
-              <h3 className="lg:text-lg md:text-lg text-base  font-sans text-gray-500 pt-2">
+              <h3 className="lg:text-lg md:text-lg text-base  font-sans text-gray-500 pt-2 p-3">
                 Comprometidos con tu formación acádemica
               </h3>
-              <div className="pt-4 px-2 xl:py-0  lg:py-0 md:py-0 py-1">
-                  <button className=" inline-flex items-center justify-center px-10 py-2  bg-yellow-400 hover:bg-yellow-500 text-white rounded-full font-semibold text-xs   uppercase tracking-widest ">
-                    <Link to="/dashboard">Ingresar</Link>
-                  </button>
-              </div>
+              <Link to="/dashboard">
+                <div className="pt-4 px-2 xl:py-0  lg:py-0 md:py-0 py-1">
+                    <button className=" inline-flex items-center justify-center px-10 py-2  bg-yellow-400 hover:bg-yellow-500 text-white rounded-full font-semibold text-xs   uppercase tracking-widest ">
+                      Ingresar
+                    </button>
+                </div>
+              </Link>
               <div className="pt-4">
                 {/*  si se ubica la etiqueta " a " o link dentro del button no hace efecto al menos que le des click a las letras esto se evita
                 ubicandola afuera */}
-                <div className="px-2 xl:py-0  lg:py-0 md:py-0 py-1">
-                  <button className=" inline-flex items-center justify-center px-4 py-2  bg-gray-400 hover:bg-gray-300 text-white  rounded-full font-semibold text-xs   uppercase tracking-widest ">
-                    <Link to="/signup">Crear una cuenta</Link>
-                  </button>
-                </div>
+                <Link to="/signup">
+                  <div className="px-2 xl:py-0  lg:py-0 md:py-0 py-1">
+                    <button className=" inline-flex items-center justify-center px-4 py-2  bg-gray-400 hover:bg-gray-300 text-white  rounded-full font-semibold text-xs   uppercase tracking-widest ">
+                      Crear una cuenta
+                    </button>
+                  </div>
+                </Link>
               </div>
             </div>
           </div>

@@ -141,7 +141,7 @@ const SignUpPage = () => {
 
     return (
       <div className=" ">
-        <div className="flex h-screen w-screen ">
+        <div className="md:flex h-screen">
           <div className=" lg:w-1/3 md:w-screen">
             <div className="min-h-screen flex items-center justify-center  py-12 px-4 sm:px-6 lg:px-8">
               <div className="max-w-md w-full space-y-2">
