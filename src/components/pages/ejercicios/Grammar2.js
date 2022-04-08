@@ -41,7 +41,7 @@ const getExercises = async() => {
         {
             method: 'POST',
             headers: {
-                'token': cookies.get("token"),
+                'token': process.env.REACT_APP_SECRET_TOKEN,
               },            
         });
     const data = await response.json();

@@ -35,11 +35,11 @@ const Review = () => {
 
 
 const getData = async(book,modulo,unit,tipo) => {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/review/${book}/${modulo}/${unit}/${tipo}`,
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/book/review/${book}/${modulo}/${unit}/${tipo}`,
         {
             method: 'GET',
             headers: {
-                'token': cookies.get("token"),
+                'token':process.env.REACT_APP_SECRET_TOKEN,
               },
             });
 

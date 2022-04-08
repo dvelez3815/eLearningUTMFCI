@@ -19,9 +19,11 @@ const Evaluacion = () => {
           </h2>
         </div>
         <div>
+        <Link to={`/pruebas/prueba-general/`}> 
           <button className="cursor-not-allowed h-10 px-5 capitalize text-white font-bold transition-colors duration-150 bg-yellow-400 rounded-lg focus:shadow-outline hover:bg-yellow-500">
             GENERAL TEST (coming soon)
           </button>
+        </Link>
         </div>
         <div>
 
@@ -52,7 +54,7 @@ const Evaluacion = () => {
                     </div>
                   </div>
                 </Link>
-                <Link to={`/pruebas/libro/` + 1}>
+                <Link to={`/pruebas/libro/` + 3}>
                   <div className="border-4 border-gray-200 p-5 rounded-lg focus:shadow-outline hover:bg-yellow-200">
                     <div className="flex justify-center items-start rounded-2xl" id="estrella">
                                 {<CollectionsBookmarkIcon color="action" fontSize="medium" /> }
@@ -62,7 +64,7 @@ const Evaluacion = () => {
                     </div>
                   </div>
                 </Link>
-                <Link to={`/pruebas/libro/` + 1}>
+                <Link to={`/pruebas/libro/` + 4}>
                   <div className="border-4 border-gray-200 p-5 rounded-lg focus:shadow-outline hover:bg-yellow-200">
                  
                     <div className="flex justify-center items-start rounded-2xl" id="estrella">
@@ -74,7 +76,7 @@ const Evaluacion = () => {
                   
                   </div>
                 </Link>
-                <Link to={`/pruebas/libro/` + 1}>
+                <Link to={`/pruebas/libro/` + 5}>
                   <div className="border-4 border-gray-200 p-5 rounded-lg focus:shadow-outline hover:bg-yellow-200">     
                     <div className="flex justify-center items-start rounded-2xl" id="estrella">
                                 {<CollectionsBookmarkIcon color="action" fontSize="medium" /> }

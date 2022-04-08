@@ -22,13 +22,13 @@ export const Inicio = () => {
   const [cargando, setcargando] = useState(true);
   const [libros, setlibros] = useState([]);
   let libroActual = 1;
-  let totalLibro = 3;
+  let totalLibro = 5;
   //get user progress from api
   const getData = async () => {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/user_progress/${userid}`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/progress/${userid}`, {
       method: "POST",
       headers: {
-        'token': cookies.get("token"),
+        'token': process.env.REACT_APP_SECRET_TOKEN
       },
     });
     const data = await response.json();
@@ -61,6 +61,7 @@ export const Inicio = () => {
   useEffect(() => {
     let llenarInfo = async () => {
       let userInfo = await getData();
+      console.log(userInfo)
       if (userInfo.name === "JsonWebTokenError") {
         window.location.href = "./signin";
       }

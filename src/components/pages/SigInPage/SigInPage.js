@@ -35,7 +35,7 @@ const SigInPage = () => {
 
     setCargando(true);
     axios
-      .post(process.env.REACT_APP_API_URL+"/signin", {
+      .post(process.env.REACT_APP_API_URL+"/user/signin", {
         mail: form.mail,
         password: form.password,
       },

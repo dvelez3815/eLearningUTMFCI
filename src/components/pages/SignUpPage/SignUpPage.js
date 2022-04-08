@@ -15,6 +15,7 @@ const SignUpPage = () => {
   const [form, setForm] = useState({
     name: "",
     lastname: "",
+    cedula: "",
     mail: "",
     password: "",
     password2: "",
@@ -49,12 +50,15 @@ const SignUpPage = () => {
   const handleSubmit = (event) => {
   event.preventDefault();
   //check if inputs are undefined
-  if (form.name === undefined || form.lastname === undefined || form.mail === undefined || form.password === undefined || form.password2 === undefined ){
+  if (form.name === undefined || form.lastname === undefined || form.cedula === undefined || form.mail === undefined || form.password === undefined || form.password2 === undefined ){
     alert("Por favor llene todos los campos");
     return true;
-  } else if(form.name === "" || form.lastname === "" || form.mail === "" || form.password === "" || form.password2 === ""){
+  } else if(form.name === "" || form.lastname === "" || form.lastname === "" ||  form.mail === "" || form.password === "" || form.password2 === ""){
     alert("Por favor llene todos los campos");
-    return true;
+    return true; 
+  } else if (form.cedula.length < 10) {
+    alert("Por favor ingrese una cédula válida");
+    return true;   
   } else if (form.password !== form.password2) {
     alert("Las contraseñas no coinciden");
     return true;
@@ -71,24 +75,23 @@ const SignUpPage = () => {
     return true;    
   }
   else{
-    setCargando(true);
-    setDato("");
-    setIsVisibleDato("hidden");    
-    setDato("El registro de usuario no está disponible");
-    setIsVisibleDato("visible");
-    setCargando(false);
-    return true;
-  }
-
+    // setCargando(true);
+    // setDato("");
+    // setIsVisibleDato("hidden");    
+    // setDato("El registro de usuario no está disponible");
+    // setIsVisibleDato("visible");
+    // setCargando(false);
+    // return true;
   setCargando(true);
   setCargando(true);
   setDato("");
   setIsVisibleDato("hidden");
 
   axios
-    .post(`${process.env.REACT_APP_API_URL}/signup`, {
+    .post(`${process.env.REACT_APP_API_URL}/user/signup`, {
       name: form.name,
       lastname: form.lastname,
+      cedula: form.cedula,
       mail: form.mail,
       password: form.password,
     },
@@ -119,6 +122,7 @@ const SignUpPage = () => {
         var user = response.data.res;
         cookie.set("_id", user._id, { path: "/" });
         cookie.set("name", user.name, { path: "/" });
+        cookie.set("cedula", user.cedula, { path: "/" });
         cookie.set("lastname", user.lastname, { path: "/" });
         cookie.set("mail", user.mail, { path: "/" });
         cookie.set("status", user.status, { path: "/" });
@@ -133,6 +137,9 @@ const SignUpPage = () => {
     .catch((error) => {
       console.log(error);
     });
+  }
+
+  
   }
   
   useEffect(() => {
@@ -202,6 +209,23 @@ const SignUpPage = () => {
                         onChange={handleChange}
                         className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
                         placeholder="Apellidos"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="email-address" className="sr-only">
+                        cedula
+                      </label>
+                      <input
+                        id="cedula"
+                        name="cedula"
+                        type="text"
+                        maxlength="10"
+                        autoComplete="cedula"
+                        required
+                        value={form.cedula}
+                        onChange={handleChange}
+                        className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
+                        placeholder="Cédula"
                       />
                     </div>
                     <div>

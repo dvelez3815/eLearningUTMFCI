@@ -12,6 +12,7 @@ import AccountPendingPage from './components/pages/AccountPendingPage/AccountPen
 import Evaluacion from './components/pages/Evaluacion/Evaluacion';
 import Pruebas from './components/pages/Pruebas/Pruebas';
 import Review from './components/pages/Review/Review';
+import PruebasGeneral from './components/pages/Pruebas/PruebasGeneral';
 
 
 
@@ -39,6 +40,10 @@ function App() {
         <Evaluacion/>
       </Route>
 
+      <Route path="/pruebas/prueba-general">
+        <PruebasGeneral/>
+      </Route> 
+      
       <Route path="/pruebas/libro/:idlibro">
         <Pruebas/>
       </Route>      
