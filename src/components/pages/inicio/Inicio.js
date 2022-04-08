@@ -9,11 +9,6 @@ import LibroDescargar from "../../../assets/icons/book-arrow-down.png";
 import "./inicio.css";
 
 import Cookies from "universal-cookie";
-import writingimg from "../../../assets/icons/Writing.png";
-
-import grammarimg from "../../../assets/icons/Grammar.png";
-import readingimg from "../../../assets/icons/Reading.png";
-import vocabularyimg from "../../../assets/icons/Vocabulary.png";
 import Progreso from "./Progreso";
 import loading from "../../../assets/resource/loading.svg";
 import shortid from "shortid";
@@ -27,7 +22,7 @@ export const Inicio = () => {
   const [cargando, setcargando] = useState(true);
   const [libros, setlibros] = useState([]);
   let libroActual = 1;
-  let totalLibro = 2;
+  let totalLibro = 3;
   //get user progress from api
   const getData = async () => {
     const response = await fetch(`${process.env.REACT_APP_API_URL}/user_progress/${userid}`, {
@@ -110,6 +105,7 @@ export const Inicio = () => {
             let userprogress2 = (modulo[1].writing.user_progress + modulo[1].grammar.user_progress + modulo[1].reading.user_progress + modulo[1].vocabulary.user_progress);
             let total_task2 = (modulo[1].writing.total_task + modulo[1].grammar.total_task + modulo[1].reading.total_task + modulo[1].vocabulary.total_task);
             let progress2 = (userprogress2 / total_task2) * 100;  
+            
 
             let totalmoduleprogress = (progress + progress2) / 2;
 

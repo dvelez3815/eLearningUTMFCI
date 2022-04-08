@@ -58,7 +58,9 @@ const cutData = (data) => {
     for (let i = 0; i < 30; i++) {
         let random = Math.floor(Math.random() * data.length);
         newData.push(data[random]);
+        
     }
+    console.log(newData)
     return newData;
 }
 export default Pruebas

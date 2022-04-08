@@ -64,9 +64,11 @@ export const Ejercicio = (props) => {
 
             
             {finJuego ? (
-              <button className=" inline-flex items-center justify-center px-10 py-2 my-4 p-10 bg-gray-100 hover:bg-gray-300 text-black  font-semibold text-xs   uppercase tracking-widest">
-                    <Link to="/dashboard">Continue</Link>
-              </button>
+              <Link to="/dashboard">
+                <button className=" inline-flex items-center justify-center px-10 py-2 my-4 p-10 bg-gray-100 hover:bg-gray-300 text-black  font-semibold text-xs   uppercase tracking-widest">
+                      Continue
+                </button>
+              </Link>
             ): props.esPrueba?<EjercicioFooterPruebaLibros totalEjercicios = {preguntasValidas} ejercicio={juego[juego.length-1]} juego={juego} setJuego = {setJuego} cargado={cargado} setCargado={setCargado} setFinJuego={setFinJuego} miref={panelJuego} contadorRespondidas={contadorRespondidas} setContadorRespondidas={setContadorRespondidas} aciertos={aciertos} setAciertos={setAciertos}/>:<EjercicioFooter ejercicio={juego[juego.length-1]} juego={juego} setJuego = {setJuego} cargado={cargado} setCargado={setCargado} setFinJuego={setFinJuego} miref={panelJuego} contadorRespondidas={contadorRespondidas} setContadorRespondidas={setContadorRespondidas}/>}
         </div>
     )
