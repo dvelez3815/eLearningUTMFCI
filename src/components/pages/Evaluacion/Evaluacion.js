@@ -7,6 +7,7 @@ import logo from "../../../assets/resource/Logo_Provicional.png";
 import CollectionsBookmarkIcon from "@material-ui/icons/CollectionsBookmark";
 import { Link } from "react-router-dom";
 
+
 const Evaluacion = () => {
   return (
     <div>
@@ -20,8 +21,8 @@ const Evaluacion = () => {
         </div>
         <div>
         <Link to={`/pruebas/prueba-general/`}> 
-          <button className="cursor-not-allowed h-10 px-5 capitalize text-white font-bold transition-colors duration-150 bg-yellow-400 rounded-lg focus:shadow-outline hover:bg-yellow-500">
-            GENERAL TEST (coming soon)
+          <button className="h-10 px-5 capitalize text-white font-bold transition-colors duration-150 bg-yellow-400 rounded-lg focus:shadow-outline hover:bg-yellow-500">
+            GENERAL TEST
           </button>
         </Link>
         </div>

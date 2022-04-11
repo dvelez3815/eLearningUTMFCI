@@ -43,7 +43,7 @@ function App() {
       <Route path="/pruebas/prueba-general">
         <PruebasGeneral/>
       </Route> 
-      
+
       <Route path="/pruebas/libro/:idlibro">
         <Pruebas/>
       </Route>      

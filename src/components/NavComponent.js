@@ -28,8 +28,8 @@ class NavComponent extends React.Component {
   }
   render() {
     return (
-      <div>
-        <nav className="static bg-green-800  dark:bg-gray-800  shadow  ">
+      <div className="">
+        <nav className="relative bg-green-800  dark:bg-gray-800  shadow  ">
           <div className="max-w-7xl mx-auto ">
             <div className="flex items-center justify-between h-16">
               <div className=" flex items-center">

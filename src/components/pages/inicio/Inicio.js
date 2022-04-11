@@ -155,7 +155,7 @@ export const Inicio = () => {
   }, []);
 
   return (
-    <div>
+    <div className="">
       <NavComponent logo={logo} activado={1} />
       {cargando?<div className="cargando"><img src={loading}></img></div>:
   <div className="grid grid-cols-12 ">

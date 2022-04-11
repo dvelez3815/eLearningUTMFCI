@@ -8,6 +8,7 @@ const SuccessData = {
     text: "Excelent!.",
   };
 
+//export const Guardar
 
 export const mostrarAlertaError= (respuesta)=>{
     let cadena = "";
@@ -100,8 +101,25 @@ export const mostrarAlertaSalir= ()=>{
         }
     ).then((result) => {
         if (result.value) {
-            
             window.location = "/dashboard";
+        } else {
+            
+        }
+    });
+}
+
+export const mostrarAlertaSalirEva= ()=>{
+    Swal.fire(
+        {
+            title: "Are you sure?",
+            type: "error",
+            text: "You are almost to exit, you will loose all your progress.",
+            confirmButtonText: "Ok",
+            showCancelButton: true,
+        }
+    ).then((result) => {
+        if (result.value) {
+            window.location = "/evaluacion";
         } else {
             
         }

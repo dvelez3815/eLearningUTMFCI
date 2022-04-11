@@ -3,6 +3,7 @@ import React from 'react';
 import shortid from 'shortid';
 import Modulo from '../Modulos/Modulo';
 import Progreso from '../pages/inicio/Progreso';
+import flecha from "../../assets/icons/flecha.png";
 
 import "./Libro.css";
 
@@ -26,9 +27,7 @@ const Libro = (props) => {
           </h2>
         </button>
         <button onClick={ocultarlibros} className='text-yellow-600 content-center justify-center '>
-          <h2 className='font-bold'>
-            v
-          </h2>
+            <img src={flecha} alt="Desplegar Libro" />
         </button>
       </div>
       

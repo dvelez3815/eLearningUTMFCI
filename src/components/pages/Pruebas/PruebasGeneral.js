@@ -6,15 +6,23 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 const ab = []
 
-const PruebaGeneral = () => {
 
+const PruebaGeneral = () => {
+    
     const [data, setData] = React.useState(ab);
     const [loadingData, setLoadingData] = React.useState(true);
+    
 
     React.useEffect(() => {
-        console.log('entra')
+        //console.log('entra')
         //addData(setData)
-        if (data !== 0) {
+        
+        if (data.lenght === 0) {
+            addData();
+            //console.log('valor cero')
+        }
+                
+        if (data.length !== 0) {
             setLoadingData(false);
         }
 
@@ -22,9 +30,8 @@ const PruebaGeneral = () => {
 
     //console.log('data_lon: ', data.length)
     return (
-        
         <div>
-            {loadingData ? <div className="cargando"><img src={loading} alt="cargando"></img></div> :data.length>0?<Ejercicio ejercicios={data} esPrueba = {true}/>:<NotFoundPage></NotFoundPage>}
+            {loadingData ? <div className="cargando"><img src={loading} alt="cargando"></img> </div> :data.length>0?<Ejercicio ejercicios={data} esPrueba = {true}/>:<NotFoundPage></NotFoundPage>}
         </div>
     )
 }
@@ -42,7 +49,6 @@ const getData = async(idlibro) => {
 }
 
 const addData = () => {
-    
     getData(1).then((a) => {
       let DataMini = cutData(a) 
       for (let i = 0; i < 10; i++) {

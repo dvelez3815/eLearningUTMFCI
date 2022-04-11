@@ -1,8 +1,9 @@
 import React from 'react'
+import { Ejercicio } from '../ejercicios/Ejer_Review';
 import { Link } from 'react-router-dom';
 import { finPrueba, mostrarAlertaError } from '../../Alert/Alerts';
 import Morty from "../../../assets/resource/pensar.gif";
-
+import EjercicioReview from "./EjerciciosReview";
 
 const EjercicioFooterPruebaLibros = (props) => {
     return (
@@ -16,14 +17,91 @@ const EjercicioFooterPruebaLibros = (props) => {
                   <p>Next</p>    
                 </span>
               </button>   
-              ): <div className='flex flex-col justify-center items-center'>
-                <h2 className="container font-bold  text-2xl  text-yellow-400  "></h2>
-                <img className="h-1/2" src={Morty} alt=" Animación" />
-                <Link to="/evaluacion">
-                  <button className=" inline-flex items-center justify-center px-10 py-2  bg-gray-200 hover:bg-yellow-500 text-black rounded-full font-semibold text-xs   uppercase tracking-widest ">
-                    Continue
-                  </button>
-                </Link> 
+              ): 
+              <div className=' flex flex-col justify-center items-center'>
+                <div>
+                  <h2 className=" font-bold  text-2xl  text-yellow-400  ">RESULTS</h2>
+                  </div>
+                <div className=' md:flex   '>
+                  <div className="items-center justify-center  p-3 ">
+                    <div className="py-10 col-span-12">
+                      <div className="overflow-auto lg:overflow-visible ">
+                        <table className="table text-gray-900 border-separate space-y-2 text-sm">
+                          <thead className="bg-gray-800 text-gray-100">
+                            <tr>
+                              <th className="p-3"></th>
+                              <th className="p-3 text-left">Category</th>
+                              <th className="p-3 text-center">Amount</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr className="bg-gray-200">
+                              <td className="p-3">
+                                <div className="flex align-items-center">
+                                  <img className="rounded-full h-12 w-12  object-cover" src="https://images.unsplash.com/photo-1613588718956-c2e80305bf61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=634&q=80" alt="unsplash"/>
+                                </div>
+                              </td>
+                              <td className="p-3 text-left">
+                              NUMBER OF QUESTIONS
+                              </td>
+                              <td className="p-3">
+                                <span className="bg-green-400 text-gray-50 rounded-md px-2 sm:p-1">
+                                {props.totalEjercicios}
+                                  </span>
+                              </td>
+                            </tr>
+                            <tr className="bg-gray-200">
+                              <td className="p-3">
+                                <div className="flex align-items-center">
+                                  <img className="rounded-full h-12 w-12   object-cover" src="https://images.unsplash.com/photo-1423784346385-c1d4dac9893a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="unsplash"/>
+
+                                </div>
+                              </td>
+                              <td className="p-3 text-left">
+                              NUMBER OF CORRECT QUESTIONS
+                              </td>
+                              <td className="p-3">
+                                <span className="bg-yellow-500 text-gray-50 rounded-md px-2 sm:p-1">
+                                  {props.aciertos}
+                                  </span>
+                              </td>
+                            </tr>
+                            <tr className="bg-gray-200">
+                              <td className="p-3">
+                                <div className="flex align-items-center">
+                                  <img className="rounded-full h-12 w-12   object-cover" src="https://images.unsplash.com/photo-1600856209923-34372e319a5d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2135&q=80" alt="unsplash"/>
+                                </div>
+                              </td>
+                              <td className="p-3 text-left">
+                              NUMBER OF INCORRECT QUESTIONS
+                              </td>
+                              <td className="p-3">
+                                <span className="bg-red-500  text-gray-50  rounded-md px-2 sm:p-1">
+                                {props.totalEjercicios - props.aciertos}
+                                  </span>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div>
+                      <Link to="/evaluacion">
+                        <button className=" inline-flex items-center justify-center px-10 py-2  bg-gray-200 hover:bg-yellow-500 text-black rounded-full font-semibold text-xs   uppercase tracking-widest ">
+                          Continues
+                        </button>
+                      </Link> 
+                    </div>
+                  </div>
+                  <div className=''>
+                    <img className="" src={Morty} alt=" Animación"  />
+                  </div>
+                  
+                </div>
+                
+                <div className=''>
+                  <Ejercicio ejercicios={props.ejercicios} esPrueba = {true}/>
+                </div> 
             </div>
            }
             
@@ -39,9 +117,27 @@ async function noEsCorrecta(props) {
     props.setContadorRespondidas(contadorRespuestas + 1);
 
     if (props.juego.length === 0) {
-        finPrueba(props.aciertos, props.totalEjercicios)  
+        //finPrueba(props.aciertos, props.totalEjercicios)  
     } else {    
     }
+  }
+
+  async function enviarSiEsCorrecta(props, contador) {
+    //Se es corecta se necesita saber si se ha llegado al final de la lista de ejercicios, de ser así, se debe de terminar el juego y guardar el progreso,
+    //caso contrario se debe de pasar al siguiente ejercicio
+    
+    let contadorRespuestas = props.contadorRespondidas;
+    if (props.juego.length === 0) {
+        props.setAciertos(contador + 1);
+        //finPrueba(props.aciertos, props.totalEjercicios)
+        
+    } else {
+        props.setAciertos(contador + 1);
+    }
+
+    props.juego.pop();
+    props.setContadorRespondidas(contadorRespuestas + 1);
+    
   }
   
 
@@ -49,6 +145,8 @@ async function noEsCorrecta(props) {
   const validarRespuesta = async (props) => {
     let tipo_ejercicio = props.ejercicio.props.ejercicio.type;
     let aciertos = props.aciertos;
+
+    //console.log('EJERCICIO: ',props.ejercicio.props.ejercicio)
   
     if (tipo_ejercicio === "opcion_correcta_1") {
       let hijos = props.miref.current.children;
@@ -127,6 +225,8 @@ async function noEsCorrecta(props) {
       if (esCorrecta) {
         enviarSiEsCorrecta(props, aciertos);
       } else {
+        //console.log('INCORRECTA: ', props)
+        //console.log('Incorrec_2: ', respuestasBack)
         noEsCorrecta(props,respuestasBack);
       }
   
@@ -276,19 +376,24 @@ async function noEsCorrecta(props) {
     }
     if (hasSelected) {
       //Se obtiene la respuesta correcta para esto utilizo la funcion filter, itero las opciones de los ejercicios y para cada opcion si la respuesta es correcta se guarda en un arreglo
-      let correctAnswer = props.ejercicio.props.ejercicio.options
+      try {
+        let correctAnswer = props.ejercicio.props.ejercicio.options
         .filter((option) => option.answer === true)[0]
         .item.toString()
         .trim();
-      if (correctAnswer === userSelection) {
-        esCorrecta = true;
+        if (correctAnswer === userSelection) {
+          esCorrecta = true;
+        }
+    
+        if (esCorrecta) {
+          enviarSiEsCorrecta(props, contadorRespondidas);
+        } else {
+          noEsCorrecta(props,correctAnswer);
+        }
+      } catch (error) {
+        
       }
-  
-      if (esCorrecta) {
-        enviarSiEsCorrecta(props, contadorRespondidas);
-      } else {
-        noEsCorrecta(props,correctAnswer);
-      }
+      
     } else {
       noEsCorrecta(props)
     }
@@ -343,23 +448,7 @@ async function noEsCorrecta(props) {
   
   
 
-  async function enviarSiEsCorrecta(props, contador) {
-    //Se es corecta se necesita saber si se ha llegado al final de la lista de ejercicios, de ser así, se debe de terminar el juego y guardar el progreso,
-    //caso contrario se debe de pasar al siguiente ejercicio
-    
-    let contadorRespuestas = props.contadorRespondidas;
-    if (props.juego.length === 0) {
-        props.setAciertos(contador + 1);
-        finPrueba(props.aciertos, props.totalEjercicios)
-        
-    } else {
-        props.setAciertos(contador + 1);
-    }
 
-    props.juego.pop();
-    props.setContadorRespondidas(contadorRespuestas + 1);
-    
-  }
   
 
 export default EjercicioFooterPruebaLibros
