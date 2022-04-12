@@ -1,14 +1,23 @@
 import './Evaluacion.css';
 
-import React from "react";
+import React, { createRef, useEffect } from "react";
 import NavComponent from "../../NavComponent";
 
 import logo from "../../../assets/resource/Logo_Provicional.png";
 import CollectionsBookmarkIcon from "@material-ui/icons/CollectionsBookmark";
 import { Link } from "react-router-dom";
 
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 const Evaluacion = () => {
+  useEffect(async () => {
+    if (!cookies.get("_id")) {
+      window.location.href = "./signin";
+    }
+
+  }, []);
+
   return (
     <div>
       <NavComponent logo={logo} activado={2} />

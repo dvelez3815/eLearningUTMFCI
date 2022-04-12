@@ -8,8 +8,8 @@ import EjercicioReview from "./EjerciciosReview";
 const EjercicioFooterPruebaLibros = (props) => {
     return (
        
-        <div className="flex items-center justify-center  ">
-          <div className="my-10">
+        <div className="w-full  items-center justify-center  ">
+          <div className="">
           { (props.juego.length > 0) ?( <button
                 className=" text-xs sm:text-xl tracking-wider  text-white bg-green-500 font-semibold  hover:bg-green-400 py-2 px-4 capitalize border border-green-500 hover:border-green-600 rounded "
                 onClick={() => {validarRespuesta(props)} }>
@@ -18,88 +18,97 @@ const EjercicioFooterPruebaLibros = (props) => {
                 </span>
               </button>   
               ): 
-              <div className=' flex flex-col justify-center items-center'>
-                <div>
-                  <h2 className=" font-bold  text-2xl  text-yellow-400  ">RESULTS</h2>
+              <div className='w-full flex flex-col  justify-center items-center '>
+                <div className='  py-10'>
+                  <div>
+                    <h2 className=" font-bold  text-2xl  text-yellow-400  ">RESULTS</h2>
                   </div>
-                <div className=' md:flex   '>
-                  <div className="items-center justify-center  p-3 ">
-                    <div className="py-10 col-span-12">
-                      <div className="overflow-auto lg:overflow-visible ">
-                        <table className="table text-gray-900 border-separate space-y-2 text-sm">
-                          <thead className="bg-gray-800 text-gray-100">
-                            <tr>
-                              <th className="p-3"></th>
-                              <th className="p-3 text-left">Category</th>
-                              <th className="p-3 text-center">Amount</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr className="bg-gray-200">
-                              <td className="p-3">
-                                <div className="flex align-items-center">
-                                  <img className="rounded-full h-12 w-12  object-cover" src="https://images.unsplash.com/photo-1613588718956-c2e80305bf61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=634&q=80" alt="unsplash"/>
-                                </div>
-                              </td>
-                              <td className="p-3 text-left">
-                              NUMBER OF QUESTIONS
-                              </td>
-                              <td className="p-3">
-                                <span className="bg-green-400 text-gray-50 rounded-md px-2 sm:p-1">
-                                {props.totalEjercicios}
-                                  </span>
-                              </td>
-                            </tr>
-                            <tr className="bg-gray-200">
-                              <td className="p-3">
-                                <div className="flex align-items-center">
-                                  <img className="rounded-full h-12 w-12   object-cover" src="https://images.unsplash.com/photo-1423784346385-c1d4dac9893a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="unsplash"/>
+                  <div className=' md:flex   '>
+                    <div className="items-center justify-center  p-3 ">
+                      <div className="pt-10 col-span-12">
+                        <div className=" overflow-auto lg:overflow-visible ">
+                          <table className="px-8 table text-gray-900 border-separate space-y-2 text-sm">
+                            <thead className="bg-gray-800 text-gray-100">
+                              <tr>
+                                <th className="p-3"></th>
+                                <th className="p-3 text-left">Category</th>
+                                <th className="p-3 text-center">Amount</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr className="bg-gray-200">
+                                <td className="p-3">
 
-                                </div>
-                              </td>
-                              <td className="p-3 text-left">
-                              NUMBER OF CORRECT QUESTIONS
-                              </td>
-                              <td className="p-3">
-                                <span className="bg-yellow-500 text-gray-50 rounded-md px-2 sm:p-1">
-                                  {props.aciertos}
-                                  </span>
-                              </td>
-                            </tr>
-                            <tr className="bg-gray-200">
-                              <td className="p-3">
-                                <div className="flex align-items-center">
-                                  <img className="rounded-full h-12 w-12   object-cover" src="https://images.unsplash.com/photo-1600856209923-34372e319a5d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2135&q=80" alt="unsplash"/>
-                                </div>
-                              </td>
-                              <td className="p-3 text-left">
-                              NUMBER OF INCORRECT QUESTIONS
-                              </td>
-                              <td className="p-3">
-                                <span className="bg-red-500  text-gray-50  rounded-md px-2 sm:p-1">
-                                {props.totalEjercicios - props.aciertos}
-                                  </span>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
+                                </td>
+                                <td className="p-3 text-left">
+                                NUMBER OF QUESTIONS
+                                </td>
+                                <td className="p-3">
+                                  <span className="bg-green-400 text-gray-50 rounded-md px-2 sm:p-1">
+                                  {props.totalEjercicios}
+                                    </span>
+                                </td>
+                              </tr>
+                              <tr className="bg-gray-200">
+                                <td className="p-3">
+
+                                </td>
+                                <td className="p-3 text-left">
+                                NUMBER OF CORRECT QUESTIONS
+                                </td>
+                                <td className="p-3">
+                                  <span className="bg-yellow-500 text-gray-50 rounded-md px-2 sm:p-1">
+                                    {props.aciertos}
+                                    </span>
+                                </td>
+                              </tr>
+                              <tr className="bg-gray-200">
+                                <td className="p-3">
+
+                                </td>
+                                <td className="p-3 text-left">
+                                NUMBER OF INCORRECT QUESTIONS
+                                </td>
+                                <td className="p-3">
+                                  <span className="bg-red-500  text-gray-50  rounded-md px-2 sm:p-1">
+                                  {props.totalEjercicios - props.aciertos}
+                                    </span>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
                       </div>
+                      
+                      <div className='  content-center align-items-center'>
+                        <div className=' justify-center'>
+                        <div className='p-5'>
+                          <Link to="/evaluacion">
+                            <button className=" inline-flex items-center justify-center px-10 py-2  bg-green-200 hover:bg-green-500 text-black rounded-full font-semibold text-xs   uppercase tracking-widest ">
+                              Continue
+                            </button>
+                          </Link> 
+                          </div>
+                          <div className='  '>
+                            <a  rel="noopener noreferrer" href="#review">
+                              <button className="  px-14 py-2  bg-yellow-200 hover:bg-yellow-500 text-black rounded-full font-semibold text-xs   uppercase ">
+                                REVIEW
+                              </button>
+                            </a>{" "}
+                          </div>
+                        </div>
+                        
+                      </div>
+                      
+                      
                     </div>
-                    <div>
-                      <Link to="/evaluacion">
-                        <button className=" inline-flex items-center justify-center px-10 py-2  bg-gray-200 hover:bg-yellow-500 text-black rounded-full font-semibold text-xs   uppercase tracking-widest ">
-                          Continues
-                        </button>
-                      </Link> 
+                    <div className=''>
+                      <img className="" src={Morty} alt=" Animación"  />
                     </div>
+                    
                   </div>
-                  <div className=''>
-                    <img className="" src={Morty} alt=" Animación"  />
-                  </div>
-                  
                 </div>
-                
-                <div className=''>
+                <div className=' w-full bg-gray-100 ' id='review'>
                   <Ejercicio ejercicios={props.ejercicios} esPrueba = {true}/>
                 </div> 
             </div>

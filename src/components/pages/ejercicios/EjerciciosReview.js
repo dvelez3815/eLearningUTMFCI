@@ -26,7 +26,7 @@ const EjercicioReview = (props) => {
   //console.log('EJERCICIOS rew: ',props.ejercicios[0].props.miref)
   
   
-  if ( props.id !== 0 && props.miref.toString()!==null){
+  if ( props.id !== -1 && props.miref.toString()!==null){
     id = props.id
     validarRespuesta(props)
   }
@@ -34,9 +34,9 @@ const EjercicioReview = (props) => {
   return (
        
         <div className="flex items-center justify-center ">
-          <div className="">
+          <div className="w-full p-5">
             
-          { (true ) ?( 
+            { (true ) ?( 
               <div className='py-5 flex items-center justify-center'>
                 <div className='p-4'>
                   {id===props.totalEjercicios-1?
@@ -59,7 +59,8 @@ const EjercicioReview = (props) => {
                    
                 </div>
                 <div>
-                  {id === 1?
+                  {id === 0?
+                  
                     <button
                       className=" text-xs sm:text-xl tracking-wider  text-white bg-gray-500 font-semibold   py-2 px-4 capitalize border border-gray-500  rounded "
                       >
@@ -90,8 +91,8 @@ const EjercicioReview = (props) => {
                 </button> 
               </div>
            }
-            <div className=' py-5'>
-              <div className='py-5'>
+            <div className=' bg-white w-full py-5'>
+              <div className='py-2'>
                 {ab.length !==1? <h2 className=' font-bold  text-2xl  text-green-500 '>ANSWERS</h2>:<h2 className=' font-bold  text-2xl  text-green-500 '>ANSWER</h2> } 
               </div>
               <div className='p-4 pb-10'>
@@ -136,6 +137,7 @@ async function noEsCorrecta(props) {
     let tipo_ejercicio = props.ejercicio.props.ejercicio.type;
     let aciertos = props.id;
     //[object Object]
+    console.log('ID: ', id)
     if (tipo_ejercicio === "opcion_correcta_1") {
       let hijos = 0
       //console.log('hijo: ',hijos)
@@ -173,7 +175,7 @@ async function noEsCorrecta(props) {
         respuestasBackEndOrdenadas
       );
     } else if (tipo_ejercicio === "true_false") {
-      let hijos = props.miref.current.children;
+      let hijos = 0;
 
       //console.log(hijos);
       console.log('true_false')

@@ -31,9 +31,8 @@ const SigInPage = () => {
     event.preventDefault();
     //check it input type are correct
 
-
-
     setCargando(true);
+    
     axios
       .post(process.env.REACT_APP_API_URL+"/user/signin", {
         mail: form.mail,
@@ -43,8 +42,11 @@ const SigInPage = () => {
         headers: {
           'token': process.env.REACT_APP_SECRET_TOKEN
       }
+      
     }).then((res) => {
-        if (res.data.res === "USER NOT EXIST") {
+        //console.log('entra a validar')
+        if (res=== "USER NOT EXIST") {
+          console.log('entro user')
           setDato("El usuario no existe");
           setCargando(false);
           setIsVisibleDato("");
@@ -60,7 +62,7 @@ const SigInPage = () => {
             setDato("");
             setIsVisibleDato("hidden");
           }, 20000);
-        } else if(res.data.res === "ERROR"){
+        } else if(res.data.res === "incorrecta"){
           setDato("Hubo un problema al conectar con el servidor");
           setIsVisibleDato("");
           setCargando(false);
@@ -86,11 +88,14 @@ const SigInPage = () => {
           cookies.set("status", res.data.res.status, { path: "/" });
           cookies.set('token',res.data.res.confirmationCode,{path:'/'});
           window.location.href = "./dashboard"
+          
         }
+        //console.log('entra a validar',res.data.res.err)
       })
       .catch((err) => {
-        //
-      });
+        
+      }
+      );
       
   }
   

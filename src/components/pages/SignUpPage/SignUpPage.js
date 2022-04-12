@@ -166,7 +166,7 @@ const SignUpPage = () => {
                   <p className="mt-2 text-center text-sm text-gray-600">
                     O
                     <a
-                      href="/signin"
+                      href="/dashboard"
                       className="font-medium ml-2 text-green-600 hover:text-green-500"
                     >
                       Iniciar sesión

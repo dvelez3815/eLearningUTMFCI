@@ -1,12 +1,18 @@
-import React from "react";
+import React, { createRef, useEffect } from "react";
 
 import Circulo from "../../../assets/resource/Semi_Circulo.png";
 import Chica from "../../../assets/resource/CHICA.png";
 import LogoProvicional from "../../../assets/resource/Logo_Provicional.png";
 import {Link} from  "react-router-dom"
+
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
+
+
 class HomePage extends React.Component {
+  
   render() {
- 
+    
   return (
     /* Este es el Navbar */
     <div className=" overflow-x-hidden ">

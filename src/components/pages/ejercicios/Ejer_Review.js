@@ -22,7 +22,7 @@ export const Ejercicio = (props) => {
   const [contadorRespondidas, setContadorRespondidas] = React.useState(0);
   const [preguntasValidas, setPreguntasValidas] = React.useState(0);
   const [aciertos, setAciertos] = React.useState(0);
-  const [id, setId] = React.useState(0);
+  const [idp, setId] = React.useState(0);
 
   const panelJuego = useRef(null);
 
@@ -44,40 +44,39 @@ export const Ejercicio = (props) => {
   }, []); //cuando haya un cambio de pregunta se actualiza el estado del componente.
 
   return (
-    <div className=" flex flex-col py-10 ">
-      <div className="py-10">
-        <h1 className=" font-bold  text-2xl  text-yellow-500 ">REVIEW </h1>
+    <div className=" w-full  flex flex-col  ">
+      <div className="pb-12">
+        <div className="bg-green-500 p-5">
+          <h1 className=" font-bold  text-2xl  text-white ">REVIEW </h1>
+        </div>
       </div>
       {cargado || (
           <div className=" "> 
             <div className=" "  >
-              <EjercicioReview totalEjercicios = {preguntasValidas} ejercicios = {juego} ejercicio={juego[id]} juego={juego} setJuego = {setJuego} cargado={cargado} setCargado={setCargado} setFinJuego={setFinJuego} miref={panelJuego} contadorRespondidas={contadorRespondidas} setContadorRespondidas={setContadorRespondidas} aciertos={aciertos} setAciertos={setAciertos} id = {id} setId={setId}/>
+              <div className=" font-bold  text-2xl  text-yellow-600 ">
+                      QUESTION {contadorRespondidas + 1}
+              </div>
+              <div className="w-full">
+                <EjercicioReview totalEjercicios = {preguntasValidas} ejercicios = {juego} ejercicio={juego[idp]} juego={juego} setJuego = {setJuego} cargado={cargado} setCargado={setCargado} setFinJuego={setFinJuego} miref={panelJuego} contadorRespondidas={contadorRespondidas} setContadorRespondidas={setContadorRespondidas} aciertos={aciertos} setAciertos={setAciertos} id = {idp} setId={setId}/>
+              </div>
             </div>
+            <div className="w-full p-5">
+              <div className="w-full bg-white py-10">
+                <div className=" font-bold  text-2xl  text-yellow-400 ">
+                      STATEMENT
+                </div>
+                <div className=" w-full "  > 
+                  <div className="w-full ">
+                      <div className="w-full flex flex-col pb-10" > 
+                          {juego[idp]}
+                      </div>
+                  </div> 
+                </div>
+              </div>
+          </div> 
+            
             
           </div>
-        
-      )}
-      {finJuego ? (
-        <div className='flex flex-col justify-center items-center'>
-          <h2 className="container font-bold  text-2xl  text-yellow-400  ">Congrulation | Activity Completed...</h2>
-          <img className="h-1/2" src={Morty} alt=" Animación" />
-        </div>
-
-      ) : (
-        <div className="">
-          <div className=" font-bold  text-2xl  text-yellow-400 ">
-                QUESTION {contadorRespondidas + 1}
-            </div>
-            <div className=" "  > 
-            <div className="">
-                <div className="flex flex-col pb-10" > 
-                    {juego[id]}
-                </div>
-            </div> 
-
-            </div>
-        </div>  
-       // 
         
       )}
 
