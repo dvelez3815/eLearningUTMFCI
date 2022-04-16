@@ -12,7 +12,6 @@ const Pruebas = () => {
 
     React.useEffect(() => {
         const id = window.location.href.split('/')[window.location.href.split('/').length - 1];
-        console.log('entra')
         let prueba = window.location.href.split('/')[3];
         getData(id).then(data => {
             if (prueba==='pruebas') {
@@ -30,7 +29,6 @@ const Pruebas = () => {
         
     }, [])
 
-    console.log('data: ', data.length)
     return (
         
         <div>

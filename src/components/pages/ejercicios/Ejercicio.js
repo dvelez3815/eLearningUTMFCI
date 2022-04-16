@@ -12,7 +12,6 @@ import VerdaderoFalso from "./VerdaderoFalso";
 import CompletarTexto from "./CompletarTexto";
 import Emparejar from "./Emparejar";
 import EjercicioFooterPruebaLibros from "./EjercicioFooterPruebaLibros";
-import EjercicioReview from "./EjerciciosReview";
 import Morty from "../../../assets/resource/Morty.gif";
 
 export const Ejercicio = (props) => {

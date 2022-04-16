@@ -2,7 +2,6 @@
 import React from 'react';
 import shortid from 'shortid';
 import Modulo from '../Modulos/Modulo';
-import Progreso from '../pages/inicio/Progreso';
 import flecha from "../../assets/icons/flecha.png";
 
 import "./Libro.css";
@@ -39,7 +38,7 @@ const Libro = (props) => {
         }
         
         if(index=== 1){
-           console.log(props.modulos[index-1].totalmoduleprogress);
+           //console.log(props.modulos[index-1].totalmoduleprogress);
            if(props.modulos[index-1].totalmoduleprogress!==100){
              bloqueo=true;
            }

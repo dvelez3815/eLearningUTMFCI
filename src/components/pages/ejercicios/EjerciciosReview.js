@@ -137,11 +137,10 @@ async function noEsCorrecta(props) {
     let tipo_ejercicio = props.ejercicio.props.ejercicio.type;
     let aciertos = props.id;
     //[object Object]
-    console.log('ID: ', id)
+
     if (tipo_ejercicio === "opcion_correcta_1") {
       let hijos = 0
-      //console.log('hijo: ',hijos)
-      console.log('opcion_correcta_1')
+
       await verificarOpcion_Correcta_1(props, hijos, aciertos);
     } else if (tipo_ejercicio === "opcion_correcta_n") {
       let hijos = 0
@@ -167,7 +166,6 @@ async function noEsCorrecta(props) {
           return texto;
         }
       });
-      console.log('Ordenar')
       await verificarOrdenar(
         props,
         hijos,
@@ -177,16 +175,14 @@ async function noEsCorrecta(props) {
     } else if (tipo_ejercicio === "true_false") {
       let hijos = 0;
 
-      //console.log(hijos);
-      console.log('true_false')
       await verificarVerdadero_Falso(props, hijos, aciertos);
     } else if (tipo_ejercicio === "completar_texto") {
       let hijos = 0;
-      console.log('completar_texto')
+
       await verificarCompletar_Texto(props, hijos, aciertos);
     } else if (tipo_ejercicio === "emparejar" || tipo_ejercicio === "emparejar_img") {
       let hijos = 0;
-      console.log('emparejar')
+
       await verificarEmparejar(props, hijos, aciertos);
     } else {
       noEsCorrecta(props,"asd");

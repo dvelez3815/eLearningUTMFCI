@@ -61,7 +61,7 @@ export const Inicio = () => {
   useEffect(() => {
     let llenarInfo = async () => {
       let userInfo = await getData();
-      console.log(userInfo)
+      //console.log(userInfo)
       if (userInfo.name === "JsonWebTokenError") {
         window.location.href = "./signin";
       }

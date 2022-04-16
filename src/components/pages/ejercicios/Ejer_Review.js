@@ -1,19 +1,15 @@
 import React, { useRef } from "react";
-import ProgressBar from "./ProgBarReview";
-import {Link} from  "react-router-dom"
+
 
 //load ejercicio.css
 import "./Ejer_review.css";
-import EjercicioFooter from "./EjercicioFooter";
 import { OpcionCorrecta_1 } from "./OpcionCorrecta_1";
 import { OpcionCorrecta_n } from "./OpcionCorrecta_n";
 import Arrastrar from "./Arrastrar";
 import VerdaderoFalso from "./VerdaderoFalso";
 import CompletarTexto from "./CompletarTexto";
 import Emparejar from "./Emparejar";
-import EjercicioFooterPruebaLibros from "./EjercicioFooterPruebaLibros";
 import EjercicioReview from "./EjerciciosReview";
-import Morty from "../../../assets/resource/Morty.gif";
 
 export const Ejercicio = (props) => {
   const [juego, setJuego] = React.useState([]);
@@ -121,7 +117,7 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado,preguntas
 
   );
   setId(contador-1)
-  console.log('can ejerci: ',contador)
+  //console.log('can ejerci: ',contador)
   setPreguntasValidas(contador);
   setCargado(false);
 };

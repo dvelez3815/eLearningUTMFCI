@@ -107,7 +107,7 @@ const SignUpPage = () => {
         setInterval(() => {
           setDato("");
           setIsVisibleDato("hidden");
-        }, 10000);
+        }, 20000);
       } else if(response.data.res === "ERROR"){
         setDato("Hubo un error al conectar con el servidor");
         setIsVisibleDato("");
@@ -115,10 +115,10 @@ const SignUpPage = () => {
         setInterval(() => {
           setDato("");
           setIsVisibleDato("hidden");
-        }, 10000);
+        }, 20000);
 
       } else {
-        console.log(response);
+
         var user = response.data.res;
         cookie.set("_id", user._id, { path: "/" });
         cookie.set("name", user.name, { path: "/" });
@@ -135,7 +135,7 @@ const SignUpPage = () => {
       }
     })
     .catch((error) => {
-      console.log(error);
+      //console.log(error);
     });
   }
 

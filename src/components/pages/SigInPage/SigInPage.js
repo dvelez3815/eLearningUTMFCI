@@ -44,16 +44,15 @@ const SigInPage = () => {
       }
       
     }).then((res) => {
-        //console.log('entra a validar')
-        if (res=== "USER NOT EXIST") {
-          console.log('entro user')
+        
+        if (res.data.res=== "USER NOT EXIST") {
           setDato("El usuario no existe");
           setCargando(false);
           setIsVisibleDato("");
           setInterval(() => {
             setDato("");
             setIsVisibleDato("hidden");
-          }, 20000);
+          }, 20500);
         } else if (res.data.res === "PASSWORD INCORRECT") {
           setDato("La contraseña es incorrecta");
           setIsVisibleDato("");
@@ -61,26 +60,16 @@ const SigInPage = () => {
           setInterval(() => {
             setDato("");
             setIsVisibleDato("hidden");
-          }, 20000);
-        } else if(res.data.res === "incorrecta"){
-          setDato("Hubo un problema al conectar con el servidor");
+          }, 20500);
+        } else if(res.data.res === "ERROR"){
+          setDato("Hubo un problema al conectar con el servidor, si el problema persiste intente más tarde");
           setIsVisibleDato("");
           setCargando(false);
           setInterval(() => {
             setDato("");
             setIsVisibleDato("hidden");
-          }, 20000);
-        }
-        else if(res.data.res === 'incorrecta'){
-          setDato("Usuario o contraseña incorrectas, por favor verificar.");
-          setIsVisibleDato("");
-          setCargando(false);
-          setInterval(() => {
-            setDato("");
-            setIsVisibleDato("hidden");
-          }, 20000);          
-        }
-        else {
+          }, 20500);          
+        } else {
           cookies.set("_id", res.data.res._id, { path: "/" });
           cookies.set("name", res.data.res.name, { path: "/" });
           cookies.set("lastname", res.data.res.lastname, { path: "/" });
@@ -90,10 +79,10 @@ const SigInPage = () => {
           window.location.href = "./dashboard"
           
         }
-        //console.log('entra a validar',res.data.res.err)
+
       })
       .catch((err) => {
-        
+
       }
       );
       
