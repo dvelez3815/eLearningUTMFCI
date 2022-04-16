@@ -21,8 +21,8 @@ const Libro = (props) => {
   return <div>
      
       <div className='flex flex-col justify-center'>
-        <button onClick={ocultarlibros} className=' p-2 rounded-lg text-2xl  text-yellow-600 mt-5 mx-5 font-bold'>
-          <h2  key={shortid.generate()} id={`libro${props.libroactual}`} className="shadow-lg hover:bg-gray-100 border-solid border-2 border-gray-300 p-2 rounded-lg text-2xl  text-yellow-600 font-bold">{`BOOK ${props.libroactual}`}
+        <button onClick={ocultarlibros} className=' p-2 rounded-lg text-2xl  text-yellow-500 mt-5 mx-5 font-bold'>
+          <h2  key={shortid.generate()} id={`libro${props.libroactual}`} className="shadow-lg hover:bg-gray-100 border-solid border- bg-gray-100 border-yellow-300 p-2 rounded-lg text-2xl  text-yellow-600 font-bold">{`BOOK ${props.libroactual}`}
           </h2>
         </button>
         <button onClick={ocultarlibros} className='text-yellow-600 content-center justify-center '>

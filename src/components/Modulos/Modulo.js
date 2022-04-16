@@ -17,12 +17,27 @@ const Modulo = (props) => {
   let bloqueo = props.bloqueo
   return <div>
     <div className='flex flex-col  '>
-      <h2  key={shortid.generate()} className={props.bloqueo?"rounded-lg text-2xl text-center text-gray-600 mt-2 mx-10 font-bold p-2":" rounded-lg text-2xl text-center text-green-600 mt-2 mx-10 font-bold p-2"}>{`Module ${props.moduloindex}`}
-      </h2>
-      <span className="flex content-center justify-center">
-        <span className={props.bloqueo?" absolute justify-center rounded-full h-3 w-3 bg-gray-400 opacity-75":"animate-ping absolute justify-center rounded-full h-3 w-3 bg-green-400 opacity-75" }></span>
-        <span className={props.bloqueo?" justify-center  rounded-full h-3 w-3 bg-gray-500":" justify-center  rounded-full h-3 w-3 bg-green-500"}></span>
-      </span>
+      {props.moduloindex === 1?
+      <div>
+          <h2  key={shortid.generate()} className={props.bloqueo?"rounded-lg text-2xl text-center text-gray-600 mt-2 mx-10 font-bold p-2":" rounded-lg text-2xl text-center text-green-700 mt-2 mx-10 font-bold p-2"}>{`Module ${props.moduloindex}`}
+          </h2>
+          <span className="flex content-center justify-center">
+          <span className={props.bloqueo?" absolute justify-center rounded-full h-3 w-3 bg-gray-400 opacity-75":"animate-ping absolute justify-center rounded-full h-3 w-3 bg-green-400 opacity-75" }></span>
+          <span className={props.bloqueo?" justify-center  rounded-full h-3 w-3 bg-gray-500":" justify-center  rounded-full h-3 w-3 bg-green-500"}></span>
+        </span>
+      </div>
+      :
+      <div>
+          <h2  key={shortid.generate()} className={props.bloqueo?"rounded-lg text-2xl text-center text-gray-600 mt-2 mx-10 font-bold p-2":" rounded-lg text-2xl text-center text-blue-900 mt-2 mx-10 font-bold p-2"}>{`Module ${props.moduloindex}`}
+          </h2>
+          <span className="flex content-center justify-center">
+          <span className={props.bloqueo?" absolute justify-center rounded-full h-3 w-3 bg-gray-400 opacity-75":"animate-ping absolute justify-center rounded-full h-3 w-3 bg-blue-700 opacity-75" }></span>
+          <span className={props.bloqueo?" justify-center  rounded-full h-3 w-3 bg-gray-500":" justify-center  rounded-full h-3 w-3 bg-blue-800"}></span>
+        </span>
+      </div>
+      }
+      
+      
     </div>
       
       <div className='p-3 mb-8'> 
