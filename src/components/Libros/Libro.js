@@ -9,6 +9,7 @@ import "./Libro.css";
 
 const Libro = (props) => {
     let bloqueo = false;
+    
     const ocultarlibros = (event) => {
         let libro = (event.target.parentNode.parentNode.parentNode);
         let modulos = libro.getElementsByClassName("modulos");
@@ -24,9 +25,6 @@ const Libro = (props) => {
         <button onClick={ocultarlibros} className=' p-2 rounded-lg text-2xl  text-yellow-500 mt-5 mx-5 font-bold'>
           <h2  key={shortid.generate()} id={`libro${props.libroactual}`} className="shadow-lg hover:bg-gray-100 border-solid border- bg-gray-100 border-yellow-300 p-2 rounded-lg text-2xl  text-yellow-600 font-bold">{`BOOK ${props.libroactual}`}
           </h2>
-        </button>
-        <button onClick={ocultarlibros} className='text-yellow-600 content-center justify-center '>
-            <img src={flecha} alt="Desplegar Libro" />
         </button>
       </div>
       
@@ -46,7 +44,7 @@ const Libro = (props) => {
         }
         return <div key={index} className='modulos'>
           <div key={shortid.generate()}>
-          <Modulo modulo={modulo.modulo} moduloindex={(index+1)} libroactual={props.libroactual} bloqueo={bloqueo}/>
+          <Modulo modulo={modulo.modulo} moduloindex={(index+1)} lecciones ={props.lecciones} libroactual={props.libroactual} bloqueo={bloqueo}/>
           </div>
         </div>
 

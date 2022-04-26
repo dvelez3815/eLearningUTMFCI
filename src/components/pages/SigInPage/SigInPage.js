@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, {useState, useEffect } from "react";
 import logo from "../../../assets/resource/Logo_Provicional.png";
 import img1 from "../../../assets/resource/sign.svg";
 import "./SigInPage.css";
@@ -12,6 +12,13 @@ const SigInPage = () => {
   const [dato, setDato] = useState("");
   const [form, setForm] = useState({});
   const [cargando, setCargando] = useState(false);
+
+  useEffect(async () => {
+    if (cookies.get("_id")) {
+      window.location.href = "./dashboard";
+    }
+
+  }, []);
 
   const handleChange = (e) => {
     setForm({
@@ -115,6 +122,7 @@ const SigInPage = () => {
                     Registrate
                   </a>
                 </p>
+
               </div>
               <div className={isVisibleDato}>
                 <h2 className="text-md text-red-500">{dato}</h2>

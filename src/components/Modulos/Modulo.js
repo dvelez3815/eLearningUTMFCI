@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import shortid from 'shortid';
 import Activity from '../Activities/Activity';
 import { ModuleProgress } from '../ModuleProgress';
@@ -15,6 +15,13 @@ import vocabularyimgng from "../../assets/icons/Vocabulary_0.png";
 
 const Modulo = (props) => {
   let bloqueo = props.bloqueo
+
+  React.useEffect(() => {
+    //getTask()
+  }, []); //cuando haya un cambio de pregunta se actualiza el estado del componente.
+
+  
+  
   return <div>
     <div className='flex flex-col  '>
       {props.moduloindex === 1?
@@ -46,7 +53,8 @@ const Modulo = (props) => {
             let userprogress = (modulo.writing.user_progress + modulo.grammar.user_progress + modulo.reading.user_progress + modulo.vocabulary.user_progress);
             let total_task = (modulo.writing.total_task + modulo.grammar.total_task + modulo.reading.total_task + modulo.vocabulary.total_task);
             let progress = (userprogress / total_task) * 100;
-            
+
+
           return (<div key={shortid.generate()} >
           <ModuleProgress
             key={shortid.generate()}
@@ -68,6 +76,9 @@ const Modulo = (props) => {
             name={"writing"}
             img={props.bloqueo?writingimgng:writingimg}
             bloqueo={props.bloqueo}
+            info = {modulo}
+            task = {props.lecciones}
+
           />
 
           <Activity
@@ -84,6 +95,9 @@ const Modulo = (props) => {
             name={"vocabulary"}
             img={props.bloqueo?vocabularyimgng:vocabularyimg}
             bloqueo={props.bloqueo}
+            info = {modulo}
+            task = {props.lecciones}
+
           />
 
           <Activity
@@ -100,6 +114,9 @@ const Modulo = (props) => {
             name={"reading"}
             img={props.bloqueo?readingimgng:readingimg}
             bloqueo={props.bloqueo}
+            info = {modulo}
+            task = {props.lecciones}
+
           />
 
           <Activity
@@ -116,6 +133,9 @@ const Modulo = (props) => {
             name={"grammar"}
             img={props.bloqueo?grammarimgng:grammarimg}
             bloqueo={props.bloqueo}
+            info = {modulo}
+            task = {props.lecciones}
+
           />
 
           </div>)

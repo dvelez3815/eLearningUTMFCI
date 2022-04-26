@@ -21,6 +21,8 @@ export const Inicio = () => {
   const [userProgress, setuserProgress] = useState([]);
   const [cargando, setcargando] = useState(true);
   const [libros, setlibros] = useState([]);
+  const [task,setTask] = useState([]);
+
   let libroActual = 1;
   let totalLibro = 5;
   //get user progress from api
@@ -34,38 +36,52 @@ export const Inicio = () => {
     const data = await response.json();
     return data;
   };
+
+  const getTask = async() => {
+    
+    const taksresponse = await fetch(`${process.env.REACT_APP_API_URL}/task/`, {
+      method: "GET",
+      headers: {
+        token: process.env.REACT_APP_SECRET_TOKEN,
+      },
+    })
+
+    const data = await taksresponse.json();
+    //mostrarContenido(topic,objetivo, explicacion)
+    return data;
+  }
   
 
   useEffect(async () => {
     if (!cookies.get("_id")) {
       window.location.href = "./signin";
     }
-    /* if (cookies.get("status") !== "Active") {
+     if (cookies.get("status") !== "Active") {
       const user_response = await fetch(`${process.env.REACT_APP_API_URL}/user/${userid}`, {
         method: "GET",
         headers: {
-          'token': cookies.get("token"),
+          'token': process.env.REACT_APP_SECRET_TOKEN,
         },                
       });
       const user_json = await user_response.json();
-
-      if (user_json.status == "Active") {
+      console.log('user',user_json)
+      if (user_json.status === "Active") {
         cookies.set("status", user_json.status, { path: "/" });
       } else {
         window.location.href = "./PendingAccount";
       } 
-    }*/
+    }
   }, []);
 
 
   useEffect(() => {
     let llenarInfo = async () => {
       let userInfo = await getData();
+      let task = await getTask();
       //console.log(userInfo)
       if (userInfo.name === "JsonWebTokenError") {
         window.location.href = "./signin";
       }
-
 
       for (let i = 0; i < userInfo.length - 1; i++) {
         for (let j = 0; j < userInfo.length - i - 1; j++) {
@@ -144,14 +160,15 @@ export const Inicio = () => {
               lastbook_is_aproved = false;
             }            
           }
-          libros.push(<Libro modulos={book.modulos} key={shortid.generate()} lastbook_is_aproved={lastbook_is_aproved} libroactual={(index+1)}/>)       
+          libros.push(<Libro modulos={book.modulos} lecciones={task.res} key={shortid.generate()} lastbook_is_aproved={lastbook_is_aproved} libroactual={(index+1)}/>)       
 
          });
         setuserProgress(await mergeBooks);
       setcargando(false);
     };
-
+  
     llenarInfo();
+    
   }, []);
 
   return (

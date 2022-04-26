@@ -63,14 +63,14 @@ class NavComponent extends React.Component {
               </div>
               <div className="-mr-2 flex md:hidden">
                 <button
-                  className="text-gray-100  dark:text-white hover:text-yellow-500 inline-flex items-center justify-center p-2 rounded-md focus:outline-none"
+                  className="text-gray-100 px-10 dark:text-white hover:text-yellow-500 inline-flex items-center justify-center p-2 rounded-md focus:outline-none"
                   id="hamburger"
                   ref={this.hamburgerBtn}
                   onClick={this.handleHamburgerButton}
                 >
                   <svg
-                    width="20"
-                    height="20"
+                    width="10"
+                    height="10"
                     fill="currentColor"
                     className="h-8 w-8"
                     viewBox="0 0 1792 1792"
@@ -81,7 +81,7 @@ class NavComponent extends React.Component {
                 </button>
               </div>
               <div className="p-2 flex ">
-                <h2 className="tex-sm sm:text-base font-medium py-1 text-white">
+                <h2 className="uppercase text-xs md:text-base lg:text-base sm:text-base  pt-1 text-white">
                   
                   {cookies.get('name') + ' ' + (cookies.get('lastname') === 'null'?'':cookies.get('lastname'))}
                 </h2>
@@ -90,7 +90,7 @@ class NavComponent extends React.Component {
                     <Menu.Button className=" flex text-sm rounded-full focus:outline-none ring-4 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-white">
                       <span className="sr-only">Open user menu</span>
                       <img
-                        className="h-8 w-8 "
+                        className="md:h-8 lg:h-8 sm:h-8 md:w-8 lg:w-8 sm:w-8 h-10 w-14 "
                         /* src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" */
                         src={user}
                         alt=""

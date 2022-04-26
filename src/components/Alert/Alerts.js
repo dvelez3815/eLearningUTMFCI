@@ -9,6 +9,38 @@ const SuccessData = {
   };
 
 //export const Guardar
+export const mostrarContenido= (tema,objetivo,explicacion)=>{
+    let topic = tema.toLowerCase()
+    let obje = objetivo.toLowerCase()
+    let exp = explicacion.toLowerCase()
+    if(tema.length === 0 || tema==='null'){
+        topic = 'There is no topic for this lesson'
+    }
+    if(objetivo.length === 0 || objetivo==='null'){
+        obje = 'There is no objective for this lesson'
+    }
+    if(explicacion.length === 0 || explicacion==='null'){
+        exp = 'There is no explanation for this lesson'
+    }
+    Swal.fire(
+        {
+            title: "LESSON INFORMATION ",
+            type: "success",
+            //html: Array.isArray(respuesta)?"<p style='color:green; font-weight: bold;'>Correct Answer: </p>"+cadena:"<p style='color:green; font-weight: bold;'>Correct Answer: </p>"+respuesta,
+            html: "<p style='color:red; font-weight: bold;'>Topic</p>"+topic+"<p> - </p> <p style='color:green; font-weight: bold;'>Objetive</p>"+obje+"<p> - </p> <p style='color:orange; font-weight: bold;'>Explication </p>"+exp,
+            customClass: 'swal-wide',
+            confirmButtonText: "Ok",
+        },
+    ).then((result) => {
+        if (result.value) {
+            
+            // window.location = "/modulo/1/grammar/2";
+        } else {
+            
+        }
+    });
+}
+
 
 export const mostrarAlertaError= (respuesta)=>{
     let cadena = "";

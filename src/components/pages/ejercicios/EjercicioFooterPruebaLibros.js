@@ -95,6 +95,11 @@ const EjercicioFooterPruebaLibros = (props) => {
                                 REVIEW
                               </button>
                             </a>{" "}
+                            
+                              <button onClick={() => {window.location.replace('')} }  className="  px-14 py-2  bg-red-200 hover:bg-red-500 text-black rounded-full font-semibold text-xs   uppercase ">
+                                TRY AGAIN
+                              </button>
+
                           </div>
                         </div>
                         

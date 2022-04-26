@@ -45,6 +45,7 @@ const getData = async(book,modulo,unit,tipo) => {
             });
 
     const data = await response.json();
+    console.log('JandryFC')
     return data;
 }
 

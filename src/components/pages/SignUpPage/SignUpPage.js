@@ -172,6 +172,11 @@ const SignUpPage = () => {
                       Iniciar sesión
                     </a>
                   </p>
+                  <div>
+                      <h3 className="font-bold py-2 lg:text-xs md:text-xs text-xs   font-sans text-gray-500 ">
+                        Si perteneces a la UTM, puedes iniciar sesión con tú cuenta insitucional @utm.edu.ec
+                      </h3>      
+                  </div>
                 </div>
                 <div className={isVisibleDato}>
                   <h2 className="text-md text-red-500">{dato}</h2>
@@ -179,6 +184,23 @@ const SignUpPage = () => {
                 <form className=" space-y-4" action="#" method="POST">
                   <input type="hidden" name="remember" value="true" />
                   <div className="rounded-md shadow-sm -space-y-px">
+                  <div>
+                      <label htmlFor="email-address" className="sr-only">
+                        cedula
+                      </label>
+                      <input
+                        id="cedula"
+                        name="cedula"
+                        type="text"
+                        maxlength="10"
+                        autoComplete="cedula"
+                        required
+                        value={form.cedula}
+                        onChange={handleChange}
+                        className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
+                        placeholder="C.I. o Pasaporte"
+                      />
+                    </div>
                     <div>
                       <label htmlFor="email-address" className="sr-only">
                         Name
@@ -211,23 +233,7 @@ const SignUpPage = () => {
                         placeholder="Apellidos"
                       />
                     </div>
-                    <div>
-                      <label htmlFor="email-address" className="sr-only">
-                        cedula
-                      </label>
-                      <input
-                        id="cedula"
-                        name="cedula"
-                        type="text"
-                        maxlength="10"
-                        autoComplete="cedula"
-                        required
-                        value={form.cedula}
-                        onChange={handleChange}
-                        className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
-                        placeholder="Cédula"
-                      />
-                    </div>
+                    
                     <div>
                       <label htmlFor="email-address" className="sr-only">
                         Email address
