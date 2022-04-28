@@ -27,7 +27,7 @@ const PruebaGeneral = () => {
 
     return (
         <div>
-            {loadingData ? <div className="cargando"><img src={loading} alt="cargando"></img> </div> :data.length>0?<Ejercicio ejercicios={data} esPrueba = {true}/>:<NotFoundPage></NotFoundPage>}
+            {loadingData ? <div className="pt-20"><img src={loading} alt="cargando"></img> </div> :data.length>0?<Ejercicio ejercicios={data} esPrueba = {true}/>:<NotFoundPage></NotFoundPage>}
         </div>
     )
 }

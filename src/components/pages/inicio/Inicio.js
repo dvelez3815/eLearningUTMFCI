@@ -174,7 +174,7 @@ export const Inicio = () => {
   return (
     <div className="">
       <NavComponent logo={logo} activado={1} />
-      {cargando?<div className="cargando"><img src={loading}></img></div>:
+      {cargando?<div className="pt-20"><img src={loading}></img></div>:
   <div className="grid grid-cols-12 ">
     <div className="xl:col-span-9 col-span-12 justify-center">
       {libros}

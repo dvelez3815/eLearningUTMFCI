@@ -24,7 +24,7 @@ const Evaluacion = () => {
 
       <div className="flex flex-col my-10  space-y-3">
         <div>
-          <h2 className="text-green-600 text-3xl sm:text-4xl font-bold ">
+          <h2 className="p-2 text-green-600 text-3xl sm:text-4xl font-bold ">
             Know your current level of English
           </h2>
         </div>

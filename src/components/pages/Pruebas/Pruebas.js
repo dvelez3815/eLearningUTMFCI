@@ -32,7 +32,7 @@ const Pruebas = () => {
     return (
         
         <div>
-            {loadingData ? <div className="cargando"><img src={loading} alt="cargando"></img></div> :data.length>0?<Ejercicio ejercicios={data} esPrueba = {esPrueba}/>:<NotFoundPage></NotFoundPage>}
+            {loadingData ? <div className="cargando"><img src={loading} alt="pt-20"></img></div> :data.length>0?<Ejercicio ejercicios={data} esPrueba = {esPrueba}/>:<NotFoundPage></NotFoundPage>}
         </div>
     )
 }
