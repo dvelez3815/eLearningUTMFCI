@@ -39,7 +39,7 @@ const getExercises = async() => {
     const url = `${process.env.REACT_APP_API_URL}/task/${taskid}`;
     const response = await fetch(url,
         {
-            method: 'POST',
+            method: 'GET',
             headers: {
                 'token': process.env.REACT_APP_SECRET_TOKEN,
               },            
