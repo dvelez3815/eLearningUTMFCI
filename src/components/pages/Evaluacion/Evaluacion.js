@@ -15,6 +15,7 @@ const Evaluacion = () => {
     if (!cookies.get("_id")) {
       window.location.href = "./signin";
     }
+    
 
   }, []);
 
