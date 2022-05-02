@@ -1,5 +1,5 @@
 import React from 'react'
-import { Ejercicio } from '../ejercicios/Ejer_Review';
+import { EjercicioR } from '../ejercicios/Ejer_Review';
 import { Link } from 'react-router-dom';
 import { finPrueba, mostrarAlertaError } from '../../Alert/Alerts';
 import Morty from "../../../assets/resource/pensar.gif";
@@ -19,19 +19,19 @@ const EjercicioFooterPruebaLibros = (props) => {
               </button>   
               ): 
               <div className='w-full flex flex-col  justify-center items-center '>
-                <div className='  py-10'>
+                <div className='  md:py-10'>
                   <div>
                     <h2 className=" font-bold  text-2xl  text-yellow-400  ">RESULTS</h2>
                   </div>
                   <div className=' md:flex   '>
                     <div className="items-center justify-center  p-3 ">
-                      <div className="pt-10 col-span-12">
+                      <div className="md:pt-10 col-span-12">
                         <div className=" overflow-auto lg:overflow-visible ">
-                          <table className="px-8 table text-gray-900 border-separate space-y-2 text-sm">
+                          <table className="md:px-8 px-3 table text-gray-900 border-separate space-y-2 text-sm">
                             <thead className="bg-gray-800 text-gray-100">
                               <tr>
                                 <th className="p-3"></th>
-                                <th className="p-3 text-left">Category</th>
+                                <th className="p-3 text-left">Information</th>
                                 <th className="p-3 text-center">Amount</th>
                               </tr>
                             </thead>
@@ -82,24 +82,24 @@ const EjercicioFooterPruebaLibros = (props) => {
                       
                       <div className='  content-center align-items-center'>
                         <div className=' justify-center'>
-                        <div className='p-5'>
-                          <Link to="/evaluacion">
-                            <button className=" inline-flex items-center justify-center px-10 py-2  bg-green-200 hover:bg-green-500 text-black rounded-full font-semibold text-xs   uppercase tracking-widest ">
-                              Continue
-                            </button>
-                          </Link> 
-                          </div>
-                          <div className='  '>
-                            <a  rel="noopener noreferrer" href="#review">
-                              <button className="  px-14 py-2  bg-yellow-200 hover:bg-yellow-500 text-black rounded-full font-semibold text-xs   uppercase ">
-                                REVIEW
-                              </button>
-                            </a>{" "}
-                            
-                              <button onClick={() => {window.location.replace('')} }  className="  px-14 py-2  bg-red-200 hover:bg-red-500 text-black rounded-full font-semibold text-xs   uppercase ">
-                                TRY AGAIN
-                              </button>
-
+                          <div className='md:p-5 pb-3'>
+                            <p className="text-black-500 text-sm md:mt-2 mt-5 mb-6  ">
+                              Slide the page to view the questions.
+                            </p>
+                            <div className='md:flex justify-center'> 
+                              <div className=' '>
+                                <Link to="/evaluacion">
+                                  <button className=" inline-flex items-center justify-center px-10 py-2  bg-green-300 hover:bg-green-500 text-black rounded-full font-semibold text-xs   uppercase tracking-widest ">
+                                    Continue
+                                  </button>
+                                </Link> 
+                              </div>
+                              <div className='md:pl-2 pt-2 md:pt-0 md:pb-1'>
+                                <button onClick={() => {window.location.replace('')} }  className="  px-11  py-2  bg-yellow-300 hover:bg-yellow-500 rounded-full font-semibold text-xs   uppercase ">
+                                  TRY AGAIN
+                                </button>
+                              </div>
+                            </div>
                           </div>
                         </div>
                         
@@ -107,14 +107,16 @@ const EjercicioFooterPruebaLibros = (props) => {
                       
                       
                     </div>
-                    <div className=''>
+                    <div className='hidden md:block'>
                       <img className="" src={Morty} alt=" Animación"  />
                     </div>
                     
                   </div>
                 </div>
-                <div className=' w-full bg-gray-100 ' id='review'>
-                  <Ejercicio ejercicios={props.ejercicios} esPrueba = {true}/>
+                <div className='md:pt-2 pt-10 relative flex flex-col min-w-0 break-words  w-full mb-6 px-4 md:px-10' id='review'>
+                  <div className='relative flex flex-col min-w-0 break-words bg-gray-50 w-full mb-6 shadow-lg rounded '>
+                    <EjercicioR ejercicios={props.ejercicios} esPrueba = {true} esLeccion={false}/>
+                  </div>
                 </div> 
             </div>
            }

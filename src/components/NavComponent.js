@@ -26,6 +26,7 @@ class NavComponent extends React.Component {
     cookies.remove("name", { path: "/" });
     cookies.remove("lastname", { path: "/" });
     cookies.remove("mail", { path: "/" });
+    cookies.remove("status", { path: "/" });
     window.location.href = "./";
   }
   render() {

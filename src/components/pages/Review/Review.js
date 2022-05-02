@@ -11,16 +11,20 @@ const Review = () => {
     const [loadingData, setLoadingData] = React.useState(true);
 
     React.useEffect(() => {
-        const tipo = window.location.href.split('/')[window.location.href.split('/').length - 1];
-        const unidad = window.location.href.split('/')[window.location.href.split('/').length - 2];
-        const modulo = window.location.href.split('/')[window.location.href.split('/').length - 3];
-        const book = window.location.href.split('/')[window.location.href.split('/').length - 4];
-        
-        //Se manada en ese orden porque el valor de modulo llega como libro al server
-        getData(unidad,modulo,book,tipo).then(data => {        
-            setData(data)
-            setLoadingData(false);
-        });
+        if (!cookies.get("_id")) {
+            window.location.href = "/signin";
+          }else{
+            const tipo = window.location.href.split('/')[window.location.href.split('/').length - 1];
+            const unidad = window.location.href.split('/')[window.location.href.split('/').length - 2];
+            const modulo = window.location.href.split('/')[window.location.href.split('/').length - 3];
+            const book = window.location.href.split('/')[window.location.href.split('/').length - 4];
+            
+            //Se manada en ese orden porque el valor de modulo llega como libro al server
+            getData(unidad,modulo,book,tipo).then(data => {        
+                setData(data)
+                setLoadingData(false);
+            });
+        }
         
         
     }, [])
@@ -48,5 +52,6 @@ const getData = async(book,modulo,unit,tipo) => {
     console.log('JandryFC')
     return data;
 }
+
 
 export default Review

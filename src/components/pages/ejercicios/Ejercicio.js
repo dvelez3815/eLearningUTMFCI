@@ -1,6 +1,9 @@
 import React, { useRef } from "react";
 import ProgressBar from "./ProgressBar";
 import {Link} from  "react-router-dom"
+import {
+  AlertaLeccion
+} from "../../Alert/Alerts";
 
 //load ejercicio.css
 import "./Ejercicio.css";
@@ -12,7 +15,11 @@ import VerdaderoFalso from "./VerdaderoFalso";
 import CompletarTexto from "./CompletarTexto";
 import Emparejar from "./Emparejar";
 import EjercicioFooterPruebaLibros from "./EjercicioFooterPruebaLibros";
-import Morty from "../../../assets/resource/Morty.gif";
+import { EjercicioR } from '../ejercicios/Ejer_Review';
+
+import image1 from "../../../assets/resource/lesson4.webp";
+import image2 from "../../../assets/resource/lesson3.webp";
+import Cookies from 'universal-cookie';
 
 export const Ejercicio = (props) => {
   const [juego, setJuego] = React.useState([]);
@@ -21,6 +28,24 @@ export const Ejercicio = (props) => {
   const [contadorRespondidas, setContadorRespondidas] = React.useState(0);
   const [preguntasValidas, setPreguntasValidas] = React.useState(0);
   const [aciertos, setAciertos] = React.useState(0);
+  const [openTab, setOpenTab] = React.useState(1);
+  const cookies = new Cookies();
+
+  const [idp, setId] = React.useState(0);
+  let topic = ''
+  let Objetive = ''
+  let explanation = ''
+  let type = ' '
+  try {
+     topic = String(props.taskInfo[0].topic.top)
+     Objetive = String(props.taskInfo[0].objetive.text)
+     explanation = String(props.taskInfo[0].explanation)
+     type = String(props.taskInfo[0].type)
+     
+  } catch (error) {
+    
+  }
+
 
   const panelJuego = useRef(null);
 
@@ -28,6 +53,7 @@ export const Ejercicio = (props) => {
     // const cargarVista = async() => {
     //     await cargarEjercicios(juego, setJuego, panelJuego, setCargado, finJuego, ejercicios);
     // }
+    
     if (juego.length === 0) {
       cargarEjercicios2(
         props.ejercicios,
@@ -35,24 +61,217 @@ export const Ejercicio = (props) => {
         panelJuego,
         setCargado,
         preguntasValidas,
-        setPreguntasValidas
+        setPreguntasValidas, 
+        setId
       );
     }
-  }, []); //cuando haya un cambio de pregunta se actualiza el estado del componente.
+  }, []);
+  React.useEffect(async()  => {
+    // const cargarVista = async() => {
+    //     await cargarEjercicios(juego, setJuego, panelJuego, setCargado, finJuego, ejercicios);
+    // }
+    
+    if (!cookies.get("_id")) {
+      let valor = await AlertaLeccion('SU SESIÓN HA EXPIRADO')
+      if(valor){
+      
+      window.location.href = "/signin";
+      }
+  }
+  }); //cuando haya un cambio de pregunta se actualiza el estado del componente.
 
   return (
-    <div className={"ejercicio"}>
-      {cargado || (
+    <div className={"ejercicio md:px-20"}>
+      {cargado  || (
         <ProgressBar
-          totalEjercicios={preguntasValidas}
-          resueltos={contadorRespondidas}
-          contadorRespondidas={contadorRespondidas}
-        />
+        totalEjercicios={preguntasValidas}
+        resueltos={contadorRespondidas}
+        contadorRespondidas={contadorRespondidas}
+      />
+        
       )}
-      {finJuego ? (
-        <div className='flex flex-col justify-center items-center'>
-          <h2 className="container font-bold  text-2xl  text-yellow-400  ">Congrulation | Activity Completed...</h2>
-          <img className="h-1/2" src={Morty} alt=" Animación" />
+      { finJuego ? (
+        <div className='flex flex-col  '>
+          <div className="max-w-screen-xl  px-8 xl:px-16 mx-auto" id="about">
+            {type !== ' '?
+              <div className="grid grid-flow-row sm:grid-flow-col grid-rows-1  md:grid-rows-1 sm:grid-cols-2 py-6 sm:py-8 ">
+                
+                <div className=" p-2 flex flex-col  pt-4 md:pt-1 justify-center items-center row-start-2 sm:row-start-1 ">
+                  <h1 className="text-3xl lg:text-4xl xl:text-5xl font-black text-yellow-500 leading-normal">
+                  CONGRATULATIONS <p className="text-lg text-center"> LESSON COMPLETED: <strong className='text-gray-400'>{type.toUpperCase()}</strong></p>
+                  </h1>
+                  <p className="text-black-500 text-sm mt-4 mb-6  ">
+                    For more information about the lesson slide the page.
+                  </p>
+                  <Link to="/dashboard">
+                    <button className="py-3 lg:py-4 px-12 lg:px-16 text-white font-semibold rounded-lg bg-green-500 hover:shadow-lg hover:bg-green-600 transition-all outline-none">CONTINUE</button>
+
+                  </Link> 
+                </div>
+                <div className="flex w-full ">
+                  <div className=" w-full">
+                  <img className="" src={image1} alt=" Animación"  width={612}
+                      height={383}/>
+                    
+                  </div>
+                </div>
+              </div>
+            :
+              <div className="grid grid-flow-row sm:grid-flow-col grid-rows-1  md:grid-rows-1 sm:grid-cols-2 py-10 pb-20">
+                
+                <div className=" p-2 flex flex-col  pt-4 md:pt-1 justify-center items-center row-start-2 sm:row-start-1 ">
+                  <h1 className="text-3xl lg:text-4xl xl:text-5xl font-black text-yellow-500 leading-normal">
+                  CONGRATULATIONS <p className="text-lg text-center"> REVIEW COMPLETED</p>
+                  </h1>
+                  <p className="text-black-500 text-sm mt-4 mb-6  ">
+                    Slide the page to view the questions.
+                  </p>
+                  <Link to="/dashboard">
+                    <button className="py-3 lg:py-4 px-12 lg:px-16 text-white font-semibold rounded-lg bg-green-500 hover:shadow-lg hover:bg-green-600 transition-all outline-none">CONTINUE</button>
+
+                  </Link> 
+                </div>
+                <div className="flex w-full ">
+                  <div className=" w-full">
+                  <img className="" src={image2} alt=" Animación"  width={612}
+                      height={383}/>
+                    
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+          {type !== ' '?
+            <div className="flex flex-wrap">
+              <div className="w-full mx-auto max-w-screen-xl md:px-10 px-3">
+                <ul
+                  className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row"
+                  role="tablist"
+                >
+                  <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                    <a
+                      className={
+                        "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
+                        (openTab === 1
+                          ? "text-yellow-500 bg-gray-100 bg-gradient-to-t from-gray-100"
+                          : "text-gray-600 bg-white")
+                      }
+                      onClick={e => {
+                        e.preventDefault();
+                        setOpenTab(1);
+                      }}
+                      data-toggle="tab"
+                      href="#link1"
+                      role="tablist"
+                    >
+                      <i className="fas fa-space-shuttle text-base mr-1"></i> Information
+                    </a>
+                  </li>
+                  <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                    <a
+                      className={
+                        "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
+                        (openTab === 2
+                          ? "text-yellow-500 bg-gray-100 bg-gradient-to-t from-gray-100"
+                          : "text-gray-600 bg-white")
+                      }
+                      onClick={e => {
+                        e.preventDefault();
+                        setOpenTab(2);
+                      }}
+                      data-toggle="tab"
+                      href="#link2"
+                      role="tablist"
+                    >
+                      <i className="fas fa-cog text-base mr-1"></i>  Review
+                    </a>
+                  </li>
+                
+                </ul>
+                <div className="relative flex flex-col  break-words bg-white w-full mb-6 shadow-lg rounded">
+                  <div className="px-4 py-5 flex-auto">
+                    <div className="tab-content tab-space">
+                      <div className={openTab === 1 ? "block md:px-4" : "hidden"} id="link1">
+                      <div className="items-center w-full justify-center  md:p-3 ">
+                          <div className=" text-green-700 pt-5 font-bold text-center  rounded-md ">
+                              INFORMATION OF LESSON
+                            </div>
+                        <div className="justify-center  py-5 w-full ">
+                          
+                          <div className="grid grid-cols-3 gap-4  pt-2">
+                            <div className=" text-sm  md:text-lg pt-1 md:pt-2 md:pl-10 pt-3 pl-4 font-bold text-left  bg-gray-50   rounded-lg ">
+                              TOPIC
+                            </div>
+                            <div className="col-span-2">
+                              <div className=" bg-white md:px-10 md:h-10 h-full px-2  text-center border border-gray-200 w-full text-sm  py-2 rounded-lg ">
+                              { (topic.toLowerCase() === 'null')?
+                              'There is not topic for this lesson'
+                              :
+                              topic.toLowerCase()
+                              }
+                              </div>
+                            </div>
+                          </div>
+                          <div className="grid grid-cols-3 gap-4  pt-2">
+                            <div className="text-sm  md:text-lg md:pl-8 pt-3 pl-2 font-bold text-left bg-gray-50   rounded-lg ">
+                            OBJETIVE
+                            
+                            </div>
+                            <div className="col-span-2">
+                              <div className="px-2 bg-white .
+                              text-center overflow-y-auto border border-gray-200 md:h-36 h-24 w-full text-sm  py-2 rounded-lg ">
+                              { (Objetive.toLowerCase() === 'null')?
+                              'There is not objetive for this lesson'
+                              :
+                              Objetive.toLowerCase()
+                              }
+                              </div>
+                            </div>
+                          </div>
+                          <div className="grid grid-cols-3 gap-4  pt-2">
+                            <div className="text-sm  md:text-lg  py-1  md:pl-8 pt-3 pl-2 font-bold text-left bg-gray-50   rounded-lg ">
+                              EXPLANATION
+                            </div>
+                            <div className="col-span-2">
+                              <div className=" px-2 bg-white text-center overflow-y-auto border border-gray-200 md:h-36  h-24 w-full text-sm  py-2 rounded-lg ">
+                              { (explanation.toLowerCase() === 'null')?
+                              'There is not explanation for this lesson'
+                              :
+                              explanation.toLowerCase()
+                              }
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                      </div>
+                      </div>
+                      <div className={openTab === 2 ? "block bg-gray-50" : "hidden"} id="link2">
+                      <div className="">
+
+                        <div className=" px-5 text-green-700 py-5 font-bold text-center  rounded-md ">
+                                {('review of lesson questions').toUpperCase()}
+                          </div>
+
+                          <div className=' w-full    ' id='review'>
+                            <EjercicioR ejercicios={props.ejercicios} esPrueba = {true} esLeccion={true}/>
+                          </div> 
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          :
+          <div className='relative flex flex-col min-w-0 break-words  w-full mb-6 px-4 md:px-10' id='review'>
+                  <div className='relative flex flex-col min-w-0 break-words bg-gray-50 w-full mb-6 shadow-lg rounded '>
+                    <EjercicioR ejercicios={props.ejercicios} esPrueba = {true} esLeccion={false}/>
+                  </div>
+            </div>
+          }
+          
+
         </div>
 
       ) : (
@@ -64,11 +283,7 @@ export const Ejercicio = (props) => {
 
             
             {finJuego ? (
-              <Link to="/dashboard">
-                <button className=" inline-flex items-center justify-center px-10 py-2 my-4 p-10 bg-gray-100 hover:bg-gray-300 text-black  font-semibold text-xs   uppercase tracking-widest">
-                      Continue
-                </button>
-              </Link>
+             <div></div>
             ): props.esPrueba?
             <div className="py-5">
               <EjercicioFooterPruebaLibros totalEjercicios = {preguntasValidas} ejercicios = {props.ejercicios} ejercicio={juego[juego.length-1]} juego={juego} setJuego = {setJuego} cargado={cargado} setCargado={setCargado} setFinJuego={setFinJuego} miref={panelJuego} contadorRespondidas={contadorRespondidas} setContadorRespondidas={setContadorRespondidas} aciertos={aciertos} setAciertos={setAciertos}/>
@@ -78,7 +293,7 @@ export const Ejercicio = (props) => {
     )
 }
 
-const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado,preguntasValidas,setPreguntasValidas)=>{
+const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado,preguntasValidas,setPreguntasValidas,setId)=>{
 
     //los ejercicios ya están cargando desde la vista anterior, solo se necesita una estructura que almacene los ejercicios de forma con componente
     // para esto se iterra atravez de ejercicios y en una variable llamada Juego se guardan los ejercicios en forma de componentes
@@ -113,7 +328,7 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado,preguntas
     } 
 
   );
-
+  setId(contador-1)
   setPreguntasValidas(contador);
   setCargado(false);
 };

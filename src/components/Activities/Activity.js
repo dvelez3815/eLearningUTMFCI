@@ -1,6 +1,6 @@
 import "./Activity.css";
 
-import React, { useEffect, useRef, useState} from "react";
+import React, { useEffect, useRef} from "react";
 import { getProgressColor } from "../../helpers/indexFuntions";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
@@ -115,10 +115,10 @@ export default function Activity(props) {
             </div>
 
           
-            <Menu.Item  className={props.percent === 100?"bg-yellow-500 w-3/4 my-2 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded":"bg-green-600 w-3/4 my-2 hover:bg-green-800 text-white font-bold py-2 px-4 rounded"}  >
+            <Menu.Item    >
               {({ active }) => (
-                  <button >
-                  <a className="block"
+                  <button className={props.percent === 100?"bg-yellow-500 w-3/4 my-2 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded":"bg-green-600 w-3/4 my-2 hover:bg-green-800 text-white font-bold  rounded"}>
+                  <a className="block w-full h-full py-2 px-4 "
                     href={props.percent === 100?props.rutaReview:props.ruta} 
                    /*  className={classNames(
                       active ? "bg-gray-100 text-gray-900" : "text-gray-700",
@@ -133,9 +133,9 @@ export default function Activity(props) {
             {(props.percent === 100)?
             <h1></h1>
             :
-            <Menu.Item  className="bg-yellow-400 w-3/4 my-2 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded" >
+            <Menu.Item   >
               {({ active }) => (
-                      <button onClick={() => getExercises(props.taskid)} >
+                      <button className="bg-yellow-400 w-3/4 my-2 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded" onClick={() => getExercises(props.taskid)} >
                         information
                       </button>
               )}

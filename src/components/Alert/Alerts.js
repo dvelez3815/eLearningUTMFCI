@@ -14,13 +14,13 @@ export const mostrarContenido= (tema,objetivo,explicacion)=>{
     let obje = objetivo.toLowerCase()
     let exp = explicacion.toLowerCase()
     if(tema.length === 0 || tema==='null'){
-        topic = 'There is no topic for this lesson'
+        topic = 'There is not topic for this lesson'
     }
     if(objetivo.length === 0 || objetivo==='null'){
-        obje = 'There is no objective for this lesson'
+        obje = 'There is not objective for this lesson'
     }
     if(explicacion.length === 0 || explicacion==='null'){
-        exp = 'There is no explanation for this lesson'
+        exp = 'There is not explanation for this lesson'
     }
     Swal.fire(
         {
@@ -52,8 +52,8 @@ export const mostrarAlertaError= (respuesta)=>{
 
     Swal.fire(
         {
-            title: "Oops..",
-            type: "error",
+            title: "INCORRECT",
+            icon: "error",
             html: Array.isArray(respuesta)?"<p style='color:green; font-weight: bold;'>Correct Answer: </p>"+cadena:"<p style='color:green; font-weight: bold;'>Correct Answer: </p>"+respuesta,
             customClass: 'swal-wide',
             confirmButtonText: "Ok",
@@ -66,6 +66,46 @@ export const mostrarAlertaError= (respuesta)=>{
             
         }
     });
+}
+
+export const mostrarAlertaErrorCuenta= async ()=>{
+
+    var value = await Swal.fire(
+        {
+            title: "Advertencia",
+            type: "error",
+            html: "<p>¿Está seguro de cancelar el registro del usuario?  </p>",
+            customClass: 'swal-wide',
+            confirmButtonText: "Continuar",
+            showCancelButton: true,
+        },
+    )
+    return value
+}
+
+export const AlertaLeccion= async (respuesta)=>{
+
+    var value = Swal.fire({
+        icon: 'warning',
+        title: 'Oops...',
+        text: respuesta
+      })
+    return value
+    
+}
+export const Alertaskip= async (respuesta)=>{
+    let cadena = "";
+    if(Array.isArray(respuesta)){
+        respuesta.forEach((item)=>{
+            cadena+= (item + " <br/>")
+        })
+    }
+    Swal.fire(
+        'SKIP',
+        Array.isArray(respuesta)?"<p style='color:green; font-weight: bold;'>Correct Answer: </p>"+cadena:"<p style='color:green; font-weight: bold;'>Correct Answer: </p>"+respuesta,
+        'question'
+      )
+    
 }
 
 export const finPrueba= (aciertos, total)=>{
@@ -89,6 +129,7 @@ export const finPrueba= (aciertos, total)=>{
 
 export const mostrarAlertaExito= ()=>{
     Swal.fire({
+        icon: 'success',
         ...SuccessData
     }).then((result) => {
         if (result.value) {
@@ -114,13 +155,14 @@ export const mostrarAlertaExitoFin= ()=>{
     });
 }
 
+
 export const mostrarImagen = (img) =>{
-Swal.fire({
-    imageUrl: img, 
-    imageAlt: "Text img", 
-    showCloseButton: true
-})
-}
+    Swal.fire({
+        imageUrl: img, 
+        imageAlt: "Text img", 
+        showCloseButton: true
+        })
+    }
 
 export const mostrarAlertaSalir= ()=>{
     Swal.fire(

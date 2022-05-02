@@ -18,6 +18,9 @@ const PruebaGeneral = () => {
         //addData(setData)
         getData().then(data => {
                 let dataPrueba = cutData(data);
+                //console.log(dataPrueba)
+                 //dataPrueba = dataPrueba.filter(x => x.type === 'true_false')
+                //console.log(dataPrueba)
                 setData(dataPrueba);
                 setLoadingData(false);
 

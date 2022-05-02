@@ -3,6 +3,7 @@ import NavComponent from "../../NavComponent";
 import logo from "../../../assets/resource/Logo_Provicional.png";
 import CollectionsBookmarkIcon from "@material-ui/icons/CollectionsBookmark";
 import { useState } from "react";
+
 import LibroDescargar from "../../../assets/icons/book-arrow-down.png";
 
 
@@ -54,25 +55,11 @@ export const Inicio = () => {
     
   };
 
-  const getTask = async() => {
-    
-    const taksresponse = await fetch(`${process.env.REACT_APP_API_URL}/task/`, {
-      method: "GET",
-      headers: {
-        token: process.env.REACT_APP_SECRET_TOKEN,
-      },
-    })
-
-    const data = await taksresponse.json();
-    //mostrarContenido(topic,objetivo, explicacion)
-    return data;
-  }
-  
 
   useEffect(async () => {
     if (!cookies.get("_id")) {
       window.location.href = "./signin";
-    }
+    }else{
      if (cookies.get("status") !== "Active") {
       const user_response = await fetch(`${process.env.REACT_APP_API_URL}/user/${userid}`, {
         method: "GET",
@@ -82,18 +69,19 @@ export const Inicio = () => {
       });
       const user_json = await user_response.json();
       console.log('user',user_json)
-      if (user_json.status === "Active") {
+      if (user_json.status !== "Active") {
         cookies.set("status", user_json.status, { path: "/" });
       } else {
         
         window.location.href = "./PendingAccount";
       } 
     }
+    }
   }, []);
   
   useEffect(async () => {
         
-    if(task.length===0 && progreso.length===0){
+    if(task.length===0 && progreso.length===0 && cookies.get("_id")){
        getData();
        
     }

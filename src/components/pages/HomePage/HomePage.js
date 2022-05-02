@@ -10,9 +10,13 @@ import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
 
+
 class HomePage extends React.Component {
   
+   
+
   render() {
+    
     
   return (
     /* Este es el Navbar */
@@ -52,9 +56,9 @@ class HomePage extends React.Component {
               <div className="pt-4">
                 {/*  si se ubica la etiqueta " a " o link dentro del button no hace efecto al menos que le des click a las letras esto se evita
                 ubicandola afuera */}
-                <Link to="/signup">
+                
                   { 
-                    cookies.get("_id")?
+                    cookies.get("_id") ?
                     <div>
                       <h3 className="lg:text-sm md:text-sm text-base  font-sans text-gray-500 ">
                         Actualmente tiene un cuenta logueada
@@ -62,14 +66,17 @@ class HomePage extends React.Component {
                               
                     </div>
                     :
-                  <div className="px-2 xl:py-0  lg:py-0 md:py-0 py-1">
-                    <button className=" inline-flex items-center justify-center px-4 py-2  bg-gray-400 hover:bg-gray-300 text-white  rounded-full font-semibold text-xs   uppercase tracking-widest ">
-                      Crear una cuenta
-                    </button>
-                  </div>
+
+                      <div className="px-2 xl:py-0  lg:py-0 md:py-0 py-1">
+                        <Link to="/signup">
+                        <button className=" inline-flex items-center justify-center px-4 py-2  bg-gray-400 hover:bg-gray-300 text-white  rounded-full font-semibold text-xs   uppercase tracking-widest ">
+                          Crear una cuenta
+                        </button>
+                        </Link>
+                      </div>
                   }
                   
-                </Link>
+                
               </div>
             </div>
           </div>

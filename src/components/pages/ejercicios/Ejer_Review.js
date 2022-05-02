@@ -11,7 +11,7 @@ import CompletarTexto from "./CompletarTexto";
 import Emparejar from "./Emparejar";
 import EjercicioReview from "./EjerciciosReview";
 
-export const Ejercicio = (props) => {
+export const EjercicioR = (props) => {
   const [juego, setJuego] = React.useState([]);
   const [cargado, setCargado] = React.useState(true);
   const [finJuego, setFinJuego] = React.useState(false);
@@ -41,13 +41,18 @@ export const Ejercicio = (props) => {
 
   return (
     <div className=" w-full  flex flex-col  ">
-      <div className="pb-12">
-        <div className="bg-green-500 p-5">
-          <h1 className=" font-bold  text-2xl  text-white ">REVIEW </h1>
+      {props.esLeccion?
+        <div></div>
+      :
+        <div className="pb-12">
+          <div className="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal ">
+            <h1 className=" font-bold  text-2xl  text-gray-500 ">REVIEW </h1>
+          </div>
         </div>
-      </div>
+        }
+      
       {cargado || (
-          <div className=" "> 
+          <div className="w-full "> 
             <div className=" "  >
               <div className=" font-bold  text-2xl  text-yellow-600 ">
                       QUESTION {contadorRespondidas + 1}
