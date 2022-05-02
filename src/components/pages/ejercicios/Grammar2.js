@@ -37,7 +37,7 @@ export const Grammar2 = () => {
     return (
         <div>
             
-            {loadingData ? <div className="cargando"><img src={loading}></img></div> :ejercicios.length>0?<Ejercicio ejercicios={ejercicios} taskInfo={task}/>:<NotFoundPage></NotFoundPage>}
+            {loadingData ? <div className="pt-10"><img src={loading}></img></div> :ejercicios.length>0?<Ejercicio ejercicios={ejercicios} taskInfo={task}/>:<NotFoundPage></NotFoundPage>}
             
         </div>
     )

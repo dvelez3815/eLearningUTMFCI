@@ -1,9 +1,8 @@
 import React from 'react'
 import { EjercicioR } from '../ejercicios/Ejer_Review';
 import { Link } from 'react-router-dom';
-import { finPrueba, mostrarAlertaError } from '../../Alert/Alerts';
 import Morty from "../../../assets/resource/pensar.gif";
-import EjercicioReview from "./EjerciciosReview";
+
 
 const EjercicioFooterPruebaLibros = (props) => {
     return (
