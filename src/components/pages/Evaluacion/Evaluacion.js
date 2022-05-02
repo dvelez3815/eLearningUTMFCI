@@ -1,14 +1,15 @@
 import './Evaluacion.css';
 
-import React, { createRef, useEffect } from "react";
+import React, { useEffect } from "react";
 import NavComponent from "../../NavComponent";
 
+import Footer from "../../Footer";
 import logo from "../../../assets/resource/Logo_Provicional.png";
 import CollectionsBookmarkIcon from "@material-ui/icons/CollectionsBookmark";
 import { Link } from "react-router-dom";
 
 import Cookies from "universal-cookie";
-import axios from 'axios';
+
 
 const cookies = new Cookies();
 
@@ -25,12 +26,12 @@ const Evaluacion = () => {
   
 
   return (
-    <div>
+    <div className=' '>
       <NavComponent logo={logo} activado={2} />
 
       <div className="flex flex-col my-10  space-y-3">
         <div>
-          <h2 className="p-2 text-green-600 text-3xl sm:text-4xl font-bold ">
+          <h2 className="p-2 uppercase text-green-600 text-2xl sm:text-3xl font-bold ">
             Know your current level of English
           </h2>
         </div>
@@ -43,13 +44,13 @@ const Evaluacion = () => {
         </div>
         <div>
 
-          <div className="container mx-auto justify-center  ">
-            <div className="h-48 flex flex-wrap justify-center content-start">
-            <div className="py-10 p-5  md:w-5/12">
+          <div className="container  mx-auto justify-center  ">
+            <div className=" flex flex-wrap justify-center content-start">
+            <div className="py-10 px-5  md:w-5/12">
               <h3 className="text-left text-2xl sm:text-3xl font-sans font-bold text-green-400">
                   Assess knowledge by book
               </h3>
-              <div className="grid grid-cols-2 gap-4 py-4">
+              <div className="grid grid-cols-2 gap-4 pt-4">
               <Link to={`/pruebas/libro/` + 1}>
                 <div className="border-4 border-gray-200 p-5 rounded-lg focus:shadow-outline hover:bg-yellow-200">                 
                     <div className="flex justify-center items-start rounded-2xl" id="estrella">
@@ -104,8 +105,8 @@ const Evaluacion = () => {
                 </Link>
               </div>
             </div>
-              <div className="items-center justify-center min-h-screen p-3 ">
-                <div className="py-10 col-span-12">
+              <div className="items-center justify-center p-3 ">
+                <div className="md:pt-10 col-span-12">
                   <div className="overflow-auto lg:overflow-visible ">
                     <table className="table text-gray-900 border-separate space-y-2 text-sm">
                       <thead className="bg-gray-800 text-gray-100">
@@ -166,6 +167,10 @@ const Evaluacion = () => {
 
         </div>
       </div>
+      <div className=''>
+           <Footer />
+      </div>
+
     
     </div>
     

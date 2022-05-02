@@ -103,22 +103,22 @@ export default function Activity(props) {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items  className="origin-center absolute  mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
+        <Menu.Items  className="origin-center absolute  mt-2 sm:w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
           <div className="py-1">
             <div className="p-2 text-left">
               <h2 className="text-center text-sm  mx-2 font-bold text-gray-500">
                 Completed: {props.percent}% 
               </h2>
               <h2 className=" mx-2  font-bold text-gray-800">
-                {props.percent === 100? <div className="text-lg text-center">lessons completed</div>: <div className="text-center  "> TOPIC <p className="text-sm"> {(props.task.filter(x => x._id === props.taskid)[0].topic.top).toLowerCase()} </p></div>}
+                {props.percent === 100? <div className="sm:text-lg text-center">lessons completed</div>: <div className="text-center  "> TOPIC <p className="text-sm"> {(props.task.filter(x => x._id === props.taskid)[0].topic.top).toLowerCase()} </p></div>}
               </h2>
             </div>
 
           
             <Menu.Item    >
               {({ active }) => (
-                  <button className={props.percent === 100?"bg-yellow-500 w-3/4 my-2 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded":"bg-green-600 w-3/4 my-2 hover:bg-green-800 text-white font-bold  rounded"}>
-                  <a className="block w-full h-full py-2 px-4 "
+                  <button className={props.percent === 100?"bg-yellow-500 w-3/4 my-2 hover:bg-gray-500 text-white font-bold  px-4 rounded":"bg-green-600 w-3/4 my-2 hover:bg-green-800 text-white font-bold  rounded"}>
+                  <a className={props.percent === 100?"block w-full  py-2 px-4 ":"block w-full h-full py-2 px-4 "}
                     href={props.percent === 100?props.rutaReview:props.ruta} 
                    /*  className={classNames(
                       active ? "bg-gray-100 text-gray-900" : "text-gray-700",

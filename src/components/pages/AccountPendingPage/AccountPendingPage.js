@@ -7,6 +7,7 @@ import { mostrarAlertaErrorCuenta } from "../../Alert/Alerts";
 const cookies = new Cookies();
 
 class AccountPendingPage extends React.Component {
+  
   Actualizar = async() => {
     let valor = await mostrarAlertaErrorCuenta()
     if(await valor){

@@ -14,8 +14,11 @@ const SigInPage = () => {
   const [cargando, setCargando] = useState(false);
 
   useEffect(async () => {
-    if (cookies.get("_id")) {
+    if (cookies.get("_id")&& cookies.get("status")==='Active') {
       window.location.href = "./dashboard";
+    }
+    if (cookies.get("_id") && cookies.get("status")!=='Active') {
+      window.location.href = "./pendingAccount";
     }
 
   }, []);

@@ -127,11 +127,11 @@ const SignUpPage = () => {
         cookie.set("mail", user.mail, { path: "/" });
         cookie.set("status", user.status, { path: "/" });
         
-        if(user.status === 'Active'){
-          window.location.href = "./dashboard";
-        }else{
+        if(user.status !== 'Active'){
           window.location.href = "./pendingAccount";
         }
+          
+        
       }
     })
     .catch((error) => {
@@ -143,7 +143,12 @@ const SignUpPage = () => {
   }
   
   useEffect(() => {
-    
+    if (cookie.get("_id") && cookie.get("status")==='Active') {
+      window.location.href = "./";
+    }
+    if (cookie.get("_id") && cookie.get("status")!=='Active') {
+      window.location.href = "./pendingAccount";
+    }
   })
 
     return (
@@ -173,7 +178,7 @@ const SignUpPage = () => {
                     </a>
                   </p>
                   <div>
-                      <h3 className="font-bold py-2 lg:text-xs md:text-xs text-xs   font-sans text-gray-500 ">
+                      <h3 className="font-bold py-2 lg:text-xs md:text-xs text-sm   font-sans text-gray-500 ">
                         Si perteneces a la UTM, puedes iniciar sesión con tú cuenta insitucional @utm.edu.ec
                       </h3>      
                   </div>
