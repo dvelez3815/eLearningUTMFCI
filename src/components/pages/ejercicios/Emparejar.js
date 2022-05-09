@@ -88,9 +88,13 @@ const Emparejar = (props) => {
         ) {
           element.getElementsByClassName('opt-1')[0].innerText =
             event.target.innerText;
-          event.target.parentNode.parentNode.classList.add("bg-gray-400");
+            element.getElementsByClassName('opt-1')[0].classList.add("bg-blue-50");
+            element.getElementsByClassName('opt-1')[0].classList.add("shadow-lg");
+            element.getElementsByClassName('opt-1')[0].classList.add("border-blue-200");
+            event.target.parentNode.parentNode.classList.add("bg-gray-400");
           event.target.parentNode.parentNode.classList.add("text-sm");
           event.target.parentNode.classList.add("invisible");
+          
           return true;
         }
       });
@@ -163,7 +167,7 @@ const Emparejar = (props) => {
                       cambiarVisibilidad(event, props);
                     }}
                   >
-                    <span className="md:text-sm text-xs  p-2 min-w-full cardCheck px-5 border-yellow-200 ">
+                    <span className="md:text-sm text-xs  p-2 min-w-full cardCheck px-5 border-blue-200 bg-blue-50">
                        {opcion}
                     </span>
                   </button>
@@ -183,6 +187,9 @@ const InputCompletarTexto = (props) => {
       if (props.opt[index] === event.target.innerText) {
         element.firstChild.classList.remove("invisible");
         element.classList.remove("bg-gray-400");
+        event.target.classList.remove("bg-blue-50");
+        event.target.classList.remove("shadow-lg");
+        event.target.classList.remove("border-blue-200");
         event.target.innerText = "Waiting answer...";
       }
     });

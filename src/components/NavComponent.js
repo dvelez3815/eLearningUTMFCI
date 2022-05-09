@@ -34,7 +34,7 @@ class NavComponent extends React.Component {
       <div className="">
         <nav className="relative w-full   bg-green-800  dark:bg-gray-800  shadow  ">
           <div className="mx-auto  ">
-            <div className="flex items-center  2xl:px-40 px-10 justify-between h-16">
+            <div className="flex items-center  2xl:px-40 md:px-10 px-5 justify-between h-16">
               <div className=" flex items-center">
                 <a className="flex-shrink-0" href="/">
                   <img
@@ -191,7 +191,7 @@ class NavComponent extends React.Component {
 
               </div>
               
-              <div className="md:hidden px-4">
+              <div className="md:hidden">
                 <button
                   className="text-gray-100 dark:text-white hover:text-yellow-500 inline-flex items-center justify-center p-2 rounded-md focus:outline-none"
                   id="hamburger"

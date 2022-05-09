@@ -91,7 +91,9 @@ export default function Activity(props) {
       
       <div className="circle-text">
         <h2 className="text-base font-bold capitalize">{props.name}</h2>
-        <span className={`${props.bloqueo?'tooltiptext':'hidden'}`}>Activity blocked, must complete previous modules</span>
+        <div>
+          <h3 className={`${props.bloqueo?'tooltiptext ':'hidden'}`}>Activity blocked, must complete previous modules</h3>
+        </div>
       </div>
 
       <Transition

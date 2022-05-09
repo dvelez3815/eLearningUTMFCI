@@ -115,7 +115,7 @@ const Texto = (props) => {
           props.marcar(props.myref);
         }}
       >
-        {(props.data.item).toLowerCase()}
+        {props.data.item}
       </button>
     </div>
   );

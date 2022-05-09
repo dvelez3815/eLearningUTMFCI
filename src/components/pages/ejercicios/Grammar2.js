@@ -8,8 +8,9 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 export const Grammar2 = () => {
 
-    const [task, setTask] = React.useState(null);
-    const [ejercicios, setEjercicios] = React.useState(null);
+    const [task, setTask] = React.useState([]);
+    const [control, setControl] = React.useState(true);
+    const [ejercicios, setEjercicios] = React.useState([]);
     const [loadingData, setLoadingData] = React.useState(true);
     const taskid = window.location.href.split('/')[window.location.href.split('/').length - 1];
 
@@ -17,20 +18,31 @@ export const Grammar2 = () => {
         if (!cookies.get("_id")) {
             window.location.href = "/signin";
           }else{
-            getExercises(taskid).then(data => {
-                setEjercicios(data);
-                //setLoadingData(false);
-            });
-    
-            getTask().then(data => {
-                let task = data.res
-                let filter = task.filter(x => x._id === parseInt(taskid)  )
-                setTask(filter);
-                setLoadingData(false);
-            });
+            
+            if(ejercicios.length ===0){
+                getExercises(taskid).then(data => {
+                    setEjercicios(data);
+                    //setLoadingData(false);
+                });
+            }
+            
+            if(task.length ===0){
+                getTask().then(data => {
+                    let task = data.res
+                    let filter = task.filter(x => x._id === parseInt(taskid)  )
+                    setTask(filter);
+                    //setLoadingData(false);
+                });
+            }
+            
+          }
+          
+          if(control && ejercicios.length !==0 && task.length!==0){
+            setControl(false)
+            setLoadingData(false);
           }
      
-    }, [])
+    },)
 
 
 

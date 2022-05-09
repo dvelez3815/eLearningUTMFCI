@@ -92,7 +92,7 @@ export const Ejercicio = (props) => {
       )}
       { finJuego ? (
         <div className='flex flex-col  '>
-          <div className="max-w-screen-xl  px-8 xl:px-16 mx-auto" id="about">
+          <div className="max-w-screen-xl   mx-auto" id="about">
             {type !== ' '?
               <div className="grid grid-flow-row sm:grid-flow-col grid-rows-1  md:grid-rows-1 sm:grid-cols-2 py-6 sm:py-8 ">
                 

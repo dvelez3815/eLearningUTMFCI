@@ -22,7 +22,7 @@ const Modulo = (props) => {
 
   
   
-  return <div>
+  return <div className=' w-full'>
     <div className='flex flex-col  '>
       {props.moduloindex === 1?
       <div>
@@ -41,7 +41,7 @@ const Modulo = (props) => {
       
     </div>
       
-      <div className='md:p-3 mb-8'> 
+      <div className='md:p-3 md:mb-8 '> 
       
         {props.modulo.map((modulo, index) => {
             let userprogress = (modulo.writing.user_progress + modulo.grammar.user_progress + modulo.reading.user_progress + modulo.vocabulary.user_progress);
