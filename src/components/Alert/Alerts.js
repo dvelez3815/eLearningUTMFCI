@@ -142,16 +142,14 @@ export const mostrarAlertaExito= ()=>{
 }
 
 
-export const mostrarAlertaExitoFin= ()=>{
+export const mostrarAlertaExitoFin= (txt)=>{
     Swal.fire({
-        ...SuccessData
+        title: "Lesson Completed !",
+        icon: 'success',
+        type: "success",
+        text: txt,
     }).then((result) => {
-        if (result.value) {
-            
-            window.location = "/dashboard";
-        } else {
-            
-        }
+
     });
 }
 

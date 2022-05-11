@@ -93,7 +93,7 @@ export const Inicio = () => {
         let userInfo = progreso
         //let task = tasku
         
-        //console.log(userInfo)
+        console.log(userInfo)
         if (userInfo.name === "JsonWebTokenError") {
           window.location.href = "./signin";
         }

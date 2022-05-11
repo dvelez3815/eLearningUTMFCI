@@ -497,18 +497,36 @@ async function enviarSiEsCorrecta(props, contadorRespondidas) {
       body: raw,
     };
     
-    await fetch(
-      process.env.REACT_APP_API_URL+"/progress/update",
-      requestOptions
-    )
-      .then((response) => response.text())
+    let responses = []
+    try {
+      responses = await fetch(
+        process.env.REACT_APP_API_URL+"/progress/update",
+        requestOptions
+      )
+    } catch (error) {
+      
+    }
+    const dataT = await responses.json();
+    console.log('Info:',dataT.res)
+    /*
+      .then((response) => console.log('REPSUESTAA',response))
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
-    props.setContadorRespondidas(contadorRespondidas + 1);
-    props.juego.pop();
-    //setInterval(() => {}, 4000);
-    //mostrarAlertaExitoFin(`End of the game`);
-    props.setFinJuego(true);
+    */
+      if(dataT.res !== 'Task Registrada' && dataT.res !=="Task ya ha sido registrado en ese usuario"){
+        //alert('Guardando Progreso... Presione aceptar')
+        enviarSiEsCorrecta(props, contadorRespondidas)
+      }else{
+        props.setContadorRespondidas(contadorRespondidas + 1);
+        props.juego.pop();
+        //setInterval(() => {}, 4000);
+        //mostrarAlertaExitoFin(`End of the game`);
+        props.setFinJuego(true);
+        mostrarAlertaExitoFin(`Excellent Work `);
+      }
+
+    
+    
   } else {
     mostrarAlertaExito(`Correct answer`);
     props.juego.pop();

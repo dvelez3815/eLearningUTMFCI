@@ -54,7 +54,6 @@ const SigInPage = () => {
       }
       
     }).then((res) => {
-        
         if (res.data.res=== "USER NOT EXIST") {
           setDato("El usuario no existe");
           setCargando(false);
@@ -79,7 +78,7 @@ const SigInPage = () => {
             setDato("");
             setIsVisibleDato("hidden");
           }, 20500);          
-        } else {
+        } else if(res.data.res._id){
           cookies.set("_id", res.data.res._id, { path: "/" });
           cookies.set("name", res.data.res.name, { path: "/" });
           cookies.set("lastname", res.data.res.lastname, { path: "/" });
@@ -87,12 +86,31 @@ const SigInPage = () => {
           cookies.set("status", res.data.res.status, { path: "/" });
           cookies.set('token',res.data.res.confirmationCode,{path:'/'});
           window.location.href = "./dashboard"
-          
+          //console.log('todo correcto',res)
+          //console.log('REStaaaa',res.data)
+          //console.log('REs-ulti',res.data.res._id)
+        }else{
+          //console.log('algo malll',res.statusText)
+          setDato("Hubo un problema al conectar con el servidor, por favor vuelva a intentarlo, si el problema persiste intente más tarde");
+          setIsVisibleDato("");
+          setCargando(false);
+          setInterval(() => {
+            setDato("");
+            setIsVisibleDato("hidden");
+          }, 20500); 
+        return
         }
 
       })
       .catch((err) => {
-
+        setDato("Hubo un problema al conectar con el servidor, por favor vuelva a intentarlo, si el problema persiste intente más tarde");
+        setIsVisibleDato("");
+          setCargando(false);
+          setInterval(() => {
+            setDato("");
+            setIsVisibleDato("hidden");
+          }, 20500); 
+        return
       }
       );
       
