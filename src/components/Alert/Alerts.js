@@ -9,7 +9,7 @@ const SuccessData = {
   };
 
 //export const Guardar
-export const mostrarContenido= (tema,objetivo,explicacion)=>{
+export const mostrarContenido= (tema,objetivo,explicacion,link)=>{
     let topic = tema.toLowerCase()
     let obje = objetivo.toLowerCase()
     let exp = explicacion.toLowerCase()
@@ -30,6 +30,12 @@ export const mostrarContenido= (tema,objetivo,explicacion)=>{
             html: "<p style='color:red; font-weight: bold;'>Topic</p>"+topic+"<p> - </p> <p style='color:green; font-weight: bold;'>Objetive</p>"+obje+"<p> - </p> <p style='color:orange; font-weight: bold;'>Explication </p>"+exp,
             customClass: 'swal-wide',
             confirmButtonText: "Ok",
+            showCloseButton: true,
+
+            focusConfirm: false,
+            confirmButtonText:
+            "<a href="+link+">START</a>",
+
         },
     ).then((result) => {
         if (result.value) {
@@ -81,6 +87,47 @@ export const mostrarAlertaErrorCuenta= async ()=>{
         },
     )
     return value
+}
+
+export const Bienvenida = async () =>{
+    Swal.fire({
+        title: 'BIENVENIDO',
+        html: '<h1 className="text-gray-700 font-semibold text-xs  px-8 md:text-sm">Para comenzar seleccione una de las actividades   <p style="color:green">| Writing - Vocabulary - Reading - Grammar |</p> disponibles en el book 1 y resuelva sus lecciones </h1>',
+        icon: 'info',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+      })
+}
+
+export const mostrarAlertaDrive= async ()=>{
+    let a= document.createElement('a');
+    a.target= '_blank';
+    a.href= "https://drive.google.com/drive/folders/1VpsHlAYQ021jdXfa06nX_wChrxjce7kn";
+    
+    Swal.fire({
+        title: '<strong>AVISO </strong>',
+        icon: 'info',
+        html:
+          'Accedera a un repositorio en <b> Google Drive</b> ', 
+        showCancelButton: true,
+        focusConfirm: false,
+        confirmButtonText:
+          '<i class="fa fa-thumbs-up"></i> Continuar',
+        confirmButtonAriaLabel: 'Thumbs up, great!',
+        cancelButtonText:
+          '<i class="fa fa-thumbs-down">Cerrar</i>',
+        cancelButtonAriaLabel: 'Thumbs down'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            //window.location.href = "https://drive.google.com/drive/folders/1VpsHlAYQ021jdXfa06nX_wChrxjce7kn";
+            a.click();
+        }
+      })
+
 }
 
 export const AlertaLeccion= async (respuesta)=>{

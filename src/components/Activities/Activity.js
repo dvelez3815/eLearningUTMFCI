@@ -37,14 +37,14 @@ export default function Activity(props) {
 
  
 
-  const getExercises = async(task_id) => {
+  const getExercises = async(task_id, ruta) => {
 
     let Info = props.task.filter(x => x._id === task_id)
     let explicacion = String(Info[0].explanation)
     let objetivo = String(Info[0].objetive.text)
     let topic_ = String(Info[0].topic.top)
     console.log('JFC')
-    mostrarContenido(topic_,objetivo, explicacion)
+    mostrarContenido(topic_,objetivo, explicacion, ruta )
     
 }
 
@@ -53,7 +53,7 @@ export default function Activity(props) {
   return (
     <Menu
       as="div"
-      className={`relative inline-block tooltip`}
+      className={`relative inline-block tooltip pb-5`}
       ref={props.myref}
     >
       {(props.percent === 100)?
@@ -114,35 +114,41 @@ export default function Activity(props) {
               <h2 className=" mx-2  font-bold text-gray-800">
                 {props.percent === 100? <div className="sm:text-lg text-center">lessons completed</div>: <div className="text-center  "> TOPIC <p className="text-sm"> {(props.task.filter(x => x._id === props.taskid)[0].topic.top).toLowerCase()} </p></div>}
               </h2>
+              
             </div>
 
-          
-            <Menu.Item    >
-              {({ active }) => (
-                  <button className={props.percent === 100?"bg-yellow-500 w-3/4 my-2 hover:bg-gray-500 text-white font-bold  px-4 rounded":"bg-green-600 w-3/4 my-2 hover:bg-green-800 text-white font-bold  rounded"}>
-                  <a className={props.percent === 100?"block w-full  py-2 px-4 ":"block w-full h-full py-2 px-4 "}
-                    href={props.percent === 100?props.rutaReview:props.ruta} 
-                   /*  className={classNames(
-                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                      "block px-4 py-2 text-sm"
-                    )} */
-                  >
-                     {props.percent === 100?"review":"start"}
-                  </a>
-                </button>
-              )}
-            </Menu.Item>
             {(props.percent === 100)?
             <h1></h1>
             :
-            <Menu.Item   >
+            <Menu.Item >
               {({ active }) => (
-                      <button className="bg-yellow-400 w-3/4 my-2 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded" onClick={() => getExercises(props.taskid)} >
-                        information
-                      </button>
+                <div className="px-2">
+                  <button onClick={() => getExercises(props.taskid,props.ruta)} className="w-full rounded hover:bg-yellow-400  py-2 bg-yellow-300 font-black text-gray-600">
+                      information
+                    </button>
+                </div>
+
               )}
             </Menu.Item>
             } 
+            <Menu.Item    >
+              {({ active }) => (
+                  <div className="px-2">
+                    <div className={props.percent === 100?"bg-yellow-500  my-2 hover:bg-gray-500 text-white font-bold  px-4 rounded":"bg-green-600  my-2 hover:bg-green-800 text-white font-bold  rounded"}>
+                    <a className={props.percent === 100?"block w-full  py-2 px-4 ":"block w-full h-full py-2 px-4 "}
+                      href={props.percent === 100?props.rutaReview:props.ruta} 
+                    /*  className={classNames(
+                        active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                        "block px-4 py-2 text-sm"
+                      )} */
+                    >
+                      {props.percent === 100?"review":"start"}
+                    </a>
+                  </div>
+                </div>
+              )}
+            </Menu.Item>
+            
           </div>
         </Menu.Items>
       </Transition>

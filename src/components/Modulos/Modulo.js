@@ -13,16 +13,22 @@ import grammarimgng from "../../assets/icons/Grammar_0.png";
 import readingimgng from "../../assets/icons/Reading_0.png";
 import vocabularyimgng from "../../assets/icons/Vocabulary_0.png";
 
+import Cookie from "universal-cookie";
+const cookies = new Cookie();
+let valorProgress = cookies.get("progreso")
+
 const Modulo = (props) => {
   let bloqueo = props.bloqueo
 
   React.useEffect(() => {
+    
     //getTask()
   }, []); //cuando haya un cambio de pregunta se actualiza el estado del componente.
 
   
   
   return <div className=' w-full'>
+    {/*
     <div className='flex flex-col  '>
       {props.moduloindex === 1?
       <div>
@@ -40,8 +46,20 @@ const Modulo = (props) => {
       
       
     </div>
+    */}
+    {bloqueo?
+      <div className="tooltip ">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>       
+        <span className='tooltiptext  p-2 text-xs'>{'Resuelva todas las actividades del módulo anterior para desbloquear el presente módulo'} </span>
+      </div>
+    :
+    <div className='pt-3'></div>
+    
+    }
       
-      <div className='md:p-3 md:mb-8 '> 
+      <div className='md:p-3   '> 
       
         {props.modulo.map((modulo, index) => {
             let userprogress = (modulo.writing.user_progress + modulo.grammar.user_progress + modulo.reading.user_progress + modulo.vocabulary.user_progress);
@@ -50,9 +68,10 @@ const Modulo = (props) => {
 
 
           return (<div key={shortid.generate()} >
+            
           <ModuleProgress
             key={shortid.generate()}
-            moduleName={"UNIT " + modulo.book_info.unit}
+            moduleName={"MODULE " + props.moduloindex +" | UNIT " + modulo.book_info.unit   }
             percent={parseInt(progress)}
             bloqueo = {bloqueo}
           ></ModuleProgress>            

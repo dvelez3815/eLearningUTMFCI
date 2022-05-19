@@ -13,13 +13,14 @@ import Evaluacion from './components/pages/Evaluacion/Evaluacion';
 import Pruebas from './components/pages/Pruebas/Pruebas';
 import Review from './components/pages/Review/Review';
 import PruebasGeneral from './components/pages/Pruebas/PruebasGeneral';
+import PerfilUser from './components/pages/user/PerfilUser';
 
 
 
 function App() {
   
   return (
-    <div className="App">      
+    <div className="App h-full">      
     {/* Rutas solo de pruebas para probar las vistas */}
 
     <Router>
@@ -46,13 +47,15 @@ function App() {
 
       <Route path="/pruebas/libro/:idlibro">
         <Pruebas/>
-      </Route>      
-
+      </Route> 
+           
       <Route path="/review/:book/:module/:unit/:type">
         <Review/>
       </Route>      
 
-
+      <Route path="/profile">
+        <PerfilUser/>
+      </Route> 
       <Route exact path="/dashboard">
         <Inicio />
       </Route>

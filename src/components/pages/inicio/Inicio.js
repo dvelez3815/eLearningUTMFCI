@@ -3,7 +3,9 @@ import NavComponent from "../../NavComponent";
 import logo from "../../../assets/resource/Logo_Provicional.png";
 import CollectionsBookmarkIcon from "@material-ui/icons/CollectionsBookmark";
 import { useState } from "react";
-import { ModuleProgress } from '../../ModuleProgress';
+import {
+  Bienvenida,
+} from "../../Alert/Alerts";
 
 
 import "./inicio.css";
@@ -14,6 +16,7 @@ import loading from "../../../assets/resource/loading.svg";
 import shortid from "shortid";
 import Libro from "../../Libros/Libro";
 const cookies = new Cookies();
+
 
 export const Inicio = () => {
   let userid = cookies.get("_id");
@@ -79,6 +82,8 @@ export const Inicio = () => {
       } 
     }
     }
+    
+    
   }, []);
 
   
@@ -93,7 +98,7 @@ export const Inicio = () => {
         let userInfo = progreso
         //let task = tasku
         
-        console.log(userInfo)
+        //console.log(userInfo)
         if (userInfo.name === "JsonWebTokenError") {
           window.location.href = "./signin";
         }
@@ -183,15 +188,15 @@ export const Inicio = () => {
            let cantTask = 0
             let cantTaskUser = 0
             for (let i=0; i< (mergeBooks.libros).length; i++){
-              cantTask = cantTask + parseInt(mergeBooks.libros[i].totaltask)
-              cantTaskUser = cantTaskUser + parseInt(mergeBooks.libros[i].userprogress)
+              cantTask = cantTask + parseFloat(mergeBooks.libros[i].totaltask)
+              cantTaskUser = cantTaskUser + parseFloat(mergeBooks.libros[i].userprogress)
             }
 
             let calculo = (cantTaskUser * 100) / cantTask
             let porcentaje = parseFloat(calculo.toFixed(2)) 
 
             setvalorProgress(porcentaje)
-          
+            cookies.set('progreso',porcentaje,{path:'/'});
           setuserProgress(await mergeBooks);
         setcargando(false);
         
@@ -203,6 +208,11 @@ export const Inicio = () => {
       setBandera(false)
     }
 
+    if(!cargando){
+      if(valorProgress === 0){
+        Bienvenida()
+      }
+    }
 
 })
   
@@ -213,15 +223,16 @@ export const Inicio = () => {
       <NavComponent logo={logo} activado={1} />
       {cargando?<div className="pt-20"><img src={loading}></img></div>:
   <div className="grid grid-cols-12 ">
-    <div className="xl:col-span-9 col-span-12 justify-center">
+    <div className="xl:col-span-9 col-span-12 justify-center sm:px-10">
+
       {libros}
        
   </div>
 
   {/* BARRA LATERAL */}
 
-  <div className="hidden xl:block md:col-span-3  w-auto fixed inset-y-30 right-8 2xl:right-16">
-  <div className="flex flex-wrap py-7 flex-col justify-center">
+  <div className="hidden xl:block md:col-span-3  w-auto fixed inset-y-30 right-20 2xl:right-28">
+    <div className="flex flex-wrap py-7 flex-col justify-center">
       <div className="border shadow rounded-2xl h-22  hidden md:block py-1">
           <div className="">
               <div className="text-center contend-center justify-center ">
