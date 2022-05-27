@@ -2,9 +2,11 @@ import React from "react";
 import NavBar from "../../NavBar/NavBar";
 import img1 from "../../../assets/resource/pendingAccount.svg";
 import { Link } from "react-router-dom";
-import Cookies from "universal-cookie";
+
 import { mostrarAlertaErrorCuenta } from "../../Alert/Alerts";
-const cookies = new Cookies();
+import Cookie from "universal-cookie";
+const cookies = new Cookie();
+
 
 class AccountPendingPage extends React.Component {
   
@@ -12,21 +14,16 @@ class AccountPendingPage extends React.Component {
     let valor = await mostrarAlertaErrorCuenta()
     if(await valor){
       //console.log('verdadero')
+      localStorage.removeItem("user");
       cookies.remove("_id", { path: "/" });
+      cookies.remove("status", { path: "/" });
+      cookies.remove("progreso", { path: "/" });
       cookies.remove("name", { path: "/" });
       cookies.remove("lastname", { path: "/" });
       cookies.remove("mail", { path: "/" });
-      cookies.remove("status", { path: "/" });
       window.location.href = "/";
     }
     
-    // cookies.remove("_id", { path: "/" });
-    // cookies.remove("name", { path: "/" });
-    // cookies.remove("lastname", { path: "/" });
-    // cookies.remove("mail", { path: "/" });
-    // cookies.remove("status", { path: "/" });
-    
-    //window.location.href = "./";
   }
   render() {
     return (

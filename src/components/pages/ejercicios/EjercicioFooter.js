@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Cookies from "universal-cookie";
+
 import {
   mostrarAlertaError,
   mostrarAlertaExito,
@@ -8,7 +8,8 @@ import {
   mostrarAlertaExitoFin,
 } from "../../Alert/Alerts";
 
-const cookies = new Cookies();
+
+const USER = JSON.parse(localStorage.getItem("user"));
 
 const EjercicioFooter = (props) => {
   useEffect(() => {
@@ -480,7 +481,7 @@ async function enviarSiEsCorrecta(props, contadorRespondidas) {
       window.location.href.split("/")[
         window.location.href.split("/").length - 1
       ];
-    let id = cookies.get("_id");
+    let id = USER._id
 
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -513,7 +514,13 @@ async function enviarSiEsCorrecta(props, contadorRespondidas) {
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
     */
-      if(dataT.res !== 'Task Registrada' && dataT.res !=="Task ya ha sido registrado en ese usuario"){
+   if(props.control === ' '){
+        props.setContadorRespondidas(contadorRespondidas + 1);
+        props.juego.pop();
+        //setInterval(() => {}, 4000);
+        //mostrarAlertaExitoFin(`End of the game`);
+        props.setFinJuego(true);
+   }else if(dataT.res !== 'Task Registrada' && dataT.res !=="Task ya ha sido registrado en ese usuario"){
         //alert('Guardando Progreso... Presione aceptar')
         enviarSiEsCorrecta(props, contadorRespondidas)
       }else{

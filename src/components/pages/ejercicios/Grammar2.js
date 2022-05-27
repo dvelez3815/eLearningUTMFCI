@@ -4,8 +4,11 @@ import { Ejercicio } from './Ejercicio'
 
 import NotFoundPage from '../NotFoundPage/NotFoundPage'
 import loading from "../../../assets/resource/loading.svg";
-import Cookies from 'universal-cookie';
-const cookies = new Cookies();
+import {
+    AlertaLeccion
+  } from "../../Alert/Alerts";
+
+const USER = JSON.parse(localStorage.getItem("user"));
 export const Grammar2 = () => {
 
     const [task, setTask] = React.useState([]);
@@ -14,9 +17,12 @@ export const Grammar2 = () => {
     const [loadingData, setLoadingData] = React.useState(true);
     const taskid = window.location.href.split('/')[window.location.href.split('/').length - 1];
 
-    React.useEffect(() => {
-        if (!cookies.get("_id")) {
+    React.useEffect(async()  => {
+        if (!USER) {
+            let valor = AlertaLeccion('SU SESIÓN HA EXPIRADO, VUELVA A INGRESAR')
+            if((await valor).value){
             window.location.href = "/signin";
+            }
           }else{
             
             if(ejercicios.length ===0){

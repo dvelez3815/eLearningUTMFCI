@@ -19,7 +19,8 @@ import { EjercicioR } from '../ejercicios/Ejer_Review';
 
 import image1 from "../../../assets/resource/lesson4.webp";
 import image2 from "../../../assets/resource/lesson3.webp";
-import Cookies from 'universal-cookie';
+
+const USER = JSON.parse(localStorage.getItem("user"));
 
 export const Ejercicio = (props) => {
   const [juego, setJuego] = React.useState([]);
@@ -29,7 +30,7 @@ export const Ejercicio = (props) => {
   const [preguntasValidas, setPreguntasValidas] = React.useState(0);
   const [aciertos, setAciertos] = React.useState(0);
   const [openTab, setOpenTab] = React.useState(1);
-  const cookies = new Cookies();
+
 
   const [idp, setId] = React.useState(0);
   let topic = ''
@@ -71,10 +72,9 @@ export const Ejercicio = (props) => {
     //     await cargarEjercicios(juego, setJuego, panelJuego, setCargado, finJuego, ejercicios);
     // }
     
-    if (!cookies.get("_id")) {
-      let valor = await AlertaLeccion('SU SESIÓN HA EXPIRADO')
-      if(valor){
-      
+    if (!USER) {
+      let valor = AlertaLeccion('SU SESIÓN HA EXPIRADO')
+      if((await valor).value){
       window.location.href = "/signin";
       }
   }
@@ -288,7 +288,7 @@ export const Ejercicio = (props) => {
             <div className="py-5">
               <EjercicioFooterPruebaLibros totalEjercicios = {preguntasValidas} ejercicios = {props.ejercicios} ejercicio={juego[juego.length-1]} juego={juego} setJuego = {setJuego} cargado={cargado} setCargado={setCargado} setFinJuego={setFinJuego} miref={panelJuego} contadorRespondidas={contadorRespondidas} setContadorRespondidas={setContadorRespondidas} aciertos={aciertos} setAciertos={setAciertos}/>
             </div>
-            :<EjercicioFooter ejercicio={juego[juego.length-1]} juego={juego} setJuego = {setJuego} cargado={cargado} setCargado={setCargado} setFinJuego={setFinJuego} miref={panelJuego} contadorRespondidas={contadorRespondidas} setContadorRespondidas={setContadorRespondidas}/>}
+            :<EjercicioFooter control = {type} ejercicio={juego[juego.length-1]} juego={juego} setJuego = {setJuego} cargado={cargado} setCargado={setCargado} setFinJuego={setFinJuego} miref={panelJuego} contadorRespondidas={contadorRespondidas} setContadorRespondidas={setContadorRespondidas}/>}
         </div>
     )
 }

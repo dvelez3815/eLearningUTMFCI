@@ -93,6 +93,7 @@ export const Bienvenida = async () =>{
     Swal.fire({
         title: 'BIENVENIDO',
         html: '<h1 className="text-gray-700 font-semibold text-xs  px-8 md:text-sm">Para comenzar seleccione una de las actividades   <p style="color:green">| Writing - Vocabulary - Reading - Grammar |</p> disponibles en el book 1 y resuelva sus lecciones </h1>',
+        footer: '<a target ="_blank" className="font-bold" style = "font-weight: bold"; href="https://drive.google.com/file/d/1vWAa7jxiih-TWB3PB1BnwiAbo9q5iGYT/view?usp=sharing">Ver video introductorio</a>',
         icon: 'info',
         showClass: {
           popup: 'animate__animated animate__fadeInDown'
@@ -225,6 +226,42 @@ export const mostrarAlertaSalir= ()=>{
             
         }
     });
+}
+export const mostrarAlertaConfimacion = async (_title, _text)=>{
+    let result = await Swal.fire(
+        {
+            title: _title,
+            type: 'success',
+            text: _text,
+            confirmButtonText: "Continuar",
+            showCancelButton: true,
+        }
+    )
+   
+    return result;
+}
+
+export const Confirmacion = async (_title, _text)=>{
+    Swal.fire({
+        
+        icon: 'success',
+        title: _title,
+        text: _text,
+        showConfirmButton: false,
+        timer: 1500
+      })
+}
+
+export const mostrarExitoEditar = async (titulo, text, icon) => {
+    var result_data =
+        await Swal.fire({
+            title: titulo,
+            text: text,
+            icon: icon,
+            showConfirmButton: true,
+        })
+    return result_data;
+
 }
 
 export const mostrarAlertaSalirEva= ()=>{

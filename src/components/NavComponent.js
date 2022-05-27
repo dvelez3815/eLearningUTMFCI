@@ -7,20 +7,23 @@ import {
    mostrarAlertaDrive
    } from "./Alert/Alerts";
 
-import user from "../assets/resource/user.png";
+import user_img from "../assets/resource/user.png";
 import logobn from "../assets/resource/Logo_Provicional_bn.png";
 import { Button } from "@material-ui/core";
-
 const cookies = new Cookie();
+
 
 class NavComponent extends React.Component {
   constructor(props) {
     super(props);
     this.hamburgerBtn = createRef();
     this.hamburgerItems = createRef();
+    console.log('id',this.props.USER)
 
   }
+  
   handleHamburgerButton = () => {
+    
     this.hamburgerItems.current.classList.toggle("hidden");
   };
   classNames(...classes) {
@@ -28,16 +31,20 @@ class NavComponent extends React.Component {
   }
 
   logout() {
+    localStorage.removeItem("user");
     cookies.remove("_id", { path: "/" });
+    cookies.remove("status", { path: "/" });
+    cookies.remove("progreso", { path: "/" });
     cookies.remove("name", { path: "/" });
     cookies.remove("lastname", { path: "/" });
     cookies.remove("mail", { path: "/" });
-    cookies.remove("status", { path: "/" });
-    cookies.remove("progreso", { path: "/" });
+    cookies.remove("creado", { path: "/" });
     window.location.href = "./";
+  
   }
   render() {
     return (
+      
       <div className="">
         <nav className="relative w-full   bg-green-800  dark:bg-gray-800  shadow  ">
           <div className="mx-auto  ">
@@ -235,7 +242,7 @@ class NavComponent extends React.Component {
               <div className="p-2 flex ">
                 <h2 className="hidden lg:block uppercase text-xs md:text-base lg:text-base sm:text-base  pt-1 text-white">
                   
-                  {cookies.get('name') + ' ' + (cookies.get('lastname') === 'null'?'':cookies.get('lastname'))}
+                  {this.props.USER.name + ' ' + (this.props.USER.lastname === 'null'?'':this.props.USER.lastname)}
                 </h2>
                 <Menu as="div" className="ml-3 relative">
                   <div>
@@ -244,7 +251,7 @@ class NavComponent extends React.Component {
                       <img
                         className="md:h-8 lg:h-8 sm:h-8 md:w-8 lg:w-8 sm:w-8 h-12 w-12 "
                         /* src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" */
-                        src={user}
+                        src={user_img}
                         alt=""
                       />
                     </Menu.Button>
@@ -267,12 +274,12 @@ class NavComponent extends React.Component {
                               <img
                                 className="md:h-20 lg:h-20 sm:h-20 md:w-20 lg:w-20 sm:w-20 h-14 w-14 "
                                 /* src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" */
-                                src={user}
+                                src={user_img}
                                 alt=""
                               />
                               <h2 className="uppercase text-sm md:text-base lg:text-base sm:text-base  pt-1 p-2 text-gray-600">
                   
-                                {cookies.get('name') + ' ' + (cookies.get('lastname') === 'null'?'':cookies.get('lastname'))}
+                                {this.props.USER.name + ' ' + (this.props.USER.lastname === 'null'?'':this.props.USER.lastname)}
                               </h2>
                             </div>
                             <div
@@ -289,7 +296,7 @@ class NavComponent extends React.Component {
                                 >
                                   Perfil
                                 </a>
-                                <a
+                                {/*<a
                                   href="#proximamente"
                                   className={
                                     "text-sm hover:bg-gray-200 py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
@@ -298,6 +305,7 @@ class NavComponent extends React.Component {
                                 >
                                   Ayuda
                                 </a>
+                                  */}
                                 <div className="h-0 my-2 border border-solid border-blueGray-100" />
                                 <a
                                   onClick={this.logout}

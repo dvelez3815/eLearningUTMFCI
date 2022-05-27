@@ -89,10 +89,10 @@ const SignUpPage = () => {
 
   axios
     .post(`${process.env.REACT_APP_API_URL}/user/signup`, {
-      name: form.name,
-      lastname: form.lastname,
+      name: form.name.toUpperCase() ,
+      lastname: form.lastname.toUpperCase() ,
       cedula: form.cedula,
-      mail: form.mail,
+      mail: form.mail.toLowerCase(),
       password: form.password,
     },
     {
@@ -120,12 +120,16 @@ const SignUpPage = () => {
       } else {
 
         var user = response.data.res;
+        localStorage.setItem("user", JSON.stringify({"_id": user._id, "name": user.name,
+          "lastname": user.lastname,"mail": user.mail, "status":user.status,
+          'token':user.confirmationCode, 'creado':user.createdAt}));
+          
         cookie.set("_id", user._id, { path: "/" });
-        cookie.set("name", user.name, { path: "/" });
-        cookie.set("cedula", user.cedula, { path: "/" });
+        cookie.set("status", user.status, { path: "/" });
+        cookie.set("name", user.res.name, { path: "/" });
         cookie.set("lastname", user.lastname, { path: "/" });
         cookie.set("mail", user.mail, { path: "/" });
-        cookie.set("status", user.status, { path: "/" });
+        cookie.set("creado", user.createdAt, { path: "/" });
         
         if(user.status !== 'Active'){
           window.location.href = "./pendingAccount";

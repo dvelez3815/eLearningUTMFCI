@@ -45,7 +45,7 @@ const SigInPage = () => {
     
     axios
       .post(process.env.REACT_APP_API_URL+"/user/signin", {
-        mail: form.mail,
+        mail: form.mail.toLowerCase(),
         password: form.password,
       },
       {
@@ -62,7 +62,15 @@ const SigInPage = () => {
             setDato("");
             setIsVisibleDato("hidden");
           }, 20500);
-        } else if (res.data.res === "PASSWORD INCORRECT") {
+        } else if (res.data.res=== "USER NOT EXIST UTM") {
+          setDato("Credenciales incorrectas, verifique los datos ingresados");
+          setCargando(false);
+          setIsVisibleDato("");
+          setInterval(() => {
+            setDato("");
+            setIsVisibleDato("hidden");
+          }, 20500);
+          } else if (res.data.res === "PASSWORD INCORRECT") {
           setDato("La contraseña es incorrecta");
           setIsVisibleDato("");
           setCargando(false);
@@ -79,12 +87,16 @@ const SigInPage = () => {
             setIsVisibleDato("hidden");
           }, 20500);          
         } else if(res.data.res._id){
+          localStorage.setItem("user", JSON.stringify({"_id": res.data.res._id, "name": res.data.res.name,
+          "lastname": res.data.res.lastname,"mail": res.data.res.mail, "status":res.data.res.status,
+          'token':res.data.res.confirmationCode, 'creado':res.data.res.createdAt}));
           cookies.set("_id", res.data.res._id, { path: "/" });
           cookies.set("name", res.data.res.name, { path: "/" });
           cookies.set("lastname", res.data.res.lastname, { path: "/" });
-          cookies.set("mail", res.data.res.mail, { path: "/" });
           cookies.set("status", res.data.res.status, { path: "/" });
-          cookies.set('token',res.data.res.confirmationCode,{path:'/'});
+          cookies.set("mail", res.data.res.mail, { path: "/" });
+          cookies.set("creado", res.data.res.createdAt, { path: "/" });
+
           window.location.href = "./dashboard"
           //console.log('todo correcto',res)
           //console.log('REStaaaa',res.data)
@@ -164,7 +176,7 @@ const SigInPage = () => {
                       pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
                       onChange={handleChange}
                       value={form.mail || ""}
-                      className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
+                      className="appearance-none  rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
                       placeholder="Correo electrónico"
                     />
                   </div>

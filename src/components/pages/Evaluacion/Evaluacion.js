@@ -8,14 +8,12 @@ import logo from "../../../assets/resource/Logo_Provicional.png";
 import CollectionsBookmarkIcon from "@material-ui/icons/CollectionsBookmark";
 import { Link } from "react-router-dom";
 
-import Cookies from "universal-cookie";
 
-
-const cookies = new Cookies();
+const USER = JSON.parse(localStorage.getItem("user"));
 
 const Evaluacion = () => {
   useEffect(async () => {
-    if (!cookies.get("_id")) {
+    if (!USER) {
       window.location.href = "./signin";
     }
 
@@ -27,7 +25,11 @@ const Evaluacion = () => {
 
   return (
     <div className=' '>
-      <NavComponent logo={logo} activado={2} />
+      { USER ?
+              <NavComponent USER={USER} logo={logo} activado={2} />
+            :
+            <div></div>
+            }
 
       <div className="flex flex-col my-10  space-y-3">
         <div>

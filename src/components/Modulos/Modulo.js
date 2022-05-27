@@ -13,9 +13,7 @@ import grammarimgng from "../../assets/icons/Grammar_0.png";
 import readingimgng from "../../assets/icons/Reading_0.png";
 import vocabularyimgng from "../../assets/icons/Vocabulary_0.png";
 
-import Cookie from "universal-cookie";
-const cookies = new Cookie();
-let valorProgress = cookies.get("progreso")
+
 
 const Modulo = (props) => {
   let bloqueo = props.bloqueo

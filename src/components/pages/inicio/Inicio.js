@@ -16,11 +16,17 @@ import loading from "../../../assets/resource/loading.svg";
 import shortid from "shortid";
 import Libro from "../../Libros/Libro";
 const cookies = new Cookies();
-
+const USER = JSON.parse(localStorage.getItem("user"));
 
 export const Inicio = () => {
-  let userid = cookies.get("_id");
+  let userid = []
   let pro = 10
+  try {
+     userid = USER._id
+  } catch (error) {
+    
+  }
+  
   const [userProgress, setuserProgress] = useState([]);
   const [valorProgress, setvalorProgress] = useState([]);
 
@@ -62,7 +68,7 @@ export const Inicio = () => {
 
 
   useEffect(async () => {
-    if (!cookies.get("_id")) {
+    if (!USER) {
       window.location.href = "./signin";
     }else{
      if (cookies.get("status") !== "Active") {
@@ -89,7 +95,7 @@ export const Inicio = () => {
   
   useEffect(async () => {
         
-    if(task.length===0 && progreso.length===0 && cookies.get("_id")){
+    if(task.length===0 && progreso.length===0 && USER._id){
        getData();
        
     }
@@ -190,9 +196,12 @@ export const Inicio = () => {
             for (let i=0; i< (mergeBooks.libros).length; i++){
               cantTask = cantTask + parseFloat(mergeBooks.libros[i].totaltask)
               cantTaskUser = cantTaskUser + parseFloat(mergeBooks.libros[i].userprogress)
+              console.log('cant libro user',  parseFloat(mergeBooks.libros[i].userprogress)
+              )
             }
 
             let calculo = (cantTaskUser * 100) / cantTask
+            console.log('cant task',cantTaskUser)
             let porcentaje = parseFloat(calculo.toFixed(2)) 
 
             setvalorProgress(porcentaje)
@@ -220,7 +229,11 @@ export const Inicio = () => {
 
   return (
     <div className="">  
-      <NavComponent logo={logo} activado={1} />
+      { USER ?
+              <NavComponent USER={USER} logo={logo} activado={1} />
+            :
+        <div></div>
+            }
       {cargando?<div className="pt-20"><img src={loading}></img></div>:
   <div className="grid grid-cols-12 ">
     <div className="xl:col-span-9 col-span-12 justify-center sm:px-10">
