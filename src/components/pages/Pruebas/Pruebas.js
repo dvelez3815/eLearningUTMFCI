@@ -12,7 +12,6 @@ const Pruebas = () => {
 
     React.useEffect(() => {
         const id = window.location.href.split('/')[window.location.href.split('/').length - 1];
-
         let prueba = window.location.href.split('/')[3];
         getData(id).then(data => {
             if (prueba==='pruebas') {
@@ -24,30 +23,30 @@ const Pruebas = () => {
                 
             }
             setLoadingData(false);
+            console.log('ejecuta')
         });
         
         
     }, [])
 
-
     return (
+        
         <div>
-            {loadingData ? <div className="cargando"><img src={loading} alt="cargando"></img></div> :data.length>0?<Ejercicio ejercicios={data} esPrueba = {esPrueba}/>:<NotFoundPage></NotFoundPage>}
-            
-            
+            {loadingData ? <div className="pt-20"><img src={loading} alt="pt-20"></img></div> :data.length>0?<Ejercicio ejercicios={data} esPrueba = {esPrueba}/>:<NotFoundPage></NotFoundPage>}
         </div>
     )
 }
 
 
 const getData = async(idlibro) => {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/book/${idlibro}`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/book/books/${idlibro}`, {
         method: 'GET',
         headers: {
-            'token': cookies.get("token"),
+            'token':process.env.REACT_APP_SECRET_TOKEN,
           },
     });
     const data = await response.json();
+    
     return data;
 }
 
@@ -58,7 +57,9 @@ const cutData = (data) => {
     for (let i = 0; i < 30; i++) {
         let random = Math.floor(Math.random() * data.length);
         newData.push(data[random]);
+        
     }
+    //console.log(newData)
     return newData;
 }
 export default Pruebas

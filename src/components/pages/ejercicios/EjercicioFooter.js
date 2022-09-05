@@ -1,12 +1,15 @@
 import React, { useEffect } from "react";
-import Cookies from "universal-cookie";
+
 import {
   mostrarAlertaError,
   mostrarAlertaExito,
+  AlertaLeccion,
+  Alertaskip,
   mostrarAlertaExitoFin,
 } from "../../Alert/Alerts";
 
-const cookies = new Cookies();
+
+const USER = JSON.parse(localStorage.getItem("user"));
 
 const EjercicioFooter = (props) => {
   useEffect(() => {
@@ -22,7 +25,7 @@ const EjercicioFooter = (props) => {
           <button
             disabled={false}
             className="bg-transparent text-xs sm:text-xl tracking-wider  my-2 text-gray-500 font-semibold hover:text-gray-400 py-2 px-4 border border-gray-500 hover:border-gray-500 rounded"
-            onClick={() => {noEsCorrecta(props, skipExercise(props))} /*props.onClick()*/}
+            onClick={() => {noEsCorrecta(props, skipExercise(props),1)} /*props.onClick()*/}
           >
             skip
           </button>
@@ -65,22 +68,31 @@ const skipExercise = (props) => {
     
   } else if (tipo_ejercicio === "ordenar") {
     let hijos = [...props.miref.current.children];
-
+    let respuestaBackEndBase = [];
     //se quita la ref
     const respuestasBack = Array.from(
       props.ejercicio.props.ejercicio.options
     ).map((item) => [...item]);
     const respuestasBackEndOrdenadas = [...respuestasBack].map((item) => {
+      
       if (item) {
         item = [...item.sort((a, b) => (a.answer > b.answer ? 1 : -1))];
         let texto = "";
+        let textoBase = "";
         for (let i = 0; i < item.length; i++) {
           const element = item[i];
           texto += element.item;
+          textoBase += (element.item + " ")
+          
         }
-        return texto;
+        
+        respuestaBackEndBase.push((textoBase+" /n"));
+        texto = texto.replace(/\s/g, "");
+        
+        return textoBase;
       }
     });
+    
     return respuestasBackEndOrdenadas;
 
   } else if (tipo_ejercicio === "true_false") {
@@ -120,6 +132,27 @@ const skipExercise = (props) => {
 
 }
 
+async function noEsCorrecta(props, respuesta, id) {
+  //Se crea otro stack para guardar las respuestas pendiente, se elimina el ejercicio actual se trabaja con la stack creada y se randomiza la stack
+  //Se muestra una alerta de que la respuesta es incorrecta
+  let aux = [...props.juego];
+  let actual = props.juego.pop();
+
+  //Ahora lo que se hace es randomizar el array para que la siguiente pregunta sea random y para que la siguiente no sea la misma a la ctual
+
+  aux = randomizarArray(aux);
+
+  aux = aux.filter((e) => e !== actual);
+
+  aux.unshift(actual);
+  if (id==1){
+    Alertaskip(respuesta)
+  }else{
+    mostrarAlertaError(respuesta);
+  }
+  
+  props.setJuego(aux);
+}
 
 const validarRespuesta = async (props) => {
   let tipo_ejercicio = props.ejercicio.props.ejercicio.type;
@@ -195,7 +228,8 @@ const verificarEmparejar = async (props, hijos, contadorRespuestas) => {
     }
   });
   if (faltaMarcar) {
-    alert("All fields must be filled");
+    AlertaLeccion("All fields must be filled")
+    //alert("All fields must be filled");
   } else {
     hijos.some((element) => {
       respuestaUser.push(element.getElementsByClassName("opt-1")[0].innerText);
@@ -249,7 +283,7 @@ const verificarCompletar_Texto = async (props, hijos, contadorRespuestas) => {
       esCorrecta = false;
     }
   } else {
-    alert("All fields must be filled");
+    AlertaLeccion("All fields must be filled");
     //console.log(respuestaBackEnd);
   }
   if (aRespondido && esCorrecta) {
@@ -376,7 +410,7 @@ const verificarOpcion_Correcta_1 = async (
       noEsCorrecta(props,correctAnswer);
     }
   } else {
-    alert("You did not select anything");
+    AlertaLeccion("You did not select anything");
   }
 };
 
@@ -423,7 +457,7 @@ const verificarOpcion_Correcta_n = async (
       noEsCorrecta(props,correctAnswer);
     }
   } else {
-    alert("You did not select anything");
+    AlertaLeccion("You did not select anything");
   }
 };
 
@@ -437,22 +471,7 @@ function randomizarArray(array) {
   return array;
 }
 
-async function noEsCorrecta(props, respuesta) {
-  //Se crea otro stack para guardar las respuestas pendiente, se elimina el ejercicio actual se trabaja con la stack creada y se randomiza la stack
-  //Se muestra una alerta de que la respuesta es incorrecta
-  let aux = [...props.juego];
-  let actual = props.juego.pop();
 
-  //Ahora lo que se hace es randomizar el array para que la siguiente pregunta sea random y para que la siguiente no sea la misma a la ctual
-
-  aux = randomizarArray(aux);
-
-  aux = aux.filter((e) => e !== actual);
-
-  aux.unshift(actual);
-  mostrarAlertaError(respuesta);
-  props.setJuego(aux);
-}
 
 async function enviarSiEsCorrecta(props, contadorRespondidas) {
   //Se es corecta se necesita saber si se ha llegado al final de la lista de ejercicios, de ser así, se debe de terminar el juego y guardar el progreso,
@@ -462,11 +481,11 @@ async function enviarSiEsCorrecta(props, contadorRespondidas) {
       window.location.href.split("/")[
         window.location.href.split("/").length - 1
       ];
-    let id = cookies.get("_id");
+    let id = USER._id
 
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("token", cookies.get("token"));
+    myHeaders.append("token", process.env.REACT_APP_SECRET_TOKEN);
 
     var raw = JSON.stringify({
       user_id: `${id}`,
@@ -479,18 +498,42 @@ async function enviarSiEsCorrecta(props, contadorRespondidas) {
       body: raw,
     };
     
-    await fetch(
-      process.env.REACT_APP_API_URL+"/progress/update",
-      requestOptions
-    )
-      .then((response) => response.text())
+    let responses = []
+    try {
+      responses = await fetch(
+        process.env.REACT_APP_API_URL+"/progress/update",
+        requestOptions
+      )
+    } catch (error) {
+      
+    }
+    const dataT = await responses.json();
+    console.log('Info:',dataT.res)
+    /*
+      .then((response) => console.log('REPSUESTAA',response))
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
-    props.setContadorRespondidas(contadorRespondidas + 1);
-    props.juego.pop();
-    setInterval(() => {}, 4000);
-    mostrarAlertaExitoFin(`End of the game`);
-    props.setFinJuego(true);
+    */
+   if(props.control === ' '){
+        props.setContadorRespondidas(contadorRespondidas + 1);
+        props.juego.pop();
+        //setInterval(() => {}, 4000);
+        //mostrarAlertaExitoFin(`End of the game`);
+        props.setFinJuego(true);
+   }else if(dataT.res !== 'Task Registrada' && dataT.res !=="Task ya ha sido registrado en ese usuario"){
+        //alert('Guardando Progreso... Presione aceptar')
+        enviarSiEsCorrecta(props, contadorRespondidas)
+      }else{
+        props.setContadorRespondidas(contadorRespondidas + 1);
+        props.juego.pop();
+        //setInterval(() => {}, 4000);
+        //mostrarAlertaExitoFin(`End of the game`);
+        props.setFinJuego(true);
+        mostrarAlertaExitoFin(`Excellent Work `);
+      }
+
+    
+    
   } else {
     mostrarAlertaExito(`Correct answer`);
     props.juego.pop();

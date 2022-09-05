@@ -2,13 +2,40 @@ import React, { useEffect, useState } from "react";
 import shortid from "shortid";
 import "../../pages/ejercicios/CheckExercise.css";
 import ViewImage from "../../ViewImage/ViewImage";
+import axios from 'axios'
 const Emparejar = (props) => {
   const [opciones, setOpciones] = useState([]);
   const divRef = React.useRef(null);
   const opcionesRef = React.useRef(null);
 
   let opcionesElegidas = [];
+  const [title, setTitle] = useState('')
+  
+  useEffect(async () => {
+    
+    translateText()
 
+    }, []);
+
+  const translateText = () => {
+    let tit = ''
+    if (String(props.ejercicio.question).length===0 ){
+      tit=('match as appropriate').replace(/[$.]/g,'')
+    }else{
+      tit=(props.ejercicio.question).replace(/[$.]/g,'')
+    }
+            
+    let data = {
+        q : tit.replace(/[$_]/g,'.').toLocaleLowerCase(),
+        source: 'en',
+        target: 'es'
+    }
+    axios.post(`https://libretranslate.de/translate`, data)
+    .then((response) => {
+      setTitle(response.data.translatedText)  
+      //console.log(response.data.translatedText)
+    })
+  } 
   const quitarRepetidos = (opciones) => {
     let seen = new Set();
     return opciones.filter((item) => {
@@ -61,8 +88,13 @@ const Emparejar = (props) => {
         ) {
           element.getElementsByClassName('opt-1')[0].innerText =
             event.target.innerText;
-          event.target.parentNode.parentNode.classList.add("bg-gray-400");
+            element.getElementsByClassName('opt-1')[0].classList.add("bg-blue-50");
+            element.getElementsByClassName('opt-1')[0].classList.add("shadow-lg");
+            element.getElementsByClassName('opt-1')[0].classList.add("border-blue-200");
+            event.target.parentNode.parentNode.classList.add("bg-gray-400");
+          event.target.parentNode.parentNode.classList.add("text-sm");
           event.target.parentNode.classList.add("invisible");
+          
           return true;
         }
       });
@@ -72,14 +104,21 @@ const Emparejar = (props) => {
   };
 
   return (
-    <div className="flex flex-col flex-wrap mt-8 xl:px-80 sm:px-20  ">
-      <h2 className="m-auto p-3 text-sm  font-bold sm:text-2xl text-green-700 ">
-        {props.ejercicio.question}{" "}
-      </h2>
+    <div className="flex  flex-col flex-wrap md:mt-8 xl:px-60  px-5 sm:px-20  ">
+      <div className="static min-w-fit ">
+        <h2 className="m-auto p-3 text-sm  font-bold sm:text-xl text-green-700 ">
+          {String(props.ejercicio.question).length===0?
+            ('match as appropriate').toUpperCase()
+          :
+            (props.ejercicio.question).toUpperCase()
+          }{" "}
+        </h2>
+
+      </div>
       {props.ejercicio.img && <ViewImage img={props.ejercicio.img} />}
-      <div className="contenedor m-auto p-auto w-auto my-1 " ref={divRef}>
+      <div className="container sm:m-auto p-auto w-auto w-full  " ref={divRef}>
         <div
-          className="flex flex-col sm:items-center sm:justify-center my-5 sm:my-1 mr-8 ml-8   "
+          className="flex  gap-1 flex-col  justify-center my-5 sm:my-1 mr-8 ml-8   "
           ref={props.miref}
         >
           {props.ejercicio.body.map((item, index) => {
@@ -112,20 +151,21 @@ const Emparejar = (props) => {
           })}
         </div>
         <div
-          className="flex flex-wrap gap-2 py-10 justify-center"
+          className="flex  px-6 static min-w-fit flex-wrap gap-2 md:py-6  px-10 justify-center"
           ref={opcionesRef}
         >
+          
           {opciones.length > 0 &&
             opciones.map((opcion, index) => {
               return (
-                <div key={shortid.generate()} className={"rounded-full "}>
+                <div key={shortid.generate()} className={"rounded-full  "}>
                   <button
                     onClick={(event, props) => {
                       cambiarVisibilidad(event, props);
                     }}
                   >
-                    <span className="text-sm sm:text-lg cardCheck px-5 border-yellow-200 ">
-                      {opcion}
+                    <span className="md:text-sm text-xs  p-2 min-w-full cardCheck px-5 border-blue-200 bg-blue-50">
+                       {opcion}
                     </span>
                   </button>
                 </div>
@@ -144,6 +184,9 @@ const InputCompletarTexto = (props) => {
       if (props.opt[index] === event.target.innerText) {
         element.firstChild.classList.remove("invisible");
         element.classList.remove("bg-gray-400");
+        event.target.classList.remove("bg-blue-50");
+        event.target.classList.remove("shadow-lg");
+        event.target.classList.remove("border-blue-200");
         event.target.innerText = "Waiting answer...";
       }
     });
@@ -175,7 +218,7 @@ const JuegoCompletarTexto = (props) => {
                   {/* <ViewImage img={juego}/> */}
                 {props.type === "emparejar_img" && <ViewImage img={juego} />}
                 {props.type == "emparejar" && <h2 className=
-                  "mx-2 text-justify text-xs sm:text-lg"
+                  "mx-2 text-justify w-auto text-xs sm:text-sm text-xs"
                  >{ juego }</h2>}
               </div>
             );

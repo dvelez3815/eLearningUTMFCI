@@ -1,10 +1,10 @@
-import React, {useState } from "react";
+import React, {useState, useEffect } from "react";
 import logo from "../../../assets/resource/Logo_Provicional.png";
 import img1 from "../../../assets/resource/sign.svg";
 import "./SigInPage.css";
 import axios from "axios";
-import Cookies from "universal-cookie";
 import loading from "../../../assets/resource/loading.svg";
+import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
 const SigInPage = () => {
@@ -12,6 +12,16 @@ const SigInPage = () => {
   const [dato, setDato] = useState("");
   const [form, setForm] = useState({});
   const [cargando, setCargando] = useState(false);
+
+  useEffect(async () => {
+    if (cookies.get("_id")&& cookies.get("status")==='Active') {
+      window.location.href = "./dashboard";
+    }
+    if (cookies.get("_id") && cookies.get("status")!=='Active') {
+      window.location.href = "./pendingAccount";
+    }
+
+  }, []);
 
   const handleChange = (e) => {
     setForm({
@@ -26,77 +36,102 @@ const SigInPage = () => {
       [e.target.name]: e.target.checked,
     });
   };
-  const settingCookies = (user) => {
-    cookies.set("_id", user._id, { path: "/" });
-    cookies.set("name", user.name, { path: "/" });
-    cookies.set("lastname", user.lastname, { path: "/" });
-    cookies.set("mail", user.mail, { path: "/" });
-    cookies.set("status", user.status, { path: "/" });
-  };
-  const viewTextMessage = (visible, text) => {
-    setDato(text);
-    if (visible) {
-      setIsVisibleDato("visible");
-    } else {
-      setIsVisibleDato("");
-    }
-    setCargando(false);
-    setInterval(() => {
-      setDato("");
-      setIsVisibleDato("hidden");
-    }, 10000);
-  };
 
   const handleButtonSubmit = async (event) => {
     event.preventDefault();
     //check it input type are correct
-    if (form.mail === "" || form.password === "") {
-      viewTextMessage(false, "Por favor llene todos los campos")
-      return;
-    }
-    else if(!isUTM(form.mail)){
-      viewTextMessage(false, "Por favor ingrese un correo institucional")
-      return;
-    }
-
 
     setCargando(true);
+    
     axios
-    .post(process.env.REACT_APP_API_URL+"/signin", {
-      mail: form.mail,
-      password: form.password,
-    },
-    {
-      headers: {
-        'token': process.env.REACT_APP_SECRET_TOKEN
+      .post(process.env.REACT_APP_API_URL+"/user/signin", {
+        mail: form.mail.toLowerCase(),
+        password: form.password,
+      },
+      {
+        headers: {
+          'token': process.env.REACT_APP_SECRET_TOKEN
       }
+      
     }).then((res) => {
-      if (res.data.res === "USER NOT EXIST") {
-        viewTextMessage(false, "El usuario no existe")
-        } else if (res.data.res === "PASSWORD INCORRECT") {
-          viewTextMessage(false, "La contraseña es incorrecta")
+        if (res.data.res=== "USER NOT EXIST") {
+          setDato("El usuario no existe");
+          setCargando(false);
+          setIsVisibleDato("");
+          setInterval(() => {
+            setDato("");
+            setIsVisibleDato("hidden");
+          }, 20500);
+        } else if (res.data.res=== "USER NOT EXIST UTM") {
+          setDato("Credenciales incorrectas, verifique los datos ingresados");
+          setCargando(false);
+          setIsVisibleDato("");
+          setInterval(() => {
+            setDato("");
+            setIsVisibleDato("hidden");
+          }, 20500);
+          } else if (res.data.res === "PASSWORD INCORRECT") {
+          setDato("La contraseña es incorrecta");
+          setIsVisibleDato("");
+          setCargando(false);
+          setInterval(() => {
+            setDato("");
+            setIsVisibleDato("hidden");
+          }, 20500);
         } else if(res.data.res === "ERROR"){
-          viewTextMessage(false, "Hubo un problema al conectar con el servidor")
-        }
-        else if(res.data.res === 'incorrecta'){
-          viewTextMessage(false, "Usuario o contraseña incorrectas, por favor verificar.")
-        }
-        else {
-          console.log(res.data.res)
-          settingCookies(res.data.res)
+          setDato("Hubo un problema al conectar con el servidor, si el problema persiste intente más tarde");
+          setIsVisibleDato("");
+          setCargando(false);
+          setInterval(() => {
+            setDato("");
+            setIsVisibleDato("hidden");
+          }, 20500);          
+        } else if(res.data.res._id){
+          localStorage.setItem("user", JSON.stringify({"_id": res.data.res._id, "name": res.data.res.name,
+          "lastname": res.data.res.lastname,"mail": res.data.res.mail, "status":res.data.res.status,
+          'token':res.data.res.confirmationCode, 'creado':res.data.res.createdAt}));
+          cookies.set("_id", res.data.res._id, { path: "/" });
+          cookies.set("name", res.data.res.name, { path: "/" });
+          cookies.set("lastname", res.data.res.lastname, { path: "/" });
+          cookies.set("status", res.data.res.status, { path: "/" });
+          cookies.set("mail", res.data.res.mail, { path: "/" });
+          cookies.set("creado", res.data.res.createdAt, { path: "/" });
+
           window.location.href = "./dashboard"
+          //console.log('todo correcto',res)
+          //console.log('REStaaaa',res.data)
+          //console.log('REs-ulti',res.data.res._id)
+        }else{
+          //console.log('algo malll',res.statusText)
+          setDato("Hubo un problema al conectar con el servidor, por favor vuelva a intentarlo, si el problema persiste intente más tarde");
+          setIsVisibleDato("");
+          setCargando(false);
+          setInterval(() => {
+            setDato("");
+            setIsVisibleDato("hidden");
+          }, 20500); 
+        return
         }
+
       })
       .catch((err) => {
-        //
-      });
+        setDato("Hubo un problema al conectar con el servidor, por favor vuelva a intentarlo, si el problema persiste intente más tarde");
+        setIsVisibleDato("");
+          setCargando(false);
+          setInterval(() => {
+            setDato("");
+            setIsVisibleDato("hidden");
+          }, 20500); 
+        return
+      }
+      );
       
   }
   
 
   return (
     <div className=" ">
-      <div className="flex h-screen ">
+      <div className="md:flex h-screen ">
         <div className="lg:w-1/3 md:w-screen ">
           <div className="min-h-screen flex items-center justify-center  py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-md w-full space-y-2">
@@ -120,6 +155,7 @@ const SigInPage = () => {
                     Registrate
                   </a>
                 </p>
+
               </div>
               <div className={isVisibleDato}>
                 <h2 className="text-md text-red-500">{dato}</h2>
@@ -140,7 +176,7 @@ const SigInPage = () => {
                       pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
                       onChange={handleChange}
                       value={form.mail || ""}
-                      className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
+                      className="appearance-none  rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
                       placeholder="Correo electrónico"
                     />
                   </div>
@@ -178,17 +214,16 @@ const SigInPage = () => {
                     >
                       Recuerdame
                     </label>
-                   
                   </div>
 
-                   <div className="text-sm">
+                  {/* <div className="text-sm">
                     <a
-                      href="/forgotPassword"
+                      href="#"
                       className="font-medium text-green-600 hover:text-green-500"
                     >
                       Olvidaste tu contraseña?
                     </a>
-                  </div> 
+                  </div> */}
                 </div>
                 {cargando && (
                   <div className="flex items-center justify-center">
@@ -224,8 +259,8 @@ const SigInPage = () => {
             </div>
           </div>
         </div>
-        <div className="lg:w-2/3 hidden md:block ">
-          <div className="min-h-screen flex-col flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="bg-gray-50 lg:w-2/3 hidden md:block ">
+          <div className="min-h-screen flex-col flex items-center justify-center  py-12 px-4 sm:px-6 lg:px-8">
             <div>
               <img src={img1} width="400" alt="aprende"></img>
             </div>

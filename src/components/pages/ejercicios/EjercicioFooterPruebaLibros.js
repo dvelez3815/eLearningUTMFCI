@@ -1,14 +1,14 @@
 import React from 'react'
+import { EjercicioR } from '../ejercicios/Ejer_Review';
 import { Link } from 'react-router-dom';
-import { finPrueba, mostrarAlertaError } from '../../Alert/Alerts';
 import Morty from "../../../assets/resource/pensar.gif";
 
 
 const EjercicioFooterPruebaLibros = (props) => {
     return (
        
-        <div className="flex items-center justify-center  ">
-          <div className="my-10">
+        <div className="w-full  items-center justify-center  ">
+          <div className="">
           { (props.juego.length > 0) ?( <button
                 className=" text-xs sm:text-xl tracking-wider  text-white bg-green-500 font-semibold  hover:bg-green-400 py-2 px-4 capitalize border border-green-500 hover:border-green-600 rounded "
                 onClick={() => {validarRespuesta(props)} }>
@@ -16,14 +16,107 @@ const EjercicioFooterPruebaLibros = (props) => {
                   <p>Next</p>    
                 </span>
               </button>   
-              ): <div className='flex flex-col justify-center items-center'>
-                <h2 className="container font-bold  text-2xl  text-yellow-400  "></h2>
-                <img className="h-1/2" src={Morty} alt=" Animación" />
-                
-                  <button className=" inline-flex items-center justify-center px-10 py-2  bg-gray-200 hover:bg-yellow-500 text-black rounded-full font-semibold text-xs   uppercase tracking-widest ">
-                    <Link to="/evaluacion">Continue</Link>
-                  </button>
-                
+              ): 
+              <div className='w-full flex flex-col  justify-center items-center '>
+                <div className='  md:py-10'>
+                  <div>
+                    <h2 className=" font-bold  text-2xl  text-yellow-400  ">RESULTS</h2>
+                  </div>
+                  <div className=' md:flex   '>
+                    <div className="items-center justify-center  p-3 ">
+                      <div className="md:pt-10 col-span-12">
+                        <div className=" overflow-auto lg:overflow-visible ">
+                          <table className="md:px-8 px-3 table text-gray-900 border-separate space-y-2 text-sm">
+                            <thead className="bg-gray-800 text-gray-100">
+                              <tr>
+                                <th className="p-3"></th>
+                                <th className="p-3 text-left">Information</th>
+                                <th className="p-3 text-center">Amount</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr className="bg-gray-200">
+                                <td className="p-3">
+
+                                </td>
+                                <td className="p-3 text-left">
+                                NUMBER OF QUESTIONS
+                                </td>
+                                <td className="p-3">
+                                  <span className="bg-green-400 text-gray-50 rounded-md px-2 sm:p-1">
+                                  {props.totalEjercicios}
+                                    </span>
+                                </td>
+                              </tr>
+                              <tr className="bg-gray-200">
+                                <td className="p-3">
+
+                                </td>
+                                <td className="p-3 text-left">
+                                NUMBER OF CORRECT QUESTIONS
+                                </td>
+                                <td className="p-3">
+                                  <span className="bg-yellow-500 text-gray-50 rounded-md px-2 sm:p-1">
+                                    {props.aciertos}
+                                    </span>
+                                </td>
+                              </tr>
+                              <tr className="bg-gray-200">
+                                <td className="p-3">
+
+                                </td>
+                                <td className="p-3 text-left">
+                                NUMBER OF INCORRECT QUESTIONS
+                                </td>
+                                <td className="p-3">
+                                  <span className="bg-red-500  text-gray-50  rounded-md px-2 sm:p-1">
+                                  {props.totalEjercicios - props.aciertos}
+                                    </span>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      
+                      <div className='  content-center align-items-center'>
+                        <div className=' justify-center'>
+                          <div className='md:p-5 pb-3'>
+                            <p className="text-black-500 text-sm md:mt-2 mt-5 mb-6  ">
+                              Slide the page to view the questions.
+                            </p>
+                            <div className='md:flex justify-center'> 
+                              <div className=' '>
+                                <Link to="/evaluacion">
+                                  <button className=" inline-flex items-center justify-center px-10 py-2  bg-green-300 hover:bg-green-500 text-black rounded-full font-semibold text-xs   uppercase tracking-widest ">
+                                    Continue
+                                  </button>
+                                </Link> 
+                              </div>
+                              <div className='md:pl-2 pt-2 md:pt-0 md:pb-1'>
+                                <button onClick={() => {window.location.replace('')} }  className="  px-11  py-2  bg-yellow-300 hover:bg-yellow-500 rounded-full font-semibold text-xs   uppercase ">
+                                  TRY AGAIN
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                      </div>
+                      
+                      
+                    </div>
+                    <div className='hidden md:block'>
+                      <img className="" src={Morty} alt=" Animación"  />
+                    </div>
+                    
+                  </div>
+                </div>
+                <div className='md:pt-2 pt-10 relative flex flex-col min-w-0 break-words  w-full mb-6 px-4 md:px-10' id='review'>
+                  <div className='relative flex flex-col min-w-0 break-words bg-gray-50 w-full mb-6 shadow-lg rounded '>
+                    <EjercicioR ejercicios={props.ejercicios} esPrueba = {true} esLeccion={false}/>
+                  </div>
+                </div> 
             </div>
            }
             
@@ -39,13 +132,27 @@ async function noEsCorrecta(props) {
     props.setContadorRespondidas(contadorRespuestas + 1);
 
     if (props.juego.length === 0) {
-        
-        finPrueba(props.aciertos, props.totalEjercicios)
+        //finPrueba(props.aciertos, props.totalEjercicios)  
+    } else {    
+    }
+  }
+
+  async function enviarSiEsCorrecta(props, contador) {
+    //Se es corecta se necesita saber si se ha llegado al final de la lista de ejercicios, de ser así, se debe de terminar el juego y guardar el progreso,
+    //caso contrario se debe de pasar al siguiente ejercicio
+    
+    let contadorRespuestas = props.contadorRespondidas;
+    if (props.juego.length === 0) {
+        props.setAciertos(contador + 1);
+        //finPrueba(props.aciertos, props.totalEjercicios)
         
     } else {
-        
+        props.setAciertos(contador + 1);
     }
 
+    props.juego.pop();
+    props.setContadorRespondidas(contadorRespuestas + 1);
+    
   }
   
 
@@ -53,6 +160,8 @@ async function noEsCorrecta(props) {
   const validarRespuesta = async (props) => {
     let tipo_ejercicio = props.ejercicio.props.ejercicio.type;
     let aciertos = props.aciertos;
+
+    //console.log('EJERCICIO: ',props.ejercicio.props.ejercicio)
   
     if (tipo_ejercicio === "opcion_correcta_1") {
       let hijos = props.miref.current.children;
@@ -131,6 +240,8 @@ async function noEsCorrecta(props) {
       if (esCorrecta) {
         enviarSiEsCorrecta(props, aciertos);
       } else {
+        //console.log('INCORRECTA: ', props)
+        //console.log('Incorrec_2: ', respuestasBack)
         noEsCorrecta(props,respuestasBack);
       }
   
@@ -280,19 +391,24 @@ async function noEsCorrecta(props) {
     }
     if (hasSelected) {
       //Se obtiene la respuesta correcta para esto utilizo la funcion filter, itero las opciones de los ejercicios y para cada opcion si la respuesta es correcta se guarda en un arreglo
-      let correctAnswer = props.ejercicio.props.ejercicio.options
+      try {
+        let correctAnswer = props.ejercicio.props.ejercicio.options
         .filter((option) => option.answer === true)[0]
         .item.toString()
         .trim();
-      if (correctAnswer === userSelection) {
-        esCorrecta = true;
+        if (correctAnswer === userSelection) {
+          esCorrecta = true;
+        }
+    
+        if (esCorrecta) {
+          enviarSiEsCorrecta(props, contadorRespondidas);
+        } else {
+          noEsCorrecta(props,correctAnswer);
+        }
+      } catch (error) {
+        
       }
-  
-      if (esCorrecta) {
-        enviarSiEsCorrecta(props, contadorRespondidas);
-      } else {
-        noEsCorrecta(props,correctAnswer);
-      }
+      
     } else {
       noEsCorrecta(props)
     }
@@ -347,23 +463,7 @@ async function noEsCorrecta(props) {
   
   
 
-  async function enviarSiEsCorrecta(props, contador) {
-    //Se es corecta se necesita saber si se ha llegado al final de la lista de ejercicios, de ser así, se debe de terminar el juego y guardar el progreso,
-    //caso contrario se debe de pasar al siguiente ejercicio
-    
-    let contadorRespuestas = props.contadorRespondidas;
-    if (props.juego.length === 0) {
-        props.setAciertos(contador + 1);
-        finPrueba(props.aciertos, props.totalEjercicios)
-        
-    } else {
-        props.setAciertos(contador + 1);
-    }
 
-    props.juego.pop();
-    props.setContadorRespondidas(contadorRespuestas + 1);
-    
-  }
   
 
 export default EjercicioFooterPruebaLibros

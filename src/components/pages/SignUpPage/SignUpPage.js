@@ -15,6 +15,7 @@ const SignUpPage = () => {
   const [form, setForm] = useState({
     name: "",
     lastname: "",
+    cedula: "",
     mail: "",
     password: "",
     password2: "",
@@ -46,102 +47,19 @@ const SignUpPage = () => {
   }
 
 
-  const handleSubmit = (event) => {
-  event.preventDefault();
-  //check if inputs are undefined
-  if (form.name === undefined || form.lastname === undefined || form.mail === undefined || form.password === undefined || form.password2 === undefined ){
-    alert("Por favor llene todos los campos");
-    return true;
-  } else if(form.name === "" || form.lastname === "" || form.mail === "" || form.password === "" || form.password2 === ""){
-    alert("Por favor llene todos los campos");
-    return true;
-  } else if (form.password !== form.password2) {
-    alert("Las contraseñas no coinciden");
-    return true;
-  }else if(!isValidEmail(form.mail)){
-    alert("Por favor ingrese un correo valido");
-    return true;
-  }else if(isUTM(form.mail)){
-    setCargando(true);
-    setDato("");
-    setIsVisibleDato("hidden");    
-    setDato("Su cuenta de dominio utm ya está habilitada, solo realice el login");
-    setIsVisibleDato("visible");
-    setCargando(false);
-    return true;    
-  }
-  else{
-    setCargando(true);
-    setDato("");
-    setIsVisibleDato("hidden");    
-    setDato("El registro de usuario no está disponible");
-    setIsVisibleDato("visible");
-    setCargando(false);
-    return true;
-  }
-
-  setCargando(true);
-  setCargando(true);
-  setDato("");
-  setIsVisibleDato("hidden");
-
-  axios
-    .post(`${process.env.REACT_APP_API_URL}/signup`, {
-      name: form.name,
-      lastname: form.lastname,
-      mail: form.mail,
-      password: form.password,
-    },
-    {
-      headers: {
-        'token': process.env.REACT_APP_SECRET_TOKEN
-    }
-    }).then((response) => {
-      if (response.data.res === "USER EXITS") {
-        setDato("El usuario ya existe");
-        setIsVisibleDato("visible");
-        setCargando(false);
-        setInterval(() => {
-          setDato("");
-          setIsVisibleDato("hidden");
-        }, 10000);
-      } else if(response.data.res === "ERROR"){
-        setDato("Hubo un error al conectar con el servidor");
-        setIsVisibleDato("");
-        setCargando(false);
-        setInterval(() => {
-          setDato("");
-          setIsVisibleDato("hidden");
-        }, 10000);
-
-      } else {
-        console.log(response);
-        var user = response.data.res;
-        cookie.set("_id", user._id, { path: "/" });
-        cookie.set("name", user.name, { path: "/" });
-        cookie.set("lastname", user.lastname, { path: "/" });
-        cookie.set("mail", user.mail, { path: "/" });
-        cookie.set("status", user.status, { path: "/" });
-        
-        if(user.status === 'Active'){
-          window.location.href = "./dashboard";
-        }else{
-          window.location.href = "./pendingAccount";
-        }
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }
   
   useEffect(() => {
-    
+    if (cookie.get("_id") && cookie.get("status")==='Active') {
+      window.location.href = "./";
+    }
+    if (cookie.get("_id") && cookie.get("status")!=='Active') {
+      window.location.href = "./pendingAccount";
+    }
   })
 
     return (
       <div className=" ">
-        <div className="flex h-screen w-screen ">
+        <div className="md:flex h-screen">
           <div className=" lg:w-1/3 md:w-screen">
             <div className="min-h-screen flex items-center justify-center  py-12 px-4 sm:px-6 lg:px-8">
               <div className="max-w-md w-full space-y-2">
@@ -159,12 +77,17 @@ const SignUpPage = () => {
                   <p className="mt-2 text-center text-sm text-gray-600">
                     O
                     <a
-                      href="/signin"
+                      href="/dashboard"
                       className="font-medium ml-2 text-green-600 hover:text-green-500"
                     >
                       Iniciar sesión
                     </a>
                   </p>
+                  <div>
+                      <h3 className="font-bold py-2 lg:text-xs md:text-xs text-sm   font-sans text-gray-500 ">
+                        Si perteneces a la UTM, puedes iniciar sesión con tú cuenta insitucional @utm.edu.ec
+                      </h3>      
+                  </div>
                 </div>
                 <div className={isVisibleDato}>
                   <h2 className="text-md text-red-500">{dato}</h2>
@@ -172,6 +95,23 @@ const SignUpPage = () => {
                 <form className=" space-y-4" action="#" method="POST">
                   <input type="hidden" name="remember" value="true" />
                   <div className="rounded-md shadow-sm -space-y-px">
+                  <div>
+                      <label htmlFor="email-address" className="sr-only">
+                        cedula
+                      </label>
+                      <input
+                        id="cedula"
+                        name="cedula"
+                        type="text"
+                        maxlength="10"
+                        autoComplete="cedula"
+                        required
+                        value={form.cedula}
+                        onChange={handleChange}
+                        className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
+                        placeholder="C.I. o Pasaporte"
+                      />
+                    </div>
                     <div>
                       <label htmlFor="email-address" className="sr-only">
                         Name
@@ -204,6 +144,7 @@ const SignUpPage = () => {
                         placeholder="Apellidos"
                       />
                     </div>
+                    
                     <div>
                       <label htmlFor="email-address" className="sr-only">
                         Email address
@@ -287,7 +228,6 @@ const SignUpPage = () => {
                     <button
                       type="submit"
                       disabled={cargando}
-                      onClick={handleSubmit}
                       className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-offset-2 
                           focus:ring-yellow-400"
                     >
