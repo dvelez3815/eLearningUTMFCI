@@ -14,7 +14,7 @@ class Viewimage extends Component {
       
       <div className="m-auto my-6">
         <div className="hidden">
-          <img src={`https://drive.google.com/uc?export=view&id=${this.props.img}`}/>
+          <img src={`https://drive.google.com/uc?export=view&id=${this.props.img}`} alt="imagen_res"/>
         </div>
         
         <button onClick={( img)=>mostrarImagen(`https://drive.google.com/uc?export=view&id=${this.props.img}` )}

@@ -7,22 +7,15 @@ import Footer from "../../Footer";
 import logo from "../../../assets/resource/Logo_Provicional.png";
 import CollectionsBookmarkIcon from "@material-ui/icons/CollectionsBookmark";
 import { Link } from "react-router-dom";
-import Cookie from "universal-cookie";
-const cookies = new Cookie();
 const USER = JSON.parse(localStorage.getItem("user"));
 
 const Evaluacion = () => {
-  useEffect(async () => {
-    if (!cookies.get("_id")) {
+  useEffect(() => {
+    if (!USER) {
       window.location.href = "./signin";
     }
-
-
   }, []);
-
-
   
-
   return (
     <div className=' '>
       { USER ?

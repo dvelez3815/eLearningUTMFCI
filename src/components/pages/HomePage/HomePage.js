@@ -1,4 +1,4 @@
-import React, { createRef, useEffect } from "react";
+import React from "react";
 
 import Circulo from "../../../assets/resource/Semi_Circulo.png";
 import Chica from "../../../assets/resource/CHICA.png";
@@ -25,7 +25,7 @@ class HomePage extends React.Component {
     <div className=" overflow-x-hidden ">
       <div className=" mx-auto z-20  flex px-5 h-auto items-center">
         <div className=" md:ml-10 mr-10">
-          <a href='https://www.utm.edu.ec/' target ='_blank' >
+          <a href='https://www.utm.edu.ec/' target ='_blank' rel="noreferrer" >
           <img className=" md:h-20 lg:h-20 sm:h-20" src={LogoProvicional} alt="logo" />
           </a>
         </div>

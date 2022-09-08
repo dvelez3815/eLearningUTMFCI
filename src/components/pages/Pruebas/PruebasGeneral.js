@@ -2,8 +2,6 @@ import React from 'react'
 import { Ejercicio } from '../ejercicios/Ejercicio';
 import loading from "../../../assets/resource/loading.svg";
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
-import Cookies from 'universal-cookie';
-const cookies = new Cookies();
 const ab = []
 
 
@@ -14,13 +12,8 @@ const PruebaGeneral = () => {
     
 
     React.useEffect(() => {
-        //console.log('entra')
-        //addData(setData)
         getData().then(data => {
                 let dataPrueba = cutData(data);
-                //console.log(dataPrueba)
-                 //dataPrueba = dataPrueba.filter(x => x.type === 'true_false')
-                //console.log(dataPrueba)
                 setData(dataPrueba);
                 setLoadingData(false);
 

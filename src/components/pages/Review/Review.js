@@ -2,16 +2,14 @@ import React from 'react'
 import { Ejercicio } from '../ejercicios/Ejercicio';
 import loading from "../../../assets/resource/loading.svg";
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
-import Cookies from 'universal-cookie';
-const cookies = new Cookies();
-
+const USER = JSON.parse(localStorage.getItem("user"));
 const Review = () => {
 
     const [data, setData] = React.useState([]);
     const [loadingData, setLoadingData] = React.useState(true);
 
     React.useEffect(() => {
-        if (!cookies.get("_id")) {
+        if (!USER) {
             window.location.href = "/signin";
           }else{
             const tipo = window.location.href.split('/')[window.location.href.split('/').length - 1];

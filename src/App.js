@@ -71,9 +71,7 @@ function App() {
       <Route exact path="/PendingAccount">
         <AccountPendingPage />
       </Route>
-      {/* <Route exact path="/restartPassword">
-        <RestarPaswor />
-      </Route> */}
+
       <Route > <NotFoundPage/> </Route>
       </Switch>
     </Router>

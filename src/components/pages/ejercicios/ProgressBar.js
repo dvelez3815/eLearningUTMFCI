@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import CancelIcon from "@material-ui/icons/Cancel";
 import { useHistory } from 'react-router';
 import { mostrarAlertaSalir } from '../../Alert/Alerts';
@@ -6,7 +6,7 @@ import { mostrarAlertaSalirEva } from '../../Alert/Alerts';
 
 
 const ProgressBar = (props) => {
-  const history = useHistory();
+ /*  const history = useHistory(); */
   
 
     return (

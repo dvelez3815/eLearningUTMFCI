@@ -2,7 +2,6 @@
 import React from 'react';
 import shortid from 'shortid';
 import Modulo from '../Modulos/Modulo';
-import flecha from "../../assets/icons/flecha.png";
 
 import "./Libro.css";
 

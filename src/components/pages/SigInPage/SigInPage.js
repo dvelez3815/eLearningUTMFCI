@@ -1,9 +1,8 @@
-import React, {useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../../../assets/resource/Logo_Provicional.png";
 import img1 from "../../../assets/resource/sign.svg";
+import loading from '../../../assets/resource/loading.svg';
 import "./SigInPage.css";
-import axios from "axios";
-import loading from "../../../assets/resource/loading.svg";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
@@ -13,16 +12,21 @@ const SigInPage = () => {
   const [form, setForm] = useState({});
   const [cargando, setCargando] = useState(false);
 
-  useEffect(async () => {
-    if (cookies.get("_id")&& cookies.get("status")==='Active') {
+  /* useEffect(async () => {
+    if (cookies.get("_id") && cookies.get("status") === "Active") {
       window.location.href = "./dashboard";
     }
-    if (cookies.get("_id") && cookies.get("status")!=='Active') {
+    if (cookies.get("_id") && cookies.get("status") !== "Active") {
       window.location.href = "./pendingAccount";
     }
+  }, []); */
 
+  useEffect(()=>{
+    if (cookies.get("_id") && cookies.get("status") === "Active") {
+      window.location.href = "./dashboard";
+    }
   }, []);
-
+  
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -39,96 +43,51 @@ const SigInPage = () => {
 
   const handleButtonSubmit = async (event) => {
     event.preventDefault();
-    //check it input type are correct
-
     setCargando(true);
-    
-    axios
-      .post(process.env.REACT_APP_API_URL+"/user/signin", {
+    console.log(form);
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/user/signin`, {
+      method: "POST",
+      body: JSON.stringify({
         mail: form.mail.toLowerCase(),
         password: form.password,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        token: process.env.REACT_APP_SECRET_TOKEN,
       },
-      {
-        headers: {
-          'token': process.env.REACT_APP_SECRET_TOKEN
-      }
-      
-    }).then((res) => {
-        if (res.data.res=== "USER NOT EXIST") {
-          setDato("El usuario no existe");
-          setCargando(false);
-          setIsVisibleDato("");
-          setInterval(() => {
-            setDato("");
-            setIsVisibleDato("hidden");
-          }, 20500);
-        } else if (res.data.res=== "USER NOT EXIST UTM") {
-          setDato("Credenciales incorrectas, verifique los datos ingresados");
-          setCargando(false);
-          setIsVisibleDato("");
-          setInterval(() => {
-            setDato("");
-            setIsVisibleDato("hidden");
-          }, 20500);
-          } else if (res.data.res === "PASSWORD INCORRECT") {
-          setDato("La contraseña es incorrecta");
-          setIsVisibleDato("");
-          setCargando(false);
-          setInterval(() => {
-            setDato("");
-            setIsVisibleDato("hidden");
-          }, 20500);
-        } else if(res.data.res === "ERROR"){
-          setDato("Hubo un problema al conectar con el servidor, si el problema persiste intente más tarde");
-          setIsVisibleDato("");
-          setCargando(false);
-          setInterval(() => {
-            setDato("");
-            setIsVisibleDato("hidden");
-          }, 20500);          
-        } else if(res.data.res._id){
-          localStorage.setItem("user", JSON.stringify({"_id": res.data.res._id, "name": res.data.res.name,
-          "lastname": res.data.res.lastname,"mail": res.data.res.mail, "status":res.data.res.status,
-          'token':res.data.res.confirmationCode, 'creado':res.data.res.createdAt}));
-          cookies.set("_id", res.data.res._id, { path: "/" });
-          cookies.set("name", res.data.res.name, { path: "/" });
-          cookies.set("lastname", res.data.res.lastname, { path: "/" });
-          cookies.set("status", res.data.res.status, { path: "/" });
-          cookies.set("mail", res.data.res.mail, { path: "/" });
-          cookies.set("creado", res.data.res.createdAt, { path: "/" });
+    });
+    const {res:user} = await response.json();
+    const {status} = response;
+    
+    setCargando(false);
+    if(status !== 200){
+      setIsVisibleDato("visible");
+      setDato("Hubo un problema al conectar con el servidor, por favor vuelva a intentarlo, si el problema persiste intente más tarde");
+      return;
+    }
+    if(user === "USER NOT EXIST UTM"){
+      setIsVisibleDato("visible");
+      setDato("El usuario no existe en el sistema, por favor verifique su correo UTM");
+      return;
+    }
+    if(user === "USER NOT EXIST"){
+      setIsVisibleDato("visible");
+      setDato("El usuario no existe en el sistema");
+      return;
+    }
+    if(user === "PASSWORD INCORRECT"){
+      setIsVisibleDato("visible");
+      setDato("La contraseña es incorrecta");
+      return;
+    }
+     localStorage.setItem(
+      "user",
+      JSON.stringify(user)
+    ); 
+    window.location.href = "./dashboard";
+    
 
-          window.location.href = "./dashboard"
-          //console.log('todo correcto',res)
-          //console.log('REStaaaa',res.data)
-          //console.log('REs-ulti',res.data.res._id)
-        }else{
-          //console.log('algo malll',res.statusText)
-          setDato("Hubo un problema al conectar con el servidor, por favor vuelva a intentarlo, si el problema persiste intente más tarde");
-          setIsVisibleDato("");
-          setCargando(false);
-          setInterval(() => {
-            setDato("");
-            setIsVisibleDato("hidden");
-          }, 20500); 
-        return
-        }
-
-      })
-      .catch((err) => {
-        setDato("Hubo un problema al conectar con el servidor, por favor vuelva a intentarlo, si el problema persiste intente más tarde");
-        setIsVisibleDato("");
-          setCargando(false);
-          setInterval(() => {
-            setDato("");
-            setIsVisibleDato("hidden");
-          }, 20500); 
-        return
-      }
-      );
-      
-  }
-  
-
+  };
   return (
     <div className=" ">
       <div className="md:flex h-screen ">
@@ -155,7 +114,6 @@ const SigInPage = () => {
                     Registrate
                   </a>
                 </p>
-
               </div>
               <div className={isVisibleDato}>
                 <h2 className="text-md text-red-500">{dato}</h2>
@@ -231,6 +189,7 @@ const SigInPage = () => {
                   </div>
                 )}
                 <div>
+                  {/*    <ReCaptcha /> */}
                   <button
                     type="submit"
                     onClick={handleButtonSubmit}
@@ -279,16 +238,5 @@ const SigInPage = () => {
     </div>
   );
 };
-
-
-//function to know if domain is @gmail.com
-const isUTM = (email) => {
-  const domain = email.split("@")[1];
-  return domain === "utm.edu.ec";
-  
-};
-
-
-
 
 export default SigInPage;

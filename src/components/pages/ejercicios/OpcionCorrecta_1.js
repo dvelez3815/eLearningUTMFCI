@@ -1,6 +1,6 @@
 import React, { createRef, useRef, useState,useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import "../../pages/ejercicios/CheckExercise.css";
+import "./CheckExercise.css";
 import ViewImage from '../../ViewImage/ViewImage'
 import axios from 'axios';
 

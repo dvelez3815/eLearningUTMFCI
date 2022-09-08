@@ -1,9 +1,7 @@
 import React, { useRef } from "react";
 import ProgressBar from "./ProgressBar";
 import {Link} from  "react-router-dom"
-import {
-  AlertaLeccion
-} from "../../Alert/Alerts";
+import { AlertaLeccion } from "../../Alert/Alerts";
 
 //load ejercicio.css
 import "./Ejercicio.css";
@@ -15,7 +13,7 @@ import VerdaderoFalso from "./VerdaderoFalso";
 import CompletarTexto from "./CompletarTexto";
 import Emparejar from "./Emparejar";
 import EjercicioFooterPruebaLibros from "./EjercicioFooterPruebaLibros";
-import { EjercicioR } from '../ejercicios/Ejer_Review';
+import { EjercicioR } from './Ejer_Review';
 
 import image1 from "../../../assets/resource/lesson4.webp";
 import image2 from "../../../assets/resource/lesson3.webp";
@@ -32,7 +30,7 @@ export const Ejercicio = (props) => {
   const [openTab, setOpenTab] = React.useState(1);
 
 
-  const [idp, setId] = React.useState(0);
+  const [_,  setId] = React.useState(0);
   let topic = ''
   let Objetive = ''
   let explanation = ''
@@ -67,14 +65,14 @@ export const Ejercicio = (props) => {
       );
     }
   }, []);
-  React.useEffect(async()  => {
+  React.useEffect(()  => {
     // const cargarVista = async() => {
     //     await cargarEjercicios(juego, setJuego, panelJuego, setCargado, finJuego, ejercicios);
     // }
     
     if (!USER) {
       let valor = AlertaLeccion('SU SESIÓN HA EXPIRADO')
-      if((await valor).value){
+      if(valor.value){
       window.location.href = "/signin";
       }
   }

@@ -14,7 +14,7 @@ import EjercicioReview from "./EjerciciosReview";
 export const EjercicioR = (props) => {
   const [juego, setJuego] = React.useState([]);
   const [cargado, setCargado] = React.useState(true);
-  const [finJuego, setFinJuego] = React.useState(false);
+  const [/* finJuego, */ setFinJuego] = React.useState(false);
   const [contadorRespondidas, setContadorRespondidas] = React.useState(0);
   const [preguntasValidas, setPreguntasValidas] = React.useState(0);
   const [aciertos, setAciertos] = React.useState(0);
@@ -97,7 +97,6 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado,preguntas
     let contador = 0;
 
     ejercicios.map((ejercicio, index) => {
-  
       if(ejercicio.type === "completar_texto"){
         setJuego(juego => [...juego, <CompletarTexto key={index} ejercicio={ejercicio} miref={panelJuego}/>])
         contador++;
@@ -116,7 +115,7 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado,preguntas
       }else if(ejercicio.type === "emparejar"  ||  ejercicio.type === "emparejar_img"  ){
           setJuego(juego => [...juego, <Emparejar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
           contador++;
-      }
+      } 
 
     } 
 

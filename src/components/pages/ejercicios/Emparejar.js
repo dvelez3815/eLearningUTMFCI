@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import shortid from "shortid";
-import "../../pages/ejercicios/CheckExercise.css";
+import "./CheckExercise.css";
 import ViewImage from "../../ViewImage/ViewImage";
 import axios from 'axios'
 const Emparejar = (props) => {

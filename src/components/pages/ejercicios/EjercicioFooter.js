@@ -145,7 +145,7 @@ async function noEsCorrecta(props, respuesta, id) {
   aux = aux.filter((e) => e !== actual);
 
   aux.unshift(actual);
-  if (id==1){
+  if (id===1){
     Alertaskip(respuesta)
   }else{
     mostrarAlertaError(respuesta);

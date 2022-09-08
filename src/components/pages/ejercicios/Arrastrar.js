@@ -9,10 +9,9 @@ const Arrastrar = (props) => {
   let data = props.ejercicio.options;
 
   //Re ordena la lista en base al cambio realizado
-  const [title, setTitle] = useState('')
+  const [/* title, */ setTitle] = useState('')
 
-  useEffect(async () => {
-    
+  useEffect(() => {
     translateText()
 
     }, []);

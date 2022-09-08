@@ -1,6 +1,5 @@
-import React, { createRef, useRef, useState,useEffect } from "react";
+import React, { useState,useEffect } from "react";
 import shortid from "shortid";
-import { OpcionCorrecta_1 } from "./OpcionCorrecta_1";
 import ViewImage from '../../ViewImage/ViewImage'
 import axios from 'axios'
 const VerdaderoFalso = (props) => {

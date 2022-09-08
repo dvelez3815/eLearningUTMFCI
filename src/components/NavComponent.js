@@ -1,7 +1,6 @@
 import React, {createRef } from "react";
 import { Fragment } from "react";
 import {Menu, Transition } from "@headlessui/react";
-import Cookie from "universal-cookie";
 
 import {
    mostrarAlertaDrive
@@ -9,8 +8,6 @@ import {
 
 import user_img from "../assets/resource/user.png";
 import logobn from "../assets/resource/Logo_Provicional_bn.png";
-import { Button } from "@material-ui/core";
-const cookies = new Cookie();
 
 
 class NavComponent extends React.Component {
@@ -18,7 +15,6 @@ class NavComponent extends React.Component {
     super(props);
     this.hamburgerBtn = createRef();
     this.hamburgerItems = createRef();
-    console.log('id',this.props.USER)
 
   }
   
@@ -32,13 +28,6 @@ class NavComponent extends React.Component {
 
   logout() {
     localStorage.removeItem("user");
-    cookies.remove("_id", { path: "/" });
-    cookies.remove("status", { path: "/" });
-    cookies.remove("progreso", { path: "/" });
-    cookies.remove("name", { path: "/" });
-    cookies.remove("lastname", { path: "/" });
-    cookies.remove("mail", { path: "/" });
-    cookies.remove("creado", { path: "/" });
     window.location.href = "./";
   
   }
@@ -64,7 +53,7 @@ class NavComponent extends React.Component {
                       className={this.props.activado===1?" flex font-semibold text-yellow-400 uppercase   dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium":"flex font-semibold text-white uppercase  hover:text-yellow-300 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"}
                       href="/dashboard"
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                       <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
                     </svg>
                       Learning
@@ -73,7 +62,7 @@ class NavComponent extends React.Component {
                       className={this.props.activado===2?"flex font-semibold text-yellow-400  uppercase   dark:hover:text-white  py-2 rounded-md text-sm font-medium":"flex font-semibold text-white uppercase  hover:text-yellow-300 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"}
                       href="/evaluacion"
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                       <path d="M8 2a1 1 0 000 2h2a1 1 0 100-2H8z" />
                       <path d="M3 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v6h-4.586l1.293-1.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L10.414 13H15v3a2 2 0 01-2 2H5a2 2 0 01-2-2V5zM15 11h2a1 1 0 110 2h-2v-2z" />
                     </svg>
@@ -82,8 +71,8 @@ class NavComponent extends React.Component {
                     <button onClick={mostrarAlertaDrive}
                       className={this.props.activado===3?"flex font-semibold text-yellow-400  uppercase   dark:hover:text-white  py-2 rounded-md text-sm font-medium":"flex font-semibold text-white uppercase  hover:text-yellow-300 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"}
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                      <path fill-rule="evenodd" d="M2 9.5A3.5 3.5 0 005.5 13H9v2.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 15.586V13h2.5a4.5 4.5 0 10-.616-8.958 4.002 4.002 0 10-7.753 1.977A3.5 3.5 0 002 9.5zm9 3.5H9V8a1 1 0 012 0v5z" clip-rule="evenodd" />
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M2 9.5A3.5 3.5 0 005.5 13H9v2.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 15.586V13h2.5a4.5 4.5 0 10-.616-8.958 4.002 4.002 0 10-7.753 1.977A3.5 3.5 0 002 9.5zm9 3.5H9V8a1 1 0 012 0v5z" clipRule="evenodd" />
                     </svg>
                      Resources
                     </button>
@@ -344,7 +333,7 @@ class NavComponent extends React.Component {
               >
                 Evaluation
               </a>
-              <a onClick={mostrarAlertaDrive}
+              <a onClick={mostrarAlertaDrive} href="#!"
                 className="text-gray-100 hover:text-yellow-500 dark:text-white block px-3 py-2 rounded-md text-base font-medium"
               >
                 Resources

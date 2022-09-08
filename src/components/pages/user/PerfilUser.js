@@ -8,7 +8,6 @@ import fb from "../../../assets/icons/facebook.svg"
 import ig from "../../../assets/icons/instagram.svg"
 
 import NavComponent from "../../NavComponent";
-import axios from "axios";
 
 
 import {
@@ -26,7 +25,7 @@ var options = { year: 'numeric', month: 'long', day: 'numeric' };
 
 export const PerfilUser = () => {
   useEffect(async () => {
-    if (!cookies.get("_id")) {
+    if (!USER) {
       window.location.href = "./signin";
     }
   });
@@ -165,7 +164,7 @@ export const PerfilUser = () => {
                           </div>
                           <div className="pl-4">
                           <button type="button" onClick={activar} className={colorButton+"text-white  text-center inline-flex items-center justify-center w-10 h-10  shadow-lg rounded-full"}>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
                               <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                             </svg>
                             </button>
@@ -220,7 +219,7 @@ export const PerfilUser = () => {
                               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400"
                             >
                               <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
                               </svg>
                               </span>
@@ -343,7 +342,7 @@ export const PerfilUser = () => {
                                     <div className="px-3 pb-4">
                                       <div className="  text-white font-bold uppercase text-base h-20 pt-2 rounded-lg shadow-md outline-none  mr-1 mb-1 ease-linear " type="button">
                                         <div className={valorProgress !=='0'? "text-white mx-auto p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-5 shadow-lg rounded-full bg-yellow-500" : "text-white mx-auto p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-5 shadow-lg rounded-full bg-gray-300"}>
-                                          <svg xmlns="http://www.w3.org/2000/svg" class="h-60 w-60" viewBox="0 0 20 20" fill="currentColor">
+                                          <svg xmlns="http://www.w3.org/2000/svg" className="h-60 w-60" viewBox="0 0 20 20" fill="currentColor">
                                             <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
                                             <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm9.707 5.707a1 1 0 00-1.414-1.414L9 12.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                                           </svg>
@@ -356,7 +355,7 @@ export const PerfilUser = () => {
                                     <div className="px-3 pb-4">
                                       <div className="  text-white font-bold uppercase text-base h-20 pt-2 rounded-lg shadow-md outline-none  mr-1 mb-1 ease-linear " type="button">
                                       <div className={valorProgress <50? "text-white mx-auto p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-5 shadow-lg rounded-full bg-gray-300" : "text-white mx-auto p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-5 shadow-lg rounded-full bg-blue-600"}>
-                                          <svg xmlns="http://www.w3.org/2000/svg" class="h-60 w-60" viewBox="0 0 20 20" fill="currentColor">
+                                          <svg xmlns="http://www.w3.org/2000/svg" className="h-60 w-60" viewBox="0 0 20 20" fill="currentColor">
                                             <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" />
                                             <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
                                           </svg>
@@ -369,7 +368,7 @@ export const PerfilUser = () => {
                                     <div className="px-3 ">
                                       <div className="  text-white font-bold uppercase text-base h-20 pt-2 rounded-lg shadow-md outline-none  mr-1 mb-1 ease-linear " type="button">
                                       <div className={valorProgress <100? "text-white mx-auto p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-5 shadow-lg rounded-full bg-gray-300" : "text-white mx-auto p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-5 shadow-lg rounded-full bg-green-600"}>
-                                          <svg xmlns="http://www.w3.org/2000/svg" class="h-60 w-60" viewBox="0 0 20 20" fill="currentColor">
+                                          <svg xmlns="http://www.w3.org/2000/svg" className="h-60 w-60" viewBox="0 0 20 20" fill="currentColor">
                                             <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
                                           </svg>
                                         </div>

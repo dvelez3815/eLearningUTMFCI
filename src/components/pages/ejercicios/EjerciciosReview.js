@@ -1,18 +1,16 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
-import { finPrueba, mostrarAlertaError } from '../../Alert/Alerts';
-import Morty from "../../../assets/resource/pensar.gif";
+import { finPrueba } from '../../Alert/Alerts';
 
 let ab = []
-let game = []
+//let game = []
 let id = 0
-
+ 
 const pru = (ab) => {
   let texto = ''
   for (let i = 0; i < ab.length; i++) {
     texto += ab[i].toLowerCase();
     //console.log(ab.length,' vfor: ',(i+1))
-    if(ab.length == (i+1)){
+    if(ab.length === (i+1)){
       return texto
     }
     texto += ' - '

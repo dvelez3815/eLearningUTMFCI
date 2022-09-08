@@ -6,9 +6,9 @@ import ViewImage from '../../ViewImage/ViewImage'
 import axios from 'axios'
 
 const CompletarTexto = (props) => {
-  const [title, setTitle] = useState('')
+  const [/* title, */ setTitle] = useState('')
 
-  useEffect(async () => {
+  useEffect(() => {
     
     translateText()
 

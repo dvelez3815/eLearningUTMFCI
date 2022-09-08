@@ -118,7 +118,7 @@ export default function Activity(props) {
             </div>
 
             {(props.percent === 100)?
-            <h1></h1>
+            <h1 className="hidden">k</h1>
             :
             <Menu.Item >
               {({ active }) => (

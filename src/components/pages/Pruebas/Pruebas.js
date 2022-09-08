@@ -2,8 +2,6 @@ import React from 'react'
 import { Ejercicio } from '../ejercicios/Ejercicio';
 import loading from "../../../assets/resource/loading.svg";
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
-import Cookies from 'universal-cookie';
-const cookies = new Cookies();
 const Pruebas = () => {
 
     const [data, setData] = React.useState([]);
@@ -23,7 +21,6 @@ const Pruebas = () => {
                 
             }
             setLoadingData(false);
-            console.log('ejecuta')
         });
         
         

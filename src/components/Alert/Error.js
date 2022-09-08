@@ -17,7 +17,7 @@ export default class AlertError extends Component {
     render() {
         return (
             <div>
-                <button class="btn btn-danger" onClick={this.HandleClick}>
+                <button className="btn btn-danger" onClick={this.HandleClick}>
                     Show Error Alert
                 </button>
             </div>

@@ -31,10 +31,7 @@ export const mostrarContenido= (tema,objetivo,explicacion,link)=>{
             customClass: 'swal-wide',
             confirmButtonText: "Ok",
             showCloseButton: true,
-
             focusConfirm: false,
-            confirmButtonText:
-            "<a href="+link+">START</a>",
 
         },
     ).then((result) => {
