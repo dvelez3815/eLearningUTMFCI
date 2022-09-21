@@ -1,91 +1,57 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import logo from "../../../assets/resource/Logo_Provicional.png";
 import img1 from "../../../assets/resource/sign.svg";
-import loading from '../../../assets/resource/loading.svg';
 import "./SigInPage.css";
-import Cookies from "universal-cookie";
-const cookies = new Cookies();
+import Loading from "../../Loading/Loading";
+import { loginUser } from '../../../api/User'
+import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as Yup from 'yup'
+import {mostrarAlertaLogin} from '../../Alert/Alerts';
+
 
 const SigInPage = () => {
   const [isVisibleDato, setIsVisibleDato] = useState("hidden");
   const [dato, setDato] = useState("");
-  const [form, setForm] = useState({});
   const [cargando, setCargando] = useState(false);
 
-  /* useEffect(async () => {
-    if (cookies.get("_id") && cookies.get("status") === "Active") {
-      window.location.href = "./dashboard";
-    }
-    if (cookies.get("_id") && cookies.get("status") !== "Active") {
-      window.location.href = "./pendingAccount";
-    }
-  }, []); */
+  const formSchema = Yup.object().shape({
+    mail: Yup.string().email('El correo no es valido').required('Campo requerido'),
+    password: Yup.string()
+      .required('La contraseña es obligatoria')
+  })
+  const formOptions = { resolver: yupResolver(formSchema) }
+  const { register, handleSubmit, formState: { errors } } = useForm(formOptions);
 
-  useEffect(()=>{
-    if (cookies.get("_id") && cookies.get("status") === "Active") {
-      window.location.href = "./dashboard";
-    }
-  }, []);
+
   
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-  };
 
-  const handleChecked = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.checked,
-    });
-  };
-
-  const handleButtonSubmit = async (event) => {
-    event.preventDefault();
+  const onSubmit = async (form) => {
     setCargando(true);
-    console.log(form);
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/user/signin`, {
-      method: "POST",
-      body: JSON.stringify({
-        mail: form.mail.toLowerCase(),
-        password: form.password,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-        token: process.env.REACT_APP_SECRET_TOKEN,
-      },
-    });
-    const {res:user} = await response.json();
-    const {status} = response;
-    
-    setCargando(false);
-    if(status !== 200){
-      setIsVisibleDato("visible");
-      setDato("Hubo un problema al conectar con el servidor, por favor vuelva a intentarlo, si el problema persiste intente más tarde");
-      return;
+    const user = await loginUser(form);
+    setIsVisibleDato("visible");
+    switch (user) {
+      case "USER NOT EXIST UTM":
+        setDato("El usuario no existe en el sistema, por favor verifique su correo UTM");
+        return;
+      case "USER NOT EXIST":
+        setDato("El usuario no existe en el sistema, por favor verifique su correo");
+        return;
+      case "PASSWORD INCORRECT":
+        setDato("La contraseña es incorrecta");
+        return;
+      case "SERVER ERROR":
+        setDato("Hubo un problema al conectar con el servidor, por favor vuelva a intentarlo, si el problema persiste intente más tarde");
+        return;
+      default:
+        break;
     }
-    if(user === "USER NOT EXIST UTM"){
-      setIsVisibleDato("visible");
-      setDato("El usuario no existe en el sistema, por favor verifique su correo UTM");
-      return;
-    }
-    if(user === "USER NOT EXIST"){
-      setIsVisibleDato("visible");
-      setDato("El usuario no existe en el sistema");
-      return;
-    }
-    if(user === "PASSWORD INCORRECT"){
-      setIsVisibleDato("visible");
-      setDato("La contraseña es incorrecta");
-      return;
-    }
-     localStorage.setItem(
+    localStorage.setItem(
       "user",
       JSON.stringify(user)
-    ); 
+    );
+    setCargando(false);
     window.location.href = "./dashboard";
-    
 
   };
   return (
@@ -97,7 +63,8 @@ const SigInPage = () => {
               <div>
                 <a href="/">
                   <img
-                    className="mx-auto h-12 w-auto"
+                    className="mx-auto md:h-16 lg:h-16 sm:h-16 w-auto"
+
                     src={logo}
                     alt="Workflow"
                   />
@@ -118,42 +85,45 @@ const SigInPage = () => {
               <div className={isVisibleDato}>
                 <h2 className="text-md text-red-500">{dato}</h2>
               </div>
-              <form className="mt-8 space-y-4" action="#" method="POST">
+              <form className="mt-8 space-y-4" action="#" method="POST" onSubmit={handleSubmit(onSubmit)}>
                 <input type="hidden" name="remember" value="true" />
-                <div className="rounded-md shadow-sm -space-y-px">
-                  <div>
-                    <label htmlFor="email-address" className="sr-only">
-                      Email address
-                    </label>
-                    <input
-                      id="email-address"
-                      name="mail"
-                      type="email"
-                      autoComplete="email"
-                      required
-                      pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
-                      onChange={handleChange}
-                      value={form.mail || ""}
-                      className="appearance-none  rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
-                      placeholder="Correo electrónico"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="password" className="sr-only">
-                      Password
-                    </label>
-                    <input
-                      id="password"
-                      name="password"
-                      type="password"
-                      onChange={handleChange}
-                      value={form.password || ""}
-                      autoComplete="current-password"
-                      required
-                      className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
-                      placeholder="Contraseña"
-                    />
-                  </div>
+                <div className="form-group mb-2">
+                  <label
+                    htmlFor="email-address"
+                    className="form-label text-left block mb-2 text-gray-700"
+                  >
+                    Correo electrónico:
+                  </label>
+                  <input
+                    id="email-address"
+                    name="mail"
+                    type="email"
+                    {...register("mail")}
+                    pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
+                    autoComplete="email"
+                    required
+                    className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                  />
+                  {errors.mail?.message && <span className="text-red-500 text-left block text-sm">{errors.mail?.message}</span>}
+                </div>
+                <div className="form-group mb-2">
+                  <label
+                    htmlFor="password"
+                    className="form-label text-left block mb-2 text-gray-700"
+                  >
+                    Contraseña:
+                  </label>
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    {...register("password")}
+                    autoComplete="current-password"
+                    required
+                    className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                  />
+
+                  {errors.password?.message && <span className="text-red-500 text-left block text-sm">{errors.password?.message}</span>}
                 </div>
 
                 <div className="flex items-center justify-between">
@@ -162,8 +132,6 @@ const SigInPage = () => {
                       id="remember"
                       name="remember"
                       type="checkbox"
-                      onChange={handleChecked}
-                      value={form.remember}
                       className="h-4 w-4 text-yellow-600 focus:ring-yellow-500 border-gray-300 rounded"
                     />
                     <label
@@ -184,15 +152,11 @@ const SigInPage = () => {
                   </div> */}
                 </div>
                 {cargando && (
-                  <div className="flex items-center justify-center">
-                    <img src={loading} width={50} alt="cargando"></img>
-                  </div>
+                  <Loading />
                 )}
                 <div>
-                  {/*    <ReCaptcha /> */}
                   <button
                     type="submit"
-                    onClick={handleButtonSubmit}
                     className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-offset-2 
                       focus:ring-yellow-400"
                   >
@@ -235,6 +199,14 @@ const SigInPage = () => {
           </div>
         </div>
       </div>
+      <script>
+        {window.onload = function () {
+          const saved = localStorage.getItem("user");
+          if (saved) {
+            mostrarAlertaLogin();
+          }
+        }}
+      </script>
     </div>
   );
 };

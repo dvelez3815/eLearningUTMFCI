@@ -1,8 +1,8 @@
 import React, {useState } from "react";
-import { omit } from 'underscore';
+import {registerUser} from '../../../api/User'
 import logo from "../../../assets/resource/Logo_Provicional.png";
 import img1 from "../../../assets/resource/sign.svg";
-import loading from "../../../assets/resource/loading.svg"
+import Loading from "../../Loading/Loading";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
@@ -30,18 +30,8 @@ const SignUpPage = () => {
   const { register, handleSubmit, formState: { errors } } = useForm(formOptions);
 
   const onSubmit = async(data) => {
-
     setCargando(true);
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/user/signup`, {
-      method: "POST",
-      body: JSON.stringify(omit(data, ['password2'])),
-      headers: {
-        "Content-Type": "application/json",
-        token: process.env.REACT_APP_SECRET_TOKEN,
-      },
-    });
-    const {res:user} = await response.json();
-    setCargando(false);
+    const user = await registerUser(data);
     if(user === "USER EXITS"){
       setIsVisibleDato("visible");
       setDato("El usuario ya existe");
@@ -51,23 +41,10 @@ const SignUpPage = () => {
       "user",
       JSON.stringify(user)
     ); 
+    setCargando(false);
     window.location.href = "./dashboard";
 
-  }
-
- /*  const handlePassWord2 = (e) => {
-    if (form.password === e.target.value) {
-      setDato("");
-      setIsVisibleDato("hidden");
-      handleChange(e);
-    } else {
-      setDato("Las contraseñas no coinciden");
-      setIsVisibleDato("visible");
-    }    
-  }   */
-
-
-  
+    }
 
     return (
       <div className=" ">
@@ -78,7 +55,7 @@ const SignUpPage = () => {
                 <div>
                   <a href="/">
                     <img
-                      className="mx-auto h-12 w-auto"
+                      className="mx-auto md:h-16 lg:h-16 sm:h-16 w-auto"
                       src={logo}
                       alt="Workflow"
                     />
@@ -153,7 +130,7 @@ const SignUpPage = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="form-group mb-2">
                         <label
-                          htmlFor="email-address"
+                          htmlFor="lastname"
                           className="form-label text-left block mb-2 text-gray-700"
                         >
                           Apellidos:
@@ -187,7 +164,7 @@ const SignUpPage = () => {
                           required
                           className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                         />
-                          {errors.mail?.message && <span className="text-red-500 text-left block text-sm">errors.mail?.message</span>}
+                          {errors.mail?.message && <span className="text-red-500 text-left block text-sm">{errors.mail?.message}</span>}
                       </div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -230,28 +207,8 @@ const SignUpPage = () => {
                       </div>
                     </div>
                   </div>
-
-                  {/*  <div className="flex items-center justify-between">
-                    <div className="flex items-center">
-                      <input
-                        id="remember"
-                        name="remember"
-                        type="checkbox"
-                        value={form.remember}
-                        className="h-4 w-4 text-yellow-600 focus:ring-yellow-500 border-gray-300 rounded"
-                      />
-                      <label
-                        htmlFor="remember"
-                        className="ml-2 block text-sm text-gray-900"
-                      >
-                        Recuerdame
-                      </label>
-                    </div>
-                  </div> */}
                   {cargando && (
-                    <div className="flex items-center justify-center">
-                      <img src={loading} width={50} alt="cargando"></img>
-                    </div>
+                   <Loading />
                   )}
                   <div>
                     <button

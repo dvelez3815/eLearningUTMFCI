@@ -1,0 +1,23 @@
+.ejercicio {
+    grid-gap: 24px;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: -webkit-min-content 1fr -webkit-min-content;
+    grid-template-rows: min-content 1fr min-content;
+    left: 0;
+    min-height: 460px;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    width: 100%;
+}
+
+
+
+@media (min-width: 700px){
+.ejercicio {
+    grid-gap: 0;
+    grid-template-rows: 100px 1fr 140px;
+    min-height: 690px;
+}
+}
