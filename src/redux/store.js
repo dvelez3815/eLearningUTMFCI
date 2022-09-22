@@ -3,13 +3,12 @@ import {createStore, combineReducers, compose, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 
 
-import userReducer from './UsuarioDucks';
 import progressReducer from './ProgressDucks';
 import taskReducer from './TaskDucks';
 
 const rootReducer = combineReducers({
-   usuarios: userReducer, 
-   progreso: progressReducer,
+  /*  usuarios: userReducer,  */
+   progress: progressReducer,
    task: taskReducer
 });
 

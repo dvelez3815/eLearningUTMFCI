@@ -19,8 +19,6 @@ export function getProgressColor(progress){
 }
 export function llenarInfo(progreso, task) {
 
-    console.log('progreso', progreso)
-    console.log('task', task)
     
     let libroActual = 1;
     let totalLibro = 5;
@@ -111,7 +109,13 @@ export function llenarInfo(progreso, task) {
             }
 
         }
-        libros.push(<Libro modulos={book.modulos} lecciones={task.res} key={shortid.generate()} lastbook_is_aproved={lastbook_is_aproved} libroactual={(index + 1)} />)
+        libros.push({
+            modulos: book.modulos, 
+            lecciones: task, 
+            key: index,
+            lastbook_is_aproved: lastbook_is_aproved,
+            libroactual: (index + 1)
+        })
 
     });
 

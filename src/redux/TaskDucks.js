@@ -1,41 +1,39 @@
-const dataInicial = {
-    array: [],
-};
+import { getTasks } from "../api/Task";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
+const initialState = {
+    task: [],
+    status: 'idle',
+    error: null
+  }
+export const obtenerTaskAccion = createAsyncThunk('task/fetchTasks', async () => {
+    const response = await getTasks();
+    return response.res;
+  })
 
-const OBTENER_TASK_EXITO = "OBTENER_TASK_EXITO";
-
-
-export default function taskReducer(state = dataInicial, action) {
-    switch (action.type) {
-        case OBTENER_TASK_EXITO:
-            return {
-                ...state,
-                array: action.payload,
-            };
-
-        default:
-            return state;
+const taskSlice = createSlice({
+    name: 'task',
+    initialState,
+    reducers: {
+      // omit existing reducers here
+    },
+    extraReducers(builder) {
+      builder
+        .addCase(obtenerTaskAccion.pending, (store, action) => {
+          store.status = 'loading'
+        })
+        .addCase(obtenerTaskAccion.fulfilled, (store, action) => {
+          store.status = 'succeeded'
+          // Add any fetched posts to the array
+          store.task = store.task.concat(action.payload)
+        })
+        .addCase(obtenerTaskAccion.rejected, (store, action) => {
+          store.status = 'failed'
+          store.error = action.error.message
+        })
     }
-}
+  })
 
+  export default taskSlice.reducer;
 
-
-export const obtenerTaskAccion = () => async (dispatch, getState) => {
-    try {
-        const taksresponse = await fetch(`${process.env.REACT_APP_API_URL}/task/`, {
-            method: "GET",
-            headers: {
-              token: process.env.REACT_APP_SECRET_TOKEN,
-            },
-          })
-      
-          const task = await taksresponse.json();
-        dispatch({
-            type: OBTENER_TASK_EXITO,
-            payload: task,
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  export const selectAllTask = store => store.task.task;

@@ -2,6 +2,7 @@
   "name": "bases",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@craco/craco": "^6.1.2",
     "@headlessui/react": "^1.4.0",
@@ -9,6 +10,7 @@
     "@hookform/resolvers": "^2.9.7",
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
+    "@reduxjs/toolkit": "^1.8.5",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
