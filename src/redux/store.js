@@ -4,9 +4,13 @@ import thunk from 'redux-thunk';
 
 
 import userReducer from './UsuarioDucks';
+import progressReducer from './ProgressDucks';
+import taskReducer from './TaskDucks';
 
 const rootReducer = combineReducers({
-   usuarios: userReducer
+   usuarios: userReducer, 
+   progreso: progressReducer,
+   task: taskReducer
 });
 
 

@@ -6,58 +6,41 @@ import { useState } from "react";
 import {
   Bienvenida,
 } from "../../Alert/Alerts";
-
-
-import { useDispatch, useSelector } from "react-redux";
-import { obtenerUserAccion } from "../../../redux/UsuarioDucks";
-
 import "./inicio.css";
-
-import Cookies from "universal-cookie";
 import Footer from "../../Footer";
 import loading from "../../../assets/resource/loading.svg";
 import shortid from "shortid";
 import Libro from "../../Libros/Libro";
-const cookies = new Cookies();
+import { useDispatch, useSelector } from "react-redux";
+import { obtenerProgresoAccion } from "../../../redux/ProgressDucks";
+
 const USER = JSON.parse(localStorage.getItem("user"));
 
 export const Inicio = () => {
   let userid = []
   let pro = 10
-  try {
-     userid = USER._id
-  } catch (error) {
-    
-  }
+  userid = USER._id
   
   const [userProgress, setuserProgress] = useState([]);
   const [valorProgress, setvalorProgress] = useState([]);
 
   const [cargando, setcargando] = useState(true);
   const [libros, setlibros] = useState([]);
-  const [progreso,setProgreso] = useState([]);
+ /*  const [progreso,setProgreso] = useState([]); */
   const [task,setTask] = useState([]);
   const [controlN, setControln] = useState(true);
 
   const [bandera, setBandera] = useState(false);
-
+  const dispatch = useDispatch();
+  const progreso = useSelector((store)=> store.progreso.array);
   let libroActual = 1;
   let totalLibro = 5;
-
-  
-  const dispatch = useDispatch();
-  const progress = useSelector((store) => store.usuarios.array);
   //get user progress from api
   const getData = async () => {
+    
+    dispatch(obtenerProgresoAccion(userid));
 
-    dispatch(obtenerUserAccion(userid));
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/progress/${userid}`, {
-      method: "POST",
-      headers: {
-        'token': process.env.REACT_APP_SECRET_TOKEN
-      },
-    });
-    const dataP = await response.json();
+
     const taksresponse = await fetch(`${process.env.REACT_APP_API_URL}/task/`, {
       method: "GET",
       headers: {
@@ -66,172 +49,141 @@ export const Inicio = () => {
     })
 
     const dataT = await taksresponse.json();
-
-    setTask(dataT)
-    setProgreso(dataP)
+    
+    setTask(await dataT)
     setControln(false)
     setBandera(true)
+    
+    
   };
 
 
-  useEffect(async () => {
-    if (!USER) {
-      window.location.href = "./signin";
-    }else{
-     if (cookies.get("status") !== "Active") {
-      const user_response = await fetch(`${process.env.REACT_APP_API_URL}/user/${userid}`, {
-        method: "GET",
-        headers: {
-          'token': process.env.REACT_APP_SECRET_TOKEN,
-        },                
-      });
-      
-      const user_json = await user_response.json();
-      //console.log('user',user_json)
-      if (user_json.status !== "Active") {
-        window.location.href = "./PendingAccount";
-      } else {
-        cookies.set("status", user_json.status, { path: "/" });
-      } 
-    }
-    }
-    
-    
-  }, []);
-
+ 
   
   useEffect(async () => {
-        
-    if(task.length===0 && progreso.length===0 && USER._id){
-       getData();
-       
-    }
-    if(bandera){
-      let llenarInfo = async () => {
-        let userInfo = progreso
-        //let task = tasku
-        
-        //console.log(userInfo)
-        if (userInfo.name === "JsonWebTokenError") {
-          window.location.href = "./signin";
-        }
-  
-        for (let i = 0; i < userInfo.length - 1; i++) {
-          for (let j = 0; j < userInfo.length - i - 1; j++) {
-            if (
-              parseInt(
-                "" + userInfo[j].book_info.module + userInfo[j].book_info.unit
-              ) >
-              parseInt(
-                "" +
-                  userInfo[j + 1].book_info.module +
-                  userInfo[j + 1].book_info.unit
-              )
-            ) {
-              let aux = userInfo[j];
-              userInfo[j] = userInfo[j + 1];
-              userInfo[j + 1] = aux;
-            }
-          }
-        }
-  
-          let mergeBooks = {libros: []};
-          while(libroActual <= totalLibro){
-            let librox = userInfo.filter(book => book.book_info.book === libroActual);
-            let contador = 1;
-            //total de modulos
-            let startedmodulo = librox[0].book_info.module;
-            let contador2 = startedmodulo
-            let modulos = [];
-            while(contador <= 2){
-              let modulo = librox.filter(book => book.book_info.module === contador2);
-              contador2++;
-              contador++;
-  
-              let userprogress = (modulo[0].writing.user_progress + modulo[0].grammar.user_progress + modulo[0].reading.user_progress + modulo[0].vocabulary.user_progress);
-              let total_task = (modulo[0].writing.total_task + modulo[0].grammar.total_task + modulo[0].reading.total_task + modulo[0].vocabulary.total_task);
-              let progress = (userprogress / total_task) * 100;  
-              
-              let userprogress2 = (modulo[1].writing.user_progress + modulo[1].grammar.user_progress + modulo[1].reading.user_progress + modulo[1].vocabulary.user_progress);
-              let total_task2 = (modulo[1].writing.total_task + modulo[1].grammar.total_task + modulo[1].reading.total_task + modulo[1].vocabulary.total_task);
-              let progress2 = (userprogress2 / total_task2) * 100;  
-              
-  
-              let totalmoduleprogress = (progress + progress2) / 2;
-  
-  
-              modulos.push({modulo, totalmoduleprogress});
-            }
-            mergeBooks.libros.push(modulos)
-            libroActual++;
-          }
-  
-          let contadormodulos = 0;
-          mergeBooks.libros.forEach((libro,index) => {
-            let totaluserprogress = 0;
-            let totaltask = 0;
-            let totalmoduleprogress = 0;
-            libro.forEach(modulo => {
-              modulo.modulo.forEach(unit => {
-                totaluserprogress = totaluserprogress + (unit.grammar.user_progress + unit.reading.user_progress + unit.vocabulary.user_progress + unit.writing.user_progress);
-                totaltask = totaltask + (unit.grammar.total_task + unit.reading.total_task + unit.vocabulary.total_task + unit.writing.total_task);
-              });
-            });
-            mergeBooks.libros[index] = {userprogress: totaluserprogress, totaltask: totaltask, modulos: mergeBooks.libros[index]}
-          });
-          
-  
-          
-          mergeBooks.libros.forEach((book,index) => {
-            let lastbook_is_aproved = true;
-            if(index!==0){
-              let modulo1 = mergeBooks.libros[index-1].modulos[0].totalmoduleprogress;
-              let modulo2= mergeBooks.libros[index-1].modulos[1].totalmoduleprogress;
-              let totalmoduleprogress = (modulo1 + modulo2) / 2;
-  
-              if(totalmoduleprogress!==100){
-                lastbook_is_aproved = false;
-              }   
-                  
-            }
-            libros.push(<Libro modulos={book.modulos} lecciones={task.res} key={shortid.generate()} lastbook_is_aproved={lastbook_is_aproved} libroactual={(index+1)}/>)       
-            
-           });  
+    await getData();
+    let llenarInfo = async () => {
+      let userInfo = progreso
+      //let task = tasku
 
-           let cantTask = 0
-            let cantTaskUser = 0
-            for (let i=0; i< (mergeBooks.libros).length; i++){
-              cantTask = cantTask + parseFloat(mergeBooks.libros[i].totaltask)
-              cantTaskUser = cantTaskUser + parseFloat(mergeBooks.libros[i].userprogress)
-              console.log('cant libro user',  parseFloat(mergeBooks.libros[i].userprogress)
-              )
-            }
-
-            let calculo = (cantTaskUser * 100) / cantTask
-            console.log('cant task',cantTaskUser)
-            let porcentaje = parseFloat(calculo.toFixed(2)) 
-
-            setvalorProgress(porcentaje)
-            cookies.set('progreso',porcentaje,{path:'/'});
-          setuserProgress(await mergeBooks);
-        setcargando(false);
-        
-      };
-      if(cargando){
-        llenarInfo();
-        
+      //console.log(userInfo)
+      if (userInfo.name === "JsonWebTokenError") {
+        window.location.href = "./signin";
       }
-      setBandera(false)
+
+      for (let i = 0; i < userInfo.length - 1; i++) {
+        for (let j = 0; j < userInfo.length - i - 1; j++) {
+          if (
+            parseInt(
+              "" + userInfo[j].book_info.module + userInfo[j].book_info.unit
+            ) >
+            parseInt(
+              "" +
+              userInfo[j + 1].book_info.module +
+              userInfo[j + 1].book_info.unit
+            )
+          ) {
+            let aux = userInfo[j];
+            userInfo[j] = userInfo[j + 1];
+            userInfo[j + 1] = aux;
+          }
+        }
+      }
+
+      let mergeBooks = { libros: [] };
+      while (libroActual <= totalLibro) {
+        let librox = userInfo.filter(book => book.book_info.book === libroActual);
+        let contador = 1;
+        //total de modulos
+        let startedmodulo = librox[0].book_info.module;
+        let contador2 = startedmodulo
+        let modulos = [];
+        while (contador <= 2) {
+          let modulo = librox.filter(book => book.book_info.module === contador2);
+          contador2++;
+          contador++;
+
+          let userprogress = (modulo[0].writing.user_progress + modulo[0].grammar.user_progress + modulo[0].reading.user_progress + modulo[0].vocabulary.user_progress);
+          let total_task = (modulo[0].writing.total_task + modulo[0].grammar.total_task + modulo[0].reading.total_task + modulo[0].vocabulary.total_task);
+          let progress = (userprogress / total_task) * 100;
+
+          let userprogress2 = (modulo[1].writing.user_progress + modulo[1].grammar.user_progress + modulo[1].reading.user_progress + modulo[1].vocabulary.user_progress);
+          let total_task2 = (modulo[1].writing.total_task + modulo[1].grammar.total_task + modulo[1].reading.total_task + modulo[1].vocabulary.total_task);
+          let progress2 = (userprogress2 / total_task2) * 100;
+
+
+          let totalmoduleprogress = (progress + progress2) / 2;
+
+
+          modulos.push({ modulo, totalmoduleprogress });
+        }
+        mergeBooks.libros.push(modulos)
+        libroActual++;
+      }
+
+      let contadormodulos = 0;
+      mergeBooks.libros.forEach((libro, index) => {
+        let totaluserprogress = 0;
+        let totaltask = 0;
+        let totalmoduleprogress = 0;
+        libro.forEach(modulo => {
+          modulo.modulo.forEach(unit => {
+            totaluserprogress = totaluserprogress + (unit.grammar.user_progress + unit.reading.user_progress + unit.vocabulary.user_progress + unit.writing.user_progress);
+            totaltask = totaltask + (unit.grammar.total_task + unit.reading.total_task + unit.vocabulary.total_task + unit.writing.total_task);
+          });
+        });
+        mergeBooks.libros[index] = { userprogress: totaluserprogress, totaltask: totaltask, modulos: mergeBooks.libros[index] }
+      });
+
+
+
+      mergeBooks.libros.forEach((book, index) => {
+        let lastbook_is_aproved = true;
+        if (index !== 0) {
+          let modulo1 = mergeBooks.libros[index - 1].modulos[0].totalmoduleprogress;
+          let modulo2 = mergeBooks.libros[index - 1].modulos[1].totalmoduleprogress;
+          let totalmoduleprogress = (modulo1 + modulo2) / 2;
+
+          if (totalmoduleprogress !== 100) {
+            lastbook_is_aproved = false;
+          }
+
+        }
+        libros.push(<Libro modulos={book.modulos} lecciones={task.res} key={shortid.generate()} lastbook_is_aproved={lastbook_is_aproved} libroactual={(index + 1)} />)
+
+      });
+
+      let cantTask = 0
+      let cantTaskUser = 0
+      for (let i = 0; i < (mergeBooks.libros).length; i++) {
+        cantTask = cantTask + parseFloat(mergeBooks.libros[i].totaltask)
+        cantTaskUser = cantTaskUser + parseFloat(mergeBooks.libros[i].userprogress)
+        console.log('cant libro user', parseFloat(mergeBooks.libros[i].userprogress)
+        )
+      }
+
+      let calculo = (cantTaskUser * 100) / cantTask
+      console.log('cant task', cantTaskUser)
+      let porcentaje = parseFloat(calculo.toFixed(2))
+
+      setvalorProgress(porcentaje)
+      setuserProgress(await mergeBooks);
+      setcargando(false);
+
+    };
+    if (cargando) {
+      llenarInfo();
+
     }
 
-    if(!cargando){
-      if(valorProgress === 0){
+    if (!cargando) {
+      if (valorProgress === 0) {
         Bienvenida()
       }
     }
 
-})
-  
+  }, [])
+
 
 
   return (
@@ -241,12 +193,12 @@ export const Inicio = () => {
             :
         <div></div>
             }
-      {cargando?
-       <div className="pt-20"><img src={loading} alt="loading"></img></div> :
+      {cargando?<div className="pt-20"><img src={loading}></img></div>:
   <div className="grid grid-cols-12 ">
     <div className="xl:col-span-9 col-span-12 justify-center sm:px-10">
+
       {libros}
-      {console.log(progress)}
+       
   </div>
 
   {/* BARRA LATERAL */}
