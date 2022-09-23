@@ -488,8 +488,8 @@ async function enviarSiEsCorrecta(props, contadorRespondidas) {
     myHeaders.append("token", process.env.REACT_APP_SECRET_TOKEN);
 
     var raw = JSON.stringify({
-      user_id: `${id}`,
-      task_id: `${tasks_id}`,
+      user_id: id,
+      task_id: tasks_id,
     });
 
     var requestOptions = {
