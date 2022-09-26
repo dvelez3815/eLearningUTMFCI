@@ -5,7 +5,7 @@ import { getProgressColor } from "../../helpers/indexFuntions";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { mostrarContenido } from "../Alert/Alerts";
-
+import {Link} from "react-router-dom";
 
 
 export default function Activity(props) {
@@ -135,15 +135,12 @@ export default function Activity(props) {
               {({ active }) => (
                   <div className="px-2">
                     <div className={props.percent === 100?"bg-yellow-500  my-2 hover:bg-gray-500 text-white font-bold  px-4 rounded":"bg-green-600  my-2 hover:bg-green-800 text-white font-bold  rounded"}>
-                    <a className={props.percent === 100?"block w-full  py-2 px-4 ":"block w-full h-full py-2 px-4 "}
-                      href={props.percent === 100?props.rutaReview:props.ruta} 
-                    /*  className={classNames(
-                        active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                        "block px-4 py-2 text-sm"
-                      )} */
+                    <Link className={props.percent === 100?"block w-full  py-2 px-4 ":"block w-full h-full py-2 px-4 "}
+                      to={props.percent === 100?props.rutaReview:props.ruta} 
+                
                     >
                       {props.percent === 100?"review":"start"}
-                    </a>
+                    </Link>
                   </div>
                 </div>
               )}

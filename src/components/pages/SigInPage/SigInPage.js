@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
 import {mostrarAlertaLogin} from '../../Alert/Alerts';
+import { Link } from "react-router-dom";
 
 
 const SigInPage = () => {
@@ -61,25 +62,25 @@ const SigInPage = () => {
           <div className="min-h-screen flex items-center justify-center  py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-md w-full space-y-2">
               <div>
-                <a href="/">
+                <Link to="/">
                   <img
                     className="mx-auto md:h-16 lg:h-16 sm:h-16 w-auto"
 
                     src={logo}
                     alt="Workflow"
                   />
-                </a>
+                </Link>
                 <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
                   Inicia sesión
                 </h2>
                 <p className="mt-2 text-center text-sm text-gray-600">
                   O
-                  <a
-                    href="/signup"
+                  <Link
+                    to="/signup"
                     className="font-medium m-2 text-green-600 hover:text-green-500"
                   >
                     Registrate
-                  </a>
+                  </Link>
                 </p>
               </div>
               <div className={isVisibleDato}>
@@ -122,7 +123,6 @@ const SigInPage = () => {
                     required
                     className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   />
-
                   {errors.password?.message && <span className="text-red-500 text-left block text-sm">{errors.password?.message}</span>}
                 </div>
 

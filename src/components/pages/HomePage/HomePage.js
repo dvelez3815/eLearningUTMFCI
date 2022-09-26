@@ -21,9 +21,9 @@ class HomePage extends React.Component {
       <div className=" overflow-x-hidden ">
         <div className=" mx-auto z-20  flex px-5 h-auto items-center">
           <div className=" md:ml-10 mr-10">
-            <a href='https://www.utm.edu.ec/' target='_blank' rel="noreferrer" >
+            <Link to='https://www.utm.edu.ec/' target='_blank' rel="noreferrer" >
               <img className=" md:h-16 lg:h-16 sm:h-16" src={LogoProvicional} alt="logo" />
-            </a>
+            </Link>
           </div>
           <div className=" flex flex-grow justify-end md:mr-20">
             <div className=" flex flex-wrap my-2">

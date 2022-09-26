@@ -1,4 +1,5 @@
 
+import { Link } from "react-router-dom";
 export function Footer() {
     return (
         <footer className="relative bg-gray-800 ">
@@ -36,8 +37,8 @@ export function Footer() {
                     <div className="w-full md:w-4/12 px-4 mx-auto text-center">
                         <div className="text-sm text-gray-100  py-1">
                             Copyright © <span id="get-current-year">2022</span>
-                            <a href="https://www.creative-tim.com/product/notus-js" className="text-blueGray-500 hover:text-gray-800" target="_blank" rel="noreferrer">a</a> 
-                            <a href="https://www.creative-tim.com?ref=njs-profile" className="text-blueGray-500 hover:text-blueGray-800">a</a>.
+                            <Link to="https://www.creative-tim.com/product/notus-js" className="text-blueGray-500 hover:text-gray-800" target="_blank" rel="noreferrer">a</Link> 
+                            <Link to="https://www.creative-tim.com?ref=njs-profile" className="text-blueGray-500 hover:text-blueGray-800">a</Link>.
                         </div>
                     </div>
                 </div>

@@ -6,18 +6,37 @@ import Loading from "../../Loading/Loading";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
-
+import { Link } from "react-router-dom";
+import mod10 from 'mod10';
 const SignUpPage = () => {
   
   const [isVisibleDato , setIsVisibleDato ] = useState("hidden");
   const [dato , setDato ] = useState("");
   const [cargando, setCargando ] = useState(false);
   
+  Yup.addMethod(Yup.string, "numberCedula", function (errorMessage) {
+    return this.test(`test-number-cedula`, errorMessage, function (value) {
+      const { path, createError } = this;
+      return (
+        mod10(parseInt(value)) ||
+        createError({ path, message: errorMessage })
+      );
+    });
+  });
+
+  Yup.addMethod(Yup.string, "emailUTM", function (errorMessage) {
+    return this.test(`test-email-utm`, errorMessage, function (value) {
+      const { path, createError } = this;
+      return (
+        !value.includes('@utm.edu.ec') ||
+        createError({ path, message: errorMessage })
+      );
+    });
+  });
   const formSchema = Yup.object().shape({
-    cedula: Yup.number('EL campo debe ser numerico').positive().required('Campo requerido') /* validate(value => value > 999999999 && value < 10000000000 ? true : "El número de cédula debe ser de 10 dígitos") */,
     name: Yup.string().required('Campo requerido'),
     lastname: Yup.string().required('Campo requerido'),
-    mail: Yup.string().email('El correo no es valido').required('Campo requerido'),
+    mail: Yup.string().email('El correo no es valido').emailUTM('Usuario institucional existente').required('Campo requerido'),
     password: Yup.string()
     .required('La contraseña es obligatoria')
     .min(5, 'La contraseña debe tener 5 caracteres de longitud'),
@@ -31,20 +50,22 @@ const SignUpPage = () => {
 
   const onSubmit = async(data) => {
     setCargando(true);
+
     const user = await registerUser(data);
-    if(user === "USER EXITS"){
+    if (user === "USER EXITS") {
       setIsVisibleDato("visible");
       setDato("El usuario ya existe");
+      setCargando(false);
       return;
     }
     localStorage.setItem(
       "user",
       JSON.stringify(user)
-    ); 
+    );
     setCargando(false);
     window.location.href = "./dashboard";
 
-    }
+  }
 
     return (
       <div className=" ">
@@ -53,29 +74,29 @@ const SignUpPage = () => {
             <div className="min-h-screen flex items-center justify-center  py-12 px-4 sm:px-6 lg:px-8">
               <div className="max-w-md w-full space-y-2">
                 <div>
-                  <a href="/">
+                  <Link to="/">
                     <img
                       className="mx-auto md:h-16 lg:h-16 sm:h-16 w-auto"
                       src={logo}
                       alt="Workflow"
                     />
-                  </a>
+                  </Link>
                   <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
                     Registro
                   </h2>
                   <p className="mt-2 text-center text-sm text-gray-600">
                     O
-                    <a
-                      href="/dashboard"
+                    <Link
+                      to="/signin"
                       className="font-medium ml-2 text-green-600 hover:text-green-500"
                     >
                       Iniciar sesión
-                    </a>
+                    </Link>
                   </p>
                   <div>
                     <h3 className="font-bold py-2 lg:text-xs md:text-xs text-sm   font-sans text-gray-500 ">
                       Si perteneces a la UTM, puedes iniciar sesión con tú
-                      cuenta insitucional @utm.edu.ec
+                      cuenta institucional @utm.edu.ec
                     </h3>
                   </div>
                 </div>

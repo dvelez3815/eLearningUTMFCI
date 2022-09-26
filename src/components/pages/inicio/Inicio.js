@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { obtenerProgresoAccion, selectAllProgress } from "../../../redux/ProgressDucks";
 import { obtenerTaskAccion, selectAllTask } from "../../../redux/TaskDucks";
 import { llenarInfo } from "../../../helpers/indexFuntions";
+import { Link } from "react-router-dom";
 
 const USER = JSON.parse(localStorage.getItem("user"));
 
@@ -50,6 +51,7 @@ export const Inicio = () => {
       setlibros(libros);
       setuserProgress(mergeBooks);
       setvalorProgress(porcentaje);
+      localStorage.setItem("progreso",porcentaje)
     }
    
   }, [taskStatus, progressStatus, dispatch, progress, task, setuserProgress])

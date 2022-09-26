@@ -476,70 +476,55 @@ function randomizarArray(array) {
 async function enviarSiEsCorrecta(props, contadorRespondidas) {
   //Se es corecta se necesita saber si se ha llegado al final de la lista de ejercicios, de ser así, se debe de terminar el juego y guardar el progreso,
   //caso contrario se debe de pasar al siguiente ejercicio
-  if (props.juego.length - 1 === 0) {
-    let tasks_id =
-      window.location.href.split("/")[
-        window.location.href.split("/").length - 1
-      ];
-    let id = USER._id
-
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("token", process.env.REACT_APP_SECRET_TOKEN);
-
-    var raw = JSON.stringify({
-      user_id: id,
-      task_id: tasks_id,
-    });
-
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-    };
-    
-    let responses = []
-    try {
-      responses = await fetch(
-        process.env.REACT_APP_API_URL+"/progress/update",
-        requestOptions
-      )
-    } catch (error) {
-      
-    }
-    const dataT = await responses.json();
-    console.log('Info:',dataT.res)
-    /*
-      .then((response) => console.log('REPSUESTAA',response))
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
-    */
-   if(props.control === ' '){
-        props.setContadorRespondidas(contadorRespondidas + 1);
-        props.juego.pop();
-        //setInterval(() => {}, 4000);
-        //mostrarAlertaExitoFin(`End of the game`);
-        props.setFinJuego(true);
-   }else if(dataT.res !== 'Task Registrada' && dataT.res !=="Task ya ha sido registrado en ese usuario"){
-        //alert('Guardando Progreso... Presione aceptar')
-        enviarSiEsCorrecta(props, contadorRespondidas)
-      }else{
-        props.setContadorRespondidas(contadorRespondidas + 1);
-        props.juego.pop();
-        //setInterval(() => {}, 4000);
-        //mostrarAlertaExitoFin(`End of the game`);
-        props.setFinJuego(true);
-        mostrarAlertaExitoFin(`Excellent Work `);
-      }
-
-    
-    
-  } else {
+  if (!(props.juego.length - 1 === 0)) {
     mostrarAlertaExito(`Correct answer`);
     props.juego.pop();
     props.setContadorRespondidas(contadorRespondidas + 1);
   }
-  //Se guarda el progreso del usuario y se muestra una alerta de que la respuesta es correcta
+  let tasks_id =
+    window.location.href.split("/")[
+    window.location.href.split("/").length - 1
+    ];
+  let id = USER._id
+
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  myHeaders.append("token", process.env.REACT_APP_SECRET_TOKEN);
+
+  var raw = JSON.stringify({
+    user_id: id,
+    task_id: tasks_id,
+  });
+
+  var requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+  };
+
+  let responses = []
+  try {
+    responses = await fetch(
+      process.env.REACT_APP_API_URL + "/progress/update",
+      requestOptions
+    )
+  } catch (error) {
+
+  }
+  const dataT = await responses.json();
+
+  if (props.control === ' ') {
+    props.setContadorRespondidas(contadorRespondidas + 1);
+    props.juego.pop();
+    props.setFinJuego(true);
+  } else if (dataT.res !== 'Task Registrada' && dataT.res !== "Task ya ha sido registrado en ese usuario") {
+    enviarSiEsCorrecta(props, contadorRespondidas)
+  } else {
+    props.setContadorRespondidas(contadorRespondidas + 1);
+    props.juego.pop();
+    props.setFinJuego(true);
+    mostrarAlertaExitoFin(`Excellent Work `);
+  }
 }
 
 export default EjercicioFooter;
