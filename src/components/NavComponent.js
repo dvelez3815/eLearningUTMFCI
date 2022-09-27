@@ -15,10 +15,13 @@ class NavComponent extends React.Component {
     super(props);
     this.hamburgerBtn = createRef();
     this.hamburgerItems = createRef();
+    this.handleHamburgerButton = this.handleHamburgerButton.bind(this); 
+    this.classNames = this.classNames.bind(this); 
+    this.logout = this.logout.bind(this); 
 
   }
 
-  handleHamburgerButton = () => {
+  handleHamburgerButton(){
 
     this.hamburgerItems.current.classList.toggle("hidden");
   };
@@ -29,7 +32,7 @@ class NavComponent extends React.Component {
   logout() {
     localStorage.removeItem("user");
     localStorage.removeItem("progreso");
-    window.location.to = "./";
+    /* window.location.to = "./"; */
 
   }
   render() {
@@ -173,8 +176,8 @@ class NavComponent extends React.Component {
                                 </Link>
                                   */}
                               <div className="h-0 my-2 border border-solid border-blueGray-100" />
-                              <a
-                              href="#!"
+                              <Link
+                              to="/signin"
                                 onClick={this.logout}
                                 className={
                                   "text-sm py-2 hover:bg-gray-200 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
@@ -182,7 +185,7 @@ class NavComponent extends React.Component {
 
                               >
                                 Cerrar sesión
-                              </a>
+                              </Link>
                             </div>
                           </div>
                         )}

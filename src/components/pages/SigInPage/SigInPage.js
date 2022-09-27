@@ -10,7 +10,6 @@ import * as Yup from 'yup'
 import {mostrarAlertaLogin} from '../../Alert/Alerts';
 import { Link } from "react-router-dom";
 
-
 const SigInPage = () => {
   const [isVisibleDato, setIsVisibleDato] = useState("hidden");
   const [dato, setDato] = useState("");
@@ -31,6 +30,7 @@ const SigInPage = () => {
     setCargando(true);
     const user = await loginUser(form);
     setIsVisibleDato("visible");
+    setCargando(false);
     switch (user) {
       case "USER NOT EXIST UTM":
         setDato("El usuario no existe en el sistema, por favor verifique su correo UTM");
@@ -51,7 +51,6 @@ const SigInPage = () => {
       "user",
       JSON.stringify(user)
     );
-    setCargando(false);
     window.location.href = "./dashboard";
 
   };
@@ -86,8 +85,8 @@ const SigInPage = () => {
               <div className={isVisibleDato}>
                 <h2 className="text-md text-red-500">{dato}</h2>
               </div>
-              <form className="mt-8 space-y-4" action="#" method="POST" onSubmit={handleSubmit(onSubmit)}>
-                <input type="hidden" name="remember" value="true" />
+              <form className="mt-8 space-y-4"  onSubmit={handleSubmit(onSubmit)} >
+                {/* <input type="hidden" name="remember" value="true" /> */}
                 <div className="form-group mb-2">
                   <label
                     htmlFor="email-address"
@@ -155,8 +154,7 @@ const SigInPage = () => {
                   <Loading />
                 )}
                 <div>
-                  <button
-                    type="submit"
+                  <button type="submit" 
                     className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-offset-2 
                       focus:ring-yellow-400"
                   >

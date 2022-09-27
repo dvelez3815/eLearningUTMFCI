@@ -8,6 +8,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
 import { Link } from "react-router-dom";
 import mod10 from 'mod10';
+
+
 const SignUpPage = () => {
   
   const [isVisibleDato , setIsVisibleDato ] = useState("hidden");
@@ -52,17 +54,17 @@ const SignUpPage = () => {
     setCargando(true);
 
     const user = await registerUser(data);
+    setCargando(false);
     if (user === "USER EXITS") {
       setIsVisibleDato("visible");
       setDato("El usuario ya existe");
-      setCargando(false);
+     
       return;
     }
     localStorage.setItem(
       "user",
       JSON.stringify(user)
     );
-    setCargando(false);
     window.location.href = "./dashboard";
 
   }
@@ -104,9 +106,9 @@ const SignUpPage = () => {
                   <h2 className="text-md text-red-500">{dato}</h2>
                 </div>
                 <form
-                  onSubmit={handleSubmit(onSubmit)}
-                  /* className=" space-y-2" */ action="#"
-                  method="POST"
+                   onSubmit={handleSubmit(onSubmit)}
+                  /* className=" space-y-2"  action="#"
+                  method="POST" */
                 >
                   <input type="hidden" name="remember" value="true" />
                   <div className="rounded-md shadow-sm mb-4">
@@ -233,7 +235,7 @@ const SignUpPage = () => {
                   )}
                   <div>
                     <button
-                      type="submit"
+                      type="submit"  
                       disabled={cargando}
                       className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-offset-2 
                           focus:ring-yellow-400"
@@ -255,6 +257,7 @@ const SignUpPage = () => {
                       </span>
                       Registrar
                     </button>
+                   
                   </div>
                 </form>
               </div>

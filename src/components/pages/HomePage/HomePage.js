@@ -7,9 +7,7 @@ import LogoProvicional from "../../../assets/resource/Logo_Provicional.png";
 import LogoFCI from "../../../assets/resource/escudo_fci.png";
 import Logo_ing from "../../../assets/resource/Logo_ing.png";
 import { Link } from "react-router-dom"
-
-import Cookies from "universal-cookie";
-const cookies = new Cookies();
+const USER = JSON.parse(localStorage.getItem("user"));
 
 
 
@@ -50,7 +48,7 @@ class HomePage extends React.Component {
                 <h3 className="lg:text-lg md:text-lg text-base  font-sans text-gray-500 pt-2 p-3">
                   Comprometidos con tu formación acádemica
                 </h3>
-                {cookies.get("_id") ?
+                {USER ?
                   <Link to="/dashboard">
                     <div className="pt-4 px-2 ">
                       <button className=" inline-flex items-center justify-center px-10 py-2  bg-yellow-400 hover:bg-yellow-500 text-white rounded-full font-semibold text-xs   uppercase tracking-widest ">
@@ -73,7 +71,7 @@ class HomePage extends React.Component {
                 ubicandola afuera */}
 
                   {
-                    cookies.get("_id") ?
+                    USER ?
                       <div>
                         <h3 className="lg:text-sm md:text-sm text-base  font-sans text-gray-500 ">
                           Actualmente tiene una cuenta logueada
