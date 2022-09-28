@@ -14,6 +14,8 @@ import Pruebas from './components/pages/Pruebas/Pruebas';
 import Review from './components/pages/Review/Review';
 import PruebasGeneral from './components/pages/Pruebas/PruebasGeneral';
 import PerfilUser from './components/pages/user/PerfilUser';
+import ForgottenPasswordPage from './components/pages/ForgottenPassword/ForgottenPasswordPage';
+import ResetPasswordPage from './components/pages/ResetPassword/ResetPasswordPage';
 
 
 
@@ -55,6 +57,12 @@ function App() {
 
           <Route path="/profile">
             <PerfilUser />
+          </Route>
+           <Route path="/restart-password/:id/:token">
+            <ResetPasswordPage />
+          </Route> 
+          <Route path="/forgotten-password">
+            <ForgottenPasswordPage />
           </Route>
           <Route exact path="/dashboard">
             <Inicio />

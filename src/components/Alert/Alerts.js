@@ -265,7 +265,7 @@ export const Confirmacion = async (_title, _text)=>{
         title: _title,
         text: _text,
         showConfirmButton: false,
-        timer: 1500
+        timer: 5000
       })
 }
 

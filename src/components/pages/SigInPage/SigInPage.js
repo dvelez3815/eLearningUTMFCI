@@ -7,7 +7,7 @@ import { loginUser } from '../../../api/User'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
-import {mostrarAlertaLogin} from '../../Alert/Alerts';
+import { mostrarAlertaLogin } from '../../Alert/Alerts';
 import { Link } from "react-router-dom";
 
 const SigInPage = () => {
@@ -24,7 +24,7 @@ const SigInPage = () => {
   const { register, handleSubmit, formState: { errors } } = useForm(formOptions);
 
 
-  
+
 
   const onSubmit = async (form) => {
     setCargando(true);
@@ -85,8 +85,8 @@ const SigInPage = () => {
               <div className={isVisibleDato}>
                 <h2 className="text-md text-red-500">{dato}</h2>
               </div>
-              <form className="mt-8 space-y-4"  onSubmit={handleSubmit(onSubmit)} >
-                {/* <input type="hidden" name="remember" value="true" /> */}
+              <form className="mt-8 space-y-4" onSubmit={handleSubmit(onSubmit)} >
+                <input type="hidden" name="remember" value="true" />
                 <div className="form-group mb-2">
                   <label
                     htmlFor="email-address"
@@ -141,20 +141,20 @@ const SigInPage = () => {
                     </label>
                   </div>
 
-                  {/* <div className="text-sm">
-                    <a
-                      href="#"
+                  <div className="text-sm">
+                    <Link
+                      to="/forgotten-password"
                       className="font-medium text-green-600 hover:text-green-500"
                     >
                       Olvidaste tu contraseña?
-                    </a>
-                  </div> */}
+                    </ Link>
+                  </div>
                 </div>
                 {cargando && (
                   <Loading />
                 )}
                 <div>
-                  <button type="submit" 
+                  <button type="submit"
                     className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-offset-2 
                       focus:ring-yellow-400"
                   >
