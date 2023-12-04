@@ -17,7 +17,7 @@ export function Footer() {
                             <div className="w-full pl-4 ml-auto">
                                 <h4 className="text-xs font-semibold text-gray-100">DEVELOPING</h4>
                                 <h5 className="text-xs mt-0 mb-2 text-gray-100">
-                                Faculty of Informatics Sciences UTM
+                                Institute of Modern Languages - UTM
                                 </h5>
       
                             
