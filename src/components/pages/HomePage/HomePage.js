@@ -97,7 +97,7 @@ class HomePage extends React.Component {
           {/* Aqui inicia las imagenes */}
           <div
             className="absolute   xl:bottom-0  xl:right-0 lg:bottom-0  lg:right-0 md:bottom-0  md:right-0 
-           sm:bottom-0  sm:right-0 -bottom-20  right-0  z-20"
+          sm:bottom-0  sm:right-0 -bottom-20  right-0  z-20"
           >
             <div className=" hidden sm:block flex xl:max-w-xl lg:max-w-xl  sm:mr-0 sm:mb-0 md:mr-0 md:mb-0 lg:mr-0 lg:mb-0 mb-10 pr-20 md:max-w-md sm:max-w-xs md:h-auto">
               <img className="md:h-1/2 md:w-10/12 md:w-auto " src={Chica} alt=" chica" />

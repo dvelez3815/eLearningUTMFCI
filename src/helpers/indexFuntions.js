@@ -1,6 +1,4 @@
 
-import Libro from '../components/Libros/Libro';
-import shortid from 'shortid';
 
 export function getProgressColor(progress){
     let progressColor;
@@ -52,6 +50,7 @@ export function llenarInfo(progreso, task) {
 
     let mergeBooks = { libros: [] };
     while (libroActual <= totalLibro) {
+        // eslint-disable-next-line no-loop-func
         let librox = userInfo.filter(book => book.book_info.book === libroActual);
         let contador = 1;
         //total de modulos
@@ -59,6 +58,7 @@ export function llenarInfo(progreso, task) {
         let contador2 = startedmodulo
         let modulos = [];
         while (contador <= 2) {
+            // eslint-disable-next-line no-loop-func
             let modulo = librox.filter(book => book.book_info.module === contador2);
             contador2++;
             contador++;
@@ -81,10 +81,12 @@ export function llenarInfo(progreso, task) {
         libroActual++;
     }
 
+    // eslint-disable-next-line no-unused-vars
     let contadormodulos = 0;
     mergeBooks.libros.forEach((libro, index) => {
         let totaluserprogress = 0;
         let totaltask = 0;
+        // eslint-disable-next-line no-unused-vars
         let totalmoduleprogress = 0;
         libro.forEach(modulo => {
             modulo.modulo.forEach(unit => {

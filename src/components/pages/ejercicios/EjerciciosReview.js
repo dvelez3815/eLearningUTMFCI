@@ -1,16 +1,20 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
-import { finPrueba } from '../../Alert/Alerts';
+import { Link } from 'react-router-dom';
+import { finPrueba, mostrarAlertaError } from '../../Alert/Alerts';
+import Morty from "../../../assets/resource/pensar.gif";
 
 let ab = []
-//let game = []
+let game = []
 let id = 0
- 
+
 const pru = (ab) => {
   let texto = ''
   for (let i = 0; i < ab.length; i++) {
     texto += ab[i].toLowerCase();
     //console.log(ab.length,' vfor: ',(i+1))
-    if(ab.length === (i+1)){
+    // eslint-disable-next-line eqeqeq
+    if(ab.length == (i+1)){
       return texto
     }
     texto += ' - '
@@ -30,7 +34,6 @@ const EjercicioReview = (props) => {
   }
   
   return (
-       
         <div className="flex items-center justify-center ">
           <div className="w-full p-5">
             
@@ -152,6 +155,7 @@ async function noEsCorrecta(props) {
       const respuestasBack = Array.from(
         props.ejercicio.props.ejercicio.options
       ).map((item) => [...item]);
+      // eslint-disable-next-line array-callback-return
       const respuestasBackEndOrdenadas = [...respuestasBack].map((item) => {
         if (item) {
           item = [...item.sort((a, b) => (a.answer > b.answer ? 1 : -1))];
@@ -218,7 +222,9 @@ async function noEsCorrecta(props) {
   const verificarVerdadero_Falso = async (props, hijos, aciertos) => {
     let respuestasBack = [];
   
+    // eslint-disable-next-line array-callback-return
     props.ejercicio.props.ejercicio.body.map((item, index) => {
+      // eslint-disable-next-line array-callback-return
       item.answer.map((item2, index2) => {
         if (item2[1]) {
           respuestasBack.push(item2[0]);
@@ -236,6 +242,7 @@ async function noEsCorrecta(props) {
     aciertos,
     respuestasBackEndOrdenadas
   ) => {
+    // eslint-disable-next-line no-unused-vars
     let esCorrecta = false;
     let respuestasUser = [];
     //aca en este for se agarran los div que tengan id agarrar el texto y agregarlo a un array

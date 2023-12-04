@@ -17,34 +17,8 @@ import vocabularyimgng from "../../assets/icons/Vocabulary_0.png";
 
 const Modulo = (props) => {
   let bloqueo = props.bloqueo
-
-  React.useEffect(() => {
-    
-    //getTask()
-  }, []); //cuando haya un cambio de pregunta se actualiza el estado del componente.
-
-  
   
   return <div className=' w-full'>
-    {/*
-    <div className='flex flex-col  '>
-      {props.moduloindex === 1?
-      <div>
-          <h2  key={shortid.generate()} className={props.bloqueo?"rounded-lg text-2xl text-center text-gray-600 mt-2 mx-10 font-bold p-2":" rounded-lg text-2xl text-center text-green-700 mt-2 mx-10 font-bold pt-3"}>{`Module ${props.moduloindex}`}
-          </h2>
-
-      </div>
-      :
-      <div>
-          <h2  key={shortid.generate()} className={props.bloqueo?"rounded-lg text-2xl text-center text-gray-600 mt-2 mx-10 font-bold p-2":" rounded-lg text-2xl text-center text-blue-900 mt-2 mx-10 font-bold p-2"}>{`Module ${props.moduloindex}`}
-          </h2>
-
-      </div>
-      }
-      
-      
-    </div>
-    */}
     {bloqueo?
       <div className="tooltip ">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">

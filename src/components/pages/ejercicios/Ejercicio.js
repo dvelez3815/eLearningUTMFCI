@@ -1,7 +1,8 @@
 import React, { useRef } from "react";
 import ProgressBar from "./ProgressBar";
-import {Link} from  "react-router-dom"
-import { AlertaLeccion } from "../../Alert/Alerts";
+import {
+  AlertaLeccion
+} from "../../Alert/Alerts";
 
 //load ejercicio.css
 import "./Ejercicio.css";
@@ -13,7 +14,7 @@ import VerdaderoFalso from "./VerdaderoFalso";
 import CompletarTexto from "./CompletarTexto";
 import Emparejar from "./Emparejar";
 import EjercicioFooterPruebaLibros from "./EjercicioFooterPruebaLibros";
-import { EjercicioR } from './Ejer_Review';
+import { EjercicioR } from '../ejercicios/Ejer_Review';
 
 import image1 from "../../../assets/resource/lesson4.webp";
 import image2 from "../../../assets/resource/lesson3.webp";
@@ -28,30 +29,31 @@ export const Ejercicio = (props) => {
   const [preguntasValidas, setPreguntasValidas] = React.useState(0);
   const [aciertos, setAciertos] = React.useState(0);
   const [openTab, setOpenTab] = React.useState(1);
-
-
-  const [_,  setId] = React.useState(0);
+  // eslint-disable-next-line no-unused-vars
+  const [idp, setId] = React.useState(0);
   let topic = ''
   let Objetive = ''
   let explanation = ''
   let type = ' '
+  let book = ''
+  let modulo
+  let unidad = ''
   try {
-     topic = String(props.taskInfo[0].topic.top)
-     Objetive = String(props.taskInfo[0].objetive.text)
-     explanation = String(props.taskInfo[0].explanation)
-     type = String(props.taskInfo[0].type)
-     
+    type = String(props.taskInfo[0].type)
+    book = String(props.taskInfo[0].unit.book)
+    modulo = parseInt(props.taskInfo[0].unit.modulo) % 2 !== 0 ? parseInt(1) : parseInt(2)
+    unidad = String(props.taskInfo[0].unit.unit)
+    topic = String(props.taskInfo[0].topic.top)
+    Objetive = String(props.taskInfo[0].objetive.text)
+    explanation = String(props.taskInfo[0].explanation)
   } catch (error) {
-    
+
   }
 
 
   const panelJuego = useRef(null);
 
   React.useEffect(() => {
-    // const cargarVista = async() => {
-    //     await cargarEjercicios(juego, setJuego, panelJuego, setCargado, finJuego, ejercicios);
-    // }
     
     if (juego.length === 0) {
       cargarEjercicios2(
@@ -64,15 +66,17 @@ export const Ejercicio = (props) => {
         setId
       );
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  React.useEffect(()  => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  React.useEffect(async()  => {
     // const cargarVista = async() => {
     //     await cargarEjercicios(juego, setJuego, panelJuego, setCargado, finJuego, ejercicios);
     // }
     
     if (!USER) {
       let valor = AlertaLeccion('SU SESIÓN HA EXPIRADO')
-      if(valor.value){
+      if((await valor).value){
       window.location.href = "/signin";
       }
   }
@@ -83,6 +87,10 @@ export const Ejercicio = (props) => {
       {cargado  || (
         <ProgressBar
         totalEjercicios={preguntasValidas}
+        type={type}
+        book={book}
+        modulo={modulo}
+        unidad={unidad}
         resueltos={contadorRespondidas}
         contadorRespondidas={contadorRespondidas}
       />
@@ -101,10 +109,10 @@ export const Ejercicio = (props) => {
                   <p className="text-black-500 text-sm mt-4 mb-6  ">
                     For more information about the lesson slide the page.
                   </p>
-                  <Link to="/dashboard">
+                  <a href="/dashboard">
                     <button className="py-3 lg:py-4 px-12 lg:px-16 text-white font-semibold rounded-lg bg-green-500 hover:shadow-lg hover:bg-green-600 transition-all outline-none">CONTINUE</button>
 
-                  </Link> 
+                  </a> 
                 </div>
                 <div className="flex w-full ">
                   <div className=" w-full">
@@ -124,10 +132,10 @@ export const Ejercicio = (props) => {
                   <p className="text-black-500 text-sm mt-4 mb-6  ">
                     Slide the page to view the questions.
                   </p>
-                  <Link to="/dashboard">
+                  <a href="/dashboard">
                     <button className="py-3 lg:py-4 px-12 lg:px-16 text-white font-semibold rounded-lg bg-green-500 hover:shadow-lg hover:bg-green-600 transition-all outline-none">CONTINUE</button>
 
-                  </Link> 
+                  </a> 
                 </div>
                 <div className="flex w-full ">
                   <div className=" w-full">
@@ -281,7 +289,7 @@ export const Ejercicio = (props) => {
 
             
             {finJuego ? (
-             <div></div>
+            <div></div>
             ): props.esPrueba?
             <div className="py-5">
               <EjercicioFooterPruebaLibros totalEjercicios = {preguntasValidas} ejercicios = {props.ejercicios} ejercicio={juego[juego.length-1]} juego={juego} setJuego = {setJuego} cargado={cargado} setCargado={setCargado} setFinJuego={setFinJuego} miref={panelJuego} contadorRespondidas={contadorRespondidas} setContadorRespondidas={setContadorRespondidas} aciertos={aciertos} setAciertos={setAciertos}/>
@@ -301,6 +309,7 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado,preguntas
 
     //De esta manera la renderización del mensaje con estado cargando se va a mostrar hasta que se carguen todos los ejercicios.
     let contador = 0;
+    // eslint-disable-next-line array-callback-return
     ejercicios.map((ejercicio, index) => {
   
       if(ejercicio.type === "completar_texto"){
@@ -313,9 +322,11 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado,preguntas
         setJuego(juego => [...juego, <VerdaderoFalso key={index} ejercicio={ejercicio} miref={panelJuego}/>])
         contador++;
       }else if(ejercicio.type === "opcion_correcta_1"){
+          // eslint-disable-next-line react/jsx-pascal-case
           setJuego(juego => [...juego, <OpcionCorrecta_1 key={index} ejercicio={ejercicio} miref={panelJuego}/>])
           contador++;
       }else if(ejercicio.type === "opcion_correcta_n"){
+          // eslint-disable-next-line react/jsx-pascal-case
           setJuego(juego => [...juego, <OpcionCorrecta_n key={index} ejercicio={ejercicio} miref={panelJuego}/>])
           contador++; 
       }else if(ejercicio.type === "emparejar"  ||  ejercicio.type === "emparejar_img"  ){

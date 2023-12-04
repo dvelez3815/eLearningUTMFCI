@@ -36,6 +36,7 @@ export const PerfilUser = () => {
   const [cargando, setCargando] = useState(false);
   const [isVisibleDato, setIsVisibleDato] = useState("hidden");
   const [colorButton, setcolorButton] = useState("bg-blue-400 hover:bg-blue-300");
+  // eslint-disable-next-line no-unused-vars
   const [dato, setDato] = useState("");
 
 

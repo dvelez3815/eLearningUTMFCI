@@ -4,14 +4,19 @@ import ViewImage from '../../ViewImage/ViewImage'
 import axios from 'axios';
 
 export const OpcionCorrecta_n = (props) => {
+  // eslint-disable-next-line no-unused-vars
   const history = useHistory();
+  // eslint-disable-next-line no-unused-vars
   const opciones = useRef(null);
+  // eslint-disable-next-line no-unused-vars
   const [title, setTitle] = useState('')
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     
     translateText()
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
   const translateText = () => {

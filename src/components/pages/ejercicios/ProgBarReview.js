@@ -1,11 +1,8 @@
-import React, { useEffect } from 'react'
-import CancelIcon from "@material-ui/icons/Cancel";
+import React from 'react'
 import { useHistory } from 'react-router';
-import { mostrarAlertaSalir } from '../../Alert/Alerts';
-import { mostrarAlertaSalirEva } from '../../Alert/Alerts';
-
 
 const ProgressBarR = (props) => {
+  // eslint-disable-next-line no-unused-vars
   const history = useHistory();
   
 

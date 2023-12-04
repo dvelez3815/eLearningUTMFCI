@@ -4,18 +4,17 @@ import logo from "../../../assets/resource/Logo_Provicional.png";
 import CollectionsBookmarkIcon from "@material-ui/icons/CollectionsBookmark";
 import { useState } from "react";
 import {
+  // eslint-disable-next-line no-unused-vars
   Bienvenida,
 } from "../../Alert/Alerts";
 import "./inicio.css";
 import Footer from "../../Footer";
 import loading from "../../../assets/resource/loading.svg";
-import shortid from "shortid";
 import Libro from "../../Libros/Libro";
 import { useDispatch, useSelector } from "react-redux";
 import { obtenerProgresoAccion, selectAllProgress } from "../../../redux/ProgressDucks";
 import { obtenerTaskAccion, selectAllTask } from "../../../redux/TaskDucks";
 import { llenarInfo } from "../../../helpers/indexFuntions";
-import { Link } from "react-router-dom";
 
 const USER = JSON.parse(localStorage.getItem("user"));
 
@@ -27,7 +26,6 @@ export const Inicio = () => {
   const [libros, setlibros] = useState([]);
 
   const dispatch = useDispatch();
- 
   const task = useSelector(selectAllTask);
   const taskStatus = useSelector((store) => store.task.status);
 
@@ -53,7 +51,6 @@ export const Inicio = () => {
       setvalorProgress(porcentaje);
       localStorage.setItem("progreso",porcentaje)
     }
-   
   }, [taskStatus, progressStatus, dispatch, progress, task, setuserProgress])
 
   return (

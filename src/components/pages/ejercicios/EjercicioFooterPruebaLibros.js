@@ -1,12 +1,21 @@
 import React from 'react'
-import { EjercicioR } from './Ejer_Review';
-import { Link } from 'react-router-dom';
+import { EjercicioR } from '../ejercicios/Ejer_Review';
+import { Link, useParams } from 'react-router-dom';
 import Morty from "../../../assets/resource/pensar.gif";
+import { updateProgressBook } from '../../../api/Progress';
 
 
 const EjercicioFooterPruebaLibros = (props) => {
+  const {idlibro} = useParams();
+  const id_user  = JSON.parse(localStorage.getItem("user"))._id;
+  // eslint-disable-next-line no-unused-vars
+  const subirNivel = async () => {
+    /* aqui colocar para actualizar el nivel */
+    if (props.aciertos >= 25) {
+      await updateProgressBook(id_user, idlibro);
+    }
+  }
     return (
-       
         <div className="w-full  items-center justify-center  ">
           <div className="">
           { (props.juego.length > 0) ?( <button
@@ -88,7 +97,7 @@ const EjercicioFooterPruebaLibros = (props) => {
                             <div className='md:flex justify-center'> 
                               <div className=' '>
                                 <Link to="/evaluacion">
-                                  <button className=" inline-flex items-center justify-center px-10 py-2  bg-green-300 hover:bg-green-500 text-black rounded-full font-semibold text-xs   uppercase tracking-widest ">
+                                  <button /* onClick={subirNivel}  */className=" inline-flex items-center justify-center px-10 py-2  bg-green-300 hover:bg-green-500 text-black rounded-full font-semibold text-xs   uppercase tracking-widest ">
                                     Continue
                                   </button>
                                 </Link> 
@@ -118,7 +127,7 @@ const EjercicioFooterPruebaLibros = (props) => {
                   </div>
                 </div> 
             </div>
-           }
+          }
             
           </div>
         </div>
@@ -154,6 +163,9 @@ async function noEsCorrecta(props) {
     props.setContadorRespondidas(contadorRespuestas + 1);
     
   }
+
+
+
   
 
 
@@ -176,6 +188,7 @@ async function noEsCorrecta(props) {
       const respuestasBack = Array.from(
         props.ejercicio.props.ejercicio.options
       ).map((item) => [...item]);
+      // eslint-disable-next-line array-callback-return
       const respuestasBackEndOrdenadas = [...respuestasBack].map((item) => {
         if (item) {
           item = [...item.sort((a, b) => (a.answer > b.answer ? 1 : -1))];
@@ -217,6 +230,7 @@ async function noEsCorrecta(props) {
       respuestasBack.push(item.answer);
     });
     let faltaMarcar = false;
+    // eslint-disable-next-line array-callback-return
     hijos.some((element) => {
       if (
         element.getElementsByClassName("opt-1")[0].innerText ===
@@ -229,6 +243,7 @@ async function noEsCorrecta(props) {
     if (faltaMarcar) {
       noEsCorrecta(props)
     } else {
+      // eslint-disable-next-line array-callback-return
       hijos.some((element) => {
         respuestaUser.push(element.getElementsByClassName("opt-1")[0].innerText);
       });
@@ -297,7 +312,9 @@ async function noEsCorrecta(props) {
   const verificarVerdadero_Falso = async (props, hijos, aciertos) => {
     let respuestasBack = [];
   
+    // eslint-disable-next-line array-callback-return
     props.ejercicio.props.ejercicio.body.map((item, index) => {
+      // eslint-disable-next-line array-callback-return
       item.answer.map((item2, index2) => {
         if (item2[1]) {
           respuestasBack.push(item2[0]);

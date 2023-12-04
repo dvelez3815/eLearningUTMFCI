@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef  } from "react";
 import logo from "../../../assets/resource/Logo_Provicional.png";
 import img1 from "../../../assets/resource/sign.svg";
 import "./SigInPage.css";
@@ -9,11 +9,15 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
 import { mostrarAlertaLogin } from '../../Alert/Alerts';
 import { Link } from "react-router-dom";
+import Input from "../../Input/Input";
+import ReCAPTCHA from "react-google-recaptcha"
 
 const SigInPage = () => {
   const [isVisibleDato, setIsVisibleDato] = useState("hidden");
   const [dato, setDato] = useState("");
   const [cargando, setCargando] = useState(false);
+  const [mostrarPassword, setMostrarPassword] = useState(false);
+  const captchaRef = useRef(null)
 
   const formSchema = Yup.object().shape({
     mail: Yup.string().email('El correo no es valido').required('Campo requerido'),
@@ -23,15 +27,23 @@ const SigInPage = () => {
   const formOptions = { resolver: yupResolver(formSchema) }
   const { register, handleSubmit, formState: { errors } } = useForm(formOptions);
 
+  const togglePassword = () => {
+    setMostrarPassword(!mostrarPassword);
+  };
 
 
 
   const onSubmit = async (form) => {
     setCargando(true);
-    const user = await loginUser(form);
+    const token = captchaRef.current.getValue();
+    captchaRef.current.reset();
+    const user = await loginUser(form, token);
     setIsVisibleDato("visible");
     setCargando(false);
     switch (user) {
+      case "TOKEN INVALID":
+        setDato("Verifique que no sea un robot");
+        return;
       case "USER NOT EXIST UTM":
         setDato("El usuario no existe en el sistema, por favor verifique su correo UTM");
         return;
@@ -52,7 +64,6 @@ const SigInPage = () => {
       JSON.stringify(user)
     );
     window.location.href = "./dashboard";
-
   };
   return (
     <div className=" ">
@@ -88,43 +99,11 @@ const SigInPage = () => {
               <form className="mt-8 space-y-4" onSubmit={handleSubmit(onSubmit)} >
                 <input type="hidden" name="remember" value="true" />
                 <div className="form-group mb-2">
-                  <label
-                    htmlFor="email-address"
-                    className="form-label text-left block mb-2 text-gray-700"
-                  >
-                    Correo electrónico:
-                  </label>
-                  <input
-                    id="email-address"
-                    name="mail"
-                    type="email"
-                    {...register("mail")}
-                    pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
-                    autoComplete="email"
-                    required
-                    className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  />
-                  {errors.mail?.message && <span className="text-red-500 text-left block text-sm">{errors.mail?.message}</span>}
+                  <Input label="Correo electrónico: " id="mail-address" type="email" name="mail" errors={errors} register={register("mail")} />
                 </div>
-                <div className="form-group mb-2">
-                  <label
-                    htmlFor="password"
-                    className="form-label text-left block mb-2 text-gray-700"
-                  >
-                    Contraseña:
-                  </label>
-                  <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    {...register("password")}
-                    autoComplete="current-password"
-                    required
-                    className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  />
-                  {errors.password?.message && <span className="text-red-500 text-left block text-sm">{errors.password?.message}</span>}
+                <div className=" form-group mb-2 relative">
+                  <Input label="Contraseña: " id="password" mostrarPassword={mostrarPassword} togglePassword={togglePassword} type="password" name="password" errors={errors} register={register("password")}/>
                 </div>
-
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
                     <input
@@ -153,6 +132,12 @@ const SigInPage = () => {
                 {cargando && (
                   <Loading />
                 )}
+                <div className="flex items-center justify-center">
+                  <ReCAPTCHA
+                    sitekey={process.env.REACT_APP_SITE_KEY}
+                    ref={captchaRef}
+                  />
+                </div>
                 <div>
                   <button type="submit"
                     className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-offset-2 

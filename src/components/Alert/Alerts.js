@@ -1,12 +1,12 @@
 import Swal from "sweetalert2";
 import "./Alert.css";
 
-  
+
 const SuccessData = {
     title: "Great",
     type: "success",
     text: "Excelent!.",
-  };
+};
 
 //export const Guardar
 export const mostrarContenido= (tema,objetivo,explicacion,link)=>{
@@ -101,30 +101,30 @@ export const Bienvenida = async () =>{
       })
 }
 
-export const mostrarAlertaDrive= async ()=>{
-    let a= document.createElement('a');
-    a.target= '_blank';
-    a.href= "https://drive.google.com/drive/folders/1VpsHlAYQ021jdXfa06nX_wChrxjce7kn";
-    
+export const mostrarAlertaDrive = async () => {
+    let a = document.createElement('a');
+    a.target = '_blank';
+    a.href = "https://drive.google.com/drive/folders/1VpsHlAYQ021jdXfa06nX_wChrxjce7kn";
+
     Swal.fire({
         title: '<strong>AVISO </strong>',
         icon: 'info',
         html:
-          'Accederá a un repositorio en <b> Google Drive</b> ', 
+            'Accederá a un repositorio en <b> Google Drive</b> ',
         showCancelButton: true,
         focusConfirm: false,
         confirmButtonText:
-          '<i class="fa fa-thumbs-up"></i> Continuar',
+            '<i class="fa fa-thumbs-up"></i> Continuar',
         confirmButtonAriaLabel: 'Thumbs up, great!',
         cancelButtonText:
-          '<i class="fa fa-thumbs-down">Cerrar</i>',
+            '<i class="fa fa-thumbs-down">Cerrar</i>',
         cancelButtonAriaLabel: 'Thumbs down'
-      }).then((result) => {
+    }).then((result) => {
         if (result.isConfirmed) {
             //window.location.href = "https://drive.google.com/drive/folders/1VpsHlAYQ021jdXfa06nX_wChrxjce7kn";
             a.click();
         }
-      })
+    })
 
 }
 
@@ -149,7 +149,7 @@ export const Alertaskip= async (respuesta)=>{
         'SKIP',
         Array.isArray(respuesta)?"<p style='color:green; font-weight: bold;'>Correct Answer: </p>"+cadena:"<p style='color:green; font-weight: bold;'>Correct Answer: </p>"+respuesta,
         'question'
-      )
+    )
     
 }
 
@@ -254,7 +254,6 @@ export const mostrarAlertaConfimacion = async (_title, _text)=>{
             showCancelButton: true,
         }
     )
-   
     return result;
 }
 
@@ -266,7 +265,7 @@ export const Confirmacion = async (_title, _text)=>{
         text: _text,
         showConfirmButton: false,
         timer: 5000
-      })
+    })
 }
 
 export const mostrarExitoEditar = async (titulo, text, icon) => {

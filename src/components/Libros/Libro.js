@@ -19,7 +19,6 @@ const Libro = (props) => {
 
 
   return <div>
-     
       <div className='flex flex-col justify-center'>
         <button onClick={ocultarlibros} className=' p-2 rounded-lg text-2xl  text-yellow-500 mt-5 mx-5 font-bold'>
           <h2  key={shortid.generate()} id={`libro${props.libroactual}`} className="shadow-lg hover:bg-gray-100 border-solid border- bg-gray-100 border-yellow-300 p-2 rounded-lg text-2xl  text-yellow-600 font-bold">{`BOOK ${props.libroactual}`}
@@ -36,10 +35,10 @@ const Libro = (props) => {
         
         if(index=== 1){
            //console.log(props.modulos[index-1].totalmoduleprogress);
-           if(props.modulos[index-1].totalmoduleprogress!==100){
-             bloqueo=true;
-           }
-           
+          if (props.modulos[index - 1].totalmoduleprogress !== 100) {
+            bloqueo = true;
+          }
+
         }
         return <div key={index} className='modulos'>
           <div key={shortid.generate()}>

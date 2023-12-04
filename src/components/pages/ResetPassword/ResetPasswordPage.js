@@ -8,6 +8,8 @@ import { useParams } from "react-router-dom";
 import Loading from "../../Loading/Loading";
 import { resetPassword } from "../../../api/User";
 import { Confirmacion } from "../../Alert/Alerts";
+import EyeIcon from "@heroicons/react/outline/EyeIcon";
+import EyeOffIcon from "@heroicons/react/outline/EyeOffIcon";
 
 const ResetPasswordPage = () => {
 
@@ -15,6 +17,7 @@ const ResetPasswordPage = () => {
   const [isVisibleDato, setIsVisibleDato] = useState("hidden");
   const [dato, setDato] = useState("");
   const [cargando, setCargando] = useState(false);
+  const [mostrarPassword, setMostrarPassword] = useState(false);
 
   const formSchema = Yup.object().shape({
     password: Yup.string()
@@ -26,6 +29,10 @@ const ResetPasswordPage = () => {
   })
   const formOptions = { resolver: yupResolver(formSchema) }
   const { register, handleSubmit, formState: { errors } } = useForm(formOptions);
+
+  const togglePassword = () => {
+    setMostrarPassword(!mostrarPassword);
+  };
 
   const onSubmit = async (form) => {
     setCargando(true);
@@ -92,7 +99,7 @@ const ResetPasswordPage = () => {
 
                 {errors.password?.message && <span className="text-red-500 text-left block text-sm">{errors.password?.message}</span>}
               </div>
-              <div className="form-group mb-2">
+              <div className="form-group mb-2 relative">
                 <label
                   htmlFor="password2"
                   className="form-label text-left block mb-2 text-gray-700"
@@ -109,6 +116,16 @@ const ResetPasswordPage = () => {
                   className=" form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                 />
                 {errors.password2 && <span className="text-red-500 text-left block text-sm">{errors.password2?.message}</span>}
+                <div
+                  className="icon_button absolute text-gray-700 right-4 top-10 cursor-pointer"
+                  onClick={togglePassword}
+                >
+                  {mostrarPassword ? (
+                    <EyeIcon className="h-6 font-extralight" />
+                  ) : (
+                    <EyeOffIcon className="h-6 font-extralight" />
+                  )}
+                </div>
               </div>
               {cargando && (
                 <Loading />

@@ -14,7 +14,8 @@ import EjercicioReview from "./EjerciciosReview";
 export const EjercicioR = (props) => {
   const [juego, setJuego] = React.useState([]);
   const [cargado, setCargado] = React.useState(true);
-  const [/* finJuego, */ setFinJuego] = React.useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [finJuego, setFinJuego] = React.useState(false);
   const [contadorRespondidas, setContadorRespondidas] = React.useState(0);
   const [preguntasValidas, setPreguntasValidas] = React.useState(0);
   const [aciertos, setAciertos] = React.useState(0);
@@ -37,6 +38,7 @@ export const EjercicioR = (props) => {
         setId
       );
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); //cuando haya un cambio de pregunta se actualiza el estado del componente.
 
   return (
@@ -96,7 +98,9 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado,preguntas
     //De esta manera la renderización del mensaje con estado cargando se va a mostrar hasta que se carguen todos los ejercicios.
     let contador = 0;
 
+    // eslint-disable-next-line array-callback-return
     ejercicios.map((ejercicio, index) => {
+  
       if(ejercicio.type === "completar_texto"){
         setJuego(juego => [...juego, <CompletarTexto key={index} ejercicio={ejercicio} miref={panelJuego}/>])
         contador++;
@@ -107,15 +111,17 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego,setCargado,preguntas
         setJuego(juego => [...juego, <VerdaderoFalso key={index} ejercicio={ejercicio} miref={panelJuego}/>])
         contador++;
       }else if(ejercicio.type === "opcion_correcta_1"){
+          // eslint-disable-next-line react/jsx-pascal-case
           setJuego(juego => [...juego, <OpcionCorrecta_1 key={index} ejercicio={ejercicio} miref={panelJuego}/>])
           contador++;
       }else if(ejercicio.type === "opcion_correcta_n"){
+          // eslint-disable-next-line react/jsx-pascal-case
           setJuego(juego => [...juego, <OpcionCorrecta_n key={index} ejercicio={ejercicio} miref={panelJuego}/>])
           contador++; 
       }else if(ejercicio.type === "emparejar"  ||  ejercicio.type === "emparejar_img"  ){
           setJuego(juego => [...juego, <Emparejar key={index} ejercicio={ejercicio} miref={panelJuego}/>])
           contador++;
-      } 
+      }
 
     } 
 

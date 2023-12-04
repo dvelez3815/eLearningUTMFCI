@@ -15,10 +15,12 @@
     "@testing-library/user-event": "^12.1.10",
     "alpinejs": "^3.8.1",
     "axios": "^0.21.1",
+    "dotenv": "^16.0.3",
     "mod10": "^0.0.3",
     "react": "^17.0.2",
     "react-beautiful-dnd": "^13.1.0",
     "react-dom": "^17.0.2",
+    "react-google-recaptcha": "^2.1.0",
     "react-hook-form": "^7.34.2",
     "react-redux": "^8.0.2",
     "react-router-dom": "^5.2.0",
@@ -36,7 +38,7 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "craco  start",
     "build": "craco build && sudo cp .htaccess ./build && sudo cp -r build /var/www/html/ && sudo systemctl restart httpd ",
     "test": "craco test",
     "eject": "react-scripts eject",
