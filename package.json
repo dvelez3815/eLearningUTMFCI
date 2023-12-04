@@ -39,8 +39,7 @@
   },
   "scripts": {
     "start": "craco  start",
-    "build": "craco build ",
-    "build_server": "craco build && sudo cp .htaccess ./build && sudo cp -r build /var/www/html/ && sudo systemctl restart httpd ",
+    "build": "craco build && sudo cp .htaccess ./build && sudo cp -r build /var/www/html/ && sudo systemctl restart httpd ",
     "test": "craco test",
     "eject": "react-scripts eject",
     "local": "env-cmd -e LOCAL npm start",

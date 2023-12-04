@@ -21,7 +21,6 @@ export async function updateProgressBook (userid, book_id) {
 }
 export async function updateProgress(data) {
 
-  console.log(data);
   const responses = await fetch(process.env.REACT_APP_API_URL + "/progress/update",
     {
       method: "POST",

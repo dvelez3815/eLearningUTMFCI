@@ -477,11 +477,9 @@ async function enviarSiEsCorrecta(props, contadorRespondidas) {
   //caso contrario se debe de pasar al siguiente ejercicio
   if (!(props.juego.length - 1 === 0)) {
     mostrarAlertaExito(`Correct answer`);
-    console.log("correcta");
     props.juego.pop();
     props.setContadorRespondidas(contadorRespondidas + 1);
   }
-  console.log("enviar");
   let tasks_id =
     window.location.href.split("/")[
     window.location.href.split("/").length - 1
@@ -514,7 +512,6 @@ async function enviarSiEsCorrecta(props, contadorRespondidas) {
   }
   const dataT = await responses.json();
 
-  console.log(dataT.res);
   if (props.control === ' ') {
     props.setContadorRespondidas(contadorRespondidas + 1);
     props.juego.pop();
