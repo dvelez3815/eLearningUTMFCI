@@ -6,12 +6,15 @@ import ViewImage from '../../ViewImage/ViewImage'
 import axios from 'axios'
 
 const CompletarTexto = (props) => {
-  const [/* title, */ setTitle] = useState('')
+  // eslint-disable-next-line no-unused-vars
+  const [title, setTitle] = useState('')
 
-  useEffect(() => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(async () => {
     
     translateText()
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
   const translateText = () => {
@@ -54,9 +57,12 @@ const CompletarTexto = (props) => {
           className="flex  gap-1 flex-col  justify-center my-5 sm:my-1 mr-8 ml-8   "
           ref={props.miref}
         >
-          {props.ejercicio.body.map((item, index) => {
+          {
+          // eslint-disable-next-line array-callback-return
+          props.ejercicio.body.map((item, index) => {
             if (item.item && item.answer) {
               let juego = [];
+              // eslint-disable-next-line array-callback-return
               item.item.map((texto, index) => {
                 if (texto[0] === "_") {
                   // aqui van las opciones

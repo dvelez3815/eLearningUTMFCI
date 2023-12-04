@@ -4,18 +4,17 @@ import logo from "../../../assets/resource/Logo_Provicional.png";
 import CollectionsBookmarkIcon from "@material-ui/icons/CollectionsBookmark";
 import { useState } from "react";
 import {
+  // eslint-disable-next-line no-unused-vars
   Bienvenida,
 } from "../../Alert/Alerts";
 import "./inicio.css";
 import Footer from "../../Footer";
 import loading from "../../../assets/resource/loading.svg";
-import shortid from "shortid";
 import Libro from "../../Libros/Libro";
 import { useDispatch, useSelector } from "react-redux";
 import { obtenerProgresoAccion, selectAllProgress } from "../../../redux/ProgressDucks";
 import { obtenerTaskAccion, selectAllTask } from "../../../redux/TaskDucks";
 import { llenarInfo } from "../../../helpers/indexFuntions";
-import { Link } from "react-router-dom";
 
 const USER = JSON.parse(localStorage.getItem("user"));
 
@@ -27,7 +26,6 @@ export const Inicio = () => {
   const [libros, setlibros] = useState([]);
 
   const dispatch = useDispatch();
- 
   const task = useSelector(selectAllTask);
   const taskStatus = useSelector((store) => store.task.status);
 
@@ -53,7 +51,6 @@ export const Inicio = () => {
       setvalorProgress(porcentaje);
       localStorage.setItem("progreso",porcentaje)
     }
-   
   }, [taskStatus, progressStatus, dispatch, progress, task, setuserProgress])
 
   return (
@@ -86,7 +83,6 @@ export const Inicio = () => {
 
                   </div>
                   <div className="overflow-hidden w-full h-6 mb-4 text-xs flex rounded bg-amber-200  border-4 border-gray-200">
-
                     {
                       valorProgress < 25
                         ? <div style={{ width: `${valorProgress}%` }} className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-400"> </div>

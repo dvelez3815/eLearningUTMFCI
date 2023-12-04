@@ -40,7 +40,7 @@ const getData = async(idlibro) => {
         method: 'GET',
         headers: {
             'token':process.env.REACT_APP_SECRET_TOKEN,
-          },
+        },
     });
     const data = await response.json();
     

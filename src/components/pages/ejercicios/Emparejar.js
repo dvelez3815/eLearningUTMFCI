@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import shortid from "shortid";
-import "./CheckExercise.css";
+import "../../pages/ejercicios/CheckExercise.css";
 import ViewImage from "../../ViewImage/ViewImage";
 import axios from 'axios'
 const Emparejar = (props) => {
@@ -9,12 +9,15 @@ const Emparejar = (props) => {
   const opcionesRef = React.useRef(null);
 
   let opcionesElegidas = [];
+  // eslint-disable-next-line no-unused-vars
   const [title, setTitle] = useState('')
   
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     
     translateText()
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
   const translateText = () => {
@@ -55,6 +58,7 @@ const Emparejar = (props) => {
         opcionesElegidas.push(opcion);
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     opcionesElegidas = quitarRepetidos(opcionesElegidas);
     opcionesElegidas.sort((a, b) => {
       if (a.length < b.length) return -1;
@@ -81,6 +85,7 @@ const Emparejar = (props) => {
     //Si ya se han completado todas las opciones
     
     if (contador !== 0) {
+      // eslint-disable-next-line array-callback-return
       aMarcar.some((element) => {
         if (
           element.getElementsByClassName('opt-1')[0].innerText ===
@@ -121,9 +126,12 @@ const Emparejar = (props) => {
           className="flex  gap-1 flex-col  justify-center my-5 sm:my-1 mr-8 ml-8   "
           ref={props.miref}
         >
-          {props.ejercicio.body.map((item, index) => {
+          {
+           // eslint-disable-next-line array-callback-return
+          props.ejercicio.body.map((item, index) => {
             if (item.item && item.answer) {
               let juego = [];
+              // eslint-disable-next-line array-callback-return
               item.item.map((texto, index) => {
                 if (texto[0] === "_") {
                   // aqui van las opciones
@@ -165,7 +173,7 @@ const Emparejar = (props) => {
                     }}
                   >
                     <span className="md:text-sm text-xs  p-2 min-w-full cardCheck px-5 border-blue-200 bg-blue-50">
-                       {opcion}
+                      {opcion}
                     </span>
                   </button>
                 </div>
@@ -208,7 +216,9 @@ const JuegoCompletarTexto = (props) => {
   return (
     <div className="grid grid-cols-2 text-justify items-center  my-2 ">
       <div>
-        {props.juego.map((juego, index) => {
+        {
+        // eslint-disable-next-line array-callback-return
+        props.juego.map((juego, index) => {
           if (typeof juego === "string") {
               
             return (
@@ -217,16 +227,18 @@ const JuegoCompletarTexto = (props) => {
               >
                   {/* <ViewImage img={juego}/> */}
                 {props.type === "emparejar_img" && <ViewImage img={juego} />}
-                {props.type == "emparejar" && <h2 className=
+                { // eslint-disable-next-line eqeqeq
+                props.type == "emparejar" && <h2 className=
                   "mx-2 text-justify w-auto text-xs sm:text-sm text-xs"
-                 >{ juego }</h2>}
+                >{ juego }</h2>}
               </div>
             );
           }
         })}
       </div>
       <div>
-        {props.juego.map((juego, index) => {
+        {// eslint-disable-next-line array-callback-return
+        props.juego.map((juego, index) => {
           if (typeof juego !== "string") {
             return juego;
           }

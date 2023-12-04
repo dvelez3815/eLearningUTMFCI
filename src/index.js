@@ -2,10 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-
+import * as dotenv from 'dotenv'
 import { Provider } from "react-redux";
 import generateStore from "./redux/store";
 const store = generateStore();
+dotenv.config()
 
 ReactDOM.render(
   <React.StrictMode>

@@ -1,4 +1,4 @@
-import { getProgress, updateProgress } from "../api/Progress";
+import { getProgress} from "../api/Progress";
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 const initialState = {
     progress: [],
@@ -33,8 +33,6 @@ const progressSlice = createSlice({
           store.status = 'failed'
           store.error = action.error.message
         });
-     
-
     }
   })
 

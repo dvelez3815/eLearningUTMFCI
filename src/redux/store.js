@@ -5,11 +5,14 @@ import thunk from 'redux-thunk';
 
 import progressReducer from './ProgressDucks';
 import taskReducer from './TaskDucks';
+import questionReducer from './QuestionDucks';
+import userReducer from './UserDucks';
 
 const rootReducer = combineReducers({
-  /*  usuarios: userReducer,  */
+   user: userReducer,
    progress: progressReducer,
-   task: taskReducer
+   task: taskReducer,
+   question: questionReducer
 });
 
 

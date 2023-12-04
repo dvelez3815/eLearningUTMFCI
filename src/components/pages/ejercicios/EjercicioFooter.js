@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   mostrarAlertaError,
@@ -12,11 +12,19 @@ import {
 const USER = JSON.parse(localStorage.getItem("user"));
 
 const EjercicioFooter = (props) => {
+  const [enviar, setEnviar] = useState(false);
   useEffect(() => {
     if (speechSynthesis.ispeaking) {
       speechSynthesis.cancel();
     }
   }, []);
+
+  const sendRespuesta=(props)=>{
+    setEnviar(true);
+    validarRespuesta(props)
+    setEnviar(false);
+
+  }
 
   return (
     <div className="m-8 ">
@@ -32,8 +40,9 @@ const EjercicioFooter = (props) => {
         </div>
         <div className="mb-4">
           <button
+          disabled={enviar}
             className=" text-xs sm:text-xl tracking-wider  my-2 text-white bg-green-500 font-semibold  hover:bg-green-400 py-2 px-4 capitalize border border-green-500 hover:border-green-600 rounded "
-            onClick={() => validarRespuesta(props)}
+            onClick={() => sendRespuesta(props)}
           >
             <span>
               <p>check</p>
@@ -48,6 +57,7 @@ const EjercicioFooter = (props) => {
 const skipExercise = (props) => {
 
   let tipo_ejercicio = props.ejercicio.props.ejercicio.type;
+  // eslint-disable-next-line no-unused-vars
   let contadorRespuestas = props.contadorRespondidas;
 
   if (tipo_ejercicio === "opcion_correcta_1") {
@@ -67,12 +77,14 @@ const skipExercise = (props) => {
     return correctAnswer;
     
   } else if (tipo_ejercicio === "ordenar") {
+    // eslint-disable-next-line no-unused-vars
     let hijos = [...props.miref.current.children];
     let respuestaBackEndBase = [];
     //se quita la ref
     const respuestasBack = Array.from(
       props.ejercicio.props.ejercicio.options
     ).map((item) => [...item]);
+    // eslint-disable-next-line array-callback-return
     const respuestasBackEndOrdenadas = [...respuestasBack].map((item) => {
       
       if (item) {
@@ -87,6 +99,7 @@ const skipExercise = (props) => {
         }
         
         respuestaBackEndBase.push((textoBase+" /n"));
+        // eslint-disable-next-line no-unused-vars
         texto = texto.replace(/\s/g, "");
         
         return textoBase;
@@ -98,7 +111,9 @@ const skipExercise = (props) => {
   } else if (tipo_ejercicio === "true_false") {
     let respuestasBack = [];
 
+    // eslint-disable-next-line array-callback-return
     props.ejercicio.props.ejercicio.body.map((item, index) => {
+      // eslint-disable-next-line array-callback-return
       item.answer.map((item2, index2) => {
         if (item2[1]) {
           respuestasBack.push(item2[0]);
@@ -127,7 +142,6 @@ const skipExercise = (props) => {
       respuestasBack.push(item.answer);
     });    
     return respuestasBack;
- 
   }
 
 }
@@ -145,7 +159,8 @@ async function noEsCorrecta(props, respuesta, id) {
   aux = aux.filter((e) => e !== actual);
 
   aux.unshift(actual);
-  if (id===1){
+  // eslint-disable-next-line eqeqeq
+  if (id==1){
     Alertaskip(respuesta)
   }else{
     mostrarAlertaError(respuesta);
@@ -171,6 +186,7 @@ const validarRespuesta = async (props) => {
     const respuestasBack = Array.from(
       props.ejercicio.props.ejercicio.options
     ).map((item) => [...item]);
+    // eslint-disable-next-line array-callback-return
     const respuestasBackEndOrdenadas = [...respuestasBack].map((item) => {
       if (item) {
         item = [...item.sort((a, b) => (a.answer > b.answer ? 1 : -1))];
@@ -218,6 +234,7 @@ const verificarEmparejar = async (props, hijos, contadorRespuestas) => {
     respuestasBack.push(item.answer);
   });
   let faltaMarcar = false;
+  // eslint-disable-next-line array-callback-return
   hijos.some((element) => {
     if (
       element.getElementsByClassName("opt-1")[0].innerText ===
@@ -231,6 +248,7 @@ const verificarEmparejar = async (props, hijos, contadorRespuestas) => {
     AlertaLeccion("All fields must be filled")
     //alert("All fields must be filled");
   } else {
+    // eslint-disable-next-line array-callback-return
     hijos.some((element) => {
       respuestaUser.push(element.getElementsByClassName("opt-1")[0].innerText);
     });
@@ -298,7 +316,9 @@ const verificarCompletar_Texto = async (props, hijos, contadorRespuestas) => {
 const verificarVerdadero_Falso = async (props, hijos, contadorRespuestas) => {
   let respuestasBack = [];
 
+  // eslint-disable-next-line array-callback-return
   props.ejercicio.props.ejercicio.body.map((item, index) => {
+    // eslint-disable-next-line array-callback-return
     item.answer.map((item2, index2) => {
       if (item2[1]) {
         respuestasBack.push(item2[0]);
@@ -476,55 +496,65 @@ function randomizarArray(array) {
 async function enviarSiEsCorrecta(props, contadorRespondidas) {
   //Se es corecta se necesita saber si se ha llegado al final de la lista de ejercicios, de ser así, se debe de terminar el juego y guardar el progreso,
   //caso contrario se debe de pasar al siguiente ejercicio
-  if (!(props.juego.length - 1 === 0)) {
+  if (props.juego.length - 1 === 0) {
+    let tasks_id =
+      window.location.href.split("/")[
+        window.location.href.split("/").length - 1
+      ];
+    let id = USER._id
+
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("token", process.env.REACT_APP_SECRET_TOKEN);
+
+    var raw = JSON.stringify({
+      user_id: `${id}`,
+      task_id: `${tasks_id}`,
+    });
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+    };
+    
+    let responses = []
+    try {
+      responses = await fetch(
+        process.env.REACT_APP_API_URL+"/progress/update",
+        requestOptions
+      )
+    } catch (error) {
+      
+    }
+    const dataT = await responses.json();
+    console.log('Info:',dataT.res)
+  if(props.control === ' '){
+        props.setContadorRespondidas(contadorRespondidas + 1);
+        props.juego.pop();
+        //setInterval(() => {}, 4000);
+        //mostrarAlertaExitoFin(`End of the game`);
+        props.setFinJuego(true);
+  }else if(dataT.res !== 'Task Registrada' && dataT.res !=="Task ya ha sido registrado en ese usuario"){
+        //alert('Guardando Progreso... Presione aceptar')
+        enviarSiEsCorrecta(props, contadorRespondidas)
+      }else{
+        props.setContadorRespondidas(contadorRespondidas + 1);
+        props.juego.pop();
+        //setInterval(() => {}, 4000);
+        //mostrarAlertaExitoFin(`End of the game`);
+        props.setFinJuego(true);
+        mostrarAlertaExitoFin(`Excellent Work `);
+      }
+
+    
+    
+  } else {
     mostrarAlertaExito(`Correct answer`);
     props.juego.pop();
     props.setContadorRespondidas(contadorRespondidas + 1);
   }
-  let tasks_id =
-    window.location.href.split("/")[
-    window.location.href.split("/").length - 1
-    ];
-  let id = USER._id
-
-  var myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-  myHeaders.append("token", process.env.REACT_APP_SECRET_TOKEN);
-
-  var raw = JSON.stringify({
-    user_id: id,
-    task_id: tasks_id,
-  });
-
-  var requestOptions = {
-    method: "POST",
-    headers: myHeaders,
-    body: raw,
-  };
-
-  let responses = []
-  try {
-    responses = await fetch(
-      process.env.REACT_APP_API_URL + "/progress/update",
-      requestOptions
-    )
-  } catch (error) {
-
-  }
-  const dataT = await responses.json();
-
-  if (props.control === ' ') {
-    props.setContadorRespondidas(contadorRespondidas + 1);
-    props.juego.pop();
-    props.setFinJuego(true);
-  } else if (dataT.res !== 'Task Registrada' && dataT.res !== "Task ya ha sido registrado en ese usuario") {
-    enviarSiEsCorrecta(props, contadorRespondidas)
-  } else {
-    props.setContadorRespondidas(contadorRespondidas + 1);
-    props.juego.pop();
-    props.setFinJuego(true);
-    mostrarAlertaExitoFin(`Excellent Work `);
-  }
+  //Se guarda el progreso del usuario y se muestra una alerta de que la respuesta es correcta
 }
 
 export default EjercicioFooter;

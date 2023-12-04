@@ -3,12 +3,15 @@ import shortid from "shortid";
 import ViewImage from '../../ViewImage/ViewImage'
 import axios from 'axios'
 const VerdaderoFalso = (props) => {
+  // eslint-disable-next-line no-unused-vars
   const [title, setTitle] = useState('')
   
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     
     translateText()
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
   const translateText = () => {
@@ -54,9 +57,11 @@ const VerdaderoFalso = (props) => {
           ref={props.miref}
         >
             
-            {props.ejercicio.body.map((item, index) => {
+            { // eslint-disable-next-line array-callback-return
+            props.ejercicio.body.map((item, index) => {
                 if(item.item  && item.answer){
                     let juego = [];
+                    // eslint-disable-next-line array-callback-return
                     item.item.map((texto, index) => {
                       //console.log(texto)
                         if(texto[0]==='_'){
@@ -89,10 +94,12 @@ const VerdaderoFalso = (props) => {
   const TextoGeneral= (props) => {
     return (
       <div className="text-center w-full p-4 ">
+        {/*  eslint-disable-next-line jsx-a11y/heading-has-content */}
         <h2 className="text-md font-bold text-left my-4 uppercase block"></h2>
 
       <div className="  w-full">
-          {props.juego.map((juego,index)=>{
+          { // eslint-disable-next-line array-callback-return
+          props.juego.map((juego,index)=>{
             if(typeof juego === 'string'){
               return <p key={shortid.generate()} className={"w-auto py-2 sm:w-auto font-bold uppercase mx-2 text-justify text-xs	md:text-md "}>{juego}</p>
             }else if(typeof juego === 'object'){
@@ -110,6 +117,7 @@ const VerdaderoFalso = (props) => {
         let div = Array.from(event.target.parentNode.children);
         
         for (let index = 0; index < div.length; index++) {
+          // eslint-disable-next-line no-unused-vars
           const element = div[index].getElementsByTagName("button");
           //console.log(div[index]);
           if(div[index].classList.contains("activado")){

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef  } from "react";
 import NavBar from "../../NavBar/NavBar";
 import logo from "../../../assets/resource/Logo_Provicional.png"
 import { Link } from "react-router-dom";
@@ -8,11 +8,14 @@ import * as Yup from 'yup'
 import { sendEmailForgottenPassword } from "../../../api/User";
 import Loading from "../../Loading/Loading";
 import { Confirmacion } from "../../Alert/Alerts";
+import Input from "../../Input/Input";
+import ReCAPTCHA from "react-google-recaptcha"
 const ForgottenPasswordPage = () => {
 
   const [isVisibleDato, setIsVisibleDato] = useState("hidden");
   const [dato, setDato] = useState("");
   const [cargando, setCargando] = useState(false);
+  const captchaRef = useRef(null)
 
   Yup.addMethod(Yup.string, "emailUTM", function (errorMessage) {
     return this.test(`test-email-utm`, errorMessage, function (value) {
@@ -31,12 +34,17 @@ const ForgottenPasswordPage = () => {
   const { register, handleSubmit, formState: { errors } } = useForm(formOptions);
 
   const onSubmit = async (form) => {
+    const token = captchaRef.current.getValue();
+    captchaRef.current.reset();
     setCargando(true);
     let { mail } = form;
-    const send_mail = await sendEmailForgottenPassword({ mail });
+    const send_mail = await sendEmailForgottenPassword({ mail, token });
     setCargando(false);
     setIsVisibleDato("visible");
     switch (send_mail) {
+      case "TOKEN INVALID":
+        setDato("Verifique que no sea un robot");
+        return;
       case "USER NOT EXIST":
         setDato("El usuario no existe en el sistema, por favor verifique su correo");
         return;
@@ -79,27 +87,17 @@ const ForgottenPasswordPage = () => {
             </div>
             <form className=" space-y-6" onSubmit={handleSubmit(onSubmit)}>
               <div className="form-group mb-2">
-                <label
-                  htmlFor="email-address"
-                  className="form-label text-left block mb-2 text-gray-700"
-                >
-                  Correo electrónico:
-                </label>
-                <input
-                  id="email-address"
-                  name="mail"
-                  type="email"
-                  {...register("mail")}
-                  pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
-                  autoComplete="email"
-                  required
-                  className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                />
-                {errors.mail?.message && <span className="text-red-500 text-left block text-sm">{errors.mail?.message}</span>}
+                <Input label="Correo electrónico: " id="mail" type="email" name="mail" errors={errors} register={register("mail")} />
               </div>
               {cargando && (
                 <Loading />
               )}
+              <div className="flex items-center justify-center">
+                <ReCAPTCHA
+                  sitekey={process.env.REACT_APP_SITE_KEY}
+                  ref={captchaRef}
+                />
+              </div>
               <div>
                 <button
                   type="submit"

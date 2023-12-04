@@ -1,9 +1,6 @@
 import "./CheckExercise.css";
 import { useState, useRef, createRef } from "react";
-import AlertError, { mostrarError } from "../../Alert/Error";
-import AlertSuccess from "../../Alert/Exito";
-import { ErrorData } from "../../Alert/Mensajes";
-import { mostrarAlertaError, mostrarAlertaExito } from "../../Alert/Alerts";
+import { mostrarAlertaError} from "../../Alert/Alerts";
 import CancelIcon from "@material-ui/icons/Cancel";
 
 const Grammar = (props) => {

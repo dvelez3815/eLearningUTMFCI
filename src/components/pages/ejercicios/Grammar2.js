@@ -4,89 +4,56 @@ import { Ejercicio } from './Ejercicio'
 
 import NotFoundPage from '../NotFoundPage/NotFoundPage'
 import loading from "../../../assets/resource/loading.svg";
-import {
-    AlertaLeccion
-  } from "../../Alert/Alerts";
+
+import { useDispatch, useSelector } from "react-redux";
+import { obtenerQuestionsAccion, selectAllquestion } from "../../../redux/QuestionDucks";
+import { obtenerTaskAccion, selectAllTask } from "../../../redux/TaskDucks";
 
 const USER = JSON.parse(localStorage.getItem("user"));
 export const Grammar2 = () => {
 
-    const [task, setTask] = React.useState([]);
-    const [control, setControl] = React.useState(true);
+    const [tasks, setTask] = React.useState([]);
     const [ejercicios, setEjercicios] = React.useState([]);
     const [loadingData, setLoadingData] = React.useState(true);
     const taskid = window.location.href.split('/')[window.location.href.split('/').length - 1];
 
-    React.useEffect(async()  => {
-        if (!USER) {
-            let valor = AlertaLeccion('SU SESIÓN HA EXPIRADO, VUELVA A INGRESAR')
-            if((await valor).value){
-            window.location.href = "/signin";
-            }
-          }else{
-            
-            if(ejercicios.length ===0){
-                getExercises(taskid).then(data => {
-                    setEjercicios(data);
-                    //setLoadingData(false);
-                });
-            }
-            
-            if(task.length ===0){
-                getTask().then(data => {
-                    let task = data.res
-                    let filter = task.filter(x => x._id === parseInt(taskid)  )
-                    setTask(filter);
-                    //setLoadingData(false);
-                });
-            }
-            
-          }
-          
-          if(control && ejercicios.length !==0 && task.length!==0){
-            setControl(false)
+    const dispatch = useDispatch();
+    const task = useSelector(selectAllTask);
+    const taskStatus = useSelector((store) => store.task.status);
+    const question = useSelector(selectAllquestion);
+    const questionStatus = useSelector((store) => store.question.status);
+
+    React.useEffect(() => {
+        if (!USER?._id) {
+            window.location.href = "./signin";
+        }
+        if (taskStatus === 'idle') {
+            dispatch(obtenerTaskAccion())
+        }
+        if (questionStatus === 'idle') {
+            dispatch(obtenerQuestionsAccion(taskid))
+        }
+        if (taskStatus === 'succeeded' && questionStatus === 'succeeded') {
+            let filter = task.filter(x => x._id === parseInt(taskid))
+            setTask(filter);
+            setEjercicios(question);
             setLoadingData(false);
-          }
-     
-    },)
-
-
+        }
+        
+    }, [ taskStatus, questionStatus, dispatch, taskid, task, question])
 
     return (
         <div>
-            
-            {loadingData ? <div className="pt-10"><img src={loading}></img></div> :ejercicios.length>0?<Ejercicio ejercicios={ejercicios} taskInfo={task}/>:<NotFoundPage></NotFoundPage>}
-            
+            {loadingData ?
+                <div className="pt-10">
+                    <img alt="img" src={loading}></img>
+                </div>
+                : ejercicios.length > 0 ?
+                    <Ejercicio ejercicios={ejercicios} taskInfo={tasks} />
+                    : <NotFoundPage></NotFoundPage>
+            }
         </div>
     )
 }
 
-
-const getExercises = async(taskid) => {
-
-    const url = `${process.env.REACT_APP_API_URL}/task/${taskid}`;
-    const response = await fetch(url,
-        {
-            method: 'GET',
-            headers: {
-                'token': process.env.REACT_APP_SECRET_TOKEN,
-              },            
-        });
-    const data = await response.json();
-    return data;
-
-}
-const getTask = async() => {
-
-    const url = `${process.env.REACT_APP_API_URL}/task`;
-    const response = await fetch(url,
-        {
-            method: 'GET',
-            headers: {
-                'token': process.env.REACT_APP_SECRET_TOKEN,
-              },            
-        });
-    const data = await response.json();
-    return data;
-
-}
+// Path: eLearningUTMFCI/src/components/pages/ejercicios/Ejercicio.js

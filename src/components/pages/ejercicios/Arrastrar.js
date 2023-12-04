@@ -1,43 +1,20 @@
 import React from "react";
-import { useState, useEffect} from "react";
+import { useState} from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import shortid from "shortid";
 import ViewImage from '../../ViewImage/ViewImage'
-import axios from 'axios'
 
 const Arrastrar = (props) => {
   let data = props.ejercicio.options;
-
   //Re ordena la lista en base al cambio realizado
-  const [/* title, */ setTitle] = useState('')
 
-  useEffect(() => {
-    translateText()
 
-    }, []);
-
-  const translateText = () => {
-    let tit = ''
-    if (String(props.ejercicio.question).length===0 ){
-      tit=('order the sentence').replace(/[$.]/g,'')
-    }else{
-      tit=(props.ejercicio.question).replace(/[$.]/g,'')
-    }
-            
-    let data = {
-        q : tit.replace(/[$_]/g,'.').toLocaleLowerCase(),
-        source: 'en',
-        target: 'es'
-    }
-    axios.post(`https://libretranslate.de/translate`, data)
-    .then((response) => {
-      setTitle(response.data.translatedText)  
-      //console.log(response.data.translatedText)
-    })
-  } 
   const reorder = (list, startIndex, endIndex, index) => {
-    const result = [...list];
-    const [removed] = result[index].splice(startIndex, 1);
+
+    let result = list.map(function (arr) {
+      return arr.slice();
+    });
+    let [removed] = result[index].splice(startIndex, 1);
     result[index].splice(endIndex, 0, removed);
     return result;
   };
@@ -62,21 +39,21 @@ const Arrastrar = (props) => {
   });
 
   const getItemStyleH = (isDragging, draggableStyle) => ({
-     // some basic styles to make the items look a bit nicer
-     userSelect: "none",
-     // padding: grid * 2,
-     margin: "0.3rem",
-     width: "60%",
-     // change background colour if dragging
-     background: isDragging ? "rgb(248 250 252)" : "white",
- 
-     // styles we need to apply on draggables
-     ...draggableStyle,
- 
-     "--border-color": "#e5e5e5",
-     "borderRadius": "12px",
-     "borderWidth": "2px 2px 2px",
-     height: "auto",
+    // some basic styles to make the items look a bit nicer
+    userSelect: "none",
+    // padding: grid * 2,
+    margin: "0.3rem",
+    width: "60%",
+    // change background colour if dragging
+    background: isDragging ? "rgb(248 250 252)" : "white",
+
+    // styles we need to apply on draggables
+    ...draggableStyle,
+
+    "--border-color": "#e5e5e5",
+    "borderRadius": "12px",
+    "borderWidth": "2px 2px 2px",
+    height: "auto",
   });
 
   const getListStyle = (isDraggingOver, itemsLength) => ({
@@ -90,7 +67,6 @@ const Arrastrar = (props) => {
 
 
   const [items, setItems] = useState(data);
-
   return (
 
       <div className="flex  flex-col  flex-wrap md:mt-8  xl:px-40 px-5 sm:px-20  "ref={props.miref}>
@@ -178,8 +154,6 @@ const Arrastrar = (props) => {
                                 {...provided.dragHandleProps}
                                 
                               > 
-                             
-                                
                                 <p className="sm:text-xs text-xs  ">{ordenar.item}</p>
                               </div>
                             </div>
