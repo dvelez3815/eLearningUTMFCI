@@ -5,7 +5,7 @@ import shortid from "shortid";
 import ViewImage from '../../ViewImage/ViewImage'
 
 const Arrastrar = (props) => {
-  let data = props.ejercicio.options;
+  let data = props.ejercicio.options.map((option)=>option.sort(() => Math.random() - 0.5));
   //Re ordena la lista en base al cambio realizado
 
 
