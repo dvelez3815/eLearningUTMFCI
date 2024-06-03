@@ -43,7 +43,6 @@ export default function Activity(props) {
     let explicacion = String(Info[0].explanation)
     let objetivo = String(Info[0].objetive.text)
     let topic_ = String(Info[0].topic.top)
-    console.log('JFC')
     mostrarContenido(topic_,objetivo, explicacion, ruta )
     
 }

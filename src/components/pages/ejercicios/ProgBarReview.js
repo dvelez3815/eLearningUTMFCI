@@ -1,9 +1,6 @@
 import React from 'react'
-import { useHistory } from 'react-router';
 
 const ProgressBarR = (props) => {
-  // eslint-disable-next-line no-unused-vars
-  const history = useHistory();
   
 
     return (

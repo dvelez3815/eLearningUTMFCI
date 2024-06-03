@@ -1,8 +1,6 @@
 import React, { useRef } from "react";
 import ProgressBar from "./ProgressBar";
-import {
-  AlertaLeccion
-} from "../../Alert/Alerts";
+
 
 //load ejercicio.css
 import "./Ejercicio.css";
@@ -19,7 +17,6 @@ import { EjercicioR } from '../ejercicios/Ejer_Review';
 import image1 from "../../../assets/resource/lesson4.webp";
 import image2 from "../../../assets/resource/lesson3.webp";
 
-const USER = JSON.parse(localStorage.getItem("user"));
 
 export const Ejercicio = (props) => {
   const [juego, setJuego] = React.useState([]);
@@ -50,9 +47,6 @@ export const Ejercicio = (props) => {
 
   }
 
-  console.log("Topic", topic);
-  console.log("Objetive", Objetive);
-  console.log("Explanation", explanation);
   const panelJuego = useRef(null);
 
   React.useEffect(() => {
@@ -70,19 +64,7 @@ export const Ejercicio = (props) => {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  React.useEffect(async()  => {
-    // const cargarVista = async() => {
-    //     await cargarEjercicios(juego, setJuego, panelJuego, setCargado, finJuego, ejercicios);
-    // }
-    
-    if (!USER) {
-      let valor = AlertaLeccion('SU SESIÓN HA EXPIRADO')
-      if((await valor).value){
-      window.location.href = "/signin";
-      }
-  }
-  }); //cuando haya un cambio de pregunta se actualiza el estado del componente.
+  //cuando haya un cambio de pregunta se actualiza el estado del componente.
 
   return (
     <div className={"ejercicio md:px-20"}>

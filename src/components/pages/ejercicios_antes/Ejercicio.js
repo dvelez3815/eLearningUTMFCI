@@ -1,7 +1,7 @@
+/* eslint-disable react/jsx-pascal-case */
 import React, { useRef, useState } from "react";
 import ProgressBar from "./ProgressBar";
 import { Link } from "react-router-dom"
-import { AlertaLeccion } from "../../Alert/Alerts";
 
 //load ejercicio.css
 import "./Ejercicio.css";
@@ -18,7 +18,6 @@ import { EjercicioR } from './Ejer_Review';
 import image1 from "../../../assets/resource/lesson4.webp";
 import image2 from "../../../assets/resource/lesson3.webp";
 
-const USER = JSON.parse(localStorage.getItem("user"));
 
 export const Ejercicio = (props) => {
   const [juego, setJuego] = useState([]);
@@ -62,16 +61,7 @@ export const Ejercicio = (props) => {
     }
   }, [juego.length, preguntasValidas, props.ejercicios]);
 
-  React.useEffect(() => {
-
-    if (!USER) {
-      let valor = AlertaLeccion('SU SESIÓN HA EXPIRADO')
-      if (valor.value) {
-        window.location.href = "/signin";
-      }
-    }
-  }); //cuando haya un cambio de pregunta se actualiza el estado del componente.
-
+ 
   return (
     <div className={"ejercicio md:px-20"}>
       {cargado || (
@@ -191,7 +181,7 @@ export const Ejercicio = (props) => {
                           <div className="justify-center  py-5 w-full ">
 
                             <div className="grid grid-cols-3 gap-4  pt-2">
-                              <div className=" text-sm  md:text-lg pt-1 md:pt-2 md:pl-10 pt-3 pl-4 font-bold text-left  bg-gray-50   rounded-lg ">
+                              <div className=" text-sm  md:text-lg  md:pt-2 md:pl-10 pt-3 pl-4 font-bold text-left  bg-gray-50   rounded-lg ">
                                 TOPIC
                               </div>
                               <div className="col-span-2">

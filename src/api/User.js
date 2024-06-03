@@ -63,3 +63,27 @@ export async function  registerUser(params, token){
       return user;
 
 }
+
+export async function getUsers() {
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/user/`, {
+      method: "GET",
+      headers: {
+          "Content-Type": "application/json",
+          token: process.env.REACT_APP_SECRET_TOKEN,
+      },
+  });
+  const user = await response.json();
+  return JSON.parse(user.user)
+}
+
+export async function getUser(id) {
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/user/${id}`, {
+      method: "GET",
+      headers: {
+          "Content-Type": "application/json",
+          token: process.env.REACT_APP_SECRET_TOKEN,
+      },
+  });
+  const user = await response.json();
+  return user
+}

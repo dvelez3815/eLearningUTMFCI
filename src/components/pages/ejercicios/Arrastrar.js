@@ -4,10 +4,17 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import shortid from "shortid";
 import ViewImage from '../../ViewImage/ViewImage'
 
+const barajarArray = (array) => {
+  const arr = array.slice(); // Crear una copia del array para no mutar el original
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+};
 const Arrastrar = (props) => {
-  let data = props.ejercicio.options.map((option)=>option.sort(() => Math.random() - 0.5));
-  //Re ordena la lista en base al cambio realizado
 
+  let data = props.ejercicio.options.map(barajarArray)
 
   const reorder = (list, startIndex, endIndex, index) => {
 
@@ -85,7 +92,7 @@ const Arrastrar = (props) => {
         )}
       {items.map((preguntas, index) => (
         <div
-          className="container lg:m-auto lg:p-auto lg:w-auto lg:w-full   "
+          className="container lg:m-auto lg:p-auto lg:w-auto   "
           key={shortid.generate()}
           id="arrastrar"
         >
@@ -115,15 +122,14 @@ const Arrastrar = (props) => {
                     <div
                     className={
                       preguntas.length > 7?
-                      " static flex h-36 static  bg-gray-50 w-full overflow-x-auto  rounded-md  items-center  bg-white  shadow-md rounded"
+                      "  flex h-36 static  bg-gray-50 w-full overflow-x-auto  rounded-md  items-center  shadow-md "
                       :
-                      " static flex h-36 static bg-gray-50 w-full overflow-x-auto justify-center  rounded-md  items-center  bg-white w-full mb-6 shadow-md rounded"
+                      "  flex h-36 static bg-gray-50 w-full overflow-x-auto justify-center  rounded-md  items-center   mb-6 shadow-md "
                     }
                       ref={provided.innerRef}
                       
                       {...provided.droppableProps}
                     >
-                      
                       {preguntas.map((ordenar, index) => (
                         <Draggable
                           key={ordenar.answer}

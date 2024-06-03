@@ -1,6 +1,5 @@
 import Swal from "sweetalert2";
 import "./Alert.css";
-
 const SuccessData = {
   title: "Great",
   type: "success",
@@ -222,8 +221,7 @@ export const mostrarAlertaSalir = () => {
   }).then((result) => {
     if (result.value) {
       window.location = "/dashboard";
-    } else {
-    }
+    } 
   });
 };
 export const mostrarAlertaConfimacion = async (_title, _text) => {
@@ -267,7 +265,6 @@ export const mostrarAlertaSalirEva = () => {
   }).then((result) => {
     if (result.value) {
       window.location = "/evaluacion";
-    } else {
-    }
+    } 
   });
 };

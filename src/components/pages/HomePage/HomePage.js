@@ -7,7 +7,6 @@ import LogoProvicional from "../../../assets/resource/Logo_Provicional.png";
 import LogoFCI from "../../../assets/resource/escudo_fci.png";
 import Logo_ing from "../../../assets/resource/Logo_ing.png";
 import { Link } from "react-router-dom"
-const USER = JSON.parse(localStorage.getItem("user"));
 
 
 
@@ -48,49 +47,13 @@ class HomePage extends React.Component {
                 <h3 className="lg:text-lg md:text-lg text-base  font-sans text-gray-500 pt-2 p-3">
                   Comprometidos con tu formación acádemica
                 </h3>
-                {USER ?
-                  <Link to="/dashboard">
-                    <div className="pt-4 px-2 ">
-                      <button className=" inline-flex items-center justify-center px-10 py-2  bg-yellow-400 hover:bg-yellow-500 text-white rounded-full font-semibold text-xs   uppercase tracking-widest ">
-                        Ingresar
-                      </button>
-                    </div>
-                  </Link>
-                  :
                   <Link to="/signin">
                     <div className="pt-4 px-2 ">
                       <button className=" inline-flex items-center justify-center px-10 py-2  bg-yellow-400 hover:bg-yellow-500 text-white rounded-full font-semibold text-xs   uppercase tracking-widest ">
-                        Ingresar
+                        Inicie sesión
                       </button>
                     </div>
                   </Link>
-                }
-
-                <div className="pt-4">
-                  {/*  si se ubica la etiqueta " a " o link dentro del button no hace efecto al menos que le des click a las letras esto se evita
-                ubicandola afuera */}
-
-                  {
-                    USER ?
-                      <div>
-                        <h3 className="lg:text-sm md:text-sm text-base  font-sans text-gray-500 ">
-                          Actualmente tiene una cuenta logueada
-                        </h3>
-
-                      </div>
-                      :
-
-                      <div className="px-2 ">
-                        <Link to="/signup">
-                          <button className=" inline-flex items-center justify-center px-4 py-2  bg-gray-400 hover:bg-gray-300 text-white  rounded-full font-semibold text-xs   uppercase tracking-widest ">
-                            Crear una cuenta
-                          </button>
-                        </Link>
-                      </div>
-                  }
-
-
-                </div>
               </div>
             </div>
           </div>

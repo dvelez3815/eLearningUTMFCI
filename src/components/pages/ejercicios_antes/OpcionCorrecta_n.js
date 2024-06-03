@@ -1,10 +1,8 @@
 import React, { createRef, useRef, useState,useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import ViewImage from '../../ViewImage/ViewImage'
 import axios from 'axios';
 
 export const OpcionCorrecta_n = (props) => {
-  const history = useHistory();
   const opciones = useRef(null);
   const [title, setTitle] = useState('')
 

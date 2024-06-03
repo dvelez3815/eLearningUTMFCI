@@ -1,12 +1,10 @@
 import React, { createRef, useRef, useState,useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import "../../pages/ejercicios/CheckExercise.css";
 import ViewImage from '../../ViewImage/ViewImage'
 import axios from 'axios';
 
 export const OpcionCorrecta_1 = (props) => {
-  // eslint-disable-next-line no-unused-vars
-  const history = useHistory();
+
   // eslint-disable-next-line no-unused-vars
   const opciones = useRef(null);
   // eslint-disable-next-line no-unused-vars

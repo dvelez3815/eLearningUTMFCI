@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import NavComponent from "../../NavComponent";
 import logo from "../../../assets/resource/Logo_Provicional.png";
 import CollectionsBookmarkIcon from "@material-ui/icons/CollectionsBookmark";
@@ -16,8 +16,7 @@ import { obtenerProgresoAccion, selectAllProgress } from "../../../redux/Progres
 import { obtenerTaskAccion, selectAllTask } from "../../../redux/TaskDucks";
 import { llenarInfo } from "../../../helpers/indexFuntions";
 
-const USER = JSON.parse(localStorage.getItem("user"));
-
+import { AuthContext } from "../../../context/AuthContext";
 export const Inicio = () => {
 
   const setuserProgress = useState([])[1];
@@ -32,16 +31,14 @@ export const Inicio = () => {
   const progress = useSelector(selectAllProgress);
   const progressStatus = useSelector((store) => store.progress.status);
 
+  const { user, setProgress } = useContext(AuthContext);
 
   useEffect(() => {
-    if (!USER?._id) {
-      window.location.href = "./signin";
-    }
     if (taskStatus === 'idle') {
       dispatch(obtenerTaskAccion())
     }
     if (progressStatus === 'idle') {
-      dispatch(obtenerProgresoAccion(USER._id))
+      dispatch(obtenerProgresoAccion(user._id))
     }
     if (taskStatus === 'succeeded' && progressStatus === 'succeeded') {
       setcargando(false)
@@ -49,14 +46,14 @@ export const Inicio = () => {
       setlibros(libros);
       setuserProgress(mergeBooks);
       setvalorProgress(porcentaje);
-      localStorage.setItem("progreso",porcentaje)
+      setProgress(porcentaje)
     }
   }, [taskStatus, progressStatus, dispatch, progress, task, setuserProgress])
 
   return (
     <div className="">
-      {USER ?
-        <NavComponent USER={USER} logo={logo} activado={1} />
+      {user ?
+        <NavComponent user={user} logo={logo} activado={1} />
         :
         <div></div>
       }

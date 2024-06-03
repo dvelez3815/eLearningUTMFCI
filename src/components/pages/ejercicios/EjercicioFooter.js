@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import {
   mostrarAlertaError,
@@ -7,11 +7,12 @@ import {
   Alertaskip,
   mostrarAlertaExitoFin,
 } from "../../Alert/Alerts";
+import { AuthContext } from "../../../context/AuthContext";
 
-
-const USER = JSON.parse(localStorage.getItem("user"));
-
+var USER = null;
 const EjercicioFooter = (props) => {
+  const { user } = useContext(AuthContext);
+  USER = user
   const [enviar, setEnviar] = useState(false);
   useEffect(() => {
     if (speechSynthesis.ispeaking) {
@@ -19,12 +20,11 @@ const EjercicioFooter = (props) => {
     }
   }, []);
 
-  const sendRespuesta=(props)=>{
+  const sendRespuesta = (props) => {
     setEnviar(true);
-    validarRespuesta(props)
+    validarRespuesta(props);
     setEnviar(false);
-
-  }
+  };
 
   return (
     <div className="m-8 ">
@@ -33,14 +33,18 @@ const EjercicioFooter = (props) => {
           <button
             disabled={false}
             className="bg-transparent text-xs sm:text-xl tracking-wider  my-2 text-gray-500 font-semibold hover:text-gray-400 py-2 px-4 border border-gray-500 hover:border-gray-500 rounded"
-            onClick={() => {noEsCorrecta(props, skipExercise(props),1)} /*props.onClick()*/}
+            onClick={
+              () => {
+                noEsCorrecta(props, skipExercise(props), 1);
+              } /*props.onClick()*/
+            }
           >
             skip
           </button>
         </div>
         <div className="mb-4">
           <button
-          disabled={enviar}
+            disabled={enviar}
             className=" text-xs sm:text-xl tracking-wider  my-2 text-white bg-green-500 font-semibold  hover:bg-green-400 py-2 px-4 capitalize border border-green-500 hover:border-green-600 rounded "
             onClick={() => sendRespuesta(props)}
           >
@@ -55,18 +59,16 @@ const EjercicioFooter = (props) => {
 };
 
 const skipExercise = (props) => {
-
   let tipo_ejercicio = props.ejercicio.props.ejercicio.type;
   // eslint-disable-next-line no-unused-vars
   let contadorRespuestas = props.contadorRespondidas;
 
   if (tipo_ejercicio === "opcion_correcta_1") {
     let correctAnswer = props.ejercicio.props.ejercicio.options
-    .filter((option) => option.answer === true)[0]
-    .item.toString()
-    .trim();
+      .filter((option) => option.answer === true)[0]
+      .item.toString()
+      .trim();
     return correctAnswer;
-    
   } else if (tipo_ejercicio === "opcion_correcta_n") {
     let correctAnswer = [];
     props.ejercicio.props.ejercicio.options.forEach((option) => {
@@ -75,7 +77,6 @@ const skipExercise = (props) => {
       }
     });
     return correctAnswer;
-    
   } else if (tipo_ejercicio === "ordenar") {
     // eslint-disable-next-line no-unused-vars
     let hijos = [...props.miref.current.children];
@@ -86,7 +87,6 @@ const skipExercise = (props) => {
     ).map((item) => [...item]);
     // eslint-disable-next-line array-callback-return
     const respuestasBackEndOrdenadas = [...respuestasBack].map((item) => {
-      
       if (item) {
         item = [...item.sort((a, b) => (a.answer > b.answer ? 1 : -1))];
         let texto = "";
@@ -94,20 +94,18 @@ const skipExercise = (props) => {
         for (let i = 0; i < item.length; i++) {
           const element = item[i];
           texto += element.item;
-          textoBase += (element.item + " ")
-          
+          textoBase += element.item + " ";
         }
-        
-        respuestaBackEndBase.push((textoBase+" /n"));
+
+        respuestaBackEndBase.push(textoBase + " /n");
         // eslint-disable-next-line no-unused-vars
         texto = texto.replace(/\s/g, "");
-        
+
         return textoBase;
       }
     });
-    
-    return respuestasBackEndOrdenadas;
 
+    return respuestasBackEndOrdenadas;
   } else if (tipo_ejercicio === "true_false") {
     let respuestasBack = [];
 
@@ -122,8 +120,6 @@ const skipExercise = (props) => {
     });
 
     return respuestasBack;
-    
-    
   } else if (tipo_ejercicio === "completar_texto") {
     let respuestaBackEnd = [];
 
@@ -133,18 +129,19 @@ const skipExercise = (props) => {
       answer = answer.replace(/\s/g, "");
       respuestaBackEnd.push(answer);
     });
-  
+
     return respuestaBackEnd;
-    
-  } else if (tipo_ejercicio === "emparejar" || tipo_ejercicio === "emparejar_img" ) {
+  } else if (
+    tipo_ejercicio === "emparejar" ||
+    tipo_ejercicio === "emparejar_img"
+  ) {
     let respuestasBack = [];
     props.ejercicio.props.ejercicio.body.forEach((item) => {
       respuestasBack.push(item.answer);
-    });    
+    });
     return respuestasBack;
   }
-
-}
+};
 
 async function noEsCorrecta(props, respuesta, id) {
   //Se crea otro stack para guardar las respuestas pendiente, se elimina el ejercicio actual se trabaja con la stack creada y se randomiza la stack
@@ -160,12 +157,12 @@ async function noEsCorrecta(props, respuesta, id) {
 
   aux.unshift(actual);
   // eslint-disable-next-line eqeqeq
-  if (id==1){
-    Alertaskip(respuesta)
-  }else{
+  if (id == 1) {
+    Alertaskip(respuesta);
+  } else {
     mostrarAlertaError(respuesta);
   }
-  
+
   props.setJuego(aux);
 }
 
@@ -195,10 +192,9 @@ const validarRespuesta = async (props) => {
         for (let i = 0; i < item.length; i++) {
           const element = item[i];
           texto += element.item;
-          textoBase += (element.item + " ")
-          
+          textoBase += element.item + " ";
         }
-        respuestaBackEndBase.push((textoBase+" \n"));
+        respuestaBackEndBase.push(textoBase + " \n");
         texto = texto.replace(/\s/g, "");
         return texto;
       }
@@ -217,14 +213,16 @@ const validarRespuesta = async (props) => {
   } else if (tipo_ejercicio === "completar_texto") {
     let hijos = Array.from(props.miref.current.children);
     await verificarCompletar_Texto(props, hijos, contadorRespuestas);
-  } else if (tipo_ejercicio === "emparejar" || tipo_ejercicio === "emparejar_img") {
+  } else if (
+    tipo_ejercicio === "emparejar" ||
+    tipo_ejercicio === "emparejar_img"
+  ) {
     let hijos = Array.from(props.miref.current.children);
     await verificarEmparejar(props, hijos, contadorRespuestas);
   } else {
-    noEsCorrecta(props,"asd");
+    noEsCorrecta(props, "asd");
   }
 };
-
 
 const verificarEmparejar = async (props, hijos, contadorRespuestas) => {
   let respuestaUser = [];
@@ -245,7 +243,7 @@ const verificarEmparejar = async (props, hijos, contadorRespuestas) => {
     }
   });
   if (faltaMarcar) {
-    AlertaLeccion("All fields must be filled")
+    AlertaLeccion("All fields must be filled");
     //alert("All fields must be filled");
   } else {
     // eslint-disable-next-line array-callback-return
@@ -261,9 +259,8 @@ const verificarEmparejar = async (props, hijos, contadorRespuestas) => {
     if (esCorrecta) {
       enviarSiEsCorrecta(props, contadorRespuestas);
     } else {
-      noEsCorrecta(props,respuestasBack);
+      noEsCorrecta(props, respuestasBack);
     }
-
   }
 };
 
@@ -307,7 +304,7 @@ const verificarCompletar_Texto = async (props, hijos, contadorRespuestas) => {
   if (aRespondido && esCorrecta) {
     enviarSiEsCorrecta(props, contadorRespuestas);
   } else if (aRespondido && !esCorrecta) {
-    noEsCorrecta(props,respuestaBackEnd);
+    noEsCorrecta(props, respuestaBackEnd);
   }
 
   // //console.log(hijos[0].children[1].value);
@@ -328,21 +325,17 @@ const verificarVerdadero_Falso = async (props, hijos, contadorRespuestas) => {
   let respuestasUser = [];
   //obtengo el div del ejercicio y lo guardo en un array
 
-
   for (let index = 0; index < hijos.length; index++) {
     const element = Array.from(hijos[index].getElementsByTagName("button"));
     element.forEach((item) => {
-      if(item.classList.contains("activado")){
-                respuestasUser.push(
-          item.innerText.toString()
-            .replace(/\n/g, "")
-            .trim()
+      if (item.classList.contains("activado")) {
+        respuestasUser.push(
+          item.innerText.toString().replace(/\n/g, "").trim()
         );
       }
     });
-  
   }
-  
+
   let esCorrecta = false;
 
   if (JSON.stringify(respuestasUser) === JSON.stringify(respuestasBack)) {
@@ -354,7 +347,7 @@ const verificarVerdadero_Falso = async (props, hijos, contadorRespuestas) => {
   if (esCorrecta) {
     enviarSiEsCorrecta(props, contadorRespuestas);
   } else {
-    noEsCorrecta(props,respuestasBack);
+    noEsCorrecta(props, respuestasBack);
   }
 };
 
@@ -374,8 +367,8 @@ const verificarOrdenar = async (
         .toString()
         .replace(/\n/g, " ")
         .trim();
-        
-      respuesta = respuesta.replace(/\s/g, "");        
+
+      respuesta = respuesta.replace(/\s/g, "");
       respuesta.replace(/\s\s+/g, " ");
       respuestasUser.push(respuesta);
     }
@@ -394,7 +387,7 @@ const verificarOrdenar = async (
   if (esCorrecta) {
     enviarSiEsCorrecta(props, contadorRespuestas);
   } else {
-    noEsCorrecta(props,respuestaBackEndBase);
+    noEsCorrecta(props, respuestaBackEndBase);
   }
 };
 
@@ -427,7 +420,7 @@ const verificarOpcion_Correcta_1 = async (
     if (esCorrecta) {
       enviarSiEsCorrecta(props, contadorRespondidas);
     } else {
-      noEsCorrecta(props,correctAnswer);
+      noEsCorrecta(props, correctAnswer);
     }
   } else {
     AlertaLeccion("You did not select anything");
@@ -474,7 +467,7 @@ const verificarOpcion_Correcta_n = async (
     if (esCorrecta) {
       enviarSiEsCorrecta(props, contadorRespondidas);
     } else {
-      noEsCorrecta(props,correctAnswer);
+      noEsCorrecta(props, correctAnswer);
     }
   } else {
     AlertaLeccion("You did not select anything");
@@ -491,17 +484,16 @@ function randomizarArray(array) {
   return array;
 }
 
-
-
 async function enviarSiEsCorrecta(props, contadorRespondidas) {
   //Se es corecta se necesita saber si se ha llegado al final de la lista de ejercicios, de ser así, se debe de terminar el juego y guardar el progreso,
   //caso contrario se debe de pasar al siguiente ejercicio
+  
   if (props.juego.length - 1 === 0) {
     let tasks_id =
       window.location.href.split("/")[
         window.location.href.split("/").length - 1
       ];
-    let id = USER._id
+    let id = USER._id;
 
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -517,38 +509,36 @@ async function enviarSiEsCorrecta(props, contadorRespondidas) {
       headers: myHeaders,
       body: raw,
     };
-    
-    let responses = []
+
+    let responses = [];
     try {
       responses = await fetch(
-        process.env.REACT_APP_API_URL+"/progress/update",
+        process.env.REACT_APP_API_URL + "/progress/update",
         requestOptions
-      )
-    } catch (error) {
-      
-    }
+      );
+    } catch (error) {}
     const dataT = await responses.json();
-    console.log('Info:',dataT.res)
-  if(props.control === ' '){
-        props.setContadorRespondidas(contadorRespondidas + 1);
-        props.juego.pop();
-        //setInterval(() => {}, 4000);
-        //mostrarAlertaExitoFin(`End of the game`);
-        props.setFinJuego(true);
-  }else if(dataT.res !== 'Task Registrada' && dataT.res !=="Task ya ha sido registrado en ese usuario"){
-        //alert('Guardando Progreso... Presione aceptar')
-        enviarSiEsCorrecta(props, contadorRespondidas)
-      }else{
-        props.setContadorRespondidas(contadorRespondidas + 1);
-        props.juego.pop();
-        //setInterval(() => {}, 4000);
-        //mostrarAlertaExitoFin(`End of the game`);
-        props.setFinJuego(true);
-        mostrarAlertaExitoFin(`Excellent Work `);
-      }
-
-    
-    
+    console.log("Info:", dataT.res);
+    if (props.control === " ") {
+      props.setContadorRespondidas(contadorRespondidas + 1);
+      props.juego.pop();
+      //setInterval(() => {}, 4000);
+      //mostrarAlertaExitoFin(`End of the game`);
+      props.setFinJuego(true);
+    } else if (
+      dataT.res !== "Task Registrada" &&
+      dataT.res !== "Task ya ha sido registrado en ese usuario"
+    ) {
+      //alert('Guardando Progreso... Presione aceptar')
+      enviarSiEsCorrecta(props, contadorRespondidas);
+    } else {
+      props.setContadorRespondidas(contadorRespondidas + 1);
+      props.juego.pop();
+      //setInterval(() => {}, 4000);
+      //mostrarAlertaExitoFin(`End of the game`);
+      props.setFinJuego(true);
+      mostrarAlertaExitoFin(`Excellent Work `);
+    }
   } else {
     mostrarAlertaExito(`Correct answer`);
     props.juego.pop();

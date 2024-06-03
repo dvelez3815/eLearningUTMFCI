@@ -126,12 +126,9 @@ export function llenarInfo(progreso, task) {
     for (let i = 0; i < (mergeBooks.libros).length; i++) {
         cantTask = cantTask + parseFloat(mergeBooks.libros[i].totaltask)
         cantTaskUser = cantTaskUser + parseFloat(mergeBooks.libros[i].userprogress)
-        console.log('cant libro user', parseFloat(mergeBooks.libros[i].userprogress)
-        )
     }
 
     let calculo = (cantTaskUser * 100) / cantTask
-    console.log('cant task', cantTaskUser)
     let porcentaje = parseFloat(calculo.toFixed(2))
 
     //cookies.set('progreso', porcentaje, { path: '/' });

@@ -1,4 +1,4 @@
-import React, { useState, useRef  } from "react";
+import React, { useState, useRef, useContext  } from "react";
 import logo from "../../../assets/resource/Logo_Provicional.png";
 import img1 from "../../../assets/resource/sign.svg";
 import "./SigInPage.css";
@@ -7,12 +7,14 @@ import { loginUser } from '../../../api/User'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
-import { mostrarAlertaLogin } from '../../Alert/Alerts';
 import { Link } from "react-router-dom";
 import Input from "../../Input/Input";
 import ReCAPTCHA from "react-google-recaptcha"
+import {AuthContext} from '../../../context/AuthContext.js'
+import { Navigate  } from "react-router-dom";
 
 const SigInPage = () => {
+  const { login, user } = useContext(AuthContext);
   const [isVisibleDato, setIsVisibleDato] = useState("hidden");
   const [dato, setDato] = useState("");
   const [cargando, setCargando] = useState(false);
@@ -59,12 +61,13 @@ const SigInPage = () => {
       default:
         break;
     }
-    localStorage.setItem(
-      "user",
-      JSON.stringify(user)
-    );
-    window.location.href = "./dashboard";
+
+    login({ ...user});
+    <Navigate  to="/dashboard" />;
+    return;
   };
+
+  if (user) return <Navigate  to="/dashboard" />;
   return (
     <div className=" ">
       <div className="md:flex h-screen ">
@@ -83,15 +86,7 @@ const SigInPage = () => {
                 <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
                   Inicia sesión
                 </h2>
-                <p className="mt-2 text-center text-sm text-gray-600">
-                  O
-                  <Link
-                    to="/signup"
-                    className="font-medium m-2 text-green-600 hover:text-green-500"
-                  >
-                    Registrate
-                  </Link>
-                </p>
+                
               </div>
               <div className={isVisibleDato}>
                 <h2 className="text-md text-red-500">{dato}</h2>
@@ -114,23 +109,22 @@ const SigInPage = () => {
                     />
                     <label
                       htmlFor="remember"
-                      className="ml-2 block text-sm text-gray-900"
-                    >
+                      className="ml-2 block text-sm text-gray-900">
                       Recuerdame
                     </label>
                   </div>
-
                   <div className="text-sm">
-                    <Link
-                      to="/forgotten-password"
+                    <a
+                      href="https://app.utm.edu.ec/sga/"
+                      target="blank"
                       className="font-medium text-green-600 hover:text-green-500"
                     >
                       Olvidaste tu contraseña?
-                    </ Link>
+                    </ a>
                   </div>
                 </div>
                 {cargando && (
-                  <Loading />
+                  <Loading width="50"/>
                 )}
                 <div className="flex items-center justify-center">
                   <ReCAPTCHA
@@ -182,14 +176,6 @@ const SigInPage = () => {
           </div>
         </div>
       </div>
-      <script>
-        {window.onload = function () {
-          const saved = localStorage.getItem("user");
-          if (saved) {
-            mostrarAlertaLogin();
-          }
-        }}
-      </script>
     </div>
   );
 };

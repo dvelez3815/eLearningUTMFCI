@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Ejercicio } from './Ejercicio'
 
 
@@ -9,8 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { obtenerQuestionsAccion, selectAllquestion } from "../../../redux/QuestionDucks";
 import { obtenerTaskAccion, selectAllTask } from "../../../redux/TaskDucks";
 
-const USER = JSON.parse(localStorage.getItem("user"));
-export const Grammar2 = () => {
+const Grammar2 = () => {
 
     const [tasks, setTask] = React.useState([]);
     const [ejercicios, setEjercicios] = React.useState([]);
@@ -24,9 +23,7 @@ export const Grammar2 = () => {
     const questionStatus = useSelector((store) => store.question.status);
 
     React.useEffect(() => {
-        if (!USER?._id) {
-            window.location.href = "./signin";
-        }
+       
         if (taskStatus === 'idle') {
             dispatch(obtenerTaskAccion())
         }
@@ -55,5 +52,5 @@ export const Grammar2 = () => {
         </div>
     )
 }
-
+export default Grammar2;
 // Path: eLearningUTMFCI/src/components/pages/ejercicios/Ejercicio.js
