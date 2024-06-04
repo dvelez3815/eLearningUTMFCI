@@ -1,11 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect } from "react";
 import NavComponent from "../../NavComponent";
 import logo from "../../../assets/resource/Logo_Provicional.png";
 import CollectionsBookmarkIcon from "@material-ui/icons/CollectionsBookmark";
 import { useState } from "react";
 import {
-  // eslint-disable-next-line no-unused-vars
-  Bienvenida,
+  Finalizacion,
 } from "../../Alert/Alerts";
 import "./inicio.css";
 import Footer from "../../Footer";
@@ -47,6 +47,7 @@ export const Inicio = () => {
       setuserProgress(mergeBooks);
       setvalorProgress(porcentaje);
       setProgress(porcentaje)
+      if(porcentaje > 0) Finalizacion()
     }
   }, [taskStatus, progressStatus, dispatch, progress, task, setuserProgress])
 

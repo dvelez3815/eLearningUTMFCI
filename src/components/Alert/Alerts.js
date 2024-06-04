@@ -1,5 +1,7 @@
 import Swal from "sweetalert2";
 import "./Alert.css";
+
+import celebration from "../../assets/resource/winners.svg";
 const SuccessData = {
   title: "Great",
   type: "success",
@@ -97,6 +99,33 @@ export const Bienvenida = async () => {
   });
 };
 
+export const Finalizacion = () => {
+  Swal.fire({
+    title: "<strong>Congratulations!</strong>",
+    width: 700,
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Si, deseo registrarme",
+    cancelButtonText: "Cancelar",
+    html: `
+   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <img src="${celebration}" alt="Example Image" class="w-full h-auto rounded-lg">
+            </div>
+            <div class="flex flex-col justify-center">
+                <h2 class="text-2xl font-bold mb-4">Has completado con éxito el simulador</h2>
+                <p class="text-gray-700">¡Estás listo para el examen! Es importante que agendes una fecha para presentarlo. Por favor, accede al sistema de programación de exámenes y selecciona el día y la hora que más te convengan. ¡Mucho éxito!</p> 
+            </div>
+    </div>
+   `,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      alert('hola')
+    }
+  });;
+};
+
 export const mostrarAlertaDrive = async () => {
   let a = document.createElement("a");
   a.target = "_blank";
@@ -184,14 +213,12 @@ export const mostrarAlertaExitoFin = (txt) => {
   }).then((result) => {});
 };
 
-export const mostrarImagen =  (img) => {
- 
-    Swal.fire({
-      title: "¡Alerta con imagen!",
-      html: `<iframe src="https://drive.google.com/file/d/${img}/preview" width="640" height="480" allow="autoplay"></iframe>`,
-      confirmButtonText: "Cerrar",
-    });
-  
+export const mostrarImagen = (img) => {
+  Swal.fire({
+    title: "¡Alerta con imagen!",
+    html: `<iframe src="https://drive.google.com/file/d/${img}/preview" width="640" height="480" allow="autoplay"></iframe>`,
+    confirmButtonText: "Cerrar",
+  });
 };
 
 export const mostrarAlertaLogin = () => {
@@ -221,7 +248,7 @@ export const mostrarAlertaSalir = () => {
   }).then((result) => {
     if (result.value) {
       window.location = "/dashboard";
-    } 
+    }
   });
 };
 export const mostrarAlertaConfimacion = async (_title, _text) => {
@@ -265,6 +292,6 @@ export const mostrarAlertaSalirEva = () => {
   }).then((result) => {
     if (result.value) {
       window.location = "/evaluacion";
-    } 
+    }
   });
 };
