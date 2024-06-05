@@ -1,6 +1,6 @@
 import "./Evaluacion.css";
 
-import React, { useContext, useEffect } from "react";
+import React, { useContext} from "react";
 import NavComponent from "../../NavComponent";
 
 import Footer from "../../Footer";

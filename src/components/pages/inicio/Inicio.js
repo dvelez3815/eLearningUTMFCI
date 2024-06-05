@@ -47,7 +47,7 @@ export const Inicio = () => {
       setuserProgress(mergeBooks);
       setvalorProgress(porcentaje);
       setProgress(porcentaje)
-      if(porcentaje > 0) Finalizacion()
+      if(porcentaje >= 99) Finalizacion()
     }
   }, [taskStatus, progressStatus, dispatch, progress, task, setuserProgress])
 

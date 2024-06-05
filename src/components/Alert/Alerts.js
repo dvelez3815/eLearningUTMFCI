@@ -103,11 +103,8 @@ export const Finalizacion = () => {
   Swal.fire({
     title: "<strong>Congratulations!</strong>",
     width: 700,
-    showCancelButton: true,
     confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Si, deseo registrarme",
-    cancelButtonText: "Cancelar",
+    confirmButtonText: "Cerrar",
     html: `
    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -115,15 +112,12 @@ export const Finalizacion = () => {
             </div>
             <div class="flex flex-col justify-center">
                 <h2 class="text-2xl font-bold mb-4">Has completado con éxito el simulador</h2>
-                <p class="text-gray-700">¡Estás listo para el examen! Es importante que agendes una fecha para presentarlo. Por favor, accede al sistema de programación de exámenes y selecciona el día y la hora que más te convengan. ¡Mucho éxito!</p> 
+                <p class="text-gray-700 mb-2">¡Estás listo para el examen! Por favor, te solicitamos que te acerques a las oficinas del ILM para gestionar la programación de tu examen.</p> 
+                <p class="text-gray-700">¡Éxitos en la prueba! Si no te sientes seguro aún para redirla, vuelve a practicar con el simulador.</p>
             </div>
     </div>
    `,
-  }).then((result) => {
-    if (result.isConfirmed) {
-      alert('hola')
-    }
-  });;
+  })
 };
 
 export const mostrarAlertaDrive = async () => {
