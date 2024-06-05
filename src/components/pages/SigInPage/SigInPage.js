@@ -2,7 +2,7 @@ import React, { useState, useRef, useContext  } from "react";
 import logo from "../../../assets/resource/Logo_Provicional.png";
 import img1 from "../../../assets/resource/sign.svg";
 import "./SigInPage.css";
-import Loading from "../../Loading/Loading";
+import loading from "../../../assets/resource/loading.svg";
 import { loginUser } from '../../../api/User'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -124,7 +124,7 @@ const SigInPage = () => {
                   </div>
                 </div>
                 {cargando && (
-                  <Loading width="50"/>
+                  <img src={loading} width="50" alt="cargando"></img>
                 )}
                 <div className="flex items-center justify-center">
                   <ReCAPTCHA

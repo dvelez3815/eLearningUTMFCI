@@ -9,7 +9,6 @@ import {
 } from "../../Alert/Alerts";
 import "./inicio.css";
 import Footer from "../../Footer";
-import loading from "../../../assets/resource/loading.svg";
 import Libro from "../../Libros/Libro";
 import { useDispatch, useSelector } from "react-redux";
 import { obtenerProgresoAccion, selectAllProgress } from "../../../redux/ProgressDucks";
@@ -17,6 +16,7 @@ import { obtenerTaskAccion, selectAllTask } from "../../../redux/TaskDucks";
 import { llenarInfo } from "../../../helpers/indexFuntions";
 
 import { AuthContext } from "../../../context/AuthContext";
+import Loading from "../../Loading/Loading";
 export const Inicio = () => {
 
   const setuserProgress = useState([])[1];
@@ -58,7 +58,7 @@ export const Inicio = () => {
         :
         <div></div>
       }
-      {cargando? <div className="pt-20"><img src={loading} alt="cargando"></img></div> :
+      {cargando? <Loading/> :
         <div className="grid grid-cols-12 ">
           <div className="xl:col-span-9 col-span-12 justify-center sm:px-10">
             {libros.map((libro) => (
