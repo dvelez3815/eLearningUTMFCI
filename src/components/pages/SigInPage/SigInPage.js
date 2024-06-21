@@ -52,7 +52,7 @@ const SigInPage = () => {
       case "USER NOT EXIST":
         setDato("El usuario no existe en el sistema, por favor verifique su correo");
         return;
-      case "PASSWORD INCORRECT":
+      case "CREDENCIALES INCORRECTAS":
         setDato("La contraseña es incorrecta");
         return;
       case "SERVER ERROR":
@@ -63,11 +63,11 @@ const SigInPage = () => {
     }
 
     login({ ...user});
-    <Navigate  to="/dashboard" />;
+    window.location.href= "/dashboard"
     return;
   };
 
-  if (user) return <Navigate  to="/dashboard" />;
+  if (user) return window.location.href= "/dashboard";
   return (
     <div className=" ">
       <div className="md:flex h-screen ">

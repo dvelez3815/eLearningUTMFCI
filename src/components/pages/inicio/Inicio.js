@@ -41,12 +41,15 @@ export const Inicio = () => {
       dispatch(obtenerProgresoAccion(user._id))
     }
     if (taskStatus === 'succeeded' && progressStatus === 'succeeded') {
+      console.log("ingresa")
       setcargando(false)
       let {libros, mergeBooks, porcentaje} = llenarInfo(progress, task);
       setlibros(libros);
       setuserProgress(mergeBooks);
       setvalorProgress(porcentaje);
-      setProgress(porcentaje)
+      console.log(porcentaje)
+      console.log(mergeBooks)
+      //setProgress(porcentaje)
       if(porcentaje >= 100) Finalizacion()
     }
   }, [taskStatus, progressStatus, dispatch, progress, task, setuserProgress])
