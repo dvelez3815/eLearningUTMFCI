@@ -100,11 +100,19 @@ export const Bienvenida = async () => {
 };
 
 export const Finalizacion = () => {
+  let a = document.createElement("a");
+  a.target = "_blank";
+  a.href =
+    "https://forms.gle/diRM2YXULT25QE5F9";
   Swal.fire({
     title: "<strong>Congratulations!</strong>",
     width: 700,
+    showCancelButton: true,
     confirmButtonColor: "#3085d6",
-    confirmButtonText: "Cerrar",
+    confirmButtonText: '<i class="fa fa-thumbs-up"></i> Inscribirse al examen',
+    cancelButtonText: '<i class="fa fa-thumbs-down">Cerrar</i>',
+    cancelButtonAriaLabel: "Thumbs down",
+    focusConfirm: false,
     html: `
    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -112,12 +120,16 @@ export const Finalizacion = () => {
             </div>
             <div class="flex flex-col justify-center">
                 <h2 class="text-2xl font-bold mb-4">Has completado con éxito el simulador</h2>
-                <p class="text-gray-700 mb-2">¡Estás listo para el examen! Por favor, te solicitamos que te acerques a las oficinas del ILM para gestionar la programación de tu examen.</p> 
+                <p class="text-gray-700 mb-2">¡Estás listo para el examen! Por favor, te solicitamos que te inscribas para rendir el examen en el formulario a continuación. <strong>El formulario debes completarlo con tu correo institucional</strong></p> 
                 <p class="text-gray-700">¡Éxitos en la prueba! Si no te sientes seguro aún para redirla, vuelve a practicar con el simulador.</p>
             </div>
     </div>
    `,
-  })
+  }).then((result) => {
+    if (result.isConfirmed) {
+      a.click();
+    }
+  });
 };
 
 export const mostrarAlertaDrive = async () => {
