@@ -12,6 +12,7 @@ import Pruebas from "./components/pages/Pruebas/Pruebas";
 import Review from "./components/pages/Review/Review";
 import PruebasGeneral from "./components/pages/Pruebas/PruebasGeneral";
 import PerfilUser from "./components/pages/user/PerfilUser";
+import RegisterExam from "./components/pages/RegisterExam/RegisterExam";
 
 import PrivateRoute from "./routes/PrivateRoute";
 import { AuthContext } from "./context/AuthContext";
@@ -74,6 +75,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="*" element={<NotFoundPage />} />
           <Route path="/signin" element={<SigInPage />} />
+          <Route path="/registerExam" element={<RegisterExam />} />
 
           {/* rutas protegidas */}
           <Route

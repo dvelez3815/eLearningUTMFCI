@@ -23,10 +23,6 @@ class HomePage extends React.Component {
             </Link>
           </div>
           <div className=" flex flex-grow justify-end md:mr-20">
-            <div className=" flex flex-wrap my-2">
-              <div></div>
-              <img className=" md:h-20 lg:h-20 sm:h-20 " src={LogoFCI} alt="logo" />
-            </div>
             <div className=" my-2 pl-2">
               <div></div>
               <img className=" md:h-20 lg:h-20 sm:h-20" src={Logo_ing} alt="logo" />

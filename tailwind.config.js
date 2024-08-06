@@ -8,6 +8,13 @@ module.exports = {
       'xs': '475px',
       ...defaultTheme.screens,
     },
+    extend: {
+      colors: {
+        // Define tus colores personalizados aquí
+        yellowutm: '#ffcc33',
+        greenutm: '#009933',
+      },
+    },
   },
   variants: {
     extend: {

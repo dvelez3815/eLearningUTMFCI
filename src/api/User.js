@@ -87,3 +87,17 @@ export async function getUser(id) {
   const user = await response.json();
   return user
 }
+
+
+export async function getUserByCedula(cedula) {
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/user/cedula/${cedula}`, {
+      method: "GET",
+      headers: {
+          "Content-Type": "application/json",
+          token: process.env.REACT_APP_SECRET_TOKEN,
+      },
+  });
+  const user = await response.json();
+  if (user.user === 'User Not Exist' ) return null;
+  return user.user
+}

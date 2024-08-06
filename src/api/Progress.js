@@ -33,3 +33,19 @@ export async function updateProgress(data) {
   const dataT = await responses.json();
   return dataT;
 }
+
+export async function getPorgressByMail(mail) {
+
+  const responses = await fetch(process.env.REACT_APP_API_URL + "/progress/porcentaje/" + mail,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        'token': process.env.REACT_APP_SECRET_TOKEN
+      },
+    }
+  )
+  const porcentaje = await responses.json();
+  if(porcentaje.porcentaje === "Not found") return null
+  return porcentaje.porcentaje;
+}
