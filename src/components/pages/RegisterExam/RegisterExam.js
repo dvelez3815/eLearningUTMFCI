@@ -253,7 +253,11 @@ const RegisterExam = () => {
                                 </>
                             }
                             <div class="hidden my-4"></div>
+                            <div className="space-x-2">
                             <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded-lg">Enviar</button>
+                            <button type="button" class="bg-red-500 text-white py-2 px-4 rounded-lg" onClick={ ()=> window.location="/"}>Cerrar</button>
+
+                            </div>
                         </form>
                     </div>
 
