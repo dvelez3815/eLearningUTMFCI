@@ -6,11 +6,11 @@ import moment from "moment";
 import { Link } from "react-router-dom"
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { getUserByCedula } from "../../../api/User";
 import { getPorgressByMail } from "../../../api/Progress";
 import { mostrarExitoEditar } from "../../Alert/Alerts";
-import { createExamenUsuario, getExamenUsuario, getExams } from "../../../api/Exams";
+import { createExamenUsuario, deleteExamenUsuario, getExamenUsuario, getExams } from "../../../api/Exams";
 import 'moment/locale/es';
 
 const RegisterExam = () => {
@@ -45,6 +45,11 @@ const RegisterExam = () => {
         }
 
         try {
+            const examen_user = await getExamenUsuario(user._id);
+            if (examen_user) {
+                const delete_examen_user = await deleteExamenUsuario(user._id, examen_user.id_examen);
+                if (!delete_examen_user) throw new Error("ExamError: No se pudo actualizar el examen");
+            }
             const examen_user_response = await createExamenUsuario(user_examen)
             console.log(examen_user_response)
             if (!examen_user_response) throw new Error("ExamenUserError: No se pudo guardar el examen");
@@ -71,6 +76,14 @@ const RegisterExam = () => {
                 );
                 return;
             }
+            if (error.message.startsWith("ExamError")) {
+                mostrarExitoEditar(
+                    "Error",
+                    "No se pudo actualizar el examen",
+                    "error"
+                );
+                return;
+            }
         }
     }
     const verificar_cedula = async () => {
@@ -78,8 +91,6 @@ const RegisterExam = () => {
         try {
             const _user = await getUserByCedula(cedula);
             if (!_user) throw new Error("UserError: No existe usuario");
-            const examen_user = await getExamenUsuario(_user._id);
-            if (examen_user) throw new Error("ExamError: El usuario ya tiene un examen registrado")
             const porcentaje = await getPorgressByMail(_user.mail)
             if (!porcentaje) throw new Error("ProgressError: El usuario no tiene progreso");
             if (porcentaje < 100) throw new Error("PorcentajeError: El usuario no ha completado el simulador");
@@ -111,7 +122,7 @@ const RegisterExam = () => {
             if (error.message.startsWith("ExamError")) {
                 mostrarExitoEditar(
                     "Error",
-                    "El usuario ya tiene un examen registrado",
+                    "No se pudo eliminar el examen",
                     "error"
                 );
                 return;
@@ -143,7 +154,7 @@ const RegisterExam = () => {
     }
     const changeSede = (event) => {
         setSedeSelected(event.target.value)
-        const _horarios = examenes.filter((examen) => examen.lugar === event.target.value)
+        const _horarios = examenes.filter((examen) => examen.lugar === event.target.value).sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
         setHorarios((horario) => [..._horarios])
     }
 
@@ -254,8 +265,8 @@ const RegisterExam = () => {
                             }
                             <div class="hidden my-4"></div>
                             <div className="space-x-2">
-                            <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded-lg">Enviar</button>
-                            <button type="button" class="bg-red-500 text-white py-2 px-4 rounded-lg" onClick={ ()=> window.location="/"}>Cerrar</button>
+                                <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded-lg">Enviar</button>
+                                <button type="button" class="bg-red-500 text-white py-2 px-4 rounded-lg" onClick={() => window.location = "/"}>Cerrar</button>
 
                             </div>
                         </form>
