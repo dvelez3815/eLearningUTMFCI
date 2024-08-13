@@ -12,10 +12,9 @@ import { getPorgressByMail } from "../../../api/Progress";
 import { mostrarExitoEditar } from "../../Alert/Alerts";
 import { createExamenUsuario, deleteExamenUsuario, getExamenUsuario, getExams } from "../../../api/Exams";
 import 'moment/locale/es';
+import Loading from "../../Loading/Loading";
 
 const RegisterExam = () => {
-
-
     const formSchema = Yup.object().shape({
         horario: Yup.string().required('Debe seleccionar un horario'),
         cedula: Yup.string().required('Es obligatorio ingresar y validar la cedula').matches(/^[0-9]+$/, 'La cedula solo puede contener números').min(10, 'La cedula debe tener 10 dígitos').max(10, 'La cedula debe tener 10 dígitos'),
@@ -30,15 +29,17 @@ const RegisterExam = () => {
     }
     const { register, setValue, handleSubmit, formState: { errors } } = useForm(formOptions);
     const [cedula, setCedula] = useState('');
-    const [user, setUser] = useState({})
-    const [examenes, setExamenes] = useState([])
-    const [cargando, setCargando] = useState(true)
-    const [sedeSelected, setSedeSelected] = useState('')
-    const [sedes, setSedes] = useState([])
-    const [horarios, setHorarios] = useState([])
+    const [user, setUser] = useState({});
+    const [examenes, setExamenes] = useState([]);
+    const [cargando, setCargando] = useState(true);
+    const [sedeSelected, setSedeSelected] = useState('');
+    const [sedes, setSedes] = useState([]);
+    const [horarios, setHorarios] = useState([]);
+    const [enviando, setEnviando] = useState(false);
     moment.locale('es-us')
 
     const onSubmit = async (form) => {
+        setEnviando(true)
         const user_examen = {
             id_user: user._id,
             id_examen: form.horario
@@ -51,7 +52,6 @@ const RegisterExam = () => {
                 if (!delete_examen_user) throw new Error("ExamError: No se pudo actualizar el examen");
             }
             const examen_user_response = await createExamenUsuario(user_examen)
-            console.log(examen_user_response)
             if (!examen_user_response) throw new Error("ExamenUserError: No se pudo guardar el examen");
             mostrarExitoEditar(
                 "Exito",
@@ -84,11 +84,14 @@ const RegisterExam = () => {
                 );
                 return;
             }
+        } finally {
+            setEnviando(false)
         }
     }
     const verificar_cedula = async () => {
         setUser({})
         try {
+            setEnviando(true)
             const _user = await getUserByCedula(cedula);
             if (!_user) throw new Error("UserError: No existe usuario");
             const porcentaje = await getPorgressByMail(_user.mail)
@@ -110,7 +113,6 @@ const RegisterExam = () => {
                 );
                 return;
             }
-
             if (error.message.startsWith("UserError")) {
                 mostrarExitoEditar(
                     "Error",
@@ -143,6 +145,8 @@ const RegisterExam = () => {
                 );
                 return;
             }
+        } finally {
+            setEnviando(false)
         }
     }
 
@@ -205,7 +209,7 @@ const RegisterExam = () => {
                                 <h4 class="md:text-lg text-md font-semibold mb-2 text-left">Cédula de Identidad o Documento de Identidad:</h4>
                                 <div class="flex space-x-2">
                                     <input name="cedula" type="text" {...register("cedula")} placeholder="Número de documento" onChange={(event) => setCedula(() => event.target.value)} defaultValue={cedula} class="w-full p-2 border border-gray-300 rounded-lg" />
-                                    <button type="button" onClick={verificar_cedula} class=" bg-yellowutm p-2 px-4  text-white rounded hover:bg-yellow-400 border border-yellow-400">Buscar</button>
+                                    <button type="button" onClick={verificar_cedula} disabled={enviando} class="bg-yellowutm p-2 px-4  text-white rounded hover:bg-yellow-400 border border-yellow-400">Buscar</button>
                                 </div>
                                 {errors.cedula && (
                                     <p className="text-red-500 text-sm text-left">{errors.cedula.message}</p>
@@ -264,8 +268,9 @@ const RegisterExam = () => {
                                 </>
                             }
                             <div class="hidden my-4"></div>
+                            {enviando && <Loading />}
                             <div className="space-x-2">
-                                <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded-lg">Enviar</button>
+                                <button type="submit" disabled={enviando} class="bg-green-500 text-white py-2 px-4 rounded-lg">Enviar</button>
                                 <button type="button" class="bg-red-500 text-white py-2 px-4 rounded-lg" onClick={() => window.location = "/"}>Cerrar</button>
 
                             </div>
