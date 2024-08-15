@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 import LogoProvicional from "../../../assets/resource/Logo_Provicional.png";
-import Logo_ing from "../../../assets/resource/Logo_ing.png";
+import Logo_ing from "../../../assets/resource/LOGO_ILM_HORIZONTAL.png";
 import moment from "moment";
-import { Link } from "react-router-dom"
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
 import { useForm } from "react-hook-form";
@@ -168,15 +167,17 @@ const RegisterExam = () => {
     }, [])
     return (
         <div className=" overflow-x-hidden ">
-            <div className=" mx-auto z-20  flex px-5 h-auto items-center">
+            <div className=" mx-auto z-20  flex p-5 h-auto items-center">
                 <div className=" md:ml-10 ">
-                    <Link to='https://www.utm.edu.ec/' target='_blank' rel="noreferrer" >
+                    <a href='https://www.utm.edu.ec/' target='_blank' rel="noreferrer" >
                         <img className=" md:h-20 lg:h-20 sm:h-20 h-16" src={LogoProvicional} alt="logo" />
-                    </Link>
+                    </a>
                 </div>
                 <div className=" flex flex-grow justify-end md:mr-20">
                     <div className=" md:ml-10 ">
-                        <img className=" md:h-20 lg:h-20 sm:h-20 h-16" src={Logo_ing} alt="logo" />
+                        <a href='https://www.utm.edu.ec/idiomas' target='_blank' rel="noreferrer" >
+                            <img className=" md:h-20 lg:h-20 sm:h-20 h-16" src={Logo_ing} alt="logo" />
+                        </a>
                     </div>
                 </div>
             </div>

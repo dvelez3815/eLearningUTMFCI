@@ -4,8 +4,7 @@ import Circulo from "../../../assets/resource/Semi_Circulo.png";
 import Chica from "../../../assets/resource/CHICA.png";
 import Chica_mb from "../../../assets/resource/CHICA_mb.png";
 import LogoProvicional from "../../../assets/resource/Logo_Provicional.png";
-import LogoFCI from "../../../assets/resource/escudo_fci.png";
-import Logo_ing from "../../../assets/resource/Logo_ing.png";
+import Logo_ing from "../../../assets/resource/LOGO_ILM_HORIZONTAL.png";
 import { Link } from "react-router-dom"
 
 
@@ -18,14 +17,16 @@ class HomePage extends React.Component {
       <div className=" overflow-x-hidden ">
         <div className=" mx-auto z-20  flex px-5 h-auto items-center">
           <div className=" md:ml-10 mr-10">
-            <Link to='https://www.utm.edu.ec/' target='_blank' rel="noreferrer" >
-              <img className=" md:h-16 lg:h-16 sm:h-16" src={LogoProvicional} alt="logo" />
-            </Link>
+            <a href='https://www.utm.edu.ec/' target='_blank' rel="noreferrer" >
+              <img className=" md:h-20 lg:h-20 sm:h-20" src={LogoProvicional} alt="logo" />
+            </a>
           </div>
           <div className=" flex flex-grow justify-end md:mr-20">
             <div className=" my-2 pl-2">
               <div></div>
-              <img className=" md:h-20 lg:h-20 sm:h-20" src={Logo_ing} alt="logo" />
+              <a href='https://www.utm.edu.ec/idiomas' target='_blank' rel="noreferrer" >
+                <img className=" md:h-20 lg:h-20 sm:h-20" src={Logo_ing} alt="logo" />
+              </a>
             </div>
           </div>
 
@@ -43,13 +44,13 @@ class HomePage extends React.Component {
                 <h3 className="lg:text-lg md:text-lg text-base  font-sans text-gray-500 pt-2 p-3">
                   Comprometidos con tu formación acádemica
                 </h3>
-                  <Link to="/signin">
-                    <div className="pt-4 px-2 ">
-                      <button className=" inline-flex items-center justify-center px-10 py-2  bg-yellow-400 hover:bg-yellow-500 text-white rounded-full font-semibold text-xs   uppercase tracking-widest ">
-                        Inicie sesión
-                      </button>
-                    </div>
-                  </Link>
+                <Link to="/signin">
+                  <div className="pt-4 px-2 ">
+                    <button className=" inline-flex items-center justify-center px-10 py-2  bg-yellow-400 hover:bg-yellow-500 text-white rounded-full font-semibold text-xs   uppercase tracking-widest ">
+                      Inicie sesión
+                    </button>
+                  </div>
+                </Link>
               </div>
             </div>
           </div>
