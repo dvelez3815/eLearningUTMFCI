@@ -121,7 +121,7 @@ export const Finalizacion = () => {
             </div>
             <div class="flex flex-col justify-center">
                 <h2 class="text-2xl font-bold mb-4">Has completado con éxito el simulador</h2>
-                <p class="text-gray-700 mb-2">¡Estás listo para el examen! Por favor, te solicitamos que te inscribas para rendir el examen en el formulario a continuación. <strong>El formulario debes completarlo con tu correo institucional</strong></p> 
+                <p class="text-gray-700 mb-2">¡Estás listo para el examen! Por favor, te solicitamos que te inscribas para rendir el examen en el formulario a continuación.</p> 
                 <p class="text-gray-700">¡Éxitos en la prueba! Si no te sientes seguro aún para rendirla, vuelve a practicar con el simulador.</p>
             </div>
     </div>

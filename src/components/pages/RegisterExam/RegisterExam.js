@@ -192,8 +192,9 @@ const RegisterExam = () => {
                     <div class="bg-green-100 p-6 rounded-lg mb-6">
                         <h2 class=" md:text-2xl text-lg font-semibold text-center mb-4">¡Bienvenido al proceso de inscripción para el examen de exoneración de Suficiencia de Inglés! </h2>
                         <h2 class="text-md text-justify text-gray-800">
-                            A continuación, encontrarás un formulario que debes completar para inscribirte al examen. Por favor, asegúrate de llenar todos los campos con información precisa y actualizada. Las fechas y horas del examen, así como los lugares disponibles, están preestablecidos y se muestran en los campos correspondientes
+                            A continuación, encontrarás un formulario que debes completar para inscribirte al examen. Por favor, asegúrate de llenar todos los campos con información precisa y actualizada. Las fechas y horas del examen, así como los lugares disponibles, están preestablecidos y se muestran en los campos correspondientes.
                         </h2>
+			<h3 class="text-md text-justify text-gray-900 font-bold">Si desea cambiar la fecha de su examen, por favor, envíe el formulario otra vez con su información.</h3>
                     </div>
                 </div>
 
