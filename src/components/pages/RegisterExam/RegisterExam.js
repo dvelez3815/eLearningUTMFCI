@@ -5,7 +5,7 @@ import Logo_ing from "../../../assets/resource/LOGO_ILM_HORIZONTAL.png";
 import moment from "moment";
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { getUserByCedula } from "../../../api/User";
 import { getPorgressByMail } from "../../../api/Progress";
 import { mostrarExitoEditar } from "../../Alert/Alerts";
@@ -32,7 +32,10 @@ const RegisterExam = () => {
     const [examenes, setExamenes] = useState([]);
     const [cargando, setCargando] = useState(true);
     const [sedeSelected, setSedeSelected] = useState('');
+    const [fechaSelected, setFechaSelected] = useState('');
+
     const [sedes, setSedes] = useState([]);
+    const [fechas, setFechas] = useState([]);
     const [horarios, setHorarios] = useState([]);
     const [enviando, setEnviando] = useState(false);
     moment.locale('es-us')
@@ -156,10 +159,21 @@ const RegisterExam = () => {
         setSedes((sede) => [..._sedes])
     }
     const changeSede = (event) => {
+        setFechas((fecha) => [])
+        setHorarios((horario) => [])
         setSedeSelected(event.target.value)
-        const _horarios = examenes.filter((examen) => examen.lugar === event.target.value).sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
+        const _fechas = examenes.filter((examen) => examen.lugar === event.target.value).sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
+        const _fechas_filtered = new Set(_fechas.map((fecha) => fecha.fecha))
+        setFechas((fechas) => [..._fechas_filtered])
+    }
+
+    const changeFecha = (event) => {
+        setHorarios((horario) => [])
+        setFechaSelected(event.target.value)
+        const _horarios = examenes.filter((examen) => examen.lugar === sedeSelected && examen.fecha === event.target.value).sort()
         setHorarios((horario) => [..._horarios])
     }
+
 
     useEffect(() => {
         getExam()
@@ -194,7 +208,7 @@ const RegisterExam = () => {
                         <h2 class="text-md text-justify text-gray-800">
                             A continuación, encontrarás un formulario que debes completar para inscribirte al examen. Por favor, asegúrate de llenar todos los campos con información precisa y actualizada. Las fechas y horas del examen, así como los lugares disponibles, están preestablecidos y se muestran en los campos correspondientes.
                         </h2>
-			<h3 class="text-md text-justify text-gray-900 font-bold">Si desea cambiar la fecha de su examen, por favor, envíe el formulario otra vez con su información.</h3>
+                        <h3 class="text-md text-justify text-gray-900 font-bold">Si desea cambiar la fecha de su examen, por favor, envíe el formulario otra vez con su información.</h3>
                     </div>
                 </div>
 
@@ -251,14 +265,37 @@ const RegisterExam = () => {
                                             }
                                         </select>
                                     </div>
+                                    <div >
+                                        <h4 class="md:text-lg text-md text-left font-semibold mb-2">Fecha:</h4>
+                                        <select id="tipo_sex" onChange={changeFecha} defaultValue={fechaSelected} class="w-full p-2 border border-gray-300 rounded-lg" name="lugar">
+                                            <option value="">Seleccionar</option>
+                                            {
+                                                fechas.map((fecha) => {
+                                                    return (
+                                                        <option key={fecha} value={fecha}>{moment(fecha).format('dddd MMMM Do YYYY')}</option>
+
+                                                    )
+                                                })
+                                            }
+                                        </select>
+                                    </div>
                                     <div class="flex flex-col">
                                         <h4 class="md:text-lg text-md font-semibold mb-2 text-left">Fecha y Hora:</h4>
                                         {
                                             horarios.length !== 0 ? horarios.map((horario) => {
+                                                const [horas, minutos, segundos] = horario.hora.split(':');
+                                                const hora_formated = new Date();
+                                                hora_formated.setHours(parseInt(horas, 10));
+                                                hora_formated.setMinutes(parseInt(minutos, 10));
+                                                hora_formated.setSeconds(parseInt(segundos, 10));
                                                 return (
                                                     <div class="flex items-left mb-2" key={horario._id}>
                                                         <input id={horario.fecha} name="fecha" type="radio" value={horario._id} class="mr-2"   {...register("horario")} />
-                                                        <label htmlFor={horario.fecha} class="text-gray-700">{moment(horario.fecha).format('dddd MMMM Do YYYY')} - {horario.hora}</label>
+                                                        <label htmlFor={horario.fecha} class="text-gray-700">{hora_formated.toLocaleTimeString('en-US', {
+                                                            hour: 'numeric',
+                                                            minute: 'numeric',
+                                                            hour12: true,
+                                                        })}</label>
                                                     </div>
                                                 )
                                             }) : <div><h3 className="md:text-md text-sm mb-2 text-center">No hay horarios disponibles. Seleccione un lugar </h3></div>
