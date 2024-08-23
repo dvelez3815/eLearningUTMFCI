@@ -280,7 +280,7 @@ const RegisterExam = () => {
                                         </select>
                                     </div>
                                     <div class="flex flex-col">
-                                        <h4 class="md:text-lg text-md font-semibold mb-2 text-left">Fecha y Hora:</h4>
+                                        <h4 class="md:text-lg text-md font-semibold mb-2 text-left">Hora:</h4>
                                         {
                                             horarios.length !== 0 ? horarios.map((horario) => {
                                                 const [horas, minutos, segundos] = horario.hora.split(':');
