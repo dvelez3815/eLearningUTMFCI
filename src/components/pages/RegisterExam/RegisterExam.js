@@ -196,36 +196,39 @@ const RegisterExam = () => {
                 </div>
             </div>
 
-            <div class="bg-white shadow-lg rounded-lg p-6  mx-auto max-w-4xl">
-                <div class="flex flex-col items-center align-center bg-greenutm">
-                    <div class="text-center ">
-                        <h2 class="text-white  md:text-3xl text-2xl  font-bold p-4 rounded-t-lg">Registro al Examen de Suficiencia de Inglés</h2>
+            <div className="bg-white shadow-lg rounded-lg p-6  mx-auto max-w-4xl">
+                <div className="flex flex-col items-center align-center bg-greenutm">
+                    <div className="text-center ">
+                        <h2 className="text-white  md:text-3xl text-2xl  font-bold p-4 rounded-t-lg">Registro al Examen de Suficiencia de Inglés</h2>
                     </div>
                 </div>
-                <div class="flex flex-col items-center my-2 bg-green-100">
-                    <div class="bg-green-100 p-6 rounded-lg mb-6">
-                        <h2 class=" md:text-2xl text-lg font-semibold text-center mb-4">¡Bienvenido al proceso de inscripción para el examen de exoneración de Suficiencia de Inglés! </h2>
-                        <h2 class="text-md text-justify text-gray-800">
+                <div className="flex flex-col items-center my-2 bg-green-100">
+                    <div className="bg-green-100 p-6 rounded-lg mb-6">
+                        <h2 className=" md:text-2xl text-lg font-semibold text-center mb-4">¡Bienvenido al proceso de inscripción para el examen de exoneración de Suficiencia de Inglés! </h2>
+                        <h2 className="text-md text-justify text-gray-800">
                             A continuación, encontrarás un formulario que debes completar para inscribirte al examen. Por favor, asegúrate de llenar todos los campos con información precisa y actualizada. Las fechas y horas del examen, así como los lugares disponibles, están preestablecidos y se muestran en los campos correspondientes.
                         </h2>
-                        <h3 class="text-md text-justify text-gray-900 font-bold">Si desea cambiar la fecha de su examen, por favor, envíe el formulario otra vez con su información.</h3>
+                        <h3 className="text-md text-justify text-gray-900 font-bold">Si desea cambiar la fecha de su examen, por favor, envíe el formulario otra vez con su información.</h3>
+                        {sedeSelected === "PORTOVIEJO" &&
+                            <p className="text-md  text-justify font-semibold text-gray-900">El examen será evaluado en el laboratorio del Instituto de Lenguas Modernas ubicado en los bajos de la Facultad de Ciencias Básicas (tercera puerta de la UTM) </p>
+                        }
                     </div>
                 </div>
 
-                <div class="flex flex-col items-center">
+                <div className="flex flex-col items-center">
 
-                    <div class="p-6 rounded-lg">
-                        <form class="space-y-4" id="frm-registro" onSubmit={handleSubmit(onSubmit)}>
+                    <div className="p-6 rounded-lg">
+                        <form className="space-y-4" id="frm-registro" onSubmit={handleSubmit(onSubmit)}>
                             <input
                                 type="hidden"
                                 {...register('validPresionado')}
                             />
 
                             <div>
-                                <h4 class="md:text-lg text-md font-semibold mb-2 text-left">Cédula de Identidad o Documento de Identidad:</h4>
-                                <div class="flex space-x-2">
-                                    <input name="cedula" type="text" {...register("cedula")} placeholder="Número de documento" onChange={(event) => setCedula(() => event.target.value)} defaultValue={cedula} class="w-full p-2 border border-gray-300 rounded-lg" />
-                                    <button type="button" onClick={verificar_cedula} disabled={enviando} class="bg-yellowutm p-2 px-4  text-white rounded hover:bg-yellow-400 border border-yellow-400">Buscar</button>
+                                <h4 className="md:text-lg text-md font-semibold mb-2 text-left">Cédula de Identidad o Documento de Identidad:</h4>
+                                <div className="flex space-x-2">
+                                    <input name="cedula" type="text" {...register("cedula")} placeholder="Número de documento" onChange={(event) => setCedula(() => event.target.value)} defaultValue={cedula} className="w-full p-2 border border-gray-300 rounded-lg" />
+                                    <button type="button" onClick={verificar_cedula} disabled={enviando} className="bg-yellowutm p-2 px-4  text-white rounded hover:bg-yellow-400 border border-yellow-400">Buscar</button>
                                 </div>
                                 {errors.cedula && (
                                     <p className="text-red-500 text-sm text-left">{errors.cedula.message}</p>
@@ -235,25 +238,25 @@ const RegisterExam = () => {
                                 )}
 
                             </div>
-                            <div class="grid grid-cols-2 gap-4 text-left">
+                            <div className="grid grid-cols-2 gap-4 text-left">
                                 <div>
-                                    <h4 class="md:text-lg text-md font-semibold mb-2">Apellidos:</h4>
-                                    <input name="lastname" type="text" id="lastname" placeholder="Apellidos" disabled defaultValue={user.lastname} class="w-full p-2 border border-gray-300 rounded-lg" />
+                                    <h4 className="md:text-lg text-md font-semibold mb-2">Apellidos:</h4>
+                                    <input name="lastname" type="text" id="lastname" placeholder="Apellidos" disabled defaultValue={user.lastname} className="w-full p-2 border border-gray-300 rounded-lg" />
                                 </div>
                                 <div>
-                                    <h4 class="md:text-lg text-md font-semibold mb-2">Nombres:</h4>
-                                    <input name="name" type="text" id="name" placeholder="Nombres" disabled defaultValue={user.name} class="w-full p-2 border border-gray-300 rounded-lg" />
+                                    <h4 className="md:text-lg text-md font-semibold mb-2">Nombres:</h4>
+                                    <input name="name" type="text" id="name" placeholder="Nombres" disabled defaultValue={user.name} className="w-full p-2 border border-gray-300 rounded-lg" />
                                 </div>
                             </div>
                             <div>
-                                <h4 class="md:text-lg text-md font-semibold mb-2 text-left">Dirección de correo electrónico:</h4>
-                                <input id="mail" name="mail" type="email" placeholder="usuario@utm.edu.ec" disabled defaultValue={user.mail} class="w-full p-2 border border-gray-300 rounded-lg" />
+                                <h4 className="md:text-lg text-md font-semibold mb-2 text-left">Dirección de correo electrónico:</h4>
+                                <input id="mail" name="mail" type="email" placeholder="usuario@utm.edu.ec" disabled defaultValue={user.mail} className="w-full p-2 border border-gray-300 rounded-lg" />
                             </div>
                             {cargando ? <div>Cargando</div> :
                                 <>
                                     <div >
-                                        <h4 class="md:text-lg text-md text-left font-semibold mb-2">Lugar:</h4>
-                                        <select id="tipo_sex" onChange={changeSede} defaultValue={sedeSelected} class="w-full p-2 border border-gray-300 rounded-lg" name="lugar">
+                                        <h4 className="md:text-lg text-md text-left font-semibold mb-2">Lugar:</h4>
+                                        <select id="tipo_sex" onChange={changeSede} defaultValue={sedeSelected} className="w-full p-2 border border-gray-300 rounded-lg" name="lugar">
                                             <option value="">Seleccionar</option>
                                             {
                                                 sedes.map((sede) => {
@@ -266,8 +269,8 @@ const RegisterExam = () => {
                                         </select>
                                     </div>
                                     <div >
-                                        <h4 class="md:text-lg text-md text-left font-semibold mb-2">Fecha:</h4>
-                                        <select id="tipo_sex" onChange={changeFecha} defaultValue={fechaSelected} class="w-full p-2 border border-gray-300 rounded-lg" name="lugar">
+                                        <h4 className="md:text-lg text-md text-left font-semibold mb-2">Fecha:</h4>
+                                        <select id="tipo_sex" onChange={changeFecha} defaultValue={fechaSelected} className="w-full p-2 border border-gray-300 rounded-lg" name="lugar">
                                             <option value="">Seleccionar</option>
                                             {
                                                 fechas.map((fecha) => {
@@ -279,8 +282,8 @@ const RegisterExam = () => {
                                             }
                                         </select>
                                     </div>
-                                    <div class="flex flex-col">
-                                        <h4 class="md:text-lg text-md font-semibold mb-2 text-left">Hora:</h4>
+                                    <div className="flex flex-col">
+                                        <h4 className="md:text-lg text-md font-semibold mb-2 text-left">Hora:</h4>
                                         {
                                             horarios.length !== 0 ? horarios.map((horario) => {
                                                 const [horas, minutos, segundos] = horario.hora.split(':');
@@ -289,9 +292,9 @@ const RegisterExam = () => {
                                                 hora_formated.setMinutes(parseInt(minutos, 10));
                                                 hora_formated.setSeconds(parseInt(segundos, 10));
                                                 return (
-                                                    <div class="flex items-left mb-2" key={horario._id}>
-                                                        <input id={horario.fecha} name="fecha" type="radio" value={horario._id} class="mr-2"   {...register("horario")} />
-                                                        <label htmlFor={horario.fecha} class="text-gray-700">{hora_formated.toLocaleTimeString('en-US', {
+                                                    <div className="flex items-left mb-2" key={horario._id}>
+                                                        <input id={horario.fecha} name="fecha" type="radio" value={horario._id} className="mr-2"   {...register("horario")} />
+                                                        <label htmlFor={horario.fecha} className="text-gray-700">{hora_formated.toLocaleTimeString('en-US', {
                                                             hour: 'numeric',
                                                             minute: 'numeric',
                                                             hour12: true,
@@ -306,11 +309,11 @@ const RegisterExam = () => {
                                     </div>
                                 </>
                             }
-                            <div class="hidden my-4"></div>
+                            <div className="hidden my-4"></div>
                             {enviando && <Loading />}
                             <div className="space-x-2">
-                                <button type="submit" disabled={enviando} class="bg-green-500 text-white py-2 px-4 rounded-lg">Enviar</button>
-                                <button type="button" class="bg-red-500 text-white py-2 px-4 rounded-lg" onClick={() => window.location = "/"}>Cerrar</button>
+                                <button type="submit" disabled={enviando} className="bg-green-500 text-white py-2 px-4 rounded-lg">Enviar</button>
+                                <button type="button" className="bg-red-500 text-white py-2 px-4 rounded-lg" onClick={() => window.location = "/"}>Cerrar</button>
 
                             </div>
                         </form>
