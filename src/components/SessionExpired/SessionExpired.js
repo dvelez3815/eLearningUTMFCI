@@ -6,7 +6,7 @@ const SessionExpired = (props) => {
       <div style={{ fontFamily: "Montserrat" }} className="space-y-2  p-6 mx-4" >
         <img src={loading} width={250} alt="cargando"></img>
         <h1 className="text-2xl text-gray-700 font-semibold text-center">
-          Oh no! Su sesión a expirado.
+          Oh no! Su sesión ha expirado.
         </h1>
         <div className="text-center">
         <a

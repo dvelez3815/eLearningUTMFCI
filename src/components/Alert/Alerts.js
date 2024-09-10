@@ -6,14 +6,14 @@ import { Navigate } from "react-router-dom";
 const SuccessData = {
   title: "Great",
   type: "success",
-  text: "Excelent!.",
+  text: "Excellent.",
 };
 
 //export const Guardar
 export const mostrarContenido = (tema, objetivo, explicacion, link) => {
-  let topic = tema.toLowerCase();
-  let obje = objetivo.toLowerCase();
-  let exp = explicacion.toLowerCase();
+  let topic = tema.toString();
+  let obje = objetivo.toString();
+  let exp = explicacion.toString();
   if (tema.length === 0 || tema === "null") {
     topic = "There is not topic for this lesson";
   }
