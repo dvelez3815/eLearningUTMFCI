@@ -95,7 +95,7 @@ const Arrastrar = (props) => {
           <ViewImage img={props.ejercicio.img} />
         }
         {props.ejercicio.description &&
-          <div className="w-full h-64 overflow-y-scroll p-4 border border-gray-300">
+          <div className="w-full h-64 overflow-y-scroll p-4 border text-left rounded border-gray-300">
             <p>{props.ejercicio.description}</p>
           </div>
         }

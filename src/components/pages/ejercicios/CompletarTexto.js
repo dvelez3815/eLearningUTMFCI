@@ -54,7 +54,7 @@ const CompletarTexto = (props) => {
           <ViewImage img={props.ejercicio.img} />
         }
         {props.ejercicio.description &&
-          <div className="w-full h-64 overflow-y-scroll p-4 border border-gray-300">
+          <div className="w-full h-64 overflow-y-scroll p-4 text-left rounded border border-gray-300">
             <p>{props.ejercicio.description}</p>
           </div>
         }

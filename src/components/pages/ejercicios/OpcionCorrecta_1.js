@@ -85,7 +85,7 @@ export const OpcionCorrecta_1 = (props) => {
           <ViewImage img={props.ejercicio.img} />
         }
         {props.ejercicio.description &&
-          <div className="w-full h-64 overflow-y-scroll p-4 border border-gray-300">
+          <div className="w-full h-64 overflow-y-scroll text-left rounded p-4 border  border-gray-300">
             <p>{props.ejercicio.description}</p>
           </div>
         }
