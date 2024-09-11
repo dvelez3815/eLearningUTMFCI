@@ -1,9 +1,9 @@
-import React, { createRef, useRef, useState,useEffect } from "react";
+import React, { createRef, useRef, useState, useEffect } from "react";
 import ViewImage from '../../ViewImage/ViewImage'
 import axios from 'axios';
 
 export const OpcionCorrecta_n = (props) => {
- 
+
   // eslint-disable-next-line no-unused-vars
   const opciones = useRef(null);
   // eslint-disable-next-line no-unused-vars
@@ -11,37 +11,37 @@ export const OpcionCorrecta_n = (props) => {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
-    
+
     translateText()
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+  }, []);
 
   const translateText = () => {
     let tit = ''
-    if (String(props.ejercicio.question).length===0 ){
-      tit=('Select the correct answer').replace(/[$.]/g,'')
-    }else{
-      tit=(props.ejercicio.question).replace(/[$.]/g,'')
+    if (String(props.ejercicio.question).length === 0) {
+      tit = ('Select the correct answer').replace(/[$.]/g, '')
+    } else {
+      tit = (props.ejercicio.question).replace(/[$.]/g, '')
     }
-            
+
     let data = {
-        q : tit.replace(/[$_]/g,'.').toLocaleLowerCase(),
-        source: 'en',
-        target: 'es'
+      q: tit.replace(/[$_]/g, '.').toLocaleLowerCase(),
+      source: 'en',
+      target: 'es'
     }
     axios.post(`https://libretranslate.de/translate`, data)
-    .then((response) => {
-      setTitle(response.data.translatedText)  
-      //console.log(response.data.translatedText)
-    })
-  } 
+      .then((response) => {
+        setTitle(response.data.translatedText)
+        //console.log(response.data.translatedText)
+      })
+  }
 
   const imagesRef = useRef(
     [...Array(props.ejercicio.options.length)].map(() => createRef())
   );
 
-  
+
 
   const marcar = (imagenRef) => {
     try {
@@ -57,42 +57,47 @@ export const OpcionCorrecta_n = (props) => {
     <div className="flex  flex-col flex-wrap md:mt-8 xl:px-60   sm:px-20 ">
       <div className="static  px-4 min-w-fit ">
         <h2 className="m-auto p-3 text-sm  font-bold sm:text-xl text-green-700 ">
-          {String(props.ejercicio.question).length===0?
+          {String(props.ejercicio.question).length === 0 ?
             ('Select the correct answer').toUpperCase()
-          :
+            :
             (props.ejercicio.question).toUpperCase()
           }{" "}
         </h2>
 
       </div>
-      <div>      
-        {props.ejercicio.img && (
+      <div className={props.ejercicio.img || props.ejercicio.description ? "grid grid-cols-2 gap-4" : "grid grid-cols-1"}>
+        {props.ejercicio.img &&
           <ViewImage img={props.ejercicio.img} />
-        )}
-      </div>
-      <div className="container sm:m-auto  p-auto w-auto w-full  ">
-        <div
-          className="flex flex-wrap pt-10 items-center justify-center gap-2  sm:items-center sm:justify-center pb-5   md:mr-8 md:ml-8 "
-          aria-label="choice"
-          role="radiogroup"
-          
-          ref={props.miref}
-        >
-          {props.ejercicio.options.map((ejercicio, index) => {
-            return (
-              <Texto
-                key={index}
-                src={
-                  "https://d2pur3iezf4d1j.cloudfront.net/images/18a521f1507cb86689faa5b2e8277703"
-                }
-                alt={"agua"}
-                nombre={"agua"}
-                marcar={marcar}
-                myref={imagesRef.current[index]}
-                data={props.ejercicio.options[index]}
-              />
-            );
-          })}
+        }
+        {props.ejercicio.description &&
+          <div className="w-full h-64 overflow-y-scroll p-4 border border-gray-300">
+            <p>{props.ejercicio.description}</p>
+          </div>
+        }
+        <div className="container sm:m-auto  p-auto w-auto w-full  ">
+          <div
+            className="flex flex-wrap pt-10 items-center justify-center gap-2  sm:items-center sm:justify-center pb-5   md:mr-8 md:ml-8 "
+            aria-label="choice"
+            role="radiogroup"
+
+            ref={props.miref}
+          >
+            {props.ejercicio.options.map((ejercicio, index) => {
+              return (
+                <Texto
+                  key={index}
+                  src={
+                    "https://d2pur3iezf4d1j.cloudfront.net/images/18a521f1507cb86689faa5b2e8277703"
+                  }
+                  alt={"agua"}
+                  nombre={"agua"}
+                  marcar={marcar}
+                  myref={imagesRef.current[index]}
+                  data={props.ejercicio.options[index]}
+                />
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>

@@ -27,12 +27,12 @@ const EjercicioFooter = (props) => {
   };
 
   return (
-    <div className="m-8 ">
+    <div className="mx-8 ">
       <div className="flex justify-between flex-row container m-auto p-auto ">
-        <div className="mb-4 ">
+        <div className=" ">
           <button
             disabled={false}
-            className="bg-transparent text-xs sm:text-xl tracking-wider  my-2 text-gray-500 font-semibold hover:text-gray-400 py-2 px-4 border border-gray-500 hover:border-gray-500 rounded"
+            className="bg-transparent uppercase text-xs sm:text-xl tracking-wider  my-2 text-gray-500 font-semibold hover:text-gray-400 py-2 px-4 border border-gray-500 hover:border-gray-500 rounded"
             onClick={
               () => {
                 noEsCorrecta(props, skipExercise(props), 1);
@@ -42,15 +42,13 @@ const EjercicioFooter = (props) => {
             skip
           </button>
         </div>
-        <div className="mb-4">
+        <div className="">
           <button
             disabled={enviar}
-            className=" text-xs sm:text-xl tracking-wider  my-2 text-white bg-green-500 font-semibold  hover:bg-green-400 py-2 px-4 capitalize border border-green-500 hover:border-green-600 rounded "
+            className=" text-xs sm:text-xl tracking-wider uppercase  my-2 text-white bg-green-500 font-semibold  hover:bg-green-400 py-2 px-4 border border-green-500 hover:border-green-600 rounded "
             onClick={() => sendRespuesta(props)}
           >
-            <span>
-              <p>check</p>
-            </span>
+            check
           </button>
         </div>
       </div>
@@ -487,11 +485,11 @@ function randomizarArray(array) {
 async function enviarSiEsCorrecta(props, contadorRespondidas) {
   //Se es corecta se necesita saber si se ha llegado al final de la lista de ejercicios, de ser así, se debe de terminar el juego y guardar el progreso,
   //caso contrario se debe de pasar al siguiente ejercicio
-  
+
   if (props.juego.length - 1 === 0) {
     let tasks_id =
       window.location.href.split("/")[
-        window.location.href.split("/").length - 1
+      window.location.href.split("/").length - 1
       ];
     let id = USER._id;
 
@@ -516,7 +514,7 @@ async function enviarSiEsCorrecta(props, contadorRespondidas) {
         process.env.REACT_APP_API_URL + "/progress/update",
         requestOptions
       );
-    } catch (error) {}
+    } catch (error) { }
     const dataT = await responses.json();
     console.log("Info:", dataT.res);
     if (props.control === " ") {

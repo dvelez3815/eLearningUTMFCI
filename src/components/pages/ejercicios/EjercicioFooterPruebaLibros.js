@@ -10,14 +10,12 @@ const EjercicioFooterPruebaLibros = (props) => {
       <div className="">
         {props.juego.length > 0 ? (
           <button
-            className=" text-xs sm:text-xl tracking-wider  text-white bg-green-500 font-semibold  hover:bg-green-400 py-2 px-4 capitalize border border-green-500 hover:border-green-600 rounded "
+            className=" text-xs sm:text-xl tracking-wider uppercase  text-white bg-green-500 font-semibold  hover:bg-green-400 py-2 px-4  border border-green-500 hover:border-green-600 rounded "
             onClick={() => {
               validarRespuesta(props);
             }}
           >
-            <span>
-              <p>Next</p>
-            </span>
+            Next
           </button>
         ) : (
           <div className="w-full flex flex-col  justify-center items-center ">

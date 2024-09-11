@@ -63,19 +63,15 @@ const EjercicioReview = (props) => {
                   {id === 0?
                   
                     <button
-                      className=" text-xs sm:text-xl tracking-wider  text-white bg-gray-500 font-semibold   py-2 px-4 capitalize border border-gray-500  rounded "
+                      className=" text-xs sm:text-xl tracking-wider  text-white bg-gray-500 font-semibold   py-2 px-4 uppercase border border-gray-500  rounded "
                       >
-                      <span>
-                        <p>Next</p>    
-                      </span>
+                        Next
                     </button>
                   :
                     <button
-                      className=" text-xs sm:text-xl tracking-wider  text-white bg-green-500 font-semibold  hover:bg-green-400 py-2 px-4 capitalize border border-green-500 hover:border-green-600 rounded "
+                      className=" text-xs sm:text-xl tracking-wider  text-white bg-green-500 font-semibold  hover:bg-green-400 py-2 px-4 uppercase border border-green-500 hover:border-green-600 rounded "
                       onClick={() => {siguiente(props)} }>
-                      <span>
-                        <p>Next</p>    
-                      </span>
+                        Next
                     </button>
                   }
                  
@@ -86,9 +82,7 @@ const EjercicioReview = (props) => {
                 <button
                   className=" text-xs sm:text-xl tracking-wider  text-white bg-green-500 font-semibold  hover:bg-green-400 py-2 px-4 capitalize border border-green-500 hover:border-green-600 rounded "
                   onClick={() => {anterior(props)} }>
-                  <span>
-                    <p>Next</p>    
-                  </span>
+                    Next
                 </button> 
               </div>
            }

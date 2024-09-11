@@ -1,25 +1,33 @@
 
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
+const Viewimage = ({ img }) => {
+  const [imageSrc, setImageSrc] = useState(null);
 
-import {mostrarImagen} from '../Alert/Alerts';
-class Viewimage extends Component {
-  
-  
+  useEffect(() => {
+    const obtenerImagen = async () => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/question/image/${img}`);
+        if (response.ok) {
+          setImageSrc(`${process.env.REACT_APP_API_URL}/question/image/${img}`);
+        } else {
+          console.error('Error al obtener la imagen');
+        }
+      } catch (error) {
+        console.error('Error en la solicitud:', error);
+      }
+    };
+    obtenerImagen();
+  }, [img]);
 
-  render() {
-    return (
-    
-      <div className="m-auto my-6">
-        <div className="">
-           </div>
-         <button onClick={( img)=>mostrarImagen(this.props.img)} 
-          className="p-3 text-xs sm:text-lg  text-yellow-600 transition-colors duration-150 border border-yellow-300 bg-yellow-100 rounded-lg focus:shadow-outline "
-        >
-          view image
-        </button>
-      </div>
-    );
-  }
+
+  return (
+    <div className="m-auto my-6">
+      {imageSrc ?
+        <img src={imageSrc} alt="Descripción de la imagen" /> :
+        <p>Loading Image...</p>
+      }
+    </div>
+  );
 }
 
 export default Viewimage;

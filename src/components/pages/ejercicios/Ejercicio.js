@@ -67,7 +67,7 @@ export const Ejercicio = (props) => {
   //cuando haya un cambio de pregunta se actualiza el estado del componente.
 
   return (
-    <div className={"ejercicio md:px-20"}>
+    <div className={"ejercicio md:px-20 h-auto"}>
       {cargado  || (
         <ProgressBar
         totalEjercicios={preguntasValidas}
@@ -239,7 +239,7 @@ export const Ejercicio = (props) => {
                       <div className={openTab === 2 ? "block bg-gray-50" : "hidden"} id="link2">
                       <div className="">
 
-                        <div className=" px-5 text-green-700 py-5 font-bold text-center  rounded-md ">
+                        <div className=" px-5 text-green-700  font-bold text-center  rounded-md ">
                                 {('review of lesson questions').toUpperCase()}
                           </div>
 
@@ -254,7 +254,7 @@ export const Ejercicio = (props) => {
               </div>
             </div>
           :
-          <div className='relative flex flex-col min-w-0 break-words  w-full mb-6 px-4 md:px-10' id='review'>
+          <div className='relative flex flex-col min-w-0 break-words  w-full  px-4 md:px-10' id='review'>
                   <div className='relative flex flex-col min-w-0 break-words bg-gray-50 w-full mb-6 shadow-lg rounded '>
                     <EjercicioR ejercicios={props.ejercicios} esPrueba = {true} esLeccion={false}/>
                   </div>
@@ -275,7 +275,7 @@ export const Ejercicio = (props) => {
             {finJuego ? (
             <div></div>
             ): props.esPrueba?
-            <div className="py-5">
+            <div className="">
               <EjercicioFooterPruebaLibros totalEjercicios = {preguntasValidas} ejercicios = {props.ejercicios} ejercicio={juego[juego.length-1]} juego={juego} setJuego = {setJuego} cargado={cargado} setCargado={setCargado} setFinJuego={setFinJuego} miref={panelJuego} contadorRespondidas={contadorRespondidas} setContadorRespondidas={setContadorRespondidas} aciertos={aciertos} setAciertos={setAciertos}/>
             </div>
             :<EjercicioFooter control = {type} ejercicio={juego[juego.length-1]} juego={juego} setJuego = {setJuego} cargado={cargado} setCargado={setCargado} setFinJuego={setFinJuego} miref={panelJuego} contadorRespondidas={contadorRespondidas} setContadorRespondidas={setContadorRespondidas}/>}
