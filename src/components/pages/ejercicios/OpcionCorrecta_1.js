@@ -86,7 +86,7 @@ export const OpcionCorrecta_1 = (props) => {
         }
         {props.ejercicio.description &&
           <div className="w-full h-64 overflow-y-scroll text-left rounded p-4 border  border-gray-300">
-            <p>{props.ejercicio.description}</p>
+            <pre>{props.ejercicio.description}</pre>
           </div>
         }
         <div className="container sm:m-auto  p-auto w-auto">

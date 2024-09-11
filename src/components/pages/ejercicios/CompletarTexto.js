@@ -55,7 +55,7 @@ const CompletarTexto = (props) => {
         }
         {props.ejercicio.description &&
           <div className="w-full h-64 overflow-y-scroll p-4 text-left rounded border border-gray-300">
-            <p>{props.ejercicio.description}</p>
+            <pre>{props.ejercicio.description}</pre>
           </div>
         }
         <div className="container sm:m-auto  p-auto w-auto " >

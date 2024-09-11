@@ -125,7 +125,7 @@ const Emparejar = (props) => {
         }
         {props.ejercicio.description &&
           <div className="w-full h-64 overflow-y-scroll text-left rounded p-4 border border-gray-300">
-            <p>{props.ejercicio.description}</p>
+            <pre>{props.ejercicio.description}</pre>
           </div>
         }
       </div>
