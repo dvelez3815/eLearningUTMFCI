@@ -85,7 +85,6 @@ const Arrastrar = (props) => {
             (props.ejercicio.question).toUpperCase()
           }{" "}
         </h2>
-
       </div>
       {props.ejercicio.img && (
         <ViewImage img={props.ejercicio.img} />
@@ -99,153 +98,151 @@ const Arrastrar = (props) => {
             <pre>{props.ejercicio.description}</pre>
           </div>
         }
-        <div>
-          {items.map((preguntas, index) => (
-            <div
-              className="container lg:m-auto lg:p-auto lg:w-auto mx-5  "
-              key={shortid.generate()}
-              id="arrastrar"
-            >
-              <h2 className="text-md  font-medium text-left my-4  "> Sentence {index + 1}</h2>
-              <div className="hidden md:block ">
-                <DragDropContext
-                  onDragEnd={(result) => {
-                    if (!result.destination) {
-                      return;
-                    }
-                    if (result.destination.index === result.source.index) {
-                      return;
-                    }
-                    setItems(
-                      reorder(
-                        items,
-                        result.source.index,
-                        result.destination.index,
-                        index
-                      )
-                    );
-                  }}
-                  key={shortid.generate()}
-                >
-                  <Droppable droppableId="droppable" direction="horizontal">
-                    {(provided, snapshot) => (
-                      <div
-                        className={
-                          preguntas.length > 7 ?
-                            "  flex h-36 static  bg-gray-50 w-full overflow-x-auto  rounded-md  items-center  shadow-md "
-                            :
-                            "  flex h-36 static bg-gray-50 w-full overflow-x-auto justify-center  rounded-md  items-center   mb-6 shadow-md "
-                        }
-                        ref={provided.innerRef}
+        {items.map((preguntas, index) => (
+          <div
+            className="container lg:m-auto lg:p-auto lg:w-auto mx-5  "
+            key={shortid.generate()}
+            id={`arrastrar${index + 1}`}
+          >
+            <h2 className="text-md  font-medium text-left my-4  "> Sentence {index + 1}</h2>
+            <div className="hidden md:block ">
+              <DragDropContext
+                onDragEnd={(result) => {
+                  if (!result.destination) {
+                    return;
+                  }
+                  if (result.destination.index === result.source.index) {
+                    return;
+                  }
+                  setItems(
+                    reorder(
+                      items,
+                      result.source.index,
+                      result.destination.index,
+                      index
+                    )
+                  );
+                }}
+                key={shortid.generate()}
+              >
+                <Droppable droppableId="droppable" direction="horizontal">
+                  {(provided, snapshot) => (
+                    <div
+                      className={
+                        preguntas.length > 7 ?
+                          "  flex h-36 static  bg-gray-50 w-full overflow-x-auto  rounded-md  items-center  shadow-md "
+                          :
+                          "  flex h-36 static bg-gray-50 w-full overflow-x-auto justify-center  rounded-md  items-center   mb-6 shadow-md "
+                      }
+                      ref={provided.innerRef}
 
-                        {...provided.droppableProps}
-                      >
-                        {preguntas.map((ordenar, index) => (
-                          <Draggable
-                            key={ordenar.answer}
-                            draggableId={ordenar.answer.toString()}
-                            index={index}
-                          >
-                            {(provided, snapshot) => (
-                              <div className="px-2">
-                                <div
-                                  style={getItemStyle(
-                                    snapshot.isDragging,
-                                    provided.draggableProps.style
-                                  )}
-                                  className={
-
-                                    String(ordenar.item).length < 20 ?
-                                      "rounded-md 3xl h-20 w-24 bg-white items-center  justify-center  p-2  flex  overflow-y-auto border shadow-md"
-                                      :
-                                      String(ordenar.item).length < 37 ?
-                                        "rounded-md 3xl h-20 w-24 bg-white items-center  justify-center  p-2  flex  overflow-y-auto border shadow-md"
-                                        :
-                                        "rounded-md 3xl h-20 w-40 bg-white p-2  flex  overflow-y-auto border shadow-md"
-
-                                  }
-
-                                  ref={provided.innerRef}
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
-
-                                >
-                                  <p className="sm:text-xs text-xs  ">{ordenar.item}</p>
-                                </div>
-                              </div>
-                            )}
-                          </Draggable>
-                        ))}
-                        {provided.placeholder}
-                      </div>
-                    )}
-                  </Droppable>
-
-                </DragDropContext>
-              </div>
-              <div className="md:hidden">
-                <DragDropContext
-                  onDragEnd={(result) => {
-                    if (!result.destination) {
-                      return;
-                    }
-                    if (result.destination.index === result.source.index) {
-                      return;
-                    }
-                    setItems(
-                      reorder(
-                        items,
-                        result.source.index,
-                        result.destination.index,
-                        index
-                      )
-                    );
-                  }}
-                  key={shortid.generate()}
-                >
-                  <Droppable droppableId="droppable" direction="vertical">
-                    {(provided, snapshot) => (
-                      <div
-                        className="mx-auto flex  flex-col rounded justify-center items-center "
-                        ref={provided.innerRef}
-                        style={getListStyle(
-                          snapshot.isDraggingOver,
-                          preguntas.length
-                        )}
-                        {...provided.droppableProps}
-                      >
-
-                        {preguntas.map((ordenar, index) => (
-                          <Draggable
-                            key={ordenar.answer}
-                            draggableId={ordenar.answer.toString()}
-                            index={index}
-                          >
-                            {(provided, snapshot) => (
+                      {...provided.droppableProps}
+                    >
+                      {preguntas.map((ordenar, index) => (
+                        <Draggable
+                          key={ordenar.answer}
+                          draggableId={ordenar.answer.toString()}
+                          index={index}
+                        >
+                          {(provided, snapshot) => (
+                            <div className="px-2">
                               <div
-                                className="rounded  justify-center flex items-center py-4 overflow-y-auto	"
-                                ref={provided.innerRef}
-                                {...provided.draggableProps}
-                                {...provided.dragHandleProps}
-                                style={getItemStyleH(
+                                style={getItemStyle(
                                   snapshot.isDragging,
                                   provided.draggableProps.style
                                 )}
+                                className={
+
+                                  String(ordenar.item).length < 20 ?
+                                    "rounded-md 3xl h-20 w-24 bg-white items-center  justify-center  p-2  flex  overflow-y-auto border shadow-md"
+                                    :
+                                    String(ordenar.item).length < 37 ?
+                                      "rounded-md 3xl h-20 w-24 bg-white items-center  justify-center  p-2  flex  overflow-y-auto border shadow-md"
+                                      :
+                                      "rounded-md 3xl h-20 w-40 bg-white p-2  flex  overflow-y-auto border shadow-md"
+
+                                }
+
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+
                               >
-                                <p className="sm:text-xs p-2 text-xs">{ordenar.item}</p>
+                                <p className="sm:text-xs text-xs  ">{ordenar.item}</p>
                               </div>
-                            )}
-                          </Draggable>
-                        ))}
-                        {provided.placeholder}
-                      </div>
-                    )}
-                  </Droppable>
-                </DragDropContext>
-              </div>
+                            </div>
+                          )}
+                        </Draggable>
+                      ))}
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+
+              </DragDropContext>
             </div>
-          ))}
-        </div>
+            <div className="md:hidden">
+              <DragDropContext
+                onDragEnd={(result) => {
+                  if (!result.destination) {
+                    return;
+                  }
+                  if (result.destination.index === result.source.index) {
+                    return;
+                  }
+                  setItems(
+                    reorder(
+                      items,
+                      result.source.index,
+                      result.destination.index,
+                      index
+                    )
+                  );
+                }}
+                key={shortid.generate()}
+              >
+                <Droppable droppableId="droppable" direction="vertical">
+                  {(provided, snapshot) => (
+                    <div
+                      className="mx-auto flex  flex-col rounded justify-center items-center "
+                      ref={provided.innerRef}
+                      style={getListStyle(
+                        snapshot.isDraggingOver,
+                        preguntas.length
+                      )}
+                      {...provided.droppableProps}
+                    >
+
+                      {preguntas.map((ordenar, index) => (
+                        <Draggable
+                          key={ordenar.answer}
+                          draggableId={ordenar.answer.toString()}
+                          index={index}
+                        >
+                          {(provided, snapshot) => (
+                            <div
+                              className="rounded  justify-center flex items-center py-4 overflow-y-auto	"
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              style={getItemStyleH(
+                                snapshot.isDragging,
+                                provided.draggableProps.style
+                              )}
+                            >
+                              <p className="sm:text-xs p-2 text-xs">{ordenar.item}</p>
+                            </div>
+                          )}
+                        </Draggable>
+                      ))}
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+              </DragDropContext>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -77,6 +77,7 @@ export const OpcionCorrecta_1 = (props) => {
 
         </h2>
 
+
       </div>
       <div>
       </div>

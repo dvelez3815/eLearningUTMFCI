@@ -371,7 +371,6 @@ const verificarOrdenar = async (
       respuestasUser.push(respuesta);
     }
   }
-
   if (
     JSON.stringify(respuestasUser) ===
     JSON.stringify(respuestasBackEndOrdenadas)
@@ -516,7 +515,6 @@ async function enviarSiEsCorrecta(props, contadorRespondidas) {
       );
     } catch (error) { }
     const dataT = await responses.json();
-    console.log("Info:", dataT.res);
     if (props.control === " ") {
       props.setContadorRespondidas(contadorRespondidas + 1);
       props.juego.pop();
