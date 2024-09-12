@@ -360,6 +360,7 @@ const verificarOrdenar = async (
   let respuestasUser = [];
   //aca en este for se agarran los div que tengan id agarrar el texto y agregarlo a un array
   for (let i = 0; i < hijos.length; i++) {
+    console.log("hijos ", i + 1, hijos[i])
     if (hijos[i].id === "arrastrar") {
       let respuesta = hijos[i].children[1].innerText
         .toString()

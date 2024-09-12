@@ -296,13 +296,13 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego, setCargado, pregunt
   // eslint-disable-next-line array-callback-return
   ejercicios.map((ejercicio, index) => {
 
-    if (ejercicio.type === "completar_texto") {
+     if (ejercicio.type === "completar_texto") {
       setJuego(juego => [...juego, <CompletarTexto key={index} ejercicio={ejercicio} miref={panelJuego} />])
       contador++;
-    } /* else if (ejercicio.type === "ordenar") {
+    }  else if (ejercicio.type === "ordenar") {
       setJuego(juego => [...juego, <Arrastrar key={index} ejercicio={ejercicio} miref={panelJuego} />])
       contador++;
-    } */ else if ((ejercicio.type === "true_false" && ejercicio.img) || ejercicio.type === "true_false") {
+    }  else if ((ejercicio.type === "true_false" && ejercicio.img) || ejercicio.type === "true_false") {
       setJuego(juego => [...juego, <VerdaderoFalso key={index} ejercicio={ejercicio} miref={panelJuego} />])
       contador++;
     } else if (ejercicio.type === "opcion_correcta_1") {
@@ -316,7 +316,7 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego, setCargado, pregunt
     } else if (ejercicio.type === "emparejar" || ejercicio.type === "emparejar_img") {
       setJuego(juego => [...juego, <Emparejar key={index} ejercicio={ejercicio} miref={panelJuego} />])
       contador++;
-    }
+    } 
 
   }
 

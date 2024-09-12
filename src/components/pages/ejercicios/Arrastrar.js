@@ -76,7 +76,7 @@ const Arrastrar = (props) => {
   const [items, setItems] = useState(data);
   return (
 
-    <div className="flex  flex-col  flex-wrap md:mt-8  xl:px-40 px-5 sm:px-20  " ref={props.miref}>
+    <div className="flex  flex-col  flex-wrap md:mt-8  xl:px-40 px-5 sm:px-20  " >
       <div className="static min-w-fit ">
         <h2 className="m-auto p-3 text-sm  font-bold sm:text-xl text-green-700 ">
           {String(props.ejercicio.question).length === 0 ?
@@ -89,7 +89,7 @@ const Arrastrar = (props) => {
       {props.ejercicio.img && (
         <ViewImage img={props.ejercicio.img} />
       )}
-      <div className={props.ejercicio.img || props.ejercicio.description ? "grid grid-cols-2 gap-4" : "grid grid-cols-1"}>
+      <div ref={props.miref} className={props.ejercicio.img || props.ejercicio.description ? "grid grid-cols-2 gap-4" : "grid grid-cols-1"}>
         {props.ejercicio.img &&
           <ViewImage img={props.ejercicio.img} />
         }
@@ -102,7 +102,7 @@ const Arrastrar = (props) => {
           <div
             className="container lg:m-auto lg:p-auto lg:w-auto mx-5  "
             key={shortid.generate()}
-            id={`arrastrar${index + 1}`}
+            id="arrastrar"
           >
             <h2 className="text-md  font-medium text-left my-4  "> Sentence {index + 1}</h2>
             <div className="hidden md:block ">
