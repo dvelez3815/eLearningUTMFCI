@@ -114,6 +114,15 @@ function App() {
             }
           />
           <Route
+            path="/modulo/:pmodulo/listening/:punidad/:id"
+            element={
+              <PrivateRoute>
+                {" "}
+                <Grammar2 />{" "}
+              </PrivateRoute>
+            }
+          />
+          <Route
             path="/modulo/:pmodulo/writing/:punidad/:id"
             element={
               <PrivateRoute>

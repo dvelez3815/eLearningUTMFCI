@@ -1,6 +1,7 @@
 import React, { createRef, useRef, useState, useEffect } from "react";
 import "../../pages/ejercicios/CheckExercise.css";
 import ViewImage from '../../ViewImage/ViewImage'
+import ViewAudio from '../../ViewAudio/ViewAudio'
 import axios from 'axios';
 
 export const OpcionCorrecta_1 = (props) => {
@@ -76,8 +77,9 @@ export const OpcionCorrecta_1 = (props) => {
           }{" "}
 
         </h2>
-
-
+        {props.ejercicio.audio &&
+          <ViewAudio audio={props.ejercicio.audio} />
+        }
       </div>
       <div>
       </div>

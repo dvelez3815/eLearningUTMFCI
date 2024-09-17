@@ -3,6 +3,7 @@ import { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import shortid from "shortid";
 import ViewImage from '../../ViewImage/ViewImage'
+import ViewAudio from '../../ViewAudio/ViewAudio'
 
 const barajarArray = (array) => {
   const arr = array.slice(); // Crear una copia del array para no mutar el original
@@ -85,6 +86,9 @@ const Arrastrar = (props) => {
             (props.ejercicio.question).toUpperCase()
           }{" "}
         </h2>
+        {props.ejercicio.audio &&
+          <ViewAudio audio={props.ejercicio.audio} />
+        }
       </div>
       {props.ejercicio.img && (
         <ViewImage img={props.ejercicio.img} />

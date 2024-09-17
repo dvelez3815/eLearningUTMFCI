@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import "./Ejercicio.css";
 import shortid from "shortid";
 import ViewImage from '../../ViewImage/ViewImage'
+import ViewAudio from '../../ViewAudio/ViewAudio'
 import axios from 'axios'
 
 const CompletarTexto = (props) => {
@@ -46,7 +47,9 @@ const CompletarTexto = (props) => {
             (props.ejercicio.question).toUpperCase()
           }{" "}
         </h2>
-
+        {props.ejercicio.audio &&
+          <ViewAudio audio={props.ejercicio.audio} />
+        }
       </div>
 
       <div className={props.ejercicio.img || props.ejercicio.description ? "grid grid-cols-2 gap-4" : "grid grid-cols-1"}>
