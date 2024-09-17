@@ -19,10 +19,13 @@ import { AuthContext } from "./context/AuthContext";
 import Loading from "./components/Loading/Loading";
 import SessionExpired from "./components/SessionExpired/SessionExpired";
 import { useContext, useEffect, useState } from "react";
+import MantenimientoPage from "./components/pages/MantenimientoPage/MantenimientoPage.js";
 
 function App() {
   const { loading, isAuthenticated, logout } = useContext(AuthContext);
   const [isSessionExpired, setIsSessionExpired] = useState(false);
+
+  const MANTENIMIENTO = process.env.REACT_APP_MANTENIMIENTO;
 
   useEffect(() => {
     if (!isAuthenticated) return;
@@ -54,6 +57,7 @@ function App() {
     events.forEach((event) => {
       window.addEventListener(event, updateLastActivityTime);
     });
+    console.log(MANTENIMIENTO)
 
     return () => {
       events.forEach((event) => {
@@ -63,7 +67,8 @@ function App() {
     };
   }, [isAuthenticated, logout]);
 
-  if (loading) return <Loading width="200"/>;
+  if (MANTENIMIENTO) return <MantenimientoPage />
+  if (loading) return <Loading width="200" />;
   if (isSessionExpired) return <SessionExpired />;
   return (
     <div className="App h-full">
@@ -173,7 +178,7 @@ function App() {
               </PrivateRoute>
             }
           />
-          
+
         </Routes>
       </Router>
     </div>
