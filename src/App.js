@@ -67,7 +67,7 @@ function App() {
     };
   }, [isAuthenticated, isMantenimiento, logout]);
 
-  if (isMantenimiento) return <MantenimientoPage />
+  //if (isMantenimiento) return <MantenimientoPage />
   if (loading) return <Loading width="200" />;
   if (isSessionExpired) return <SessionExpired />;
   return (
