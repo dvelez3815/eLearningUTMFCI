@@ -20,6 +20,7 @@
 .env.production.local
 .env-cmdrc.json
 .env-cmdrc
+.env
 
 npm-debug.log*
 yarn-debug.log*

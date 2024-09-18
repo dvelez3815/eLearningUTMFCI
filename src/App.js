@@ -57,7 +57,6 @@ function App() {
     events.forEach((event) => {
       window.addEventListener(event, updateLastActivityTime);
     });
-    console.log(MANTENIMIENTO)
 
     return () => {
       events.forEach((event) => {
