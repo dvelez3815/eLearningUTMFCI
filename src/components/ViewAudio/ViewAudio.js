@@ -6,7 +6,13 @@ const ViewAudio = ({ audio }) => {
     useEffect(() => {
         const obtenerAudio = async () => {
             try {
-                const response = await fetch(`${process.env.REACT_APP_API_URL}/question/audio/${audio}`);
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/question/audio/${audio}`,
+                    {
+                        headers: {
+                            token: process.env.REACT_APP_SECRET_TOKEN,
+                        }
+                    }
+                );
                 if (response.ok) {
                     // Establece la URL para reproducir el audio
                     setAudioSrc(`${process.env.REACT_APP_API_URL}/question/audio/${audio}`);

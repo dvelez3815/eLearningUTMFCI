@@ -6,7 +6,11 @@ const Viewimage = ({ img }) => {
   useEffect(() => {
     const obtenerImagen = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/question/image/${img}`);
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/question/image/${img}`, {
+          headers: {
+              token: process.env.REACT_APP_SECRET_TOKEN,
+          }
+      });
         if (response.ok) {
           setImageSrc(`${process.env.REACT_APP_API_URL}/question/image/${img}`);
         } else {
