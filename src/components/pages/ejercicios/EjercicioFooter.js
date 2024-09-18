@@ -28,7 +28,7 @@ const EjercicioFooter = (props) => {
 
   return (
     <div className="mx-8 ">
-      <div className="flex justify-between flex-row container m-auto p-auto ">
+      <div className="flex justify-between flex-row container  ">
         <div className=" ">
           <button
             disabled={false}

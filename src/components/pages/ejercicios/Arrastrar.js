@@ -2,8 +2,8 @@ import React from "react";
 import { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import shortid from "shortid";
-import ViewImage from '../../ViewImage/ViewImage'
-import ViewAudio from '../../ViewAudio/ViewAudio'
+import ViewImage from '../../../components/ViewImage/ViewImage'
+import ViewAudio from "../../../components/ViewAudio/ViewAudio";
 
 const barajarArray = (array) => {
   const arr = array.slice(); // Crear una copia del array para no mutar el original
@@ -77,9 +77,9 @@ const Arrastrar = (props) => {
   const [items, setItems] = useState(data);
   return (
 
-    <div className="flex  flex-col  flex-wrap md:mt-8  xl:px-40 px-5 sm:px-20  " >
+    <div className="flex  flex-col  flex-wrap " >
       <div className="static min-w-fit ">
-        <h2 className="m-auto p-3 text-sm  font-bold sm:text-xl text-green-700 ">
+        <h2 className="m-auto p-3 text-sm text-center font-bold sm:text-xl text-green-700 ">
           {String(props.ejercicio.question).length === 0 ?
             ('order the sentence').toUpperCase()
             :
@@ -98,8 +98,10 @@ const Arrastrar = (props) => {
           <ViewImage img={props.ejercicio.img} />
         }
         {props.ejercicio.description &&
-          <div className="w-full h-64 overflow-y-scroll p-4 border text-left rounded border-gray-300">
-            <pre>{props.ejercicio.description}</pre>
+          <div className="flex items-center justify-center">
+            <div className="w-full h-64 overflow-y-scroll p-4 border text-left rounded border-gray-300">
+              <pre>{props.ejercicio.description}</pre>
+            </div>
           </div>
         }
         {items.map((preguntas, index) => (

@@ -1,8 +1,8 @@
 import React, { createRef, useRef, useState, useEffect } from "react";
-import "../../pages/ejercicios/CheckExercise.css";
-import ViewImage from '../../ViewImage/ViewImage'
-import ViewAudio from '../../ViewAudio/ViewAudio'
+import "./CheckExercise.css";
+import ViewImage from '../../../components/ViewImage/ViewImage'
 import axios from 'axios';
+import ViewAudio from "../../../components/ViewAudio/ViewAudio";
 
 export const OpcionCorrecta_1 = (props) => {
 
@@ -66,9 +66,9 @@ export const OpcionCorrecta_1 = (props) => {
   };
 
   return (
-    <div className="flex  flex-col flex-wrap md:mt-8 xl:px-60  sm:px-20 ">
+    <div className="flex  flex-col flex-wrap  ">
       <div className=" static  px-4 min-w-fit ">
-        <h2 className="  justify-center items-center m-auto p-3 text-sm  font-bold sm:text-xl text-green-700 ">
+        <h2 className="  text-center m-auto p-3 text-sm  font-bold sm:text-xl text-green-700 ">
 
           {String(props.ejercicio.question).length === 0 ?
             ('Select the correct answer').toUpperCase()
@@ -80,21 +80,24 @@ export const OpcionCorrecta_1 = (props) => {
         {props.ejercicio.audio &&
           <ViewAudio audio={props.ejercicio.audio} />
         }
+
       </div>
       <div>
       </div>
-      <div className={props.ejercicio.img || props.ejercicio.description ? "grid grid-cols-2 gap-4 items-center justify-center" : "grid grid-cols-1 items-center justify-center"}>
+      <div className={props.ejercicio.img || props.ejercicio.description ? "grid grid-cols-2 h-80 gap-4 items-center justify-center" : "grid grid-cols-1 items-center h-80 justify-center"}>
         {props.ejercicio.img &&
           <ViewImage img={props.ejercicio.img} />
         }
         {props.ejercicio.description &&
-          <div className="w-full h-64 overflow-y-scroll text-left rounded p-4 border  border-gray-300">
-            <pre>{props.ejercicio.description}</pre>
+          <div className="flex items-center justify-center">
+            <div className="w-full h-64 overflow-y-scroll text-left rounded p-4 border  border-gray-300">
+              <pre>{props.ejercicio.description}</pre>
+            </div>
           </div>
         }
-        <div className="container sm:m-auto  p-auto w-auto">
+        <div className="container w-auto">
           <div
-            className="  flex flex-wrap pt-10 items-center justify-center gap-2  sm:items-center w-96 sm:justify-center pb-5  mr-8 ml-8 "
+            className="flex flex-wrap gap-2 mr-8 ml-8  justify-center items-center"
             aria-label="choice"
             role="radiogroup"
 
@@ -155,3 +158,5 @@ function SpeechReader(texto) {
   utterance.rate = 0.8;
   window.speechSynthesis.speak(utterance);
 }
+
+export default OpcionCorrecta_1;

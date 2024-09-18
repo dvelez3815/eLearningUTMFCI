@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import shortid from "shortid";
-import "../../pages/ejercicios/CheckExercise.css";
-import ViewImage from "../../ViewImage/ViewImage";
+import "./CheckExercise.css";
+import ViewImage from '../../../components/ViewImage/ViewImage'
 import axios from 'axios'
+import ViewAudio from "../../../components/ViewAudio/ViewAudio";
 const Emparejar = (props) => {
   const [opciones, setOpciones] = useState([]);
   const divRef = React.useRef(null);
@@ -109,29 +110,34 @@ const Emparejar = (props) => {
   };
 
   return (
-    <div className="flex  flex-col flex-wrap md:mt-8 xl:px-60  px-5 sm:px-20  ">
+    <div className="flex  flex-col flex-wrap">
       <div className="static min-w-fit ">
-        <h2 className="m-auto p-3 text-sm  font-bold sm:text-xl text-green-700 ">
+        <h2 className="m-auto p-3 text-sm text-center font-bold sm:text-xl text-green-700 ">
           {String(props.ejercicio.question).length === 0 ?
             ('match as appropriate').toUpperCase()
             :
             (props.ejercicio.question).toUpperCase()
           }{" "}
         </h2>
+        {props.ejercicio.audio &&
+          <ViewAudio audio={props.ejercicio.audio} />
+        }
       </div>
-      <div className={props.ejercicio.img || props.ejercicio.description ? "grid grid-cols-2 gap-4" : "grid grid-cols-1"}>
+      <div className={props.ejercicio.img || props.ejercicio.description ? "grid grid-cols-2 gap-4  min-h-80" : "grid grid-cols-1  min-h-80"}>
         {props.ejercicio.img &&
           <ViewImage img={props.ejercicio.img} />
         }
         {props.ejercicio.description &&
-          <div className="w-full h-64 overflow-y-scroll text-left rounded p-4 border border-gray-300">
-            <pre>{props.ejercicio.description}</pre>
+          <div className="flex items-center justify-center">
+            <div className="w-full h-64 overflow-y-scroll text-left rounded p-4 border border-gray-300">
+              <pre>{props.ejercicio.description}</pre>
+            </div>
           </div>
         }
       </div>
-      <div className="container sm:m-auto p-auto w-auto w-full  " ref={divRef}>
+      <div className="container w-auto mx-auto" ref={divRef}>
         <div
-          className="flex  gap-1 flex-col  justify-center my-5 sm:my-1 mr-8 ml-8   "
+          className="flex gap-2 flex-wrap justify-center items-center md:mr-8 md:ml-8"
           ref={props.miref}
         >
           {
