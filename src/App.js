@@ -24,9 +24,10 @@ import MantenimientoPage from "./components/pages/MantenimientoPage/Mantenimient
 function App() {
   const { loading, isAuthenticated, logout } = useContext(AuthContext);
   const [isSessionExpired, setIsSessionExpired] = useState(false);
-  const [isMantenimiento, setIsMantenimiento] = useState(process.env.REACT_APP_MANTENIMIENTO)
+  const [isMantenimiento, setIsMantenimiento] = useState(false)
 
   useEffect(() => {
+    setIsMantenimiento(process.env.REACT_APP_MANTENIMIENTO)
     if (isMantenimiento) return;
     if (!isAuthenticated) return;
 
