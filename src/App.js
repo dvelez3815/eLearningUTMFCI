@@ -24,10 +24,10 @@ import MantenimientoPage from "./components/pages/MantenimientoPage/Mantenimient
 function App() {
   const { loading, isAuthenticated, logout } = useContext(AuthContext);
   const [isSessionExpired, setIsSessionExpired] = useState(false);
-
-  const MANTENIMIENTO = process.env.REACT_APP_MANTENIMIENTO;
+  const [isMantenimiento, setIsMantenimiento] = useState(process.env.REACT_APP_MANTENIMIENTO)
 
   useEffect(() => {
+    if (isMantenimiento) return;
     if (!isAuthenticated) return;
 
     let timer;
@@ -64,9 +64,9 @@ function App() {
       });
       clearTimeout(timer);
     };
-  }, [isAuthenticated, logout]);
+  }, [isAuthenticated, isMantenimiento, logout]);
 
-  if (MANTENIMIENTO) return <MantenimientoPage />
+  if (isMantenimiento) return <MantenimientoPage />
   if (loading) return <Loading width="200" />;
   if (isSessionExpired) return <SessionExpired />;
   return (
