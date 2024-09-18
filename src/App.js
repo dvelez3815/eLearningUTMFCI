@@ -27,7 +27,7 @@ function App() {
   const [isMantenimiento, setIsMantenimiento] = useState(false)
 
   useEffect(() => {
-    setIsMantenimiento(process.env.REACT_APP_MANTENIMIENTO)
+    setIsMantenimiento(process.env.REACT_APP_MANTENIMIENTO || false)
     if (isMantenimiento) return;
     if (!isAuthenticated) return;
 
