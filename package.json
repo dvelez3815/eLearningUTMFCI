@@ -15,6 +15,7 @@
     "@testing-library/user-event": "^12.1.10",
     "alpinejs": "^3.8.1",
     "axios": "^0.21.1",
+    "dompurify": "^3.1.6",
     "dotenv": "^16.0.3",
     "mod10": "^0.0.3",
     "moment": "^2.30.1",

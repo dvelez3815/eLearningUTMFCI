@@ -3,6 +3,9 @@ import shortid from "shortid";
 import ViewImage from '../../../components/ViewImage/ViewImage'
 import ViewAudio from '../../../components/ViewAudio/ViewAudio'
 import axios from 'axios'
+import "./Ejercicio.css";
+import DOMPurify from 'dompurify';
+
 const VerdaderoFalso = (props) => {
   // eslint-disable-next-line no-unused-vars
   const [title, setTitle] = useState('')
@@ -57,8 +60,7 @@ const VerdaderoFalso = (props) => {
         }
         {props.ejercicio.description &&
         <div className="flex items-center justify-center">
-          <div className="w-full h-64 overflow-y-scroll  p-4 border text-left rounded border-gray-300">
-            <pre>{props.ejercicio.description}</pre>
+          <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.ejercicio.description) }} className="w-full h-64 overflow-y-scroll p-4 text-left rounded border border-gray-300">
           </div>
         </div>
 

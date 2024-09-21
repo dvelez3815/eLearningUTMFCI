@@ -19,8 +19,8 @@ const ProgressBar = (props) => {
               <CancelIcon style={{ fontSize: 27 }}/> Exit
             </button>
           </div>
-          <div className='my-2 text-yellow-500 text-xl font-semibold hover:text-yellow-400 py-5 '>
-            <p>Question {props.contadorRespondidas+1} of {props.totalEjercicios}</p>
+          <div>
+            <p  className='my-2 text-yellow-500 text-xl font-semibold hover:text-yellow-400 py-5 '>Question {props.contadorRespondidas+1} of {props.totalEjercicios}</p>
           </div>
           <div className='mx-4 truncate'>
             <span title={`${props.type} | Book: ${props.book} | Module: ${props.modulo} | Unit: ${props.unidad}`} className='font-semibold capitalize text-xl tracking-widest text-yellow-500  hover:text-yellow-400'>{props.type} | Book: {props.book} | Module: {props.modulo} | Unit: {props.unidad}</span>

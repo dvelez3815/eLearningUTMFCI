@@ -2,6 +2,8 @@ import React, { createRef, useRef, useState, useEffect } from "react";
 import ViewImage from '../../../components/ViewImage/ViewImage'
 import axios from 'axios';
 import ViewAudio from "../../../components/ViewAudio/ViewAudio";
+import "./Ejercicio.css";
+import DOMPurify from 'dompurify';
 
 export const OpcionCorrecta_n = (props) => {
 
@@ -76,8 +78,7 @@ export const OpcionCorrecta_n = (props) => {
         {props.ejercicio.description &&
           <div className="flex items-center justify-center">
 
-            <div className="w-full h-64 overflow-y-scroll p-4 border text-left rounded border-gray-300">
-              <pre>{props.ejercicio.description}</pre>
+            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.ejercicio.description) }} className="w-full h-64 overflow-y-scroll p-4 text-left rounded border border-gray-300">
             </div>
           </div>
         }

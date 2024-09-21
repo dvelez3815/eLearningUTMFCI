@@ -5,6 +5,7 @@ import shortid from "shortid";
 import ViewImage from '../../../components/ViewImage/ViewImage'
 import axios from 'axios'
 import ViewAudio from "../../../components/ViewAudio/ViewAudio";
+import DOMPurify from 'dompurify';
 
 const CompletarTexto = (props) => {
   // eslint-disable-next-line no-unused-vars
@@ -58,9 +59,8 @@ const CompletarTexto = (props) => {
           <ViewImage img={props.ejercicio.img} />
         }
         {props.ejercicio.description &&
-          <div className="flex items-center justify-center">
-            <div className="w-full h-64 overflow-y-scroll p-4 text-left rounded border border-gray-300">
-              <pre>{props.ejercicio.description}</pre>
+          <div className="flex items-center justify-center prose lg:prose-xl mt-6">
+            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.ejercicio.description) }} className="w-full h-64 overflow-y-scroll p-4 text-left rounded border border-gray-300">
             </div>
           </div>
         }
