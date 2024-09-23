@@ -8,7 +8,7 @@ const MantenimientoPage = () => {
                 <img src={fixion} width={250} alt="En mantenimiento" />
                 <h1 className="text-3xl text-gray-800  font-semibold text-center">Sitio en Mantenimiento</h1>
                 <p className="text-gray-500 text-center">Volveremos el <strong>Domingo 29 de Septiembre del 2024</strong></p>
-                <p className="text-gray-500 text-center">Para consultas contacte al correo <a href="mailto:ilm@utm.edu.ec">ilm@utm.edu.ec</a></p>
+                <p className="text-gray-500 text-center">En caso de haber culminado el simualdor contacte al correo <a className="font-semibold" href="mailto:ilm@utm.edu.ec">ilm@utm.edu.ec</a></p>
 
             </div>
         </div>
