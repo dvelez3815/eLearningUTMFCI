@@ -131,8 +131,8 @@ const Emparejar = (props) => {
         }
         {props.ejercicio.description &&
           <div className="flex items-center justify-center">
-           <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.ejercicio.description) }} className="w-full h-64 overflow-y-scroll p-4 text-left rounded border border-gray-300">
-           </div>
+            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.ejercicio.description) }} className="w-full h-64 overflow-y-scroll p-4 text-left rounded border border-gray-300">
+            </div>
           </div>
         }
       </div>
@@ -144,37 +144,27 @@ const Emparejar = (props) => {
           {
             // eslint-disable-next-line array-callback-return
             props.ejercicio.body.map((item, index) => {
+              let juego = [];
               if (item.item && item.answer) {
-                let juego = [];
-                // eslint-disable-next-line array-callback-return
-                item.item.map((texto, index) => {
-                  if (texto[0] === "_") {
-                    // aqui van las opciones
-                    juego.push(
-                      <InputCompletarTexto
-                        texto={""}
-                        key={shortid.generate()}
-                        opcionesRef={opcionesRef}
-                        opt={Array.from(opciones)}
-                      />
-                    );
-                  } else {
-                    juego.push(texto);
-                  }
-                });
-                return (
-                  <JuegoCompletarTexto
-                    key={shortid.generate()}
-                    type={props.ejercicio.type}
-                    juego={juego}
-                  />
-                );
-              } else {
+                juego.push(item.item.join(" "))
+                juego.push(<InputCompletarTexto
+                  texto={""}
+                  key={shortid.generate()}
+                  opcionesRef={opcionesRef}
+                  opt={Array.from(opciones)}
+                />)
               }
+              return (
+                <JuegoCompletarTexto
+                  key={shortid.generate()}
+                  type={props.ejercicio.type}
+                  juego={juego}
+                />
+              );
             })}
         </div>
         <div
-          className="flex  px-6 static min-w-fit flex-wrap gap-2 md:py-6  px-10 justify-center"
+          className="flex static min-w-fit flex-wrap gap-2 md:py-6  px-10 justify-center"
           ref={opcionesRef}
         >
 
@@ -228,37 +218,26 @@ const InputCompletarTexto = (props) => {
 };
 
 const JuegoCompletarTexto = (props) => {
-  return (
-    <div className="grid grid-cols-2 text-justify items-center  my-2 ">
-      <div>
-        {
-          // eslint-disable-next-line array-callback-return
-          props.juego.map((juego, index) => {
-            if (typeof juego === "string") {
 
-              return (
-                <div
-                  key={shortid.generate()}
-                >
-                  {/* <ViewImage img={juego}/> */}
-                  {props.type === "emparejar_img" && <ViewImage img={juego} />}
-                  { // eslint-disable-next-line eqeqeq
-                    props.type == "emparejar" && <h2 className=
-                      "mx-2 text-justify w-auto text-xs sm:text-sm text-xs"
-                    >{juego}</h2>}
-                </div>
-              );
-            }
-          })}
-      </div>
-      <div>
-        {// eslint-disable-next-line array-callback-return
-          props.juego.map((juego, index) => {
-            if (typeof juego !== "string") {
-              return juego;
-            }
-          })}
-      </div>
+  return (
+    <div className="grid grid-cols-2 text-justify items-center space-x-7 my-2 ">
+      {
+        props.juego.map((juego, index) => {
+          if (typeof juego === "string") {
+            return (
+              <div
+                key={shortid.generate()}
+              >
+                {props.type === "emparejar_img" && <ViewImage img={juego} />}
+                {
+                  props.type === "emparejar" && <h2 className=
+                    "mx-2 text-right w-auto sm:text-sm text-xs"
+                  >{juego}</h2>}
+              </div>
+            );
+          }
+          return juego;
+        })}
     </div>
   );
 };
