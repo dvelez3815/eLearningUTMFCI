@@ -27,7 +27,7 @@ function App() {
   const [isMantenimiento, setIsMantenimiento] = useState(true)
 
   useEffect(() => {
-    setIsMantenimiento(true)
+    setIsMantenimiento(false)
     if (isMantenimiento) return;
     if (!isAuthenticated) return;
 

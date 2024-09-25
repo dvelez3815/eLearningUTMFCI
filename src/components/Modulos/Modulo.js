@@ -1,6 +1,7 @@
 import React from 'react';
 import shortid from 'shortid';
 import Activity from '../Activities/Activity';
+import ActivityFile from '../Activities/ActivityFile';
 import { ModuleProgress } from '../ModuleProgress';
 
 import writingimg from "../../assets/icons/Writing.png";
@@ -29,11 +30,11 @@ const Modulo = (props) => {
         <span className='tooltiptext  p-2 text-xs'>{'Resuelva todas las actividades del módulo anterior para desbloquear el presente módulo'} </span>
       </div>
       :
-      <div className='pt-3'></div>
+      <div ></div>
 
     }
 
-    <div className='md:p-3   '>
+    <div className='md:p-3'>
 
       {props.modulo.map((modulo, index) => {
         let userprogress = (modulo.writing.user_progress + modulo.grammar.user_progress + modulo.reading.user_progress + modulo.vocabulary.user_progress + modulo.listening.user_progress);
