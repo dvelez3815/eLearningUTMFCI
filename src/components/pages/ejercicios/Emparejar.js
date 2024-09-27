@@ -147,7 +147,7 @@ const Emparejar = (props) => {
               let juego = [];
               if (item.item && item.answer) {
                 if(props.ejercicio.type === "emparejar_img"){
-                  juego.push(item.item.filter(e => e !== '________').join(' '))
+                  juego.push(item.item.filter(e => e[0] !== '_' && e[e.length-1] !== '_').join(' '))
                 }else{
                   juego.push(item.item.join(" "))
                 }

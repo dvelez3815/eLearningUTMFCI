@@ -8,6 +8,7 @@ import {
   mostrarAlertaExitoFin,
 } from "../../Alert/Alerts";
 import { AuthContext } from "../../../context/AuthContext";
+import { updateProgress } from "../../../api/Progress";
 
 var USER = null;
 const EjercicioFooter = (props) => {
@@ -493,46 +494,27 @@ async function enviarSiEsCorrecta(props, contadorRespondidas) {
       ];
     let id = USER._id;
 
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("token", process.env.REACT_APP_SECRET_TOKEN);
-
-    var raw = JSON.stringify({
-      user_id: `${id}`,
-      task_id: `${tasks_id}`,
-    });
-
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
+    var data = {
+      user_id: id,
+      task_id: tasks_id,
     };
-
-    let responses = [];
+    console.log(data)
+    let dataT = null;
     try {
-      responses = await fetch(
-        process.env.REACT_APP_API_URL + "/progress/update",
-        requestOptions
-      );
+      dataT = await updateProgress(data)
     } catch (error) { }
-    const dataT = await responses.json();
     if (props.control === " ") {
       props.setContadorRespondidas(contadorRespondidas + 1);
       props.juego.pop();
-      //setInterval(() => {}, 4000);
-      //mostrarAlertaExitoFin(`End of the game`);
       props.setFinJuego(true);
     } else if (
       dataT.res !== "Task Registrada" &&
       dataT.res !== "Task ya ha sido registrado en ese usuario"
     ) {
-      //alert('Guardando Progreso... Presione aceptar')
       enviarSiEsCorrecta(props, contadorRespondidas);
     } else {
       props.setContadorRespondidas(contadorRespondidas + 1);
       props.juego.pop();
-      //setInterval(() => {}, 4000);
-      //mostrarAlertaExitoFin(`End of the game`);
       props.setFinJuego(true);
       mostrarAlertaExitoFin(`Excellent Work `);
     }

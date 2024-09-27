@@ -26,6 +26,7 @@ export async function updateProgress(data) {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
+        "Content-Type": "application/json",
         'token': process.env.REACT_APP_SECRET_TOKEN
       },
     }
