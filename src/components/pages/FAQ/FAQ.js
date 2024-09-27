@@ -24,7 +24,6 @@ const FAQ = () => {
     return (
         <div className="h-screen flex flex-col relative">
             <NavBar />
-
             <div className="max-w-3xl mx-auto py-8 px-4">
                 <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">Preguntas Frecuentes</h1>
                 <div className="space-y-4">

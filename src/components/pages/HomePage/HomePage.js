@@ -1,6 +1,6 @@
 import React from "react";
 
-import home from "../../../assets/resource/home.svg";
+import home from "../../../assets/resource/sign.svg";
 import LogoUTM from "../../../assets/resource/LOGO_UTM_ILM.png";
 import { Link } from "react-router-dom";
 import NavBar from "../../NavBar/NavBar";
