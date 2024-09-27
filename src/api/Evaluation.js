@@ -1,11 +1,12 @@
+import { FetchWithIntercept } from "./Intercept";
+
 export const getPruebaGeneral = async () => {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/evaluation/`, {
+    const data = await FetchWithIntercept(`${process.env.REACT_APP_API_URL}/evaluation/`, {
         method: 'GET',
         headers: {
-            'token': process.env.REACT_APP_SECRET_TOKEN,
+            "Content-Type": "application/json",
         },
     });
-    const data = await response.json();
 
     return data;
 }
