@@ -1,6 +1,5 @@
 export const FetchWithIntercept = async (url, options = {}) => {
-    const token = localStorage.getItem('token') || process.env.REACT_APP_SECRET_TOKEN;
-
+    const token = localStorage.getItem('token') || ''
     const headers = {
         ...options.headers,
         token: token,
@@ -12,7 +11,9 @@ export const FetchWithIntercept = async (url, options = {}) => {
     });
     // Manejo de errores y parseo de la respuesta
     if (!response.ok) {
-        throw new Error('Error en la solicitud');
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        window.location.href = '/'
     }
     return response.json();
 };

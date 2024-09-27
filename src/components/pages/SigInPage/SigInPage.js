@@ -62,7 +62,6 @@ const SigInPage = () => {
       default:
         break;
     }
-
     login({ ...user });
     window.location.href = "/dashboard"
     return;

@@ -33,18 +33,12 @@ export const getQuestionForReview = async (book, modulo, unit, tipo) => {
 };
 export const getImageOfQuestion = async (img) => {
 
-    const response = await FetchWithIntercept(`${process.env.REACT_APP_API_URL}/question/image/${img}`, {
-        headers: {}
-    });
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/question/image/${img}`);
     return response.ok || null;
 }
 
 export const getAudioOfQuestion = async (audio) => {
-    const response = await FetchWithIntercept(`${process.env.REACT_APP_API_URL}/question/audio/${audio}`,
-        {
-            headers: {}
-        }
-    );
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/question/audio/${audio}`);
 
     return response.ok || null;
 }
