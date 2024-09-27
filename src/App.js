@@ -20,6 +20,7 @@ import Loading from "./components/Loading/Loading";
 import SessionExpired from "./components/SessionExpired/SessionExpired";
 import { useContext, useEffect, useState } from "react";
 import MantenimientoPage from "./components/pages/MantenimientoPage/MantenimientoPage.js";
+import FAQ from "./components/pages/FAQ/FAQ.js";
 
 function App() {
   const { loading, isAuthenticated, logout } = useContext(AuthContext);
@@ -78,6 +79,7 @@ function App() {
         <Routes>
           {/* Rutas no protegidas */}
           <Route path="/" element={<HomePage />} />
+          <Route path="/preguntas" element={<FAQ />} />
           <Route path="*" element={<NotFoundPage />} />
           <Route path="/signin" element={<SigInPage />} />
           <Route path="/registerExam" element={<RegisterExam />} />

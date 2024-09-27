@@ -111,7 +111,7 @@ const NavComponent = (props) => {
                 </svg>
               </button>
             </div>
-            <div className="p-2 flex ">
+            <div className="p-2 my-auto flex justify-center ">
               <h2 className="hidden lg:block uppercase text-xs md:text-base lg:text-base sm:text-base  pt-1 text-white">
                 {props.user.name +
                   " " +
@@ -123,7 +123,6 @@ const NavComponent = (props) => {
                     <span className="sr-only">Open user menu</span>
                     <img
                       className="md:h-8 lg:h-8 sm:h-8 md:w-8 lg:w-8 sm:w-8 h-12 w-12 "
-                      /* src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" */
                       src={user_img}
                       alt=""
                     />

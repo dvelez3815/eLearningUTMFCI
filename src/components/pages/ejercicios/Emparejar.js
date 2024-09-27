@@ -146,7 +146,11 @@ const Emparejar = (props) => {
             props.ejercicio.body.map((item, index) => {
               let juego = [];
               if (item.item && item.answer) {
-                juego.push(item.item.join(" "))
+                if(props.ejercicio.type === "emparejar_img"){
+                  juego.push(item.item.filter(e => e !== '________').join(' '))
+                }else{
+                  juego.push(item.item.join(" "))
+                }
                 juego.push(<InputCompletarTexto
                   texto={""}
                   key={shortid.generate()}

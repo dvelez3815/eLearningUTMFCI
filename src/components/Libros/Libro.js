@@ -30,12 +30,13 @@ const Libro = (props) => {
         </h2>
       </button>
     </div>
+
     <div className='modulos'>
       <div className='flex justify-center flex-wrap items-center space-x-2'>
-        <ActivityFile img={bloqueo ? speakingimgng : speakingimg}
-          bloqueo={bloqueo} name={"Speaking Example"} percent={parseInt(0)} />
+        <ActivityFile img={bloqueo ? speakingimgng : speakingimg} title="SPEAKING"
+          bloqueo={bloqueo} name={"Speaking Example"} percent={parseInt(0)} libro={props.libroactual} />
         <ActivityFile img={bloqueo ? writingimgng : writingimg}
-          bloqueo={bloqueo} name={"Writing Example"} percent={parseInt(0)} />
+          bloqueo={bloqueo} name={"Writing Example"} percent={parseInt(0)} title="WRITING" libro={props.libroactual}/>
       </div>
       {props.modulos.map((modulo, index) => {
         if (!props.lastbook_is_aproved) {

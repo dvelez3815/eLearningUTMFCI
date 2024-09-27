@@ -13,6 +13,8 @@ module.exports = {
         // Define tus colores personalizados aquí
         yellowutm: '#ffcc33',
         greenutm: '#009933',
+        greenutmbajo: '#00802b',
+        greenutmsuperbajo: '#00bd3f',
       },
     },
   },
