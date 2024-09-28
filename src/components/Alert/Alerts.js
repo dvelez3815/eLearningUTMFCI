@@ -2,7 +2,6 @@ import Swal from "sweetalert2";
 import "./Alert.css";
 
 import celebration from "../../assets/resource/winners.svg";
-import { Navigate } from "react-router-dom";
 const SuccessData = {
   title: "Great",
   type: "success",

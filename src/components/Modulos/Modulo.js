@@ -1,7 +1,6 @@
 import React from 'react';
 import shortid from 'shortid';
 import Activity from '../Activities/Activity';
-import ActivityFile from '../Activities/ActivityFile';
 import { ModuleProgress } from '../ModuleProgress';
 
 import writingimg from "../../assets/icons/Writing.png";

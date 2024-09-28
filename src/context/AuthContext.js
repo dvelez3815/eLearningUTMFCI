@@ -41,14 +41,6 @@ export const AuthProvider = ({ children }) => {
     } = userData;
     return { _id, name, lastname, mail, rol, progress, status};
   }
- 
-
-  const setProgress = (porcentaje)=>{
-    login({
-      ...user, 
-      progress: porcentaje
-    })
-  }
 
   useEffect(() => {
     // Comprobar si el usuario está autenticado al cargar la aplicación

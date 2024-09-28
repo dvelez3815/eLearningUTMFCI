@@ -100,17 +100,12 @@ const SigInPage = () => {
               </div>
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
-                  <input
-                    id="remember"
-                    name="remember"
-                    type="checkbox"
-                    className="h-4 w-4 text-yellow-600 focus:ring-yellow-500 border-gray-300 rounded"
-                  />
-                  <label
-                    htmlFor="remember"
-                    className="ml-2 block text-sm text-gray-900">
-                    Recuerdame
-                  </label>
+                <Link
+                    to="/preguntas"
+                    className="font-medium text-yellow-500 hover:text-yellow-400"
+                  >
+                    ¿Tienes alguna duda?
+                  </Link>
                 </div>
                 <div className="text-sm">
                   <a
@@ -118,7 +113,7 @@ const SigInPage = () => {
                     target="blank"
                     className="font-medium text-green-600 hover:text-green-500"
                   >
-                    Olvidaste tu contraseña?
+                    ¿Olvidaste tu contraseña?
                   </ a>
                 </div>
               </div>

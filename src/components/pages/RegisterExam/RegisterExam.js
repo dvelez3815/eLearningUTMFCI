@@ -5,7 +5,7 @@ import Logo_ing from "../../../assets/resource/LOGO_ILM_HORIZONTAL.png";
 import moment from "moment";
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { getUserByCedula } from "../../../api/User";
 import { getPorgressByMail } from "../../../api/Progress";
 import { mostrarExitoEditar } from "../../Alert/Alerts";
