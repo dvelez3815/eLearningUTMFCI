@@ -15,8 +15,62 @@ const FAQ = () => {
         },
         {
             question: '¿Cuántos puntos tengo que obtener para aprobar las Suficiencias de Inglés con el examen EASI?',
-            answer: 'Revisa las tablas que se adjuntan para que conozcas los puntajes que se requieren para aprobar los niveles de las Suficiencias de Inglés.',
-            //resource: `<img id="media" src=${logo_UTM} alt="Imagen inicial" width="400" height="300">`
+            answer: 'Revisa las tabla que se adjunta para que conozcas los puntajes que se requieren para aprobar los niveles de las Suficiencias de Inglés.',
+            resource: `<div class="overflow-x-auto dark:bg-neutral-700">
+                    <table class="text-left text-sm whitespace-nowrap">
+                        <thead class="uppercase tracking-wider border-b-2 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-800">
+                            <tr>
+                                <th scope="col" class="px-6 py-4">
+                                    Suficiencia de Inglés
+                                </th>
+                                <th scope="col" class="px-6 py-4">
+                                    Ponderación
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr class="border-b dark:border-neutral-600">
+                                <th scope="row" class="px-6 py-4">
+                                    Suficiencia de Inglés I
+                                </th>
+                                <td class="px-6 py-4">1 - 9 Ptos</td>
+                            </tr>
+
+                            <tr class="border-b dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-800">
+                                <th scope="row" class="px-6 py-4">
+                                Suficiencia de Inglés II
+                                </th>
+                                <td class="px-6 py-4">10 - 19 Ptos</td>
+                            </tr>
+
+                            <tr class="border-b dark:border-neutral-600">
+                                <th scope="row" class="px-6 py-4">
+                                Suficiencia de Inglés III
+                                </th>
+                                <td class="px-6 py-4">20 - 29 Ptos</td>
+                            </tr>
+
+                            <tr class="border-b dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-800">
+                                <th scope="row" class="px-6 py-4">
+                                Suficiencia de Inglés IV
+                                </th>
+                                <td class="px-6 py-4">30 - 39 Ptos</td>
+                            </tr>
+
+                            <tr class="border-b dark:border-neutral-600">
+                                <th scope="row" class="px-6 py-4">
+                                Suficiencia de Inglés V
+                                </th>
+                                <td class="px-6 py-4">40 - 100 Ptos</td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>`
         },
         {
             question: '¿En qué modalidad se tomará el examen EASI?',
@@ -83,7 +137,7 @@ const FAQ = () => {
                         <div key={index} className="bg-gray-100 rounded-lg p-4 shadow-md transition hover:shadow-lg">
                             <h2 className="font-semibold text-lg text-gray-700">{faq.question}</h2>
                             <p className="mt-2 text-gray-600">{faq.answer}</p>
-                            { faq.resource && 
+                            {faq.resource &&
                                 <div className="flex justify-center items-center" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(faq.resource) }}></div>
                             }
                         </div>
