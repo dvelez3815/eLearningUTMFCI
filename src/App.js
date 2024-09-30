@@ -25,7 +25,7 @@ import FAQ from "./components/pages/FAQ/FAQ.js";
 function App() {
   const { loading, isAuthenticated, logout } = useContext(AuthContext);
   const [isSessionExpired, setIsSessionExpired] = useState(false);
-  const [isMantenimiento, setIsMantenimiento] = useState(true)
+  const [isMantenimiento, setIsMantenimiento] = useState(false)
 
   useEffect(() => {
     setIsMantenimiento(false)
@@ -68,7 +68,7 @@ function App() {
     };
   }, [isAuthenticated, isMantenimiento, logout]);
 
-  if (isMantenimiento) return <MantenimientoPage />
+  //if (isMantenimiento) return <MantenimientoPage />
   if (loading) return <Loading width="200" />;
   if (isSessionExpired) return <SessionExpired />;
   return (
