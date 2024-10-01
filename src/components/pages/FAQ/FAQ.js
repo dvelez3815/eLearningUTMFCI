@@ -11,7 +11,7 @@ const FAQ = () => {
         {
             question: '¿Qué tengo que hacer para rendir el EASI?',
             answer: 'Sigue los pasos que se presentan en este video tutorial',
-            resource: `<video id="media" width="400" height="300" controls><source src="/assets/TUTORIAL.mp4" type="video/mp4">Tu navegador no soporta videos.</video>`
+            resource: `<video id="media" height="300" controls><source src="/assets/TUTORIAL.mp4" type="video/mp4">Tu navegador no soporta videos.</video>`
         },
         {
             question: '¿Cuántos puntos tengo que obtener para aprobar las Suficiencias de Inglés con el examen EASI?',

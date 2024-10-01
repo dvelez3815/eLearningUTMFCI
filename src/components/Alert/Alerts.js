@@ -98,6 +98,18 @@ export const Bienvenida = async () => {
     },
   });
 };
+export const AletVideo = async () => {
+  Swal.fire({
+    title: "Video Tutorial",
+    html: `<video id="media" height="300" controls><source src="/assets/TUTORIAL.mp4" type="video/mp4">Tu navegador no soporta videos.</video>`, 
+    showClass: {
+      popup: "animate__animated animate__fadeInDown",
+    },
+    hideClass: {
+      popup: "animate__animated animate__fadeOutUp",
+    },
+  });
+};
 
 export const Finalizacion = () => {
   let a = document.createElement("a");
