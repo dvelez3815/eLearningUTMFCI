@@ -9,6 +9,10 @@ const FAQ = () => {
             answer: 'El Examen de Acreditación de las Suficiencias de Inglés (EASI) es un test con el que puedes avanzar varios niveles de las Suficiencias de Inglés.',
         },
         {
+            question: '¿Qué pasa si ya tengo varios niveles aprobados con el anterior proceso de las Suficiencia de Inglés?',
+            answer: 'Esos niveles aprobados si son válidos. Para poder aprobar los niveles que aún tienen pendientes tendrá que hacer las actividades en el Simulador y agendar la fecha del examen para poder acreditarlos.',
+        },
+        {
             question: '¿Qué tengo que hacer para rendir el EASI?',
             answer: 'Sigue los pasos que se presentan en este video tutorial',
             resource: `<video id="media" height="300" controls><source src="/assets/TUTORIAL.mp4" type="video/mp4">Tu navegador no soporta videos.</video>`
