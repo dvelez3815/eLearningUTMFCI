@@ -113,7 +113,7 @@ const FAQ = () => {
             answer: 'Se recomienda realizar las actividades del Simulador desde un PC. ',
         },
         {
-            question: '¿Qué pasar sin ya domino el idioma inglés y deseo presentarme a dar un examen de exoneración?',
+            question: '¿Qué pasa si ya domino el idioma inglés y deseo presentarme a dar un examen de exoneración?',
             answer: 'Si este es tu caso, comunícate a correo ilm@utm.edu.ec para que te expliquen los pasos a seguir. ',
         },
         {
