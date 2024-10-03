@@ -25,14 +25,13 @@ const Grammar2 = () => {
     React.useEffect(() => {
        
         if (taskStatus === 'idle') {
-            dispatch(obtenerTaskAccion())
+            dispatch(obtenerTaskAccion(taskid))
         }
         if (questionStatus === 'idle') {
             dispatch(obtenerQuestionsAccion(taskid))
         }
         if (taskStatus === 'succeeded' && questionStatus === 'succeeded') {
-            let filter = task.filter(x => x._id === parseInt(taskid))
-            setTask(filter);
+            setTask(task);
             setEjercicios(question);
             setLoadingData(false);
         }

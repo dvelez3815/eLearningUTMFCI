@@ -1,4 +1,4 @@
-import { getTasks } from "../api/Task";
+import { getTask } from "../api/Task";
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 const initialState = {
@@ -6,9 +6,9 @@ const initialState = {
     status: 'idle',
     error: null
   }
-export const obtenerTaskAccion = createAsyncThunk('task/fetchTasks', async () => {
-    const response = await getTasks();
-    return response.res;
+export const obtenerTaskAccion = createAsyncThunk('task/fetchTasks', async (id_task) => {
+    const response = await getTask(id_task);
+    return response;
   })
 
 const taskSlice = createSlice({
