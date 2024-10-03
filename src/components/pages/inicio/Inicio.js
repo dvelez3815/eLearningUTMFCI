@@ -12,7 +12,6 @@ import Footer from "../../Footer";
 import Libro from "../../Libros/Libro";
 import { useDispatch, useSelector } from "react-redux";
 import { obtenerProgresoAccion, selectAllProgress } from "../../../redux/ProgressDucks";
-import { obtenerTaskAccion, selectAllTask } from "../../../redux/TaskDucks";
 import { llenarInfo } from "../../../helpers/indexFuntions";
 
 import { AuthContext } from "../../../context/AuthContext";
@@ -25,8 +24,6 @@ export const Inicio = () => {
   const [libros, setlibros] = useState([]);
 
   const dispatch = useDispatch();
-  const task = useSelector(selectAllTask);
-  const taskStatus = useSelector((store) => store.task.status);
 
   const progress = useSelector(selectAllProgress);
   const progressStatus = useSelector((store) => store.progress.status);
@@ -34,34 +31,30 @@ export const Inicio = () => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    if (taskStatus === 'idle') {
-      dispatch(obtenerTaskAccion())
-    }
     if (progressStatus === 'idle') {
       dispatch(obtenerProgresoAccion(user._id))
     }
-    if (taskStatus === 'succeeded' && progressStatus === 'succeeded') {
+    if ( progressStatus === 'succeeded') {
       setcargando(false)
-      let {libros, mergeBooks, porcentaje} = llenarInfo(progress, task);
+      let {libros, mergeBooks, porcentaje} = llenarInfo(progress);
       setlibros(libros);
       setuserProgress(mergeBooks);
       setvalorProgress(porcentaje);
       if(porcentaje >= 100) Finalizacion()
     }
-  }, [taskStatus, progressStatus, dispatch, progress, task, setuserProgress])
+  }, [ progressStatus, dispatch, progress, setuserProgress])
 
   return (
     <div className="">
-      {user ?
+      {user &&
         <NavComponent user={user} logo={logo} activado={1} />
-        :
-        <div></div>
       }
-      {cargando? <Loading/> :
+      {cargando? 
+      <Loading/> :
         <div className="grid grid-cols-12 ">
           <div className="xl:col-span-9 col-span-12 justify-center sm:px-10">
             {libros.map((libro) => (
-              <Libro modulos={libro.modulos} lecciones={libro.lecciones} key={libro.key} lastbook_is_aproved={libro.lastbook_is_aproved} libroactual={libro.libroactual} />
+              <Libro modulos={libro.modulos}  key={libro.key} lastbook_is_aproved={libro.lastbook_is_aproved} libroactual={libro.libroactual} />
             ))}
           </div>
           {/* BARRA LATERAL */}
@@ -196,7 +189,6 @@ export const Inicio = () => {
             </div>
           </div>
         </div>
-
       }
       {
         libros.length === 0 ?

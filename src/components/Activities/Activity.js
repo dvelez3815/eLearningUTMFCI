@@ -6,6 +6,7 @@ import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { mostrarContenido } from "../Alert/Alerts";
 import { Link } from "react-router-dom";
+import { getTask } from "../../api/Task";
 
 
 export default function Activity(props) {
@@ -38,11 +39,11 @@ export default function Activity(props) {
 
 
   const getExercises = async (task_id, ruta) => {
-
-    let Info = props.task.filter(x => x._id === task_id)
-    let explicacion = String(Info[0].explanation)
-    let objetivo = String(Info[0].objetive.text)
-    let topic_ = String(Info[0].topic.top)
+    //consultar solo las tareas que se necesitan, no todas
+    const task = await getTask(task_id);
+    let explicacion = String(task.explanation)
+    let objetivo = String(task.objetive.text)
+    let topic_ = String(task.topic.top)
     mostrarContenido(topic_, objetivo, explicacion, ruta)
 
   }
@@ -105,25 +106,19 @@ export default function Activity(props) {
         leaveTo="transform opacity-0 scale-95"
       >
         <Menu.Items className="origin-center absolute  mt-2 sm:w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
-          <div className="py-1">
-            <div className="p-2 text-left">
-              <h2 className="text-center text-sm  mx-2 font-bold text-gray-500">
-                Completed: {props.percent}%
-              </h2>
-              <h2 className=" mx-2  font-bold text-gray-800">
-                {props.percent === 100 ? <div className="sm:text-lg text-center">lessons completed</div> : <div className="text-center  "> TOPIC <p className="text-sm"> {(props.task.filter(x => x._id === props.taskid)[0].topic.top).toLowerCase()} </p></div>}
-              </h2>
-
-            </div>
-
-            {(props.percent === 100) ?
-              <h1 className="hidden">k</h1>
-              :
+          <div className="py-2">
+            <h2 className="text-center text-sm  mx-2 font-bold text-gray-500">
+              Completed: {props.percent}%
+            </h2>
+            <h2 className=" mx-2  font-bold text-gray-800 text-center capitalize text-md">
+              {props.percent === 100 ? "complete lessons" : "incomplete lesson"}
+            </h2>
+            {(props.percent !== 100) &&
               <Menu.Item >
                 {({ active }) => (
                   <div className="px-2">
                     <button onClick={() => getExercises(props.taskid, props.ruta)} className="w-full rounded hover:bg-yellow-400  py-2 bg-yellow-300 font-black text-gray-600">
-                      information
+                      Information
                     </button>
                   </div>
 
@@ -138,7 +133,7 @@ export default function Activity(props) {
                       to={props.percent === 100 ? props.rutaReview : props.ruta}
 
                     >
-                      {props.percent === 100 ? "review" : "start"}
+                      {props.percent === 100 ? "Review" : "Start"}
                     </Link>
                   </div>
                 </div>

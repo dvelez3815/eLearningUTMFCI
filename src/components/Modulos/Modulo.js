@@ -65,7 +65,6 @@ const Modulo = (props) => {
               img={props.bloqueo ? writingimgng : writingimg}
               bloqueo={props.bloqueo}
               info={modulo}
-              task={props.lecciones}
 
             />
           }

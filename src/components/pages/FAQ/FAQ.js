@@ -10,7 +10,7 @@ const FAQ = () => {
         },
         {
             question: '¿Qué pasa si ya tengo varios niveles aprobados con el anterior proceso de las Suficiencia de Inglés?',
-            answer: 'Esos niveles aprobados si son válidos. Para poder aprobar los niveles que aún tienen pendientes tendrá que hacer las actividades en el Simulador y agendar la fecha del examen para poder acreditarlos.',
+            answer: 'Esos niveles aprobados si son válidos. Para poder aprobar los niveles que aún tienen pendientes tendrá que hacer las actividades en el Simulador y agendar la fecha del examen para poder acreditarlo.',
         },
         {
             question: '¿Qué tengo que hacer para rendir el EASI?',

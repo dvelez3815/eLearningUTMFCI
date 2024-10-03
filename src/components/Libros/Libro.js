@@ -48,7 +48,7 @@ const Libro = (props) => {
           }
         }
         return (<div key={index}>
-          <Modulo modulo={modulo.modulo} moduloindex={(index + 1)} lecciones={props.lecciones} libroactual={props.libroactual} bloqueo={bloqueo} />
+          <Modulo modulo={modulo.modulo} moduloindex={(index + 1)} libroactual={props.libroactual} bloqueo={bloqueo} />
         </div>)
       })}
     </div>

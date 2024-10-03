@@ -15,7 +15,7 @@ export function getProgressColor(progress){
     
     return progressColor;
 }
-export function llenarInfo(progreso, task) {
+export function llenarInfo(progreso) {
 
     
     let libroActual = 1;
@@ -113,7 +113,6 @@ export function llenarInfo(progreso, task) {
         }
         libros.push({
             modulos: book.modulos, 
-            lecciones: task, 
             key: index,
             lastbook_is_aproved: lastbook_is_aproved,
             libroactual: (index + 1)
