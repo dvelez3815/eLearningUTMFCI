@@ -63,12 +63,12 @@ export function llenarInfo(progreso) {
             contador2++;
             contador++;
 
-            let userprogress = (modulo[0].writing.user_progress + modulo[0].grammar.user_progress + modulo[0].reading.user_progress + modulo[0].vocabulary.user_progress);
-            let total_task = (modulo[0].writing.total_task + modulo[0].grammar.total_task + modulo[0].reading.total_task + modulo[0].vocabulary.total_task);
+            let userprogress = (modulo[0].writing.user_progress + modulo[0].listening.user_progress + modulo[0].grammar.user_progress + modulo[0].reading.user_progress + modulo[0].vocabulary.user_progress);
+            let total_task = (modulo[0].writing.total_task+ modulo[0].listening.total_task + modulo[0].grammar.total_task + modulo[0].reading.total_task + modulo[0].vocabulary.total_task);
             let progress = (userprogress / total_task) * 100;
 
-            let userprogress2 = (modulo[1].writing.user_progress + modulo[1].grammar.user_progress + modulo[1].reading.user_progress + modulo[1].vocabulary.user_progress);
-            let total_task2 = (modulo[1].writing.total_task + modulo[1].grammar.total_task + modulo[1].reading.total_task + modulo[1].vocabulary.total_task);
+            let userprogress2 = (modulo[1].writing.user_progress + modulo[1].grammar.user_progress + modulo[1].reading.user_progress + modulo[1].vocabulary.user_progress + modulo[1].listening.user_progress);
+            let total_task2 = (modulo[1].writing.total_task + modulo[1].grammar.total_task + modulo[1].reading.total_task + modulo[1].vocabulary.total_task + modulo[1].listening.total_task );
             let progress2 = (userprogress2 / total_task2) * 100;
 
 
@@ -90,8 +90,8 @@ export function llenarInfo(progreso) {
         let totalmoduleprogress = 0;
         libro.forEach(modulo => {
             modulo.modulo.forEach(unit => {
-                totaluserprogress = totaluserprogress + (unit.grammar.user_progress + unit.reading.user_progress + unit.vocabulary.user_progress + unit.writing.user_progress);
-                totaltask = totaltask + (unit.grammar.total_task + unit.reading.total_task + unit.vocabulary.total_task + unit.writing.total_task);
+                totaluserprogress = totaluserprogress + (unit.grammar.user_progress + unit.reading.user_progress + unit.vocabulary.user_progress + unit.writing.user_progress + unit.listening.user_progress);
+                totaltask = totaltask + (unit.grammar.total_task + unit.reading.total_task + unit.vocabulary.total_task + unit.writing.total_task + unit.listening.total_task);
             });
         });
         mergeBooks.libros[index] = { userprogress: totaluserprogress, totaltask: totaltask, modulos: mergeBooks.libros[index] }
