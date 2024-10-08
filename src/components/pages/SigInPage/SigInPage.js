@@ -10,7 +10,6 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
 import { Link } from "react-router-dom";
 import Input from "../../Input/Input";
-import ReCAPTCHA from "react-google-recaptcha"
 import { AuthContext } from '../../../context/AuthContext.js'
 /* import { Navigate } from "react-router-dom"; */
 
@@ -20,7 +19,6 @@ const SigInPage = () => {
   const [dato, setDato] = useState("");
   const [cargando, setCargando] = useState(false);
   const [mostrarPassword, setMostrarPassword] = useState(false);
-  const captchaRef = useRef(null)
 
   const formSchema = Yup.object().shape({
     mail: Yup.string().email('El correo no es valido').required('Campo requerido'),
@@ -38,34 +36,30 @@ const SigInPage = () => {
 
   const onSubmit = async (form) => {
     setCargando(true);
-    const token = captchaRef.current.getValue();
-    captchaRef.current.reset();
-    const user = await loginUser(form, token);
-    setIsVisibleDato("visible");
+    const _user = await loginUser(form);
+    console.log(_user)
     setCargando(false);
-    switch (user) {
-      case "TOKEN INVALID":
-        setDato("Verifique que no sea un robot");
-        return;
-      case "USER NOT EXIST UTM":
-        setDato("El usuario no existe en el sistema, por favor verifique su correo UTM");
-        return;
-      case "USER NOT EXIST":
-        setDato("El usuario no existe en el sistema, por favor verifique su correo");
-        return;
-      case "CREDENCIALES INCORRECTAS":
-        setDato("La contraseña es incorrecta");
-        return;
-      case "SERVER ERROR":
-        setDato("Hubo un problema al conectar con el servidor, por favor vuelva a intentarlo, si el problema persiste intente más tarde");
-        return;
-      default:
-        break;
+    if(!_user.token){
+      setIsVisibleDato("visible");
+      setDato(retornar_mensaje_error(_user.user))
+      return;
     }
-    login({ ...user });
+    login({ ..._user.user, token: _user.token });
     window.location.href = "/dashboard"
     return;
   };
+
+  const retornar_mensaje_error =(mjs_error)=>{
+    const texto = {
+        "USER NOT EXIST UTM": "El usuario no existe en el sistema, por favor verifique su correo UTM", 
+        "USER NOT EXIST": "El usuario no existe en el sistema, por favor verifique su correo", 
+        "CREDENCIALES INCORRECTAS": "La contraseña es incorrecta", 
+        "SERVER ERROR": "Hubo un problema al conectar con el servidor, por favor vuelva a intentarlo, si el problema persiste intente más tarde"
+      }
+
+      return texto[mjs_error];
+    
+  }
 
   if (user) return window.location.href = "/dashboard";
   return (
@@ -88,7 +82,7 @@ const SigInPage = () => {
 
             </div>
             <div className={isVisibleDato}>
-              <h2 className="text-md text-red-500">{dato}</h2>
+              <p className="text-md text-red-500">{dato}</p>
             </div>
             <form className="mt-8 space-y-4" onSubmit={handleSubmit(onSubmit)} >
               <input type="hidden" name="remember" value="true" />
@@ -120,12 +114,6 @@ const SigInPage = () => {
               {cargando && (
                 <img src={loading} width="50" alt="cargando"></img>
               )}
-              <div className="flex items-center justify-center">
-                <ReCAPTCHA
-                  sitekey={process.env.REACT_APP_SITE_KEY}
-                  ref={captchaRef}
-                />
-              </div>
               <div>
                 <button type="submit"
                   className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-offset-2 

@@ -10,10 +10,11 @@ export const FetchWithIntercept = async (url, options = {}) => {
         headers,
     });
     // Manejo de errores y parseo de la respuesta
-    if (!response.ok) {
+    if (response.status === 401) {
         localStorage.removeItem("user");
         localStorage.removeItem("token");
-        window.location.href = '/'
+        window.location.href = '/';
+        return;
     }
     return response.json();
 };

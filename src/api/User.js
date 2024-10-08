@@ -1,19 +1,18 @@
 import { omit } from 'underscore';
 import { FetchWithIntercept } from './Intercept';
 
-export async function loginUser(params, tokenGoogle) {
+export async function loginUser(params) {
   const { res: user, token } = await FetchWithIntercept(`${process.env.REACT_APP_API_URL}/user/signin`, {
     method: "POST",
     body: JSON.stringify({
       mail: params.mail.toLowerCase(),
       password: params.password,
-      token: tokenGoogle
     }),
     headers: {
       "Content-Type": "application/json",
     },
   });
-  return {...user, token};
+  return {user, token};
 }
 export async function sendEmailForgottenPassword({ mail, token }) {
   const { res: user } = await FetchWithIntercept(`${process.env.REACT_APP_API_URL}/user/forgottenPassword/`, {
