@@ -49,7 +49,6 @@ export const Ejercicio = (props) => {
   const panelJuego = useRef(null);
 
   React.useEffect(() => {
-
     if (juego.length === 0) {
       cargarEjercicios2(
         props.ejercicios,
