@@ -24,7 +24,7 @@ const Viewimage = ({ img }) => {
   return (
     <div className="m-auto my-6">
       {imageSrc ?
-        <img src={imageSrc} alt="Descripción de la imagen" /> :
+        <img src={imageSrc} alt="Descripción de la imagen" className="h-32"/> :
         <p>Loading Image...</p>
       }
     </div>
