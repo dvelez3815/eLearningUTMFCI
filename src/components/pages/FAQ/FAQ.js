@@ -39,35 +39,35 @@ const FAQ = () => {
                                 <th scope="row" class="px-6 py-4">
                                     Suficiencia de Inglés I
                                 </th>
-                                <td class="px-6 py-4">1 - 9 Ptos</td>
+                                <td class="px-6 py-4">10 - 19 Ptos</td>
                             </tr>
 
                             <tr class="border-b dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-800">
                                 <th scope="row" class="px-6 py-4">
                                 Suficiencia de Inglés II
                                 </th>
-                                <td class="px-6 py-4">10 - 19 Ptos</td>
+                                <td class="px-6 py-4">20 - 29 Ptos</td>
                             </tr>
 
                             <tr class="border-b dark:border-neutral-600">
                                 <th scope="row" class="px-6 py-4">
                                 Suficiencia de Inglés III
                                 </th>
-                                <td class="px-6 py-4">20 - 29 Ptos</td>
+                                <td class="px-6 py-4">30 - 39 Ptos</td>
                             </tr>
 
                             <tr class="border-b dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-800">
                                 <th scope="row" class="px-6 py-4">
                                 Suficiencia de Inglés IV
                                 </th>
-                                <td class="px-6 py-4">30 - 39 Ptos</td>
+                                <td class="px-6 py-4">40 - 49 Ptos</td>
                             </tr>
 
                             <tr class="border-b dark:border-neutral-600">
                                 <th scope="row" class="px-6 py-4">
                                 Suficiencia de Inglés V
                                 </th>
-                                <td class="px-6 py-4">40 - 100 Ptos</td>
+                                <td class="px-6 py-4">50 - 100 Ptos</td>
                             </tr>
 
                         </tbody>
