@@ -54,7 +54,8 @@ const SigInPage = () => {
         "USER NOT EXIST UTM": "El usuario no existe en el sistema, por favor verifique su correo UTM", 
         "USER NOT EXIST": "El usuario no existe en el sistema, por favor verifique su correo", 
         "CREDENCIALES INCORRECTAS": "La contraseña es incorrecta", 
-        "SERVER ERROR": "Hubo un problema al conectar con el servidor, por favor vuelva a intentarlo, si el problema persiste intente más tarde"
+        "SERVER ERROR": "Hubo un problema al conectar con el servidor, por favor vuelva a intentarlo, si el problema persiste intente más tarde", 
+        "USER UTM BLOQUEADO": "Su cuenta de SGA ha sido bloqueada por multiples intentos. Por favor, restablezca su contraseña"
       }
 
       return texto[mjs_error];
