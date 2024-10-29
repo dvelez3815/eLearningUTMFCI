@@ -33,7 +33,7 @@ const EjercicioFooter = (props) => {
         <div className=" ">
           <button
             disabled={false}
-            className="bg-transparent uppercase text-xs sm:text-xl tracking-wider  my-2 text-gray-500 font-semibold hover:text-gray-400 py-2 px-4 border border-gray-500 hover:border-gray-500 rounded"
+            className="bg-transparent uppercase text-md md:text-xl tracking-wider  my-2 text-gray-500 font-semibold hover:text-gray-400 py-2 px-4 border border-gray-500 hover:border-gray-500 rounded"
             onClick={
               () => {
                 noEsCorrecta(props, skipExercise(props), 1);
@@ -46,7 +46,7 @@ const EjercicioFooter = (props) => {
         <div className="">
           <button
             disabled={enviar}
-            className=" text-xs sm:text-xl tracking-wider uppercase  my-2 text-white bg-green-500 font-semibold  hover:bg-green-400 py-2 px-4 border border-green-500 hover:border-green-600 rounded "
+            className=" text-md md:text-xl tracking-wider uppercase  my-2 text-white bg-green-500 font-semibold  hover:bg-green-400 py-2 px-4 border border-green-500 hover:border-green-600 rounded "
             onClick={() => sendRespuesta(props)}
           >
             check

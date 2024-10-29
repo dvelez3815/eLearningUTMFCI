@@ -98,7 +98,7 @@ export const OpcionCorrecta_1 = (props) => {
         }
         <div className="container w-auto">
           <div
-            className="flex flex-wrap gap-2 mr-8 ml-8  justify-center items-center"
+            className="flex  md:flex-wrap flex-col md:flex-row gap-2 mr-8 ml-8  justify-center items-center"
             aria-label="choice"
             role="radiogroup"
 
@@ -130,14 +130,14 @@ const Texto = (props) => {
   return (
     <div
       style={{ height: "80px" }}
-      className="flex flex-col   overflow-y-auto w-2/5 center-items justify-center flex-wrap cardCheck"
+      className="flex flex-col   overflow-y-auto w-auto center-items justify-center flex-wrap cardCheck"
       aria-checked="false"
       role="radio"
       tabIndex="-1"
       ref={props.myref}
     >
       <button
-        className="h-full text-xs px-4 md:px-8  sm:text-xs "
+        className="h-full md:text-xs px-4 md:px-8  sm:text-xs "
         onClick={() => {
           props.marcar(props.myref);
         }}
