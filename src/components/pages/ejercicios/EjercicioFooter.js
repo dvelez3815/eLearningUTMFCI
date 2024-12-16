@@ -426,45 +426,46 @@ const verificarOpcion_Correcta_1 = async (
   }
 };
 
-const verificarOpcion_Correcta_n = async (
-  props,
-  hijos,
-  contadorRespondidas
-) => {
+
+const verificarOpcion_Correcta_n = async (props, hijos) => {
   let esCorrecta = false;
   let userSelection = [];
   let hasSelected = false;
 
+  // Filtrar elementos válidos
+  hijos = Array.from(hijos).filter((hijo) => hijo.nodeType === 1);
+
   for (let i = 0; i < hijos.length; i++) {
     if (hijos[i].classList.contains("activado")) {
       hasSelected = true;
-      userSelection.push(hijos[i].innerText);
+      userSelection.push(hijos[i].textContent.trim());
     }
   }
 
   if (hasSelected) {
-    //Se obtiene la respuesta correcta para esto utilizo la funcion filter, itero las opciones de los ejercicios y para cada opcion si la respuesta es correcta se guarda en un arreglo
     let correctAnswer = [];
-    props.ejercicio.props.ejercicio.options.forEach((option) => {
+    const options = Array.isArray(props.ejercicio.props.ejercicio.options)
+      ? props.ejercicio.props.ejercicio.options
+      : [];
+
+    options.forEach((option) => {
       if (option.answer === true) {
-        correctAnswer.push(option.item);
+        correctAnswer.push(option.item.trim());
       }
     });
-    if (
-      userSelection.length > correctAnswer.length ||
-      userSelection.length < correctAnswer.length
-    ) {
-      esCorrecta = false;
-    } else if (userSelection.length === correctAnswer.length) {
-      //order array
-      userSelection.sort();
-      correctAnswer.sort();
-      if (userSelection.toString().trim() === correctAnswer.toString().trim()) {
+
+    // Comparar las respuestas
+    if (userSelection.length === correctAnswer.length) {
+      userSelection.sort((a, b) => a.localeCompare(b));
+      correctAnswer.sort((a, b) => a.localeCompare(b));
+
+      if (userSelection.join("") === correctAnswer.join("")) {
         esCorrecta = true;
       }
     }
+
     if (esCorrecta) {
-      enviarSiEsCorrecta(props, contadorRespondidas);
+      enviarSiEsCorrecta(props);
     } else {
       noEsCorrecta(props, correctAnswer);
     }
@@ -472,6 +473,7 @@ const verificarOpcion_Correcta_n = async (
     AlertaLeccion("You did not select anything");
   }
 };
+
 
 function randomizarArray(array) {
   for (var i = array.length - 1; i > 0; i--) {

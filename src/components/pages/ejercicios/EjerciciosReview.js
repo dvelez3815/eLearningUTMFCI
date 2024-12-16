@@ -270,7 +270,7 @@ async function noEsCorrecta(props) {
     }
   };
   
-  const verificarOpcion_Correcta_n = async (
+/*   const verificarOpcion_Correcta_n = async (
     props,
     hijos,
     contadorRespondidas
@@ -291,7 +291,36 @@ async function noEsCorrecta(props) {
     } else {
       noEsCorrecta(props)
     }
+  }; */
+
+
+  const verificarOpcion_Correcta_n = async (props, hijos, contadorRespondidas) => {
+    let hasSelected = true;
+  
+    if (hasSelected) {
+      // Se obtiene la respuesta correcta
+      let correctAnswer = [];
+      const options = Array.isArray(props.ejercicio.props.ejercicio.options)
+        ? props.ejercicio.props.ejercicio.options
+        : [];
+  
+      options.forEach((option) => {
+        if (option.answer === true) {
+          correctAnswer.push(option.item.trim());
+        }
+      });
+  
+      // Normalizar y asegurar que el arreglo sea válido para evitar errores en Safari
+      const ab = correctAnswer.join(", "); // Convierte a texto si es necesario
+  
+      // Aquí puedes llamar la función para enviar el resultado si es correcta
+      // enviarSiEsCorrecta(props, contadorRespondidas);
+  
+    } else {
+      noEsCorrecta(props);
+    }
   };
+  
   
   
   
