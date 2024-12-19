@@ -303,11 +303,10 @@ const cargarEjercicios2 = (ejercicios, setJuego, panelJuego, setCargado, pregunt
       // eslint-disable-next-line react/jsx-pascal-case
       setJuego(juego => [...juego, <OpcionCorrecta_1 key={index} ejercicio={ejercicio} miref={panelJuego} />])
       contador++;
-    } else if (ejercicio.type === "opcion_correcta_n") {
-      // eslint-disable-next-line react/jsx-pascal-case
+    } /* else if (ejercicio.type === "opcion_correcta_n") {
       setJuego(juego => [...juego, <OpcionCorrecta_n key={index} ejercicio={ejercicio} miref={panelJuego} />])
       contador++;
-    } else if (ejercicio.type === "emparejar" || ejercicio.type === "emparejar_img") {
+    }  */else if (ejercicio.type === "emparejar" || ejercicio.type === "emparejar_img") {
       setJuego(juego => [...juego, <Emparejar key={index} ejercicio={ejercicio} miref={panelJuego} />])
       contador++;
     }
