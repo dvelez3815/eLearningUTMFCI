@@ -489,7 +489,6 @@ function randomizarArray(array) {
 async function enviarSiEsCorrecta(props, contadorRespondidas) {
   //Se es corecta se necesita saber si se ha llegado al final de la lista de ejercicios, de ser así, se debe de terminar el juego y guardar el progreso,
   //caso contrario se debe de pasar al siguiente ejercicio
-  console.log("enviando si es correcta", props, contadorRespondidas);
 
   if (props.juego.length - 1 !== 0) {
     mostrarAlertaExito(`Correct answer`);
