@@ -22,11 +22,8 @@ export function llenarInfo(progreso) {
     let totalLibro = 5;
     let libros = [];
     let userInfo = progreso
-    //let task = tasku
-
-    //console.log(userInfo)
-    if (userInfo.name === "JsonWebTokenError") {
-        window.location.href = "./signin";
+    if (userInfo[0].res === "user no exist") {
+        return { porcentaje: 0, mergeBooks: null, libros: null }
     }
 
     for (let i = 0; i < userInfo.length - 1; i++) {

@@ -28,7 +28,7 @@ export const Inicio = () => {
   const progress = useSelector(selectAllProgress);
   const progressStatus = useSelector((store) => store.progress.status);
 
-  const { user } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
 
   useEffect(() => {
     if (progressStatus === 'idle') {
@@ -37,6 +37,10 @@ export const Inicio = () => {
     if ( progressStatus === 'succeeded') {
       setcargando(false)
       let {libros, mergeBooks, porcentaje} = llenarInfo(progress);
+      if ( !mergeBooks || !libros) {
+        logout();
+        return
+      };
       setlibros(libros);
       setuserProgress(mergeBooks);
       setvalorProgress(porcentaje);

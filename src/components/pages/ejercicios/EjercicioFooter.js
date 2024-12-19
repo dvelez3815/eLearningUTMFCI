@@ -6,6 +6,7 @@ import {
   AlertaLeccion,
   Alertaskip,
   mostrarAlertaExitoFin,
+  mostrarExitoEditar,
 } from "../../Alert/Alerts";
 import { AuthContext } from "../../../context/AuthContext";
 import { updateProgress } from "../../../api/Progress";
@@ -488,44 +489,48 @@ function randomizarArray(array) {
 async function enviarSiEsCorrecta(props, contadorRespondidas) {
   //Se es corecta se necesita saber si se ha llegado al final de la lista de ejercicios, de ser así, se debe de terminar el juego y guardar el progreso,
   //caso contrario se debe de pasar al siguiente ejercicio
+  console.log("enviando si es correcta", props, contadorRespondidas);
 
-  if (props.juego.length - 1 === 0) {
-    let tasks_id =
-      window.location.href.split("/")[
-      window.location.href.split("/").length - 1
-      ];
-    let id = USER._id;
-
-    var data = {
-      user_id: id,
-      task_id: tasks_id,
-    };
-    console.log(data)
-    let dataT = null;
-    try {
-      dataT = await updateProgress(data)
-    } catch (error) { }
-    if (props.control === " ") {
-      props.setContadorRespondidas(contadorRespondidas + 1);
-      props.juego.pop();
-      props.setFinJuego(true);
-    } else if (
-      dataT.res !== "Task Registrada" &&
-      dataT.res !== "Task ya ha sido registrado en ese usuario"
-    ) {
-      enviarSiEsCorrecta(props, contadorRespondidas);
-    } else {
-      props.setContadorRespondidas(contadorRespondidas + 1);
-      props.juego.pop();
-      props.setFinJuego(true);
-      mostrarAlertaExitoFin(`Excellent Work `);
-    }
-  } else {
+  if (props.juego.length - 1 !== 0) {
     mostrarAlertaExito(`Correct answer`);
     props.juego.pop();
     props.setContadorRespondidas(contadorRespondidas + 1);
+    return;
   }
-  //Se guarda el progreso del usuario y se muestra una alerta de que la respuesta es correcta
+  let tasks_id =
+    window.location.href.split("/")[
+    window.location.href.split("/").length - 1
+    ];
+  let dataT = null;
+  try {
+    dataT = await updateProgress({
+      user_id: USER._id,
+      task_id: tasks_id,
+    });
+  } catch (error) {
+    console.log(error);
+    const response_alert = await mostrarExitoEditar("Error", "Error al guardar el progreso",  "error");
+    if (response_alert) {
+      window.location = "/dashboard";
+    }
+  }
+
+  const { res } = dataT;
+  if (
+    res === "Task Registrada" ||
+    res === "Task ya ha sido registrado en ese usuario"
+  ) {
+    props.setContadorRespondidas(contadorRespondidas + 1);
+    props.juego.pop();
+    props.setFinJuego(true);
+    mostrarAlertaExitoFin(`Excellent Work `);
+  } else {
+    const response_alert = await mostrarExitoEditar( "Error", "Error al guardar el progreso", "error");
+    if (response_alert) {
+      //retorna al dashboard
+      window.location = "/dashboard";
+    }
+  }
 }
 
 export default EjercicioFooter;
