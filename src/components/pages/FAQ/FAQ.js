@@ -81,6 +81,10 @@ const FAQ = () => {
             answer: 'El examen se tomará en modalidad presencial. Recuerda que en el Simulador podrás escoger las fechas, hora, y la sede donde deseas tomar el examen EASI. Vale recalcar que las sedes serán Portoviejo, Bahía de Caráquez, Chone y Quito.',
         },
         {
+            question: '¿En qué momento  puedo empezar las actividades en el Simulador y presentarme a rendir el examen EASI?',
+            answer: 'Las activadades del Simulador lo podrá realizar durante el semestre e incluso en vacaciones.',
+        },
+        {
             question: '¿Qué pasaría si no alcanzo el puntaje requerido para aprobar el examen EASI?',
             answer: '¡No hay problema! En caso de ocurrir esto se te asignará una nueva fecha para rendir el examen.',
         },
