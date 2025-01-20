@@ -45,3 +45,14 @@ export async function deleteExamenUsuario(id_user, id_examen) {
     return exam.examen_user
 
 }
+export async function updateExamenUsuario(id_user, id_examen, exam_user) {
+    const exam = await FetchWithIntercept(`${process.env.REACT_APP_API_URL}/user_examenes/${id_user}/${id_examen}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(exam_user),
+    });
+    if (exam.examen_user === 'No se pudo actualizar el examen') return null;
+    return exam.examen_user
+}

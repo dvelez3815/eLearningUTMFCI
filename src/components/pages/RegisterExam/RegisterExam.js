@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { getUserByCedula } from "../../../api/User";
 import { getPorgressByMail } from "../../../api/Progress";
 import { mostrarExitoEditar } from "../../Alert/Alerts";
-import { createExamenUsuario, deleteExamenUsuario, getExamenUsuario, getExams } from "../../../api/Exams";
+import { createExamenUsuario, deleteExamenUsuario, getExamenUsuario, getExams, updateExamenUsuario } from "../../../api/Exams";
 import 'moment/locale/es';
 import Loading from "../../Loading/Loading";
 
@@ -50,8 +50,14 @@ const RegisterExam = () => {
         try {
             const examen_user = await getExamenUsuario(user._id);
             if (examen_user) {
-                const delete_examen_user = await deleteExamenUsuario(user._id, examen_user.id_examen);
-                if (!delete_examen_user) throw new Error("ExamError: No se pudo actualizar el examen");
+                const update_examen_user = await updateExamenUsuario(user._id, examen_user.examenes[0]._id, user_examen);
+                if (!update_examen_user) throw new Error("ExamError: No se pudo actualizar el examen");
+                mostrarExitoEditar(
+                    "Exito",
+                    "Se ha actualizado su fecha de examen",
+                    "success"
+                );
+                return;
             }
             const examen_user_response = await createExamenUsuario(user_examen)
             if (!examen_user_response) throw new Error("ExamenUserError: No se pudo guardar el examen");
