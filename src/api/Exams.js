@@ -1,7 +1,7 @@
 import { FetchWithIntercept } from "./Intercept";
 
-export async function getExams() {
-    const exam = await FetchWithIntercept(`${process.env.REACT_APP_API_URL}/exam?filtered=true`, {
+export async function getExams(id_sede) {
+    const exam = await FetchWithIntercept(`${process.env.REACT_APP_API_URL}/exam?filtered=true&sede=${id_sede}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import LogoProvicional from "../../../assets/resource/Logo_Provicional.png";
 import Logo_ing from "../../../assets/resource/LOGO_ILM_HORIZONTAL.png";
@@ -12,6 +12,7 @@ import { mostrarExitoEditar } from "../../Alert/Alerts";
 import { createExamenUsuario, deleteExamenUsuario, getExamenUsuario, getExams, updateExamenUsuario } from "../../../api/Exams";
 import 'moment/locale/es';
 import Loading from "../../Loading/Loading";
+import { getSedes } from "../../../api/Sede";
 
 const RegisterExam = () => {
     const formSchema = Yup.object().shape({
@@ -157,34 +158,54 @@ const RegisterExam = () => {
             setEnviando(false)
         }
     }
-
-    const getExam = async () => {
-        const _examenes = await getExams();
-        setExamenes((exam) => [..._examenes])
-        const _sedes = new Set(_examenes.map((examen) => examen.lugar))
-        setSedes((sede) => [..._sedes])
-    }
-    const changeSede = (event) => {
-        setFechas((fecha) => [])
-        setHorarios((horario) => [])
-        setSedeSelected(event.target.value)
-        const _fechas = examenes.filter((examen) => examen.lugar === event.target.value).sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
-        const _fechas_filtered = new Set(_fechas.map((fecha) => fecha.fecha))
-        setFechas((fechas) => [..._fechas_filtered])
+    const changeSede = async (event) => {
+        setFechas((fecha) => []);
+        setHorarios((horario) => []);
+        setSedeSelected(event.target.value);
+        try {
+            const exams_ = await getExams(event.target.value);
+            setExamenes(exams_);
+        } catch (error) {
+            mostrarExitoEditar(
+                "Error",
+                "Hubo un problema al buscar los exámenes",
+                "error"
+            );
+        }
     }
 
     const changeFecha = (event) => {
         setHorarios((horario) => [])
         setFechaSelected(event.target.value)
-        const _horarios = examenes.filter((examen) => examen.lugar === sedeSelected && examen.fecha === event.target.value).sort()
+        const _horarios = examenes.filter((examen) => examen.fecha === event.target.value).sort()
         setHorarios((horario) => [..._horarios])
     }
 
+    useEffect(() => {
+        if (examenes.length > 0) {
+            const _fechas = examenes.sort((a, b) => new Date(a.fecha) - new Date(b.fecha)); // Ordena por fecha
+            const _fechas_filtered = Array.from(new Set(_fechas.map((fecha) => fecha.fecha))); // Filtra fechas únicas
+            setFechas(_fechas_filtered); // Actualiza las fechas en el estado
+        }
+    }, [examenes]);
+
 
     useEffect(() => {
-        getExam()
-        setCargando(false)
-    }, [])
+        try {
+            getSedes().then((sedes) => {
+                setSedes((sede) => [...sedes])
+            });
+        } catch (error) {
+            mostrarExitoEditar(
+                "Error",
+                "No se encontró el conexión con el servidor",
+                "error"
+            );
+        } finally {
+            setCargando(false)
+        }
+    }, [cargando]);
+
     return (
         <div className=" overflow-x-hidden ">
             <div className=" mx-auto z-20  flex p-5 h-auto items-center">
@@ -262,12 +283,12 @@ const RegisterExam = () => {
                                 <>
                                     <div >
                                         <h4 className="md:text-lg text-md text-left font-semibold mb-2">Lugar:</h4>
-                                        <select id="tipo_sex" onChange={changeSede} defaultValue={sedeSelected} className="w-full p-2 border border-gray-300 rounded-lg" name="lugar">
+                                        <select id="tipo_sede" onChange={changeSede} defaultValue={sedeSelected} className="w-full p-2 border border-gray-300 rounded-lg" name="lugar">
                                             <option value="">Seleccionar</option>
                                             {
                                                 sedes.map((sede) => {
                                                     return (
-                                                        <option key={sede} value={sede}>{sede}</option>
+                                                        <option key={sede._id} value={sede._id}>{sede.nombre}</option>
 
                                                     )
                                                 })
@@ -276,7 +297,7 @@ const RegisterExam = () => {
                                     </div>
                                     <div >
                                         <h4 className="md:text-lg text-md text-left font-semibold mb-2">Fecha:</h4>
-                                        <select id="tipo_sex" onChange={changeFecha} defaultValue={fechaSelected} className="w-full p-2 border border-gray-300 rounded-lg" name="lugar">
+                                        <select id="tipo_fecha" onChange={changeFecha} defaultValue={fechaSelected} className="w-full p-2 border border-gray-300 rounded-lg" name="lugar">
                                             <option value="">Seleccionar</option>
                                             {
                                                 fechas.map((fecha) => {
