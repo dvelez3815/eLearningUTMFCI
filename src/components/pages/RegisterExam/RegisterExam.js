@@ -173,6 +173,14 @@ const RegisterExam = () => {
             );
         }
     }
+    // Agrupar fechas por mes
+    const fechasPorMes = fechas.reduce((acc, fecha) => {
+        const fechaObj = new Date(fecha);
+        const mes = fechaObj.toLocaleString("default", { month: "long", year: "numeric" }); // Ejemplo: "January 2025"
+        if (!acc[mes]) acc[mes] = [];
+        acc[mes].push(fecha);
+        return acc;
+    }, {});
 
     const changeFecha = (event) => {
         setHorarios((horario) => [])
@@ -299,14 +307,24 @@ const RegisterExam = () => {
                                         <h4 className="md:text-lg text-md text-left font-semibold mb-2">Fecha:</h4>
                                         <select id="tipo_fecha" onChange={changeFecha} defaultValue={fechaSelected} className="w-full p-2 border border-gray-300 rounded-lg" name="lugar">
                                             <option value="">Seleccionar</option>
-                                            {
+                                            {/* {
                                                 fechas.map((fecha) => {
                                                     return (
                                                         <option key={fecha} value={fecha}>{moment(fecha).format('dddd MMMM Do YYYY')}</option>
 
                                                     )
                                                 })
-                                            }
+                                            } */}
+
+                                            {Object.entries(fechasPorMes).map(([mes, fechas]) => (
+                                                <optgroup label={mes} key={mes}>
+                                                    {fechas.map((fecha) => (
+                                                        <option value={fecha} key={fecha}>
+                                                            {moment(fecha).format('dddd MMMM Do YYYY')}
+                                                        </option>
+                                                    ))}
+                                                </optgroup>
+                                            ))}
                                         </select>
                                     </div>
                                     <div className="flex flex-col">
