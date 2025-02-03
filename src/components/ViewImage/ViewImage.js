@@ -19,7 +19,7 @@ const Viewimage = ({ img }) => {
       }
     };
     obtenerImagen();
-  }, [img]);
+  }, [img, API_KEY]);
 
 
   return (
