@@ -1,25 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { getAudioOfQuestion } from '../../api/Questions';
 
 const ViewAudio = ({ audio }) => {
     const [audioSrc, setAudioSrc] = useState(null);
+    const API_KEY = process.env.REACT_APP_API_KEY;
 
     useEffect(() => {
         const obtenerAudio = async () => {
             try {
-                const response = await getAudioOfQuestion(audio);
-                if (response) {
-                    setAudioSrc(`${process.env.REACT_APP_API_URL}/question/audio/${audio}`);
-                } else {
-                    console.error('Error al obtener el audio');
-                }
+                const audioResponse = await fetch(
+                    `https://www.googleapis.com/drive/v3/files/${audio}?alt=media&key=${API_KEY}`
+                );
+
+                if (!audioResponse.ok) throw new Error("Error al cargar el audrio");
+
+                setAudioSrc(audioResponse.url);
+
             } catch (error) {
                 console.error('Error en la solicitud:', error);
             }
         };
 
         obtenerAudio();
-    }, [audio]);
+    }, [audio, API_KEY]);
 
     return (
         <div className='text-center m-auto flex justify-center items-center'>
