@@ -23,7 +23,7 @@ const RegisterExam = () => {
         validPresionado: Yup.boolean().oneOf([true], 'Debes validar la cédula')
 
     })
-    const { user }  = useContext(AuthContext);
+    const { user: userSesion }  = useContext(AuthContext);
     const formOptions = {
         resolver: yupResolver(formSchema),
         defaultValues: {
@@ -32,7 +32,7 @@ const RegisterExam = () => {
     }
     const { register, setValue, handleSubmit, formState: { errors } } = useForm(formOptions);
     const [cedula, setCedula] = useState('');
-    const [user_form, setUser] = useState({});
+    const [user, setUser] = useState({});
     const [examenes, setExamenes] = useState([]);
     const [cargando, setCargando] = useState(true);
     const [sedeSelected, setSedeSelected] = useState('');
@@ -47,14 +47,14 @@ const RegisterExam = () => {
     const onSubmit = async (form) => {
         setEnviando(true)
         const user_examen = {
-            id_user: user_form._id,
+            id_user: user._id,
             id_examen: form.horario
         }
 
         try {
-            const examen_user = await getExamenUsuario(user_form._id);
+            const examen_user = await getExamenUsuario(user._id);
             if (examen_user) {
-                const update_examen_user = await updateExamenUsuario(user_form._id, examen_user.examenes[0]._id, user_examen);
+                const update_examen_user = await updateExamenUsuario(user._id, examen_user.examenes[0]._id, user_examen);
                 if (!update_examen_user) throw new Error("ExamError: No se pudo actualizar el examen");
                 mostrarExitoEditar(
                     "Exito",
@@ -219,7 +219,7 @@ const RegisterExam = () => {
 
     return (
         <div className=" overflow-x-hidden ">
-            {user ? <NavComponent user={user} logo={LogoProvicional} activado={1} /> :
+            {user ? <NavComponent user={userSesion} logo={LogoProvicional} activado={1} /> :
                 <NavBar />}
             <div className="bg-white shadow-lg rounded-lg p-6  mx-auto max-w-4xl">
                 <div className="flex flex-col items-center align-center bg-greenutm">
@@ -266,16 +266,16 @@ const RegisterExam = () => {
                             <div className="grid grid-cols-2 gap-4 text-left">
                                 <div>
                                     <h4 className="md:text-lg text-md font-semibold mb-2">Apellidos:</h4>
-                                    <input name="lastname" type="text" id="lastname" placeholder="Apellidos" disabled defaultValue={user_form.lastname} className="w-full p-2 border border-gray-300 rounded-lg" />
+                                    <input name="lastname" type="text" id="lastname" placeholder="Apellidos" disabled defaultValue={user.lastname} className="w-full p-2 border border-gray-300 rounded-lg" />
                                 </div>
                                 <div>
                                     <h4 className="md:text-lg text-md font-semibold mb-2">Nombres:</h4>
-                                    <input name="name" type="text" id="name" placeholder="Nombres" disabled defaultValue={user_form.name} className="w-full p-2 border border-gray-300 rounded-lg" />
+                                    <input name="name" type="text" id="name" placeholder="Nombres" disabled defaultValue={user.name} className="w-full p-2 border border-gray-300 rounded-lg" />
                                 </div>
                             </div>
                             <div>
                                 <h4 className="md:text-lg text-md font-semibold mb-2 text-left">Dirección de correo electrónico:</h4>
-                                <input id="mail" name="mail" type="email" placeholder="usuario@utm.edu.ec" disabled defaultValue={user_form.mail} className="w-full p-2 border border-gray-300 rounded-lg" />
+                                <input id="mail" name="mail" type="email" placeholder="usuario@utm.edu.ec" disabled defaultValue={user.mail} className="w-full p-2 border border-gray-300 rounded-lg" />
                             </div>
                             {cargando ? <div>Cargando</div> :
                                 <>
@@ -347,9 +347,9 @@ const RegisterExam = () => {
                             <div className="hidden my-4"></div>
                             {enviando && <Loading />}
                             <div className="space-x-2">
-                                <button type="submit" disabled={enviando} className="bg-green-500 text-white py-2 px-4 rounded-lg">Enviar</button>
-                                <button type="button" className="bg-red-500 text-white py-2 px-4 rounded-lg" onClick={() => window.location = "/"}>Cerrar</button>
-
+                                <button type="submit" disabled={enviando} className="bg-green-500 text-white py-2 px-4 rounded-lg">
+                                    Enviar
+                                    </button>
                             </div>
                         </form>
                     </div>
