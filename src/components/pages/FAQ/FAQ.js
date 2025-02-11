@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import NavBar from '../../NavBar/NavBar';
 import logo_UTM from "../../../assets/resource/LOGO_SIMPLE_BG.png";
 import DOMPurify from 'dompurify';
+import { AuthContext } from "../../../context/AuthContext";
+import NavComponent from '../../NavComponent';
+import logo from "../../../assets/resource/Logo_Provicional.png";
 const FAQ = () => {
+     const { user } = useContext(AuthContext);
     const faqs = [
         {
             question: '¿Qué es el Examen de Acreditación de las Suficiencias de Inglés?',
@@ -137,7 +141,8 @@ const FAQ = () => {
 
     return (
         <div className="h-screen flex flex-col relative">
-            <NavBar />
+            {user ? <NavComponent user={user} logo={logo} activado={1} />:
+            <NavBar />}
             <div className="max-w-3xl mx-auto py-8 px-4">
                 <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">Preguntas Frecuentes</h1>
                 <div className="space-y-4">

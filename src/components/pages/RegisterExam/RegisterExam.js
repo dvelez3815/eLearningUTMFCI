@@ -1,7 +1,6 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import LogoProvicional from "../../../assets/resource/Logo_Provicional.png";
-import Logo_ing from "../../../assets/resource/LOGO_ILM_HORIZONTAL.png";
 import moment from "moment";
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
@@ -9,10 +8,13 @@ import { useForm } from "react-hook-form";
 import { getUserByCedula } from "../../../api/User";
 import { getPorgressByMail } from "../../../api/Progress";
 import { mostrarExitoEditar } from "../../Alert/Alerts";
-import { createExamenUsuario, deleteExamenUsuario, getExamenUsuario, getExams, updateExamenUsuario } from "../../../api/Exams";
+import { createExamenUsuario, getExamenUsuario, getExams, updateExamenUsuario } from "../../../api/Exams";
 import 'moment/locale/es';
 import Loading from "../../Loading/Loading";
 import { getSedes } from "../../../api/Sede";
+import NavComponent from "../../NavComponent";
+import NavBar from "../../NavBar/NavBar";
+import { AuthContext } from "../../../context/AuthContext";
 
 const RegisterExam = () => {
     const formSchema = Yup.object().shape({
@@ -21,6 +23,7 @@ const RegisterExam = () => {
         validPresionado: Yup.boolean().oneOf([true], 'Debes validar la cédula')
 
     })
+    const { user }  = useContext(AuthContext);
     const formOptions = {
         resolver: yupResolver(formSchema),
         defaultValues: {
@@ -29,7 +32,7 @@ const RegisterExam = () => {
     }
     const { register, setValue, handleSubmit, formState: { errors } } = useForm(formOptions);
     const [cedula, setCedula] = useState('');
-    const [user, setUser] = useState({});
+    const [user_form, setUser] = useState({});
     const [examenes, setExamenes] = useState([]);
     const [cargando, setCargando] = useState(true);
     const [sedeSelected, setSedeSelected] = useState('');
@@ -44,14 +47,14 @@ const RegisterExam = () => {
     const onSubmit = async (form) => {
         setEnviando(true)
         const user_examen = {
-            id_user: user._id,
+            id_user: user_form._id,
             id_examen: form.horario
         }
 
         try {
-            const examen_user = await getExamenUsuario(user._id);
+            const examen_user = await getExamenUsuario(user_form._id);
             if (examen_user) {
-                const update_examen_user = await updateExamenUsuario(user._id, examen_user.examenes[0]._id, user_examen);
+                const update_examen_user = await updateExamenUsuario(user_form._id, examen_user.examenes[0]._id, user_examen);
                 if (!update_examen_user) throw new Error("ExamError: No se pudo actualizar el examen");
                 mostrarExitoEditar(
                     "Exito",
@@ -216,25 +219,12 @@ const RegisterExam = () => {
 
     return (
         <div className=" overflow-x-hidden ">
-            <div className=" mx-auto z-20  flex p-5 h-auto items-center">
-                <div className=" md:ml-10 ">
-                    <a href='https://www.utm.edu.ec/' target='_blank' rel="noreferrer" >
-                        <img className=" md:h-20 lg:h-20 sm:h-20 h-16" src={LogoProvicional} alt="logo" />
-                    </a>
-                </div>
-                <div className=" flex flex-grow justify-end md:mr-20">
-                    <div className=" md:ml-10 ">
-                        <a href='https://www.utm.edu.ec/idiomas' target='_blank' rel="noreferrer" >
-                            <img className=" md:h-20 lg:h-20 sm:h-20 h-16" src={Logo_ing} alt="logo" />
-                        </a>
-                    </div>
-                </div>
-            </div>
-
+            {user ? <NavComponent user={user} logo={LogoProvicional} activado={1} /> :
+                <NavBar />}
             <div className="bg-white shadow-lg rounded-lg p-6  mx-auto max-w-4xl">
                 <div className="flex flex-col items-center align-center bg-greenutm">
                     <div className="text-center ">
-                        <h2 className="text-white  md:text-3xl text-2xl  font-bold p-4 rounded-t-lg">Registro al Examen de Suficiencia de Inglés</h2>
+                        <h2 className="text-white md:text-3xl text-2xl  font-bold p-4 rounded-t-lg">Registro al Examen de Suficiencia de Inglés</h2>
                     </div>
                 </div>
                 <div className="flex flex-col items-center my-2 bg-green-100">
@@ -276,16 +266,16 @@ const RegisterExam = () => {
                             <div className="grid grid-cols-2 gap-4 text-left">
                                 <div>
                                     <h4 className="md:text-lg text-md font-semibold mb-2">Apellidos:</h4>
-                                    <input name="lastname" type="text" id="lastname" placeholder="Apellidos" disabled defaultValue={user.lastname} className="w-full p-2 border border-gray-300 rounded-lg" />
+                                    <input name="lastname" type="text" id="lastname" placeholder="Apellidos" disabled defaultValue={user_form.lastname} className="w-full p-2 border border-gray-300 rounded-lg" />
                                 </div>
                                 <div>
                                     <h4 className="md:text-lg text-md font-semibold mb-2">Nombres:</h4>
-                                    <input name="name" type="text" id="name" placeholder="Nombres" disabled defaultValue={user.name} className="w-full p-2 border border-gray-300 rounded-lg" />
+                                    <input name="name" type="text" id="name" placeholder="Nombres" disabled defaultValue={user_form.name} className="w-full p-2 border border-gray-300 rounded-lg" />
                                 </div>
                             </div>
                             <div>
                                 <h4 className="md:text-lg text-md font-semibold mb-2 text-left">Dirección de correo electrónico:</h4>
-                                <input id="mail" name="mail" type="email" placeholder="usuario@utm.edu.ec" disabled defaultValue={user.mail} className="w-full p-2 border border-gray-300 rounded-lg" />
+                                <input id="mail" name="mail" type="email" placeholder="usuario@utm.edu.ec" disabled defaultValue={user_form.mail} className="w-full p-2 border border-gray-300 rounded-lg" />
                             </div>
                             {cargando ? <div>Cargando</div> :
                                 <>

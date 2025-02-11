@@ -2,7 +2,6 @@ import React, { createRef, useContext } from "react";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
-import { mostrarAlertaDrive } from "./Alert/Alerts";
 
 import user_img from "../assets/resource/user.png";
 import logobn from "../assets/resource/Logo_Provicional_bn.png";
@@ -15,7 +14,7 @@ const NavComponent = (props) => {
   const handleHamburgerButton = () => {
     hamburgerItems.current.classList.toggle("hidden");
   };
-  
+
 
   return (
     <div className="">
@@ -30,7 +29,7 @@ const NavComponent = (props) => {
                 <div className=" ml-10 flex items-baseline space-x-4">
                   <Link
                     className={
-                      props.activado === 1
+                      props.activado === 0
                         ? " flex  text-yellow-400 uppercase   dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                         : "flex  text-white uppercase  hover:text-yellow-300 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                     }
@@ -38,7 +37,7 @@ const NavComponent = (props) => {
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5"
+                      className="h-5 w-5 mx-1"
                       viewBox="0 0 20 20"
                       fill="currentColor"
                     >
@@ -48,7 +47,7 @@ const NavComponent = (props) => {
                   </Link>
                   <Link
                     className={
-                      props.activado === 2
+                      props.activado === 0
                         ? "flex  text-yellow-400  uppercase   dark:hover:text-white  py-2 rounded-md text-sm font-medium"
                         : "flex  text-white uppercase  hover:text-yellow-300 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                     }
@@ -56,7 +55,7 @@ const NavComponent = (props) => {
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5"
+                      className="h-5 w-5 mx-1"
                       viewBox="0 0 20 20"
                       fill="currentColor"
                     >
@@ -67,22 +66,26 @@ const NavComponent = (props) => {
                   </Link>
                   <Link
                     className={
-                      props.activado === 2
+                      props.activado === 0
                         ? "flex  text-yellow-400  uppercase   dark:hover:text-white  py-2 rounded-md text-sm font-medium"
                         : "flex  text-white uppercase  hover:text-yellow-300 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                     }
                     to="/registerExam"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path d="M8 2a1 1 0 000 2h2a1 1 0 100-2H8z" />
-                      <path d="M3 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v6h-4.586l1.293-1.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L10.414 13H15v3a2 2 0 01-2 2H5a2 2 0 01-2-2V5zM15 11h2a1 1 0 110 2h-2v-2z" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mx-1" fill="currentColor" viewBox="0 0 448 512"><path d="M96 32l0 32L48 64C21.5 64 0 85.5 0 112l0 48 448 0 0-48c0-26.5-21.5-48-48-48l-48 0 0-32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 32L160 64l0-32c0-17.7-14.3-32-32-32S96 14.3 96 32zM448 192L0 192 0 464c0 26.5 21.5 48 48 48l352 0c26.5 0 48-21.5 48-48l0-272z" /></svg>
                     Schedule Exam
+                  </Link>
+                  <Link
+                    className={
+                      props.activado === 0
+                        ? "flex  text-yellow-400  uppercase   dark:hover:text-white  py-2 rounded-md text-sm font-medium"
+                        : "flex  text-white uppercase  hover:text-yellow-300 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    }
+                    to="/preguntas"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mx-1"
+                      fill="currentColor" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM169.8 165.3c7.9-22.3 29.1-37.3 52.8-37.3l58.3 0c34.9 0 63.1 28.3 63.1 63.1c0 22.6-12.1 43.5-31.7 54.8L280 264.4c-.2 13-10.9 23.6-24 23.6c-13.3 0-24-10.7-24-24l0-13.5c0-8.6 4.6-16.5 12.1-20.8l44.3-25.4c4.7-2.7 7.6-7.7 7.6-13.1c0-8.4-6.8-15.1-15.1-15.1l-58.3 0c-3.4 0-6.4 2.1-7.5 5.3l-.4 1.2c-4.4 12.5-18.2 19-30.6 14.6s-19-18.2-14.6-30.6l.4-1.2zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z" /></svg>
+                    Frequent questions
                   </Link>
                 </div>
               </div>
@@ -108,7 +111,7 @@ const NavComponent = (props) => {
                 </svg>
               </button>
             </div>
-            <div className="p-2 my-auto flex justify-center ">
+            <div className=" flex justify-center ">
               <h2 className="hidden lg:block uppercase text-xs md:text-base lg:text-base sm:text-base  pt-1 text-white">
                 {props.user.name +
                   " " +
@@ -210,7 +213,7 @@ const NavComponent = (props) => {
             <Link
               className="text-gray-100 hover:text-yellow-500 dark:text-white block px-3 py-2 rounded-md text-base font-medium"
               to="/evaluacion"
-              >
+            >
               Evaluation
             </Link>
             <Link
@@ -218,6 +221,12 @@ const NavComponent = (props) => {
               className="text-gray-100 hover:text-yellow-500 dark:text-white block px-3 py-2 rounded-md text-base font-medium"
             >
               Schedule exam
+            </Link>
+            <Link
+              to="/preguntas"
+              className="text-gray-100 hover:text-yellow-500 dark:text-white block px-3 py-2 rounded-md text-base font-medium"
+            >
+              Frequent questions
             </Link>
           </div>
         </div>
