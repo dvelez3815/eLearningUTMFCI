@@ -10,6 +10,7 @@ import {
 } from "../../Alert/Alerts";
 import { AuthContext } from "../../../context/AuthContext";
 import { updateProgress } from "../../../api/Progress";
+import { guardarIntento } from "../../../api/Intento";
 
 var USER = null;
 const EjercicioFooter = (props) => {
@@ -168,14 +169,16 @@ async function noEsCorrecta(props, respuesta, id) {
 
 const validarRespuesta = async (props) => {
   let tipo_ejercicio = props.ejercicio.props.ejercicio.type;
+  let id_question = props.ejercicio.props.ejercicio._id;
   let contadorRespuestas = props.contadorRespondidas;
+  let esCorrecta = null;
 
   if (tipo_ejercicio === "opcion_correcta_1") {
     let hijos = props.miref.current.children;
-    await verificarOpcion_Correcta_1(props, hijos, contadorRespuestas);
+    esCorrecta = await verificarOpcion_Correcta_1(props, hijos, contadorRespuestas);
   } else if (tipo_ejercicio === "opcion_correcta_n") {
     let hijos = props.miref.current.children;
-    await verificarOpcion_Correcta_n(props, hijos, contadorRespuestas);
+    esCorrecta = await verificarOpcion_Correcta_n(props, hijos, contadorRespuestas);
   } else if (tipo_ejercicio === "ordenar") {
     let hijos = [...props.miref.current.children];
     let respuestaBackEndBase = [];
@@ -199,7 +202,7 @@ const validarRespuesta = async (props) => {
         return texto;
       }
     });
-    await verificarOrdenar(
+    esCorrecta = await verificarOrdenar(
       props,
       hijos,
       contadorRespuestas,
@@ -209,25 +212,36 @@ const validarRespuesta = async (props) => {
   } else if (tipo_ejercicio === "true_false") {
     let hijos = props.miref.current.children;
     //console.log(hijos);
-    await verificarVerdadero_Falso(props, hijos, contadorRespuestas);
+    esCorrecta = await verificarVerdadero_Falso(props, hijos, contadorRespuestas);
   } else if (tipo_ejercicio === "completar_texto") {
     let hijos = Array.from(props.miref.current.children);
-    await verificarCompletar_Texto(props, hijos, contadorRespuestas);
+    esCorrecta = await verificarCompletar_Texto(props, hijos, contadorRespuestas);
   } else if (
     tipo_ejercicio === "emparejar" ||
     tipo_ejercicio === "emparejar_img"
   ) {
     let hijos = Array.from(props.miref.current.children);
-    await verificarEmparejar(props, hijos, contadorRespuestas);
+    esCorrecta = await verificarEmparejar(props, hijos, contadorRespuestas);
   } else {
     noEsCorrecta(props, "asd");
   }
+  //enviar estos valores a la base de datos
+  if (esCorrecta === null) {
+    return;
+
+  }
+  const intento = {
+    id_user: USER._id,
+    id_question: id_question,
+    estado: esCorrecta,
+  };
+  await guardarIntento(intento)
+
 };
 
 const verificarEmparejar = async (props, hijos, contadorRespuestas) => {
   let respuestaUser = [];
   let respuestasBack = [];
-  let esCorrecta = false;
   props.ejercicio.props.ejercicio.body.forEach((item) => {
     respuestasBack.push(item.answer);
   });
@@ -244,24 +258,18 @@ const verificarEmparejar = async (props, hijos, contadorRespuestas) => {
   });
   if (faltaMarcar) {
     AlertaLeccion("All fields must be filled");
-    //alert("All fields must be filled");
-  } else {
-    // eslint-disable-next-line array-callback-return
-    hijos.some((element) => {
-      respuestaUser.push(element.getElementsByClassName("opt-1")[0].innerText);
-    });
-    if (JSON.stringify(respuestaUser) === JSON.stringify(respuestasBack)) {
-      esCorrecta = true;
-    } else {
-      esCorrecta = false;
-    }
-    //console.log(JSON.stringify(respuestaUser), JSON.stringify(respuestasBack));
-    if (esCorrecta) {
-      enviarSiEsCorrecta(props, contadorRespuestas);
-    } else {
-      noEsCorrecta(props, respuestasBack);
-    }
+    return null
   }
+  // eslint-disable-next-line array-callback-return
+  hijos.some((element) => {
+    respuestaUser.push(element.getElementsByClassName("opt-1")[0].innerText);
+  });
+  if (JSON.stringify(respuestaUser) === JSON.stringify(respuestasBack)) {
+    enviarSiEsCorrecta(props, contadorRespuestas);
+    return true
+  }
+  noEsCorrecta(props, respuestasBack);
+  return false;
 };
 
 const verificarCompletar_Texto = async (props, hijos, contadorRespuestas) => {
@@ -289,25 +297,16 @@ const verificarCompletar_Texto = async (props, hijos, contadorRespuestas) => {
     }
   });
 
-  let esCorrecta = false;
-
-  if (aRespondido) {
-    if (JSON.stringify(respuestaUser) === JSON.stringify(respuestaBackEnd)) {
-      esCorrecta = true;
-    } else {
-      esCorrecta = false;
-    }
-  } else {
+  if (!aRespondido) {
     AlertaLeccion("All fields must be filled");
-    //console.log(respuestaBackEnd);
+    return null
   }
-  if (aRespondido && esCorrecta) {
+  if ((JSON.stringify(respuestaUser) === JSON.stringify(respuestaBackEnd) && aRespondido)) {
     enviarSiEsCorrecta(props, contadorRespuestas);
-  } else if (aRespondido && !esCorrecta) {
-    noEsCorrecta(props, respuestaBackEnd);
+    return true;
   }
-
-  // //console.log(hijos[0].children[1].value);
+  noEsCorrecta(props, respuestaBackEnd);
+  return false;
 };
 
 const verificarVerdadero_Falso = async (props, hijos, contadorRespuestas) => {
@@ -335,20 +334,17 @@ const verificarVerdadero_Falso = async (props, hijos, contadorRespuestas) => {
       }
     });
   }
-
-  let esCorrecta = false;
+  if (respuestasUser.length === 0) {
+    AlertaLeccion("All fields must be filled");
+    return null
+  }
 
   if (JSON.stringify(respuestasUser) === JSON.stringify(respuestasBack)) {
-    esCorrecta = true;
-  } else {
-    esCorrecta = false;
-  }
-
-  if (esCorrecta) {
     enviarSiEsCorrecta(props, contadorRespuestas);
-  } else {
-    noEsCorrecta(props, respuestasBack);
+    return true;
   }
+  noEsCorrecta(props, respuestasBack);
+  return false;
 };
 
 const verificarOrdenar = async (
@@ -358,11 +354,9 @@ const verificarOrdenar = async (
   respuestasBackEndOrdenadas,
   respuestaBackEndBase
 ) => {
-  let esCorrecta = false;
   let respuestasUser = [];
   //aca en este for se agarran los div que tengan id agarrar el texto y agregarlo a un array
   for (let i = 0; i < hijos.length; i++) {
-    console.log("hijos ", i + 1, hijos[i])
     if (hijos[i].id === "arrastrar") {
       let respuesta = hijos[i].children[1].innerText
         .toString()
@@ -378,17 +372,11 @@ const verificarOrdenar = async (
     JSON.stringify(respuestasUser) ===
     JSON.stringify(respuestasBackEndOrdenadas)
   ) {
-    esCorrecta = true;
-  } else {
-    esCorrecta = false;
-  }
-  //console.log(respuestasUser, respuestasBackEndOrdenadas);
-
-  if (esCorrecta) {
     enviarSiEsCorrecta(props, contadorRespuestas);
-  } else {
-    noEsCorrecta(props, respuestaBackEndBase);
+    return true;
   }
+  noEsCorrecta(props, respuestaBackEndBase);
+  return false;
 };
 
 const verificarOpcion_Correcta_1 = async (
@@ -396,7 +384,6 @@ const verificarOpcion_Correcta_1 = async (
   hijos,
   contadorRespondidas
 ) => {
-  let esCorrecta = false;
   let userSelection;
   let hasSelected = false;
 
@@ -407,29 +394,25 @@ const verificarOpcion_Correcta_1 = async (
       break;
     }
   }
-  if (hasSelected) {
-    //Se obtiene la respuesta correcta para esto utilizo la funcion filter, itero las opciones de los ejercicios y para cada opcion si la respuesta es correcta se guarda en un arreglo
-    let correctAnswer = props.ejercicio.props.ejercicio.options
-      .filter((option) => option.answer === true)[0]
-      .item.toString()
-      .trim();
-    if (correctAnswer === userSelection) {
-      esCorrecta = true;
-    }
-
-    if (esCorrecta) {
-      enviarSiEsCorrecta(props, contadorRespondidas);
-    } else {
-      noEsCorrecta(props, correctAnswer);
-    }
-  } else {
+  if (!hasSelected) {
     AlertaLeccion("You did not select anything");
+    return null;
   }
+  //Se obtiene la respuesta correcta para esto utilizo la funcion filter, itero las opciones de los ejercicios y para cada opcion si la respuesta es correcta se guarda en un arreglo
+  let correctAnswer = props.ejercicio.props.ejercicio.options
+    .filter((option) => option.answer === true)[0]
+    .item.toString()
+    .trim();
+  if (correctAnswer === userSelection) {
+    enviarSiEsCorrecta(props, contadorRespondidas);
+    return true;
+  }
+  noEsCorrecta(props, correctAnswer);
+  return false;
 };
 
 
 const verificarOpcion_Correcta_n = async (props, hijos) => {
-  let esCorrecta = false;
   let userSelection = [];
   let hasSelected = false;
 
@@ -443,36 +426,35 @@ const verificarOpcion_Correcta_n = async (props, hijos) => {
     }
   }
 
-  if (hasSelected) {
-    let correctAnswer = [];
-    const options = Array.isArray(props.ejercicio.props.ejercicio.options)
-      ? props.ejercicio.props.ejercicio.options
-      : [];
-
-    options.forEach((option) => {
-      if (option.answer === true) {
-        correctAnswer.push(option.item.trim());
-      }
-    });
-
-    // Comparar las respuestas
-    if (userSelection.length === correctAnswer.length) {
-      userSelection.sort((a, b) => a.localeCompare(b));
-      correctAnswer.sort((a, b) => a.localeCompare(b));
-
-      if (userSelection.join("") === correctAnswer.join("")) {
-        esCorrecta = true;
-      }
-    }
-
-    if (esCorrecta) {
-      enviarSiEsCorrecta(props);
-    } else {
-      noEsCorrecta(props, correctAnswer);
-    }
-  } else {
+  if (!hasSelected) {
     AlertaLeccion("You did not select anything");
+    return null
   }
+  let correctAnswer = [];
+  const options = Array.isArray(props.ejercicio.props.ejercicio.options)
+    ? props.ejercicio.props.ejercicio.options
+    : [];
+
+  options.forEach((option) => {
+    if (option.answer === true) {
+      correctAnswer.push(option.item.trim());
+    }
+  });
+
+  // Comparar las respuestas
+  if (userSelection.length !== correctAnswer.length) {
+    noEsCorrecta(props, correctAnswer);
+    return false;
+  }
+
+  userSelection.sort((a, b) => a.localeCompare(b));
+  correctAnswer.sort((a, b) => a.localeCompare(b));
+  if (userSelection.join("") === correctAnswer.join("")) {
+    enviarSiEsCorrecta(props);
+    return true;
+  }
+  noEsCorrecta(props, correctAnswer);
+  return false;
 };
 
 
@@ -508,7 +490,7 @@ async function enviarSiEsCorrecta(props, contadorRespondidas) {
     });
   } catch (error) {
     console.log(error);
-    const response_alert = await mostrarExitoEditar("Error", "Error al guardar el progreso",  "error");
+    const response_alert = await mostrarExitoEditar("Error", "Error al guardar el progreso", "error");
     if (response_alert) {
       window.location = "/dashboard";
     }
@@ -524,7 +506,7 @@ async function enviarSiEsCorrecta(props, contadorRespondidas) {
     props.setFinJuego(true);
     mostrarAlertaExitoFin(`Excellent Work `);
   } else {
-    const response_alert = await mostrarExitoEditar( "Error", "Error al guardar el progreso", "error");
+    const response_alert = await mostrarExitoEditar("Error", "Error al guardar el progreso", "error");
     if (response_alert) {
       //retorna al dashboard
       window.location = "/dashboard";
