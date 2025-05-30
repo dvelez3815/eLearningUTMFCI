@@ -1,25 +1,26 @@
 
 import React, { useEffect, useState } from "react";
+import { getImageOfQuestion } from "../../api/Questions"
+
 const Viewimage = ({ img }) => {
   const [imageSrc, setImageSrc] = useState(null);
-  const API_KEY = process.env.REACT_APP_API_KEY;
 
   useEffect(() => {
     const obtenerImagen = async () => {
       try {
-        const imageResponse = await fetch(
-          `https://www.googleapis.com/drive/v3/files/${img}?alt=media&key=${API_KEY}`
-        );
+        const imageResponse = await getImageOfQuestion(img);
 
-        if (!imageResponse.ok) throw new Error("Error al cargar la imagen");
+        if (!imageResponse) throw new Error("Error al cargar la imagen");
+        const blob = await imageResponse.blob(); // Convertimos la respuesta en Blob
+        const imagenUrl = URL.createObjectURL(blob);
 
-        setImageSrc(imageResponse.url);
+        setImageSrc(imagenUrl);
       } catch (error) {
         console.error('Error en la solicitud:', error);
       }
     };
     obtenerImagen();
-  }, [img, API_KEY]);
+  }, [img]);
 
 
   return (
