@@ -50,24 +50,24 @@ const VerdaderoFalso = (props) => {
         </h2>
         {props.ejercicio.audio &&
 
-        <ViewAudio audio={props.ejercicio.audio}/>
+          <ViewAudio audio={props.ejercicio.audio} />
         }
-        
+
       </div>
       <div className={props.ejercicio.img || props.ejercicio.description ? "grid grid-cols-2 gap-4 min-h-80 " : "grid grid-cols-1 min-h-80"}>
         {props.ejercicio.img &&
           <ViewImage img={props.ejercicio.img} />
         }
         {props.ejercicio.description &&
-        <div className="flex items-center justify-center">
-          <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.ejercicio.description) }} className="w-full h-64 overflow-y-scroll p-4 text-left rounded border border-gray-300">
+          <div className="flex items-center justify-center">
+            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.ejercicio.description) }} className="w-full h-64 overflow-y-scroll p-4 text-left rounded border border-gray-300">
+            </div>
           </div>
-        </div>
 
         }
         <div className="container   w-auto ">
           <div
-            className="  flex flex-wrap gap-2 md:mr-8 md:ml-8 justify-center items-center"
+            className="  flex flex-col gap-4 space-y-4 md:mr-8 md:ml-8 justify-center items-center"
             aria-label="choice"
             role="radiogroup"
             ref={props.miref}
@@ -79,7 +79,6 @@ const VerdaderoFalso = (props) => {
                   let juego = [];
                   // eslint-disable-next-line array-callback-return
                   item.item.map((texto, index) => {
-                    //console.log(texto)
                     if (texto[0] === '_') {
                       // aqui van las opciones del juego true/false
                       if (item.answer) {
@@ -111,18 +110,16 @@ const VerdaderoFalso = (props) => {
 
 const TextoGeneral = (props) => {
   return (
-    <div className="text-center w-full p-4 ">
-      {/*  eslint-disable-next-line jsx-a11y/heading-has-content */}
-      <h2 className="text-md font-bold text-left my-4 uppercase block"></h2>
+    <div className=" p-4  card flex flex-col items-stretch shadow-md rounded-md bg-white gap-2 ">
 
-      <div className="  w-full">
-        { // eslint-disable-next-line array-callback-return
+      <div className=" flex flex-wrap items-center justify-center mx-auto  my-2 space-x-2">
+        {
           props.juego.map((juego, index) => {
-            if (typeof juego === 'string') {
-              return <p key={shortid.generate()} className={"w-auto py-2 sm:w-auto font-bold uppercase mx-2 text-justify text-xs	md:text-md "}>{juego}</p>
-            } else if (typeof juego === 'object') {
-              return juego
-            }
+            return (
+              <span key={index} className="inline-block">
+                {juego}
+              </span>
+            )
           })}
       </div>
     </div>
@@ -150,7 +147,7 @@ const TextoMarcar = (props) => {
   }
 
   return (
-    <button className={"shadow appearance-none border rounded w-auto  h-10 sm:h-12 sm:w-72 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xs"} onClick={quitarActivados}>
+    <button className={"shadow appearance-none border rounded w-auto  h-10 sm:h-12 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-xs"} onClick={quitarActivados}>
       {props.texto}
     </button>
   );
