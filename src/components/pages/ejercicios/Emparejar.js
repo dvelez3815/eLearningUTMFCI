@@ -138,7 +138,7 @@ const Emparejar = (props) => {
       </div>
       <div className="container w-auto mx-auto" ref={divRef}>
         <div
-          className="flex gap-2 flex-wrap justify-center items-center md:mr-8 md:ml-8"
+          className="flex gap-2 flex-col justify-center items-center md:mr-8 md:ml-8"
           ref={props.miref}
         >
           {
