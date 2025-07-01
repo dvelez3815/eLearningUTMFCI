@@ -16,6 +16,13 @@ module.exports = {
         greenutmbajo: '#00802b',
         greenutmsuperbajo: '#00bd3f',
       },
+      //agregar el tamaño de altura a mayor de h-96
+      height: {
+        '96': '24rem',
+        '100': '28rem',
+        '128': '32rem',
+        '144': '36rem',
+      },
     },
   },
   variants: {

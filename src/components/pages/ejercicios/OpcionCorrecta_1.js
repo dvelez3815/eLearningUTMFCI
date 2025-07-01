@@ -5,6 +5,7 @@ import axios from 'axios';
 import ViewAudio from "../../../components/ViewAudio/ViewAudio";
 import "./Ejercicio.css";
 import DOMPurify from 'dompurify';
+import Description from "../../Description/Description";
 
 export const OpcionCorrecta_1 = (props) => {
 
@@ -91,10 +92,7 @@ export const OpcionCorrecta_1 = (props) => {
           <ViewImage img={props.ejercicio.img} />
         }
         {props.ejercicio.description &&
-          <div className="flex items-center justify-center">
-            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.ejercicio.description) }} className="w-full h-64 overflow-y-scroll p-4 text-left rounded border border-gray-300">
-            </div>
-          </div>
+          <Description description={props.ejercicio.description} />
         }
         <div className="container w-auto">
           <div

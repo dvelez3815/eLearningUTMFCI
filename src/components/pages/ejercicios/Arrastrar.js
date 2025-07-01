@@ -101,7 +101,7 @@ const Arrastrar = (props) => {
         }
         {props.ejercicio.description &&
           <div className="flex items-center justify-center">
-            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.ejercicio.description) }} className="w-full h-64 overflow-y-scroll p-4 text-left rounded border border-gray-300">
+            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.ejercicio.description) }} className="w-full h-100 overflow-y-auto p-4 text-left rounded border border-gray-300">
             </div>
           </div>
         }
