@@ -33,9 +33,9 @@ export async function updateProgress(data) {
   return dataT;
 }
 
-export async function getPorgressByMail(mail) {
+export async function getVerifyCompleteProgress(_id) {
 
-  const porcentaje = await FetchWithIntercept(process.env.REACT_APP_API_URL + "/progress/porcentaje/" + mail,
+  const verify = await FetchWithIntercept(process.env.REACT_APP_API_URL + "/progress/verify/" + _id,
     {
       method: "GET",
       headers: {
@@ -43,6 +43,6 @@ export async function getPorgressByMail(mail) {
       },
     }
   )
-  if (porcentaje.porcentaje === "Not found") return null
-  return porcentaje.porcentaje;
+  if (verify.verify === "Not found") return null
+  return verify.verify ;
 }

@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
 import { useForm } from "react-hook-form";
 import { getUserByCedula } from "../../../api/User";
-import { getPorgressByMail } from "../../../api/Progress";
+import { getVerifyCompleteProgress } from "../../../api/Progress";
 import { mostrarExitoEditar } from "../../Alert/Alerts";
 import { createExamenUsuario, getExamenUsuario, getExams, updateExamenUsuario } from "../../../api/Exams";
 import 'moment/locale/es';
@@ -106,9 +106,8 @@ const RegisterExam = () => {
             setEnviando(true)
             const _user = await getUserByCedula(cedula);
             if (!_user) throw new Error("UserError: No existe usuario");
-            const porcentaje = await getPorgressByMail(_user.mail)
-            if (!porcentaje) throw new Error("ProgressError: El usuario no tiene progreso");
-            if (porcentaje < 100) throw new Error("PorcentajeError: El usuario no ha completado el simulador");
+            const porcentaje = await getVerifyCompleteProgress(_user._id)
+            if (!porcentaje) throw new Error("PorcentajeError: El usuario no ha completado el simulador");
             setUser({
                 _id: _user._id,
                 name: _user.name,
