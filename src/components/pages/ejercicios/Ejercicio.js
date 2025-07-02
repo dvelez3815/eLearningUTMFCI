@@ -36,9 +36,9 @@ export const Ejercicio = (props) => {
   let unidad = ''
   try {
     type = String(props.taskInfo[0].type)
-    book = String(props.taskInfo[0].unit.book)
-    modulo = parseInt(props.taskInfo[0].unit.modulo) % 2 !== 0 ? parseInt(1) : parseInt(2)
-    unidad = String(props.taskInfo[0].unit.unit)
+    book = String(props.taskInfo[0].unidad.book)
+    modulo = parseInt(props.taskInfo[0].unidad.modulo) % 2 !== 0 ? parseInt(1) : parseInt(2)
+    unidad = String(props.taskInfo[0].unidad.unit)
     topic = String(props.taskInfo[0].topic.top)
     Objetive = String(props.taskInfo[0].objetive.text)
     explanation = String(props.taskInfo[0].explanation)

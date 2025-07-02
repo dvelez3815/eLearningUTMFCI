@@ -18,7 +18,6 @@ export async function createExamenUsuario(exam_user) {
         },
         body: JSON.stringify(exam_user),
     });
-    console.log(exam)
     if (exam.examen_user === 'No se pudo crear el examen') return null;
     return exam.examen_user
 }
