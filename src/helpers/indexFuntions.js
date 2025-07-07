@@ -15,6 +15,11 @@ export function getProgressColor(progress){
     
     return progressColor;
 }
+
+export function esNumeroFlexible(valor) {
+  return !isNaN(valor) && !isNaN(parseFloat(valor));
+}
+
 export function llenarInfo(progreso) {
 
     

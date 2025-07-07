@@ -11,6 +11,7 @@ import {
 import { AuthContext } from "../../../context/AuthContext";
 import { updateProgress } from "../../../api/Progress";
 import { guardarIntento } from "../../../api/Intento";
+import { esNumeroFlexible } from "../../../helpers/indexFuntions";
 
 var USER = null;
 const EjercicioFooter = (props) => {
@@ -482,25 +483,24 @@ async function enviarSiEsCorrecta(props, contadorRespondidas) {
     window.location.href.split("/")[
     window.location.href.split("/").length - 1
     ];
-  let dataT = null;
-  try {
-    dataT = await updateProgress({
-      user_id: USER._id,
-      task_id: tasks_id,
-    });
-  } catch (error) {
-    console.log(error);
-    const response_alert = await mostrarExitoEditar("Error", "Error al guardar el progreso", "error");
-    if (response_alert) {
-      window.location = "/dashboard";
+  let dataT = esNumeroFlexible(tasks_id) ? null : { res: 'Task ya ha sido registrado en ese usuario' };
+  if (esNumeroFlexible(tasks_id)) {
+    try {
+      dataT = await updateProgress({
+        user_id: USER._id,
+        task_id: tasks_id,
+      });
+    } catch (error) {
+      const response_alert = await mostrarExitoEditar("Error", "Error al guardar el progreso", "error");
+      if (response_alert) {
+        window.location = "/dashboard";
+      }
     }
   }
 
+
   const { res } = dataT;
-  if (
-    res === "Task Registrada" ||
-    res === "Task ya ha sido registrado en ese usuario"
-  ) {
+  if (["Task Registrada", "Task ya ha sido registrado en ese usuario"].includes(res)) {
     props.setContadorRespondidas(contadorRespondidas + 1);
     props.juego.pop();
     props.setFinJuego(true);
