@@ -131,10 +131,12 @@ export const Finalizacion = () => {
                 <img src="${celebration}" alt="Example Image" class="w-full h-auto rounded-lg">
             </div>
             <div class="flex flex-col justify-center">
-                <h2 class="text-2xl font-bold mb-4">Has completado con éxito el simulador</h2>
-                <p class="text-gray-700 mb-2">¡Estás listo para el examen! Por favor, te solicitamos que te inscribas para rendir el examen en el formulario a continuación.</p> 
-                <p class="text-gray-700">¡Éxitos en la prueba! Si no te sientes seguro aún para rendirla, vuelve a practicar con el simulador.</p>
+            <h2 class="text-2xl font-bold mb-4">Has completado con éxito el simulador</h2>
+            <p class="text-gray-700 mb-2">¡Estás listo para el examen! Por favor, te solicitamos que te inscribas para rendir el examen en el formulario a continuación.</p> 
+            <p class="text-gray-700">¡Éxitos en la prueba! Si no te sientes seguro aún para rendirla, vuelve a practicar con el simulador.</p>
+            <p class="text-gray-700 font-semibold">Los estudiantes que se encuentren en el último nivel de carrera pueden comunicarse al correo <a href="mailto:ilm@utm.edu.ec" class="outline-none">ilm@utm.edu.ec</a> para solicitar el adelanto de su examen.</p>
             </div>
+
     </div>
    `,
   }).then((result) => {
