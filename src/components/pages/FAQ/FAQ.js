@@ -134,7 +134,7 @@ const FAQ = () => {
         },
         {
             question: '¿Qué pasará con los estudiantes con necesidades educativas especiales y que no puedan rendir el examen de manera presencial?',
-            answer: 'Todos los estudiantes reportados por la Unidad de Inclusión, Equidad Social y Género se les asignará un docente para que realicen las actividades enviadas por ellos para que puedan acreditar los niveles de las Suficiencias de Inglés.',
+            answer: 'A todos los estudiantes reportados por la Unidad de Inclusión, Equidad Social y Género serán matriculados en un aula virtual para que realicen actividades y puedan acreditar los niveles de la Suficiencia de Inglés.',
         },
 
     ];
