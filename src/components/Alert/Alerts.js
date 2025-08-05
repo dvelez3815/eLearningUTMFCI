@@ -2,6 +2,7 @@ import Swal from "sweetalert2";
 import "./Alert.css";
 
 import celebration from "../../assets/resource/winners.svg";
+import question from "../../assets/resource/question.svg";
 const SuccessData = {
   title: "Great",
   type: "success",
@@ -58,9 +59,9 @@ export const mostrarAlertaError = (respuesta) => {
     icon: "error",
     html: Array.isArray(respuesta)
       ? "<p style='color:green; font-weight: bold;'>Correct Answer: </p>" +
-        cadena
+      cadena
       : "<p style='color:green; font-weight: bold;'>Correct Answer: </p>" +
-        respuesta,
+      respuesta,
     customClass: "swal-wide",
     confirmButtonText: "Ok",
   }).then((result) => {
@@ -100,15 +101,31 @@ export const Bienvenida = async () => {
 };
 export const AletVideo = async () => {
   Swal.fire({
-    title: "Video Tutorial",
-    html: `<video id="media" height="300" controls><source src="/assets/TUTORIAL.mp4" type="video/mp4">Tu navegador no soporta videos.</video>`, 
-    showClass: {
-      popup: "animate__animated animate__fadeInDown",
-    },
-    hideClass: {
-      popup: "animate__animated animate__fadeOutUp",
-    },
-  });
+    title: "<strong>¡Bienvenidos!</strong>",
+    width: 700,
+    showCancelButton: true,
+    confirmButtonColor: "#019933",
+    confirmButtonText: '<i class="fa fa-thumbs-up"></i> Preguntas Frecuentes',
+    cancelButtonText: '<i class="fa fa-thumbs-down">Cerrar</i>',
+    cancelButtonAriaLabel: "Thumbs down",
+    focusConfirm: true,
+    html: `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <img src="${question}" alt="Example Image" class="w-full h-auto rounded-lg">
+                    </div>
+                    <div class="flex flex-col justify-center">
+                    <h2 class="text-2xl font-bold mb-4">🚀¡Todo listo para empezar!</h2>
+                    <p class="text-gray-700 mb-2">Antes de empezar, te sugerimos revisar el apartado de <strong>Preguntas Frecuentes</strong>. Allí encontrarás respuestas clave que pueden ayudarte a aprovechar mejor esta herramienta.</p> 
+                    <p class="text-gray-700">Una vez que te sientas listo, ¡adelante con el simulador!</p>
+                    </div>
+
+            </div>`,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      window.location = "/preguntas";
+    }
+  });;
 };
 
 export const Finalizacion = () => {
@@ -141,7 +158,7 @@ export const Finalizacion = () => {
    `,
   }).then((result) => {
     if (result.isConfirmed) {
-      window.location ="/registerExam";
+      window.location = "/registerExam";
     }
   });
 };
@@ -189,9 +206,9 @@ export const Alertaskip = async (respuesta) => {
     "SKIP",
     Array.isArray(respuesta)
       ? "<p style='color:green; font-weight: bold;'>Correct Answer: </p>" +
-          cadena
+      cadena
       : "<p style='color:green; font-weight: bold;'>Correct Answer: </p>" +
-          respuesta,
+      respuesta,
     "question"
   );
 };
@@ -230,7 +247,7 @@ export const mostrarAlertaExitoFin = (txt) => {
     icon: "success",
     type: "success",
     text: txt,
-  }).then((result) => {});
+  }).then((result) => { });
 };
 
 export const mostrarImagen = (img) => {

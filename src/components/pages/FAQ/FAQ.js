@@ -155,10 +155,8 @@ const FAQ = () => {
             `
         },
         {
-            question: "¿Qué pasa si tengo necesidades educativas especiales y no puedo rendir el examen presencial?¿Qué pasa si tengo necesidades educativas especiales y no puedo rendir el examen presencial?",
-            answer: `
-            Los estudiantes reportados por la Unidad de Inclusión, Equidad Social y Género recibirán apoyo personalizado. Se les asignará un docente que les facilitará actividades adaptadas para acreditar los niveles de suficiencia.
-            Todos los estudiantes reportados por la Unidad de Inclusión, Equidad Social y Género serán matriculados en un aula virtual para que puedan realizar las actividades de la Suficiencia de Inglés y así poder acreditarlas.`
+            question: "¿Qué pasa si tengo necesidades educativas especiales y no puedo rendir el examen presencial?",
+            answer: "Todos los estudiantes reportados por la Unidad de Inclusión, Equidad Social y Género serán matriculados en un aula virtual para que puedan realizar las actividades de la Suficiencia de Inglés y así poder acreditarlas."
         }
     ]
 
