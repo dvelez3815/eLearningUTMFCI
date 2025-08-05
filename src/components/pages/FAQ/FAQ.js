@@ -6,160 +6,184 @@ import { AuthContext } from "../../../context/AuthContext";
 import NavComponent from '../../NavComponent';
 import logo from "../../../assets/resource/Logo_Provicional.png";
 const FAQ = () => {
-     const { user } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const faqs = [
         {
-            question: '¿Qué es el Examen de Acreditación de las Suficiencias de Inglés?',
-            answer: 'El Examen de Acreditación de las Suficiencias de Inglés (EASI) es un test con el que puedes avanzar varios niveles de las Suficiencias de Inglés.',
+            question: "¿Qué es el EASI?",
+            answer: "El Examen de Acreditación de las Suficiencias de Inglés (EASI) es una evaluación que permite acreditar varios niveles del requisito de suficiencia en inglés, según el reglamento académico vigente."
         },
         {
-            question: '¿Qué pasa si ya tengo varios niveles aprobados con el anterior proceso de las Suficiencia de Inglés?',
-            answer: 'Esos niveles aprobados si son válidos. Para poder aprobar los niveles que aún tienen pendientes tendrá que hacer las actividades en el Simulador y agendar la fecha del examen para poder acreditarlo.',
-        },
-        {
-            question: '¿Qué tengo que hacer para rendir el EASI?',
-            answer: 'Sigue los pasos que se presentan en este video tutorial',
+            question: "¿Cómo puedo rendir el examen EASI?",
+            answer: "Debes seguir los pasos indicados en el video tutorial disponible en el siguiente enlace: ",
             resource: `<video id="media" height="300" controls><source src="/assets/TUTORIAL.mp4" type="video/mp4">Tu navegador no soporta videos.</video>`
         },
         {
-            question: '¿Cuántos puntos tengo que obtener para aprobar las Suficiencias de Inglés con el examen EASI?',
-            answer: 'Revisa las tabla que se adjunta para que conozcas los puntajes que se requieren para aprobar los niveles de las Suficiencias de Inglés.',
-            resource: `<div class="overflow-x-auto dark:bg-neutral-700">
-                    <table class="text-left text-sm whitespace-nowrap">
-                        <thead class="uppercase tracking-wider border-b-2 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-800">
-                            <tr>
-                                <th scope="col" class="px-6 py-4">
-                                    Suficiencia de Inglés
-                                </th>
-                                <th scope="col" class="px-6 py-4">
-                                    Ponderación
-                                </th>
-                            </tr>
-                        </thead>
+            question: "¿Qué ocurre si ya aprobé algunos niveles con el proceso anterior?",
+            answer: "Los niveles previamente aprobados siguen siendo válidos. Para acreditar los niveles restantes, deberás completar las actividades en el Simulador y agendar la fecha del examen correspondiente."
+        },
+        {
+            question: "¿Cuál es el puntaje mínimo para aprobar los niveles de suficiencia?",
+            answer: "Consulta las tablas adjuntas para conocer los puntajes requeridos por nivel.",
+            resource: 
+            `<div class="overflow-x-auto rounded-lg shadow-md dark:bg-neutral-800">
+                <table class="min-w-full divide-y divide-neutral-300 dark:divide-neutral-600 text-sm text-left">
+                    <thead class="bg-green-100 dark:bg-green-600 text-neutral-800 dark:text-white uppercase tracking-wider">
+                    <tr>
+                        <th scope="col" class="px-6 py-4 font-semibold">Suficiencia de Inglés</th>
+                        <th scope="col" class="px-6 py-4 font-semibold">Ponderación</th>
+                    </tr>
+                    </thead>
+                    <tbody class="divide-y divide-neutral-200 dark:divide-neutral-700">
+                    <tr class="hover:bg-yellow-50 dark:hover:bg-yellow-700 transition">
+                        <th scope="row" class="px-6 py-4 font-medium text-neutral-700 dark:text-white">Suficiencia de Inglés I</th>
+                        <td class="px-6 py-4 text-neutral-600 dark:text-neutral-300">10 - 19 Ptos</td>
+                    </tr>
+                    <tr class="hover:bg-yellow-50 dark:hover:bg-yellow-700 transition">
+                        <th scope="row" class="px-6 py-4 font-medium text-neutral-700 dark:text-white">Suficiencia de Inglés II</th>
+                        <td class="px-6 py-4 text-neutral-600 dark:text-neutral-300">20 - 29 Ptos</td>
+                    </tr>
+                    <tr class="hover:bg-yellow-50 dark:hover:bg-yellow-700 transition">
+                        <th scope="row" class="px-6 py-4 font-medium text-neutral-700 dark:text-white">Suficiencia de Inglés III</th>
+                        <td class="px-6 py-4 text-neutral-600 dark:text-neutral-300">30 - 39 Ptos</td>
+                    </tr>
+                    <tr class="hover:bg-yellow-50 dark:hover:bg-yellow-700 transition">
+                        <th scope="row" class="px-6 py-4 font-medium text-neutral-700 dark:text-white">Suficiencia de Inglés IV</th>
+                        <td class="px-6 py-4 text-neutral-600 dark:text-neutral-300">40 - 49 Ptos</td>
+                    </tr>
+                    <tr class="hover:bg-yellow-50 dark:hover:bg-yellow-700 transition">
+                        <th scope="row" class="px-6 py-4 font-medium text-neutral-700 dark:text-white">Suficiencia de Inglés V</th>
+                        <td class="px-6 py-4 text-neutral-600 dark:text-neutral-300">50 - 100 Ptos</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>`
+        },
+        {
+            question: "¿En qué modalidad se aplica el examen EASI?",
+            answer: "El examen se realiza de manera presencial. Puedes seleccionar la fecha, hora y sede a través del Simulador. Las sedes disponibles son: Portoviejo, Bahía de Caráquez, Chone y Quito."
+        },
+        {
+            question: "¿Qué sucede si no alcanzo el puntaje necesario?",
+            answer: "No te preocupes. Si no apruebas, se te asignará una nueva fecha para rendir el examen nuevamente."
+        },
+        {
+            question: "¿Qué hago si estoy por egresar y no hay fechas cercanas disponibles?",
+            answer: "Puedes acercarte a la Dirección del Instituto de Lenguas Modernas o escribir al correo ilm@utm.edu.ec para solicitar una fecha prioritaria."
+        },
+        {
+            question: "¿Cuándo puedo comenzar las actividades en el Simulador y rendir el examen?",
+            answer: "Se recomienda iniciar las actividades en el Simulador antes de finalizar tu carrera, ya que la suficiencia en inglés es un requisito de titulación."
+        },
+        {
+            question: "¿Qué debo hacer antes de rendir el examen EASI?",
+            answer: "Es obligatorio completar todas las actividades del Simulador antes de presentar el examen."
+        },
+        {
+            question: "¿Qué es el Simulador?",
+            answer: "Es una plataforma virtual donde puedes practicar tus habilidades lingüísticas en inglés. Accede con tu usuario y contraseña institucional (UTM). El Simulador te prepara para el examen EASI."
+        },
+        {
+            question: "¿Quiénes pueden usar el Simulador?",
+            answer: "Todos los estudiantes de la UTM pueden acceder al Simulador para practicar y agendar el examen."
+        },
+        {
+            question: "¿Puedo rendir el examen sin haber finalizado el Simulador?",
+            answer: "No. Completar el Simulador es un requisito indispensable para presentar el examen EASI."
+        },
+        {
+            question: "¿Qué hago si tengo problemas técnicos con el Simulador?",
+            answer: "Envía un correo a ilm@utm.edu.ec con capturas de pantalla que evidencien el problema."
+        },
+        {
+            question: "¿Puedo realizar las actividades del Simulador desde mi celular?",
+            answer: "No es lo más recomendable. Para disfrutar de una experiencia óptima en nuestra plataforma, recomendamos el uso de dispositivos con pantallas grandes, como laptops, computadoras de escritorio o tablets. Esto permite visualizar mejor los contenidos y facilita la navegación por las distintas funcionalidades."
+        },
+        {
+            question: "¿Qué hago si ya domino el inglés y quiero rendir un examen de exoneración?",
+            answer: "Puedes enviar un oficio firmado al correo ilm@utm.edu.ec solicitando el examen de exoneración. Se adjunta el formato correspondiente.",
+            resource: `
+                <a
+                    href="/assets/oficio_exoneracion_ingles.docx"
+                    download
+                    class="mb-2 px-6 py-2.5 bg-yellow-500 text-white inline-flex items-center font-bold text-xs leading-normal uppercase rounded shadow-md hover:bg-yellow-500 hover:shadow-md focus:bg-yellow-600 focus:outline-none focus:ring-0 active:bg-yellow-800 transition duration-150 ease-in-out"
+                    >
+                    <svg
+                        class="w-5 h-5 mr-2 text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 640 640"
+                        fill="currentColor"
+                    >
+                        <path d="M352 96C352 78.3 337.7 64 320 64C302.3 64 288 78.3 288 96L288 306.7L246.6 265.3C234.1 252.8 213.8 252.8 201.3 265.3C188.8 277.8 188.8 298.1 201.3 310.6L297.3 406.6C309.8 419.1 330.1 419.1 342.6 406.6L438.6 310.6C451.1 298.1 451.1 277.8 438.6 265.3C426.1 252.8 405.8 252.8 393.3 265.3L352 306.7L352 96zM160 384C124.7 384 96 412.7 96 448L96 480C96 515.3 124.7 544 160 544L480 544C515.3 544 544 515.3 544 480L544 448C544 412.7 515.3 384 480 384L433.1 384L376.5 440.6C345.3 471.8 294.6 471.8 263.4 440.6L206.9 384L160 384zM464 440C477.3 440 488 450.7 488 464C488 477.3 477.3 488 464 488C450.7 488 440 477.3 440 464C440 450.7 450.7 440 464 440z"/>
+                    </svg>
+                    Descargar formato
+                </a>
+            `
+        },
+        {
+            question: "¿Cómo puedo homologar los niveles de suficiencia en inglés?",
+            answer: "Si has cursado inglés en otra universidad/instituto universitario o cuentas con certificaciones internacionales, puedes solicitar la homologación escribiendo a ilm@utm.edu.ec. Debes adjuntar:",
+            resource: `
+            <div class="flex flex-col space-y-4 max-w-md"> 
+            
+                <ol class="list-decimal pl-6 space-y-2 text-sm text-gray-600">
+                    <li class="bg-yellow-100 text-left p-2 rounded-md shadow-sm hover:bg-yellow-200 transition">
+                        Oficio firmado solicitando la homologación.
+                    </li>
+                    <li class="bg-yellow-100 text-left p-2 rounded-md shadow-sm hover:bg-yellow-200 transition">
+                        Certificado académico emitido por la institución donde cursaste inglés, firmado por las autoridades correspondientes.
+                    </li>
+                    <li class="bg-yellow-100 p-2 text-left rounded-md shadow-sm hover:bg-yellow-200 transition">
+                        Certificados internacionales válidos (IELTS, PET, FCE, CAE, MET, TOEFL, entre otros). Una vez recibida la documentación, se analizará y se te notificará por correo electrónico.
+                    </li>
+                </ol>
+                <a
+                    href="/assets/Oficio_Homologacion_Ingles.docx"
+                    download
+                    class="mb-2 w-max self-center px-6 py-2.5 bg-yellow-500 text-white inline-flex items-center font-bold text-xs leading-normal uppercase rounded shadow-md hover:bg-yellow-500 hover:shadow-md focus:bg-yellow-600 focus:outline-none focus:ring-0 active:bg-yellow-800 transition duration-150 ease-in-out"
+                    >
+                    <svg
+                        class="w-5 h-5 mr-2 text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 640 640"
+                        fill="currentColor"
+                    >
+                        <path d="M352 96C352 78.3 337.7 64 320 64C302.3 64 288 78.3 288 96L288 306.7L246.6 265.3C234.1 252.8 213.8 252.8 201.3 265.3C188.8 277.8 188.8 298.1 201.3 310.6L297.3 406.6C309.8 419.1 330.1 419.1 342.6 406.6L438.6 310.6C451.1 298.1 451.1 277.8 438.6 265.3C426.1 252.8 405.8 252.8 393.3 265.3L352 306.7L352 96zM160 384C124.7 384 96 412.7 96 448L96 480C96 515.3 124.7 544 160 544L480 544C515.3 544 544 515.3 544 480L544 448C544 412.7 515.3 384 480 384L433.1 384L376.5 440.6C345.3 471.8 294.6 471.8 263.4 440.6L206.9 384L160 384zM464 440C477.3 440 488 450.7 488 464C488 477.3 477.3 488 464 488C450.7 488 440 477.3 440 464C440 450.7 450.7 440 464 440z"/>
+                    </svg>
+                    Descargar formato
+                </a>
+            </div>
+            `
+        },
+        {
+            question: "¿Qué pasa si tengo necesidades educativas especiales y no puedo rendir el examen presencial?¿Qué pasa si tengo necesidades educativas especiales y no puedo rendir el examen presencial?",
+            answer: `
+            Los estudiantes reportados por la Unidad de Inclusión, Equidad Social y Género recibirán apoyo personalizado. Se les asignará un docente que les facilitará actividades adaptadas para acreditar los niveles de suficiencia.
+            Todos los estudiantes reportados por la Unidad de Inclusión, Equidad Social y Género serán matriculados en un aula virtual para que puedan realizar las actividades de la Suficiencia de Inglés y así poder acreditarlas.`
+        }
+    ]
 
-                        <tbody>
-
-                            <tr class="border-b dark:border-neutral-600">
-                                <th scope="row" class="px-6 py-4">
-                                    Suficiencia de Inglés I
-                                </th>
-                                <td class="px-6 py-4">10 - 19 Ptos</td>
-                            </tr>
-
-                            <tr class="border-b dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-800">
-                                <th scope="row" class="px-6 py-4">
-                                Suficiencia de Inglés II
-                                </th>
-                                <td class="px-6 py-4">20 - 29 Ptos</td>
-                            </tr>
-
-                            <tr class="border-b dark:border-neutral-600">
-                                <th scope="row" class="px-6 py-4">
-                                Suficiencia de Inglés III
-                                </th>
-                                <td class="px-6 py-4">30 - 39 Ptos</td>
-                            </tr>
-
-                            <tr class="border-b dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-800">
-                                <th scope="row" class="px-6 py-4">
-                                Suficiencia de Inglés IV
-                                </th>
-                                <td class="px-6 py-4">40 - 49 Ptos</td>
-                            </tr>
-
-                            <tr class="border-b dark:border-neutral-600">
-                                <th scope="row" class="px-6 py-4">
-                                Suficiencia de Inglés V
-                                </th>
-                                <td class="px-6 py-4">50 - 100 Ptos</td>
-                            </tr>
-
-                        </tbody>
-
-                    </table>
-
-                </div>`
-        },
-        {
-            question: '¿En qué modalidad se tomará el examen EASI?',
-            answer: 'El examen se tomará en modalidad presencial. Recuerda que en el Simulador podrás escoger las fechas, hora, y la sede donde deseas tomar el examen EASI. Vale recalcar que las sedes serán Portoviejo, Bahía de Caráquez, Chone y Quito.',
-        },
-        {
-            question: '¿En qué momento  puedo empezar las actividades en el Simulador y presentarme a rendir el examen EASI?',
-            answer: 'Las activadades del Simulador lo podrá realizar durante el semestre e incluso en vacaciones.',
-        },
-        {
-            question: '¿Qué pasaría si no alcanzo el puntaje requerido para aprobar el examen EASI?',
-            answer: '¡No hay problema! En caso de ocurrir esto se te asignará una nueva fecha para rendir el examen.',
-        },
-        {
-            question: '¿En qué momento de mis estudios universitarios puedo empezar las actividades en el Simulador y presentarme a rendir el examen EASI?',
-            answer: 'Es recomendable que realices las actividades en el Simulador antes de culminar tu carrera universitaria. Recuerda que la Suficiencia de Inglés es un requisito para graduarte.',
-        },
-        {
-            question: '¿Qué tienes que hacer para antes de rendir el examen EASI?',
-            answer: 'Para rendir el examen EASI, es obligatorio realizar las actividades en el Simulador.',
-        },
-        {
-            question: '¿Qué es el Simulador?',
-            answer: 'Es una plataforma en la que puedes acceder con tu usuario y contraseña UTM para practicar las destrezas lingüísticas del idioma inglés.   El Simulador te ayudará a prepararte para el Examen de Acreditación de las Suficiencias de Inglés (EASI).',
-        },
-        {
-            question: '¿Quiénes puede hacer el Simulador?',
-            answer: 'El simulador lo pueden hacer todos los estudiantes de la UTM para que puedan practicar y posterior a esto agendar el examen EASI. ',
-        },
-        {
-            question: '¿Puedo presentarme a dar el examen EASI sin haber finalizado el Simulador?',
-            answer: 'No, recuerda que el Simulador es un requisito para dar el examen EASI.',
-        },
-        {
-            question: 'En caso de presentarse problemas técnicos con el Simulador ¿dónde puedo enviar la incidencia? ',
-            answer: 'En el caso de haber algún problema técnico con el Simulador, puedes enviar un correo a ilm@utm.edu.ec adjuntando las capturas de pantallas de los ejercicios donde se presentan los problemas. ',
-        },
-        {
-            question: '¿Con que navegadores puedo abrir el Simulador?',
-            answer: 'El Simulador lo pueden abrir con los navegadores Google Chrome o Mozilla Firefox. El Simulador no es compatible con Safari y con las Macbook en general.',
-        },
-        {
-            question: '¿Puedo hacer las actividades del Simulador desde mi teléfono móvil?',
-            answer: 'Se recomienda realizar las actividades del Simulador desde un PC. ',
-        },
-        {
-            question: '¿Qué pasa si ya domino el idioma inglés y deseo presentarme a dar un examen de exoneración?',
-            answer: 'Si este es tu caso, comunícate a correo ilm@utm.edu.ec para que te expliquen los pasos a seguir. ',
-        },
-        {
-            question: '¿Puedo homologar los niveles de las Suficiencias de Inglés? ',
-            answer: 'Si, para realizar este proceso te puedes comunicar al correo ilm@utm.edu.ec para que te expliquen los pasos a seguir.',
-        },
-        {
-            question: '¿Qué pasará con los estudiantes con necesidades educativas especiales y que no puedan rendir el examen de manera presencial?',
-            answer: 'A todos los estudiantes reportados por la Unidad de Inclusión, Equidad Social y Género serán matriculados en un aula virtual para que realicen actividades y puedan acreditar los niveles de la Suficiencia de Inglés.',
-        },
-
-    ];
 
     return (
-        <div className="h-screen flex flex-col relative">
-            {user ? <NavComponent user={user} logo={logo} activado={1} />:
-            <NavBar />}
-            <div className="max-w-3xl mx-auto py-8 px-4">
-                <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">Preguntas Frecuentes</h1>
-                <div className="space-y-4">
+        <div class="h-screen flex flex-col relative">
+            {user ? <NavComponent user={user} logo={logo} activado={1} /> :
+                <NavBar />}
+            <div class="max-w-3xl mx-auto py-8 px-4">
+                <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Preguntas Frecuentes</h1>
+                <div class="space-y-4">
                     {faqs.map((faq, index) => (
-                        <div key={index} className="bg-gray-100 rounded-lg p-4 shadow-md transition hover:shadow-lg">
-                            <h2 className="font-semibold text-lg text-gray-700">{faq.question}</h2>
-                            <p className="mt-2 text-gray-600">{faq.answer}</p>
+                        <div key={index} class="bg-gray-100 rounded-lg p-4 shadow-md transition hover:shadow-lg">
+                            <h2 class="font-semibold text-lg text-gray-700">{faq.question}</h2>
+                            <p class="mt-2 text-gray-600">{faq.answer}</p>
                             {faq.resource &&
-                                <div className="flex justify-center items-center" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(faq.resource) }}></div>
+                                <div class="flex justify-center items-center" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(faq.resource) }}></div>
                             }
                         </div>
                     ))}
-                    <p className="mt-2 text-gray-600"> Cualquier otra inquietud que tenga sobre el proceso del examen EASI que no esté explicado en esta sección puedes comunicarte al correo <strong>ilm@utm.edu.ec</strong></p>
+                    <p class="mt-2 text-gray-600"> Cualquier otra inquietud que tenga sobre el proceso del examen EASI que no esté explicado en esta sección puedes comunicarte al correo <strong>ilm@utm.edu.ec</strong></p>
                 </div>
             </div>
-            <div className="absolute -bottom-24 hidden lg:block md:block -left-40 p-4 opacity-30">
-                <img src={logo_UTM} alt="Marca de agua" className="h-96" />
+            <div class="absolute -bottom-24 hidden lg:block md:block -left-40 p-4 opacity-30">
+                <img src={logo_UTM} alt="Marca de agua" class="h-96" />
             </div>
         </div>
     );
