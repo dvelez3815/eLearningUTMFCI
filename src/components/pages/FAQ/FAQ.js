@@ -100,7 +100,7 @@ const FAQ = () => {
         },
         {
             question: "¿Qué hago si ya domino el inglés y quiero rendir un examen de exoneración?",
-            answer: "Puedes enviar un oficio firmado al correo ilm@utm.edu.ec solicitando el examen de exoneración. Se adjunta el formato correspondiente.",
+            answer: "Puedes enviar un oficio firmado al correo electrónico ilm@utm.edu.ec solicitando el examen de exoneración. Además, deberás adjuntar el certificado de Suficiencia de Inglés, el cual puedes descargar desde el sistema SGA. Se adjunta un ejemplo de oficio como referencia para la redacción del documento que debes enviar.",
             resource: `
                 <a
                     href="/assets/oficio_exoneracion_ingles.docx"
